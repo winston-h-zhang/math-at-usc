@@ -41,32 +41,17 @@ Exercises 8, 9, 12, 26, 36, pp. 21-23.
 \begin{enumerate}
     \item [8.] 
     \begin{enumerate}
-        \item [(a)] 
-        We show that $G$ satifies that group axioms under multiplcation. 
-
-        \textit{Identity:} Clearly $1 \in G$. And $1$ is the identity since for any $g \in G \subset \mathbb C$, $g * 1 = 1 * g = g$.
+        \item [(a)] Since $G$ is a subset of $\mathbb C$, it suffices to prove that $G$ is a subgroup of $\mathbb C$. For any $g, h \in G$, we need to show that $gh^{-1} \in G$. By definiton there exist some $n, m \in \mathbb Z^+$ such that $g^n = h^m = 1$. 
         
-        \textit{Associativity:} Note that $G \subset \mathbb C$. Since $\mathbb C$ is associative under normal $*$, and $G$ carries the same (restricted) $*$, $G$ must be associative as well. 
-
-        \textit{Closure:} Let $g, h \in G$. Then by definition there exist some $n, m \in \mathbb Z^+$ such that $g ^ n = h ^ m = 1$. We want to find $N$ such that $(gh)^N = 1$. Let $N = nm$, directly calucating $(gh)^N$ yields $(gh)^{nm} = g^{nm} * h ^{nm} = (g^n)^m * (h^m)^n = 1^m * 1 ^ n = 1$. Therefore $gh \in G$. 
-
-        \textit{Inverse:} Let $g \in G$, with $g^n = 1$ for some $n \in \mathbb Z^+$. Let $h = \overline{g}$, the complex conjugate of $g$. Then
-
+        We want to find $N$ such that $(gh^{-1})^N = 1$. Let $N = nm$ and notice that $(gh^{-1})^{nm} = g^{nm} * h^{-nm} = (g^n)^m * (h^m)^{-n} = 1^m * 1 ^{-n} = 1$. Hence $gh^{-1} \in G$, and $G$ is a subgroup of $\mathbb C$, which makes it a group in general.
         \item [(b)] 
     \end{enumerate}
 
     \item [9.]
     \item \begin{enumerate}
-        \item [(a)]
-        We show that $G$ satisfies the group axioms under addtion.
-
-        \textit{Identity:} Clearly $0 = 0 + 0 \sqrt 2 \in G$. And $0$ is the identity since for any $g \in G \subset \mathbb R$, $g + 0 = 0 + g = g$.
+        \item [(a)] Again we prove that $G$ is a group by proving it is a subgroup of $\mathbb R$. 
         
-        \textit{Associativity:} Note that $G \subset \mathbb R$. Since $\mathbb R$ is associative under normal $+$, and $G$ carries the same (restricted) $+$, $G$ must be associative as well. 
-
-        \textit{Closure:} Let $g, h \in G$. Then by definition there exist some $p, q, r, s \in \mathbb Q$ such that $p + q\sqrt 2 = g$ and $r + s \sqrt 2 = h$. We want to find $x, y \in \mathbb Q$ such that $x + y \sqrt 2 = g + h$. Clearly we want $x = p + r$ and $y = q + s$, so that $g + h = (p + r) + (q + s)\sqrt 2 = x + y \sqrt 2$. 
-
-        \textit{Inverse:} Let $g \in G$, with $a + b \sqrt 2 = g$ for some $a, b, \in \mathbb Q$. Then $-a + -b \sqrt 2 \in G$ is the inverse of $g$, since $a + b\sqrt 2 - a - b\sqrt 2 = 0$. Hence $G$ has inverses.
+        For any $g, h \in G$, there are some $a, b, c, d \in \mathbb Q$ with $g = a + b \sqrt 2$ and $h = c \sqrt d$. then $g - h = (a - c) + (b - d)\sqrt 2$. Clearly $a - c$ and $b - d$ are rational, so $g - h \in G$, as desired. 
 
         \item [(b)] Let $g$ be a non-zero element of $G$ such that $a + b \sqrt 2 = g$ for some $a, b \in \mathbb Q$ (where $a$ and $B$ are not both $0$). Then note that $1 / g = 1 / (a + b \sqrt 2)$ is in $G$, since \[\frac 1 {a + b \sqrt 2} = \frac {a - b\sqrt 2} {(a + b \sqrt 2) (a - b \sqrt 2)} = \frac {a - b \sqrt 2} {a^2 - 2b^2}.\] Letting $x = \frac a {a^2 - 2b^2}$ and $y = \frac {-b} {a^2 - 2b^2}$, we have $1 / g = x + y \sqrt 2$. 
         Both $x$ and $y$ are rational, since they are made up of rational expressions. Hence $1 / g$ (in $\mathbb R$) is the inverse og $g$ in $G$. 
@@ -74,7 +59,13 @@ Exercises 8, 9, 12, 26, 36, pp. 21-23.
         \item[Note.] This makes $G$ a \textit{field}. In fact it is the field $\mathbb Q[\sqrt 2]$, the result of adjoining $\sqrt 2$ to $\mathbb Q$. 
     \end{enumerate}
     
-    \item [12.] $1$
+    \item [12.] We can just calculate the orders:
+    \begin{align*}    
+        |\overline{1}| =& 0 \\
+        \overline{-1}^2 = 1, |\overline {-1}| =& 2 \\
+        
+    \end{align*}
+    
 \end{enumerate}
 
 Exercises 3, 9, pp. 27-28.

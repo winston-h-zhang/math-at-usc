@@ -1,0 +1,170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% USE THIS FILE TO SUBMIT YOUR SOLUTIONS   %%
+%%                                          %%
+%% You must have the usamts.tex file in     %%
+%% the same directory as this file.         %%
+%% You do NOT need to submit this file or   %%
+%% usamts.tex with your solutions.  You     %%
+%% only need to submit the output PDF file. %%
+%%                                          %%
+%% DO NOT ALTER THE FILE usamts.tex         %%
+%%                                          %%
+%% If you have any questions or problems    %%
+%% using this file, or with LaTeX in        %%
+%% general, please go to the LaTeX          %%
+%% forum on the Art Of Problem Solving      %%
+%% web site, and post your problem.         %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT ALTER THE FOLLOWING LINES
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{csquotes}
+\include{../formatting}
+
+\renewcommand{\baselinestretch}{1}
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{3}
+\mathclass{425A}
+
+\renewcommand{\bf}{\mathbf}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+
+\begin{document}
+
+\begin{theorem}[6]
+    Let $E'$ be the set of all limit points of a set $E$. Prove that $E'$ is closed. Prove that $E$ and $E'$ have the same limit points. (Recall that $\overline E = E \cup E'$.) Do $E$ and $E'$ always have the same limit points.
+\end{theorem}
+
+\begin{proof}
+    \textit{$E'$ is closed.} By definition $E'$ is closed if and only if $E''$, the limit points of $E'$, are conained within $E'$. So we need to show that every limit point of $E'$ is a limit point of $E$.
+
+    Let $x$ be a limit point of $E'$. Every neighbourhood $U_x$ around $x$ then contains some $y \in E'$. Since $U_x$ is open, we can find some neighbourhood $U_y$ of $y$ such that $U_y \subseteq U_x$. Because $y$ is a limit point of $E$, we also know the $U_y$ contains points of $E$. Hence $U_x$ contains points of $E$. This holds for any neighbourhood $U_x$, and thus $x \in E'$, as desired.  
+\end{proof}
+
+\begin{proof}
+    \textit{$E$ and $\overline{E}$ have the same limit points.} We prove both inclusions.
+
+    Since $E \subseteq \overline{E}$, every neighbourhood $U_x$ of a limit point $x \in E$ will intersect at least $E$. Hence $E' \subseteq \overline{E}'$.
+
+    For the other inclusion, let $x$ be a limit point of $\overline{E}$ and $U_x$ be any neighbourhood of $x$. Then 
+\end{proof}
+
+\textit{$E$ and $E'$ do not always have the same limit points.} Let $E = \{1/n : n \in \mathbb N\}$. Then $E' = \{0\}$ is the limit points of $E$, but $E'$ clearly doesn't have any limit points itself. 
+
+\begin{theorem}[9]
+    Let $E^\circ$ denote the set of all interior points in a set $E$. 
+    \begin{enumerate}
+        \item[(a)] Prove that $E^\circ$ is always open
+        
+        \begin{proof}
+            For every $x \in E^\circ$, choose some neighbourhood $U_x$. We claim that $\bigcup_{x \in E^\circ} U_x = U = E^\circ$. Indeed, clearly $U$ contains every point of $E^\circ$ so $E^\circ \subseteq U$. At the same time, every $U_x$ is contained in $E^\circ$, so $U \subseteq E^\circ$. Now $U$ is a union of open sets, so it is open. Hence $E^\circ = U$ is open.
+        \end{proof}
+
+        \item[(b)] Prove that $E$ is open if and only if $E^\circ = E$.
+        
+        \begin{proof}
+            ($\implies$): If $E = E^\circ$, then part (a) shows that $E$ is open. 
+            
+            ($\coimplies$): If $E$ is open, then for every $x \in E$ and $U_x$ a neighbourhood of $x$, $U_x \subseteq E$. Hence $x \in E^\circ$ and $E = E^\circ$.
+        \end{proof}
+
+        \item[(c)] If $G \subset E$ and $G$ is open, prove that $G \subset E^\circ$.
+        
+        \begin{proof}
+            Consider $G^\circ$. If $x \in G^\circ$, then there is a neighbourhood $U_x \subseteq G \subseteq E$. Hence $x \in E^\circ$ and $G^\circ \subseteq E^\circ$. But $G$ is open, so part (b) shows that $G = G^\circ$, and thus $G \subseteq E^\circ$. 
+        \end{proof}
+
+        \item[(d)] Prove that the complement of $E^\circ$ is the closure of the complement of $E$.
+        
+        \begin{proof}
+            We want to show that $(E^\circ)^c = \overline{(E^c)}$ by proving both inclusions. 
+
+            First, $(E^\circ)^c \subseteq \overline{(E^c)}$. Let $x \in (E^\circ)^c$
+        \end{proof}
+        
+        \item[(e)] Do $E$ and $\overline E$ always have the same interiors?
+        
+        No. Let $E = \mathbb Q \subseteq \mathbb R$. Then $E^\circ = \varnothing$, while $\overline E ^\circ = \mathbb R ^\circ = \mathbb R$.
+
+        \item[(f)] Do $E$ and $E^\circ$ always have the same closures?
+        
+        No. Let $E = \mathbb Q \subseteq \mathbb R$. Then $E^\circ = \varnothing$. Hence $\overline E = \mathbb R \neq \overline{E^\circ} = \varnothing$. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}[10]
+    Let $X$ be an infinite set. For $p \in X$ and $q \in X$, define 
+    \[d(p, q) = 
+    \begin{cases}
+        1 & p \neq q \\ 0 & p = q.
+    \end{cases}\]
+    Prove that this is a metric. Which subsets of the resulting metric space are open? Which are closed? Which are compact?
+\end{theorem}
+
+\begin{proof}
+    We first prove the $d(p, q)$ is a metric. By definition $d(p, q) = 0$ if and only if $p = q$. Clearly $d(p, q) = d(q, p)$. Finally, we can prove $d(p, q) + d(q, r) \ge d(p, r)$ with some casework. 
+    
+    If the LHS is 0, then it must be that $d(p, q) = d(q, r) = 0$, implying that $p = q = r = 0$. Hence the RHS is also $0$ and inequality holds.
+
+    If the LHS is $1$, then one term is $1$ while the other is zero. Without loss of generality assume $d(p, q) = 1$ and $d(q, r) = 0$. Then $p \neq q$ and $q = r$ implies $p \neq r$. Thus $d(p, r) = 1$ and inequality holds. 
+
+    If the LHS is 2, then inequality always holds since $2 > 1 \ge d(p, r)$.
+
+    We conclude that $d(p, q)$ is indeed a metric. 
+\end{proof}
+
+\begin{prop}
+    The open and closed sets in this metric are $\mathcal P (X)$, i.e. the indiscrete toplogy.   
+\end{prop}
+
+\begin{proof}
+    For any $p$, $N_r(p) = \{q : d(p, q) < r\} = \{p\}$. If $r < 1$, then only $d(p, p) = 0 < 1$, so $N_r(p) = \{p\}$. So every point is an open set. Then we can construct every subset of $X$ by taking suitable unions of the points. Hence all subsets are open. At the same time, every subset is a complement of another, so every subset is complement to a open set. Hence every subset is also closed. 
+\end{proof}
+
+\begin{prop}
+    A subset $A$ of $X$ is compact if and only if $A$ is finite.
+\end{prop}
+
+\begin{proof}
+    ($\implies$): Let $\mathcal C$ be a cover of $A$. If $A$ is finite, then for each $x \in A$ choose some $U_x \in \mathcal C$ containing $x$. Then $\bigcup_{x \in A} U_x$ is a finite union coving $A$.
+
+    ($\coimplies$): If $A$ is compact then the cover $\mathcal C$ made of $\{x\}$ for every $x \in A$ has size equal to $A$. The only subcover of $\mathcal C$ is $\mathcal C$ itself, so $\mathcal C$ must be finite. Hence $A$ is finite.
+\end{proof}
+
+\end{document}

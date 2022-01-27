@@ -62,15 +62,83 @@ Exercises 8, 9, 12, 26, 36, pp. 21-23.
     \item [12.] We can just calculate the orders:
     \begin{align*}    
         |\overline{1}| =& 0 \\
-        \overline{-1}^2 = 1, |\overline {-1}| =& 2 \\
-        
+        \overline{-1}^2 = 1, |\overline {-1}| =& 2       
     \end{align*}
     
 \end{enumerate}
 
 Exercises 3, 9, pp. 27-28.
+
+We will have to use the fact that $D_{2n} = \{1, r, \dots, r^{n-1}, s, sr, \dots, sr^{n-1}\}$. This is not easy to prove formally because we don't have a formal definition of a presentation yet, so for now I will take it to be true.
+
+\begin{enumerate}
+    \item [3.] Since $x$ is not a rotation, it must be of the form $sr^i$ for $0 \le i < n$. Then $(sr^i)^2 = sr^isr^i = ssr^{-i}r^i = 1 * 1 = 1$. Thus $sr^i$ has order 2. 
+    
+    We can combine $s$ and $sr$ to get $ssr = r$. Hence $s$ and $sr$ generate $r$, which together will generate $D_{2n}$.
+
+    \item[9.] Note that the orientation of the tetrahedron is determined the orientation of a single edge. Call the edge $ab$. Then there are 4 choices for $a$ and $3$ choices for $b$, giving a total of $12$ orientations, or $12$ possible rigid motions we can do.
+
+\end{enumerate}
 Exercises 2, 4, 13, 16, 20, pp. 32-34.
+
+\begin{enumerate}
+    \item[2.] Write everything in cycle notation. We have $\sigma = (1,13,5,10) (3,15,8) (4,14,11,7,12,9)$ and $\tau = (1,14) (2,9,15,13,4) (3,10) (5,12,7) (8,11)$.
+    
+    Then quick calculations show that: 
+    \begin{align*}
+        \sigma^2 &= (1,5) (5,10) (3,15,8) (4,11,12) (14,7,9) \\
+        \sigma \tau &= (1,11,3) (2,4) (5,9,8,7,10,15) (13,14) \\
+        \tau \sigma &= (1,4) (2,9) (3,13,12,15,11,5) (8,10,14) \\
+        \tau^2 \sigma = \tau (\tau\sigma) &= (1,2,15,8,3,4,14,11,12,13,7,5,10)
+    \end{align*}
+
+    \item[4.] 
+    \begin{enumerate}
+        \item [(a)] $S_3$ has 6 elements: $\{(), (12), (23), (13), (123), (132)\}$. Direct calculation shows that these elements have orders $0, 2, 2, 2, 3, 3$.
+        \item [(b)] $S_4$ has 24 elements: 
+        \begin{enumerate}
+            \item 1 identity: $()$; order = 0;
+            \item 6 transpositions: $(12), (23), (34), (14), (13), (24)$; order = 2;
+            \item 3 disjoint products of transpositions: $(12)(34), (23)(14), (13)(24)$; order = 2;
+            \item 8 3-cycles: $(123), (132), (124), (142), (134), (143), (234), (243)$; order = 3;
+            \item 6 4-cycles: $(1234), (1243), (1324), (1342), (1423), (1432)$; order = 4.
+        \end{enumerate}
+    \end{enumerate} 
+
+    \item[13.] $(\Rightarrow)$: If $\sigma$ is a product of commuting 2-cycles. Let $\sigma = (a_1 b_1) (a_2 b_2) \dots (a_k b_k)$. Then \[\sigma^2 = (a_1 b_1) (a_2 b_2) \dots (a_k b_k)(a_1 b_1) (a_2 b_2) \dots (a_k b_k) = (a_1 b_1)^2 \dots (a_k b_k)^2,\] since all the factors commute. But squaring a 2-cycle makes the term vanish, so $\sigma^2 = 1$ and $\sigma$ has order 2.
+    
+    $(\Leftarrow)$: Suppose $\sigma$ has order 2. Decompose $\sigma$ as the product of disjoint cycles $c_1, \dots c_k$, with lengths $\ell_1, \dots, \ell_k$. Since $\sigma^2 = 1$ and disjoint cycles do not affect each other, we must have $c_1^2 = c_2^2 = \dots = c_k^2 = 1$. Then $\ell_1 = \dots = \ell_k = 2$ and everything is a 2-cycle, as desired.
+
+    \item[16.] We make a combinatorial argument. To form an $m$-cycle we must choose $m$ objects out of $n$, where order matters. This gives $n(n-1) \dots (n - m + 1)$ possible choices. However, for each cycle, we have $m$ different representations created by shifting the cycle over $m$ times. Hence we have overcounted by a factor of $m$. Thus the final answer is 
+    \[\frac{n(n-1)\dots(n-m+1)}{m}.\] 
+
+    \item[20.] We know that $S_3 = \{(), (12), (23), (13), (123), (132)\}$ and that $(12)(23) = (123)$. So $(12)$ and $(23)$ can generate $()$, $(123)$, and $(132)$. Then $(132)(12) = (23)$. Hence $a = (12)$ and $b = (23)$ generate $S_3$. The relations are at least $a^2 = b^2 = 1$. 
+    This isn't enough though, because it tells us nothing about how $ab = (123)$ behaves. Thus we need another relation $ab^3 = 1$ to constrain $(123)$. This gives \[S_3 = \langle a, b : a^2 = b^2 = 1, (ab)^3 = 1\rangle.\]
+\end{enumerate}
+
 Exercises 17, 18, pp. 40.
+
+\begin{enumerate}
+    \item[17.] Let $i : G \to G$ be the map $g \mapsto g^{-1}$. Then $i(gh) = (gh)^{-1} = h^{-1}g^{-1}$. Clearly $i(gh) = i(g)i(h)$ if and only if $h^{-1}$ commutes with $g^{-1}$ for all $g, h \in G$, i.e. $G$ is abelian.
+    \item[18.] Let $s : G \to G$ be the map $g \mapsto g^2$. Then $s(gh) = (gh)^2 = ghgh$. If $G$ is abelian, then $ghgh = gghh = g^2 h^2 = s(g)s(h)$. Thus $s$ is a homomorphism. Conversely, if $s(gh) = s(g)s(h)$, then we can take $ghgh = gghh$ and multiply by $g^{-1}$ on the left and $h^{-1}$ on the right to cancel. The result is $gh = hg$. This holds for any $g, h \in G$, therefore $G$ is abelian.
+\end{enumerate}
+
 Exercises 18, 19, pp. 45.
+
+\begin{enumerate}
+    \item [18.] Let $H$ be a left action on $A$. The relation $a \sim b$ defined by $a = hb$ for some $h \in H$ defines a equivalence relation:
+    
+    \textit{Reflexive:} Let $h = 1$. Then clearly $a = 1a$ for all $a \in A$. Hence $a \sim a$ for all $a \in A$. 
+
+    \textit{Symmetric:} Let $a \sim b$ with $a = hb$. Then $h^{-1}a = b$. Thus $b \sim a$.
+
+    \textit{Transitive:} Let $a \sim b$ and $b \sim c$ with $a = h_1 b$ and $b = h_2 c$. Then substitute $b$ to see that $a = (h_1 h_2) c$. Hence $a \sim c$.
+
+    \item [19.] Define $f : H \to \mathcal O$ to be the map $h \mapsto hx$. If $f(x) = f(y)$, then $hx = hy$. Cancelling implies $x = y$; thus $f$ is injective. Furthermore, for any $y \in \mathcal O$, we know by definition that $y \sim x$. Hence there is some $h \in H$ such that $y = hx$. Thus $f(h) = y$, and $f$ is surjective. The two combine show that $f$ is bijective. We conclude that $|H| = |\mathcal O|$. 
+    
+    But this is true for every orbit $\mathcal O$, so all the orbits $\mathcal O_1, \mathcal O_2, \dots, \mathcal O_k$ have size $|H|$. Since the orbits partition $G$, we have 
+    \[|G = \sum_{i = 1}^k |\mathcal O_i| = \sum_{i = 1}^k |H| = k|H|.\]
+    (We may do the sum since $G$ is finite.) Therefore we have \textit{Lagrange's Theorem}: $|H|$ divides $|G|$ for any subgroup $H$ of a finite group $G$.
+\end{enumerate}
 
 \end{document}

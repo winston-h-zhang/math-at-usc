@@ -1,6 +1,6 @@
-PWD C:\Users\jiand\hanting-zhang\math_at_usc\410
+PWD C:\Users\jiand\hanting-zhang\math_at_usc\410\hw1
 INPUT C:\Users\jiand\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\jiand\hanting-zhang\math_at_usc\410\hw1.tex
+INPUT c:\Users\jiand\hanting-zhang\math_at_usc\410\hw1\hw1.tex
 OUTPUT hw1.log
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
@@ -578,6 +578,8 @@ INPUT C:\Users\jiand\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT hw1.aux
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\jiand\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb

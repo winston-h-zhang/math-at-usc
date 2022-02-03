@@ -82,10 +82,15 @@
 
     Since $E \subseteq \overline{E}$, every neighbourhood $U_x$ of a limit point $x \in E$ will intersect at least $E$. Hence $E' \subseteq \overline{E}'$.
 
-    For the other inclusion, let $x$ be a limit point of $\overline{E}$ and $U_x$ be any neighbourhood of $x$. Then 
+    For the other inclusion, let $x$ be a limit point of $\overline{E}$ and $U_x$ be any neighbourhood of $x$. Then $U_x$ intersects $\overline{E}$ at some $y \neq x$. Now either $y \in E$ or $y \in E'$, since $\overline{E} = E \cup E'$. In the first case, we deduce that $U_x$ intersects $E$. In the second case, we know that $y$ is a limit point of $E$, so any neighbourhood $U_y$ around $y$ intersects $E$. 
+    We can choose $U_y$ to be contained in $U_x$ and \textit{not} contain $x$ by making it sufficiently small. (Since $U_x$ is open and $y \neq x$.) Hence $U_x$ contains $U_y$ and therefore some point of $E$ which is not $x$. In both cases, $U_x$ intersects $E$. This holds for any $U_x$, so $x$ must be a limit point of $E$. 
+
+    Hence the proof is complete.
 \end{proof}
 
-\textit{$E$ and $E'$ do not always have the same limit points.} Let $E = \{1/n : n \in \mathbb N\}$. Then $E' = \{0\}$ is the limit points of $E$, but $E'$ clearly doesn't have any limit points itself. 
+\begin{proof}
+    \textit{$E$ and $E'$ do not always have the same limit points.} Let $E = \{1/n : n \in \mathbb N\}$. Then $E' = \{0\}$ is the limit points of $E$, but $E'$ clearly doesn't have any limit points itself. 
+\end{proof}
 
 \begin{theorem}[9]
     Let $E^\circ$ denote the set of all interior points in a set $E$. 
@@ -113,9 +118,11 @@
         \item[(d)] Prove that the complement of $E^\circ$ is the closure of the complement of $E$.
         
         \begin{proof}
-            We want to show that $(E^\circ)^c = \overline{(E^c)}$ by proving both inclusions. 
+            We want to show that $(E^\circ)^c = \overline{E^c}$ by proving both inclusions. 
 
-            First, $(E^\circ)^c \subseteq \overline{(E^c)}$. Let $x \in (E^\circ)^c$
+            First, $(E^\circ)^c \subseteq \overline{E^c}$. For any $x \in (E^\circ)^c$, either $x$ is in $E^c$ or $E \setminus E^\circ$. In the first case, clearly $x \in \overline{E^c}$. In the second case, we know that $x$ is not in the interior of $E$, so any open neighbourhood $U_x$ contains some point $y$ of $E^c$. We can see that $y \neq x$ since $x \in E$ while $y \in E^c$. Therefore $x$ is a limit point of $E^c$, hence $x \in \overline{E^c}$.
+            
+            For the other inclusion, since $E^\circ \subseteq E$, we have $E^c \subseteq (E^\circ)^c$. Hence $\overline{E^c} \subseteq \overline{(E^\circ)^c} = (E^\circ)^c$. The last equality comes from the fact that, since $E^\circ$ is open, $(E^\circ)^c$ must be closed. This completes the proof.
         \end{proof}
         
         \item[(e)] Do $E$ and $\overline E$ always have the same interiors?

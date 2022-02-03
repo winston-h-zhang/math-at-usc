@@ -10,6 +10,7 @@
 %% Student and Year/Round data
 \newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
 \newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
 
 %% Pagestyle setup
 \setlength{\headheight}{0.75in}
@@ -20,7 +21,7 @@
 \setlength{\textwidth}{6.5in}
 \setlength{\headwidth}{6.5in}
 \setlength{\textheight}{8in}
-\lhead{Math 410}
+\lhead{Math \printmathclass}
 \chead{\Large \textbf{Homework \printpset}}
 \rhead{\printrealname}
 \rfoot{Page \thepage}

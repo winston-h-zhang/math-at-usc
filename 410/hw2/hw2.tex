@@ -31,7 +31,7 @@
 \DeclareUnicodeCharacter{2212}{-}
 
 \title{\textbf{Math 410 Homework 2}}
-\author{Due Date: \textbf{something}}
+\author{By: Hanting Zhang \hspace{5mm} Due Date: \textbf{Jan. 29, 2022}}
 \date{} 
 \begin{document}
 \maketitle
@@ -44,26 +44,98 @@ Exercises 8, 9, 12, 26, 36, pp. 21-23.
         \item [(a)] Since $G$ is a subset of $\mathbb C$, it suffices to prove that $G$ is a subgroup of $\mathbb C$. For any $g, h \in G$, we need to show that $gh^{-1} \in G$. By definiton there exist some $n, m \in \mathbb Z^+$ such that $g^n = h^m = 1$. 
         
         We want to find $N$ such that $(gh^{-1})^N = 1$. Let $N = nm$ and notice that $(gh^{-1})^{nm} = g^{nm} * h^{-nm} = (g^n)^m * (h^m)^{-n} = 1^m * 1 ^{-n} = 1$. Hence $gh^{-1} \in G$, and $G$ is a subgroup of $\mathbb C$, which makes it a group in general.
-        \item [(b)] 
+        \item [(b)] Clearly $1 \in G$, but $1 + 1 = 2 \notin G$. So $G$ is not closed under addition.
     \end{enumerate}
 
     \item [9.]
-    \item \begin{enumerate}
+    \begin{enumerate}
         \item [(a)] Again we prove that $G$ is a group by proving it is a subgroup of $\mathbb R$. 
         
         For any $g, h \in G$, there are some $a, b, c, d \in \mathbb Q$ with $g = a + b \sqrt 2$ and $h = c \sqrt d$. then $g - h = (a - c) + (b - d)\sqrt 2$. Clearly $a - c$ and $b - d$ are rational, so $g - h \in G$, as desired. 
 
         \item [(b)] Let $g$ be a non-zero element of $G$ such that $a + b \sqrt 2 = g$ for some $a, b \in \mathbb Q$ (where $a$ and $B$ are not both $0$). Then note that $1 / g = 1 / (a + b \sqrt 2)$ is in $G$, since \[\frac 1 {a + b \sqrt 2} = \frac {a - b\sqrt 2} {(a + b \sqrt 2) (a - b \sqrt 2)} = \frac {a - b \sqrt 2} {a^2 - 2b^2}.\] Letting $x = \frac a {a^2 - 2b^2}$ and $y = \frac {-b} {a^2 - 2b^2}$, we have $1 / g = x + y \sqrt 2$. 
-        Both $x$ and $y$ are rational, since they are made up of rational expressions. Hence $1 / g$ (in $\mathbb R$) is the inverse og $g$ in $G$. 
+        Both $x$ and $y$ are rational, since they are made up of rational expressions. Hence $1 / g$ (in $\mathbb R$) is the inverse of $g$ in $G$. 
 
         \item[Note.] This makes $G$ a \textit{field}. In fact it is the field $\mathbb Q[\sqrt 2]$, the result of adjoining $\sqrt 2$ to $\mathbb Q$. 
     \end{enumerate}
     
     \item [12.] We can just calculate the orders:
     \begin{align*}    
-        |\overline{1}| =& 0 \\
-        \overline{-1}^2 = 1, |\overline {-1}| =& 2       
+        |\overline{1}| &= 1 \\
+        \overline{-1}^2 = 1 \implies |\overline {-1}| &= 2  \\
+        \overline{5}^2 = \overline{25} = \overline 1 \implies |\overline{5}| &= 2 \\
+        \overline{7} = -\overline{5} \implies |\overline{7}| &= 2 \\
+        \overline{-7} = \overline{5} \implies |\overline{-7}| &= 2 \\
+        \overline{13} = \overline{1} \implies |\overline{13}| &= 1
     \end{align*}
+
+    \item [26.] We proceed by proving the goal axioms for $H$:
+    
+    \textit{Identity:} Let $1_H = 1_G$. Then for all $h \in H$, $1_H *_H h = 1_G *_G h = h$ by definition.
+
+    \textit{Associativity:} For any $h_1, h_2, h_3 \in H$, $(h_1 *_H h_2) *_H h_3 = (h_1 *_G h_2) *_G h_3 = h_1 *_G (h_2 *_G h_3) = h_1 *_H (h_2 *_G h_3)$. Here we use the associativity of $G$.
+
+    \textit{Closure:} Given by assumption.
+
+    \textit{Inverses:} Given by assumption.
+
+    \item [36.] Write it out in a table!
+    
+    \begin{center}
+        \begin{tabular}{ c | c c c c }
+         & 1 & $a$ & $b$ & $c$ \\ 
+        \hline
+        1 & 1 & $a$ & $b$ & $c$ \\  
+        $a$ & $a$ &  &  &  \\  
+        $b$ & $b$ &  &  &  \\ 
+        $c$ & $c$ &  &  &  \\ 
+        \end{tabular}
+    \end{center}
+
+    With loss of generality we can swap between $b$ and $c$ by relabeling them $c = b'$ and $b = c'$. Hence for $aa = ?$, we only need to consider cases $aa = 1$ and $aa = b$. 
+    
+    \textbf{Case $aa = b$}: Then $ab = 1$ or $ab = c$. In the first case, we have $aab = a1 \Rightarrow bb = a \Rightarrow aaaa = a \Rightarrow aaa = 1$. But $a$ cannot be of order $3$, thus we must have $ab = c$. So the final entry $ac$ is $1$ because that's the only choice left:    
+    
+    \begin{center}
+        \begin{tabular}{ c | c c c c }
+         & 1 & $a$ & $b$ & $c$ \\ 
+        \hline
+         1  &  1  & $a$ & $b$ & $c$ \\  
+        $a$ & $a$ & $b$ & $c$ & 1 \\  
+        $b$ & $b$ &  &  &  \\ 
+        $c$ & $c$ &  &  &  \\ 
+        \end{tabular}
+    \end{center}
+
+    Now $ba$ is either $c$ or 1. By the same logic it must be $c$ and $ac = 1$. This makes it easy to fill out the rest of the table $bb = 1$, $bc = a$, $cb = a$, $cc = b$.
+
+    \begin{center}
+        \begin{tabular}{ c | c c c c }
+         & 1 & $a$ & $b$ & $c$ \\ 
+        \hline
+         1  &  1  & $a$ & $b$ & $c$ \\  
+        $a$ & $a$ & $b$ & $c$ &  1  \\  
+        $b$ & $b$ & $c$ &  1  & $a$ \\ 
+        $c$ & $c$ &  1  & $a$ & $b$ \\ 
+        \end{tabular}
+    \end{center}
+
+    But here, we see that $aa = b$ and so $aaaa = bb = 1$. Thus $a$ has order 4, so the table is \textbf{not} the one we're looking for. 
+
+    \textbf{Case $aa = 1$}: Then we must have $ab = ba = c$ and $ac = ca = b$. More deductions show that, $bb = 1$, $cc = 1$, $bc = cb = a$. The tables is:
+
+    \begin{center}
+        \begin{tabular}{ c | c c c c }
+         & 1 & $a$ & $b$ & $c$ \\ 
+        \hline
+         1  &  1  & $a$ & $b$ & $c$ \\  
+        $a$ & $a$ & $1$ & $c$ & $b$ \\  
+        $b$ & $b$ & $c$ & 1 & $a$ \\ 
+        $c$ & $c$ & $b$ & $a$ & 1 \\ 
+        \end{tabular}
+    \end{center}
+
+    So this is the unique table of $G$. Clearly $G$ is abelian.
     
 \end{enumerate}
 
@@ -113,7 +185,7 @@ Exercises 2, 4, 13, 16, 20, pp. 32-34.
     \[\frac{n(n-1)\dots(n-m+1)}{m}.\] 
 
     \item[20.] We know that $S_3 = \{(), (12), (23), (13), (123), (132)\}$ and that $(12)(23) = (123)$. So $(12)$ and $(23)$ can generate $()$, $(123)$, and $(132)$. Then $(132)(12) = (23)$. Hence $a = (12)$ and $b = (23)$ generate $S_3$. The relations are at least $a^2 = b^2 = 1$. 
-    This isn't enough though, because it tells us nothing about how $ab = (123)$ behaves. Thus we need another relation $ab^3 = 1$ to constrain $(123)$. This gives \[S_3 = \langle a, b : a^2 = b^2 = 1, (ab)^3 = 1\rangle.\]
+    This isn't enough though, because it tells us nothing about how $ab = (123)$ behaves. Thus we need another relation $(ab)^3 = 1$ to constrain $(123)$. This gives \[S_3 = \langle a, b : a^2 = b^2 = 1, (ab)^3 = 1\rangle.\]
 \end{enumerate}
 
 Exercises 17, 18, pp. 40.

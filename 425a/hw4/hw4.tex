@@ -68,19 +68,60 @@
 \begin{document}
 
 \begin{theorem}[15]
-    Show that Theorem 2.36 and its Corolary become false (in $\mathbb R$, for example) if the word "compact" is replaced by "closed" or "bounded."
+    Show that Theorem 2.36 and its Corolary become false (in $\mathbb R$, for example) if the word ``compact'' is replaced by ``closed'' or ``bounded.''
 \end{theorem}
 
-\begin{proof}
-    Bruh
-\end{proof}
+\begin{enumerate}
+    \item Closed: If we instead consider a collection of closed subsets, then the theorem is false because we can take advantage of the fact that the subsets can be unbounded. For example, take \(C_i = [i, \infty) \subseteq \mathbb R\) for \(i \in \mathbb N\). Then the intersection every finite subset \(\{C_i\}_{i \in A}\) for \(A \subseteq \mathbb N\) is just \(C_{\max A}\), which clearly is non-empty. However, the total intersection \(\bigcap_{i = 0}^\infty C_i\) is empty. 
+    
+    \item Bounded: If we instead only assume that our subsets are bounded, then notice that \(\varnothing\) is bounded. Therefore any collection that contains the empty set will have an empty intersection. So the theorem fails in this case as well.
+\end{enumerate}
 
 \begin{theorem}[16]
     Regard $\mathbb Q$, the set of all rational numbers, as a metric space, with $d(p, q) = |p - q|$. Let $E$ be the set of all $p \in \mathbb Q$ such that $2 < p^2 < 3$. Show that $E$ is closed and bounded in $\mathbb Q$, but that $E$ is not compact. Is $E$ open in $\mathbb Q$?
 \end{theorem}
 
+First, let us prove a few useful lemmas:
+
+\begin{lemma}
+    For any \(p \in \mathbb R\), the set \(U = \{x \in \mathbb Q : x^2 < p\}\) is open in our metric. 
+\end{lemma}
+
 \begin{proof}
-    
+    We want to show that there exists some \(r > 0\) such that \(B_r(x) \subseteq U\). This is equivalent to showing that for every \(-r < \epsilon  < r\), \((x + \epsilon) \in U \implies (x + \epsilon)^2 < p\). Solving for \(\epsilon\) in this quadratic in \(\mathbb R\) reveals \(|x + \epsilon| < \sqrt{p}\). 
+    Taking the positive branch of the absolute value (since \(r > 0\)), we have \(\epsilon < \sqrt{p} - x \implies r \le \sqrt p - x\). We now return to \(\mathbb Q\) by choosing a suitable value of \(r\) that is rational. Hence \(B_r(x) \subseteq U\) and \(U\) is open.
+\end{proof}
+
+\begin{lemma}
+    For any \(p \in \mathbb R\), the set \(U = \{x \in \mathbb Q : x^2 > p\}\) is open in our metric.
+\end{lemma}
+
+\begin{proof}
+    I will drop the proof since it is extremely similar to the one above. (Just replace \(<\) with \(>\) in most places.)
+\end{proof}
+
+\begin{corollary}
+    If \(p\) is prime, then \(U = \{x \in \mathbb Q : x^2 < p\}\) and \(V = \{x \in \mathbb Q : x^2 > p\}\) is also closed.
+\end{corollary}
+
+\begin{proof}
+    For \(U\), we need to prove that \(U^c = \{x \in \mathbb Q : x^2 >= p\}\) is open. Note that because \(p\) is prime, there is no \(x \in \mathbb Q\) such that \(x^2 = p\), so we can drop the \(=\) conditioning without losing any points, hence \(U^c = \{x \in \mathbb Q : x^2 > p\}\), which we proved is open. 
+
+    Similarly, \(V\) is open since \(V^c\) can be written as \(\{x \in \mathbb Q : x^2 < p\}\).
+\end{proof}
+
+Now we can do the exercise quite smoothly!
+
+\begin{proof}
+    \begin{enumerate}
+        \item \(E\) is closed: Note that \(E = \{p : 2 < p^2\} \cap \{p : p^2 < 3\}\). Applying our lemmas, then, \(E\) is a intersection of closed sets, so it is also closed.
+        
+        \item \(E\) is bounded: \(E\) is bounded by \(M = 9\). If \(p >= 3\), then \(p^2 >= 9\) and \(p \notin E\). Hence \(U \subseteq B_9(0)\).
+        
+        \item \(E\) is not compact: Let \(\mathcal C\) be the collection of open sets \(B_q(0)\) for each \(q \in E\). Clearly \(\bigcup_{q \in E} B_q(0) = E\), but there is no finite subcover because any finite subcollection \(B_{q_1}(0), \cdots B_{q_n}(0)\) can be bounded by their maximum \(B_{\max{q_i}}(0)\). But \(\sqrt 2\) and \(\sqrt 3\) are irrational so we will always be missing points between \(\max q_i\) and \(sqrt 2\), for example.
+        
+        \item \(E\) is open: Apply our lemmas because \(E = \{p : 2 < p^2\} \cap \{p : p^2 < 3\}\) is an intersection of open sets.
+    \end{enumerate}
 \end{proof}
 
 \end{document}

@@ -87,9 +87,23 @@ Exercises 3, 8, 20, 23, 25, pp. 40-41;
 
     \item [23.] To show that every element $g$ can be written as $x^{-1} \sigma(x)$, it is equivalent to prove that the map $x \mapsto x^{-1}\sigma(x)$ is surjective. Since $G$ is finite, this is equivalent to showing that $x \mapsto x^{-1}\sigma(x)$ is injective via a cardinality argument.
     
-    Let $x, y \in G$ such that $x^{-1}\sigma(x) = y^{-1}\sigma(y)$. 
+    Let $x, y \in G$ such that $x^{-1}\sigma(x) = y^{-1}\sigma(y)$. Then rearrange to get \(\sigma(x)\sigma(y)^{-1} = \sigma(xy^{-1}) = xy^{-1}\). The the fact that \(sigma\) only fixes the dientity means that \(xy^{-1} = 1 \implies x = y\). Hence $x \mapsto x^{-1}\sigma(x)$ is injective, we can conclude from above considerations that it is bijective.
+    
+    So, for any \(g \in G\) we an find \(x \in G\) such that \(g = x^{-1} \sigma(x)\). Use the hint from the text and apply \(\sigma\) to both sides to get \(\sigma(g) = \sigma(x^{-1})\sigma^2(x) = \sigma(x)^{-1}x\). Aha! We can see that, in fact, \(\sigma(g) \cdot g = \sigma(x)^{-1} x \cdot x^{-1} \sigma(x) = 1\), so \(g = \sigma(g^{-1})\).
+    Then we have, for any \(g, h \in G\), 
+    \[gh = \sigma(g^{-1}) \sigma(h^{-1}) = \sigma(g^{-1}h^{-1}) = \sigma((hg)^{-1}) = hg,\]
+    which proves that \(G\) is abelian!
 
     \item [25.] 
+    \begin{enumerate}
+        \item [(a)] Geometrically, you can draw it out and see that if we apply \(\begin{pmatrix}
+            x \\
+            y
+        \end{pmatrix}\) to the matrix, we get \(\begin{pmatrix}
+            x \cos \theta - y \sin \theta \\
+            x \sin \theta + y \cos \theta
+        \end{pmatrix}\), which rotates the input by \(\theta\) radians counterclockwise.
+    \end{enumerate}
 \end{enumerate}
 
 Exercises 4, 5, 6, 20, 21, pp. 44-45.
@@ -107,20 +121,39 @@ Exercises 4, 5, 6, 20, 21, pp. 44-45.
 
     \item [6.] For a faithful action of \(G\) on \(A\), the corresponding permutation representation is injective. Hence \(\ker \varphi\) is the trivial subgroup. By exercise 5, the kernel of the action is therefore also trivial.
     
-    \item [20.] Imagine the group of such rigid motions \(G\) acting on the vertices of the tetrahedron. Then we have an action from \(G\) on \(\{\text{four vertices}\}\). This is equivalent to a homomorphism \(\varphi : G \to S_4\). Furthermore, the only action that fixes all the vertices is clearly the trivial action. Hence the action is faithful, and \(G\) embedds into \(S_4\), i.e. \(G\) is isomorphic to its image (which is some subgroup) in \(S_4\) under \(\varphi\).
+    \item [20.] Imagine the group of such rigid motions \(G\) acting on the vertices of the tetrahedron. Then we have an action from \(G\) on \(\{\text{four vertices}\}\). This is equivalent to a homomorphism \(\varphi : G \to S_4\). Furthermore, the only action that fixes all the vertices is clearly the trivial action. Hence the action is faithful, and \(G\) embbeds into \(S_4\), i.e. \(G\) is isomorphic to its image (which is some subgroup) in \(S_4\) under \(\varphi\).
     
     \item [21.] Let the rigid motions of the cube \(G\) act on the four pairs of opposite vertices that make up the cube. This is a valid action because opposite vertices remain opposite after rigid motions. The associated permutation representation is a map \(\varphi : G \to S_4\). Furthermore, the only action that does not permute any vertices is the identity action. Then \(G\) acts faithfully; hence \(\varphi\) is injective. 
     
-    Now we prove that \(\varphi\) is surjective. Let \(\sigma\) be some permutation of opposite pairs of vertices. 
+    Now we prove that \(\varphi\) is surjective. Let \(\sigma\) be some permutation of opposite pairs of vertices. First pick some set of vertices and map them to the desired image. Then there are 3 choices in how to rotate the other 3 pairs to fit \(\sigma\). This give 8 choices to pick the first pair and (4 pair locations times 2 orientations each) and 3 more choices. In total, that is 24 choices, meaning \(\varphi\) must also be surjective. Hence \(\varphi\) is bijective and is a group isomorphism.
 \end{enumerate}
 
 Exercises 8, 10, 15 ,17, pp. 48-49.
 
 \begin{enumerate}
-    \item [8.] 
+    \item [8.] \((\Rightarrow)\): If \(H \subseteq K\) or \(K \subseteq H\), then either \(H \cup K = K\) or \(H \cup K = H\). In both cases \(H \cup K\) is a subgroup of \(G\).
+    
+    \((\Leftarrow)\): If \(H \cup K\) is a subgroup of \(G\), then suppose for the sake of contradiction assume that \(H < H \cup K\) and \(K < H \cup K\), so there is some \(h \in H\) such that \(h \notin K\) and some \(k \in K\) such that \(k \notin H\). Consider the product \(hk \in H \cup K\). Then \(hk = h' \in H\) or \(hk = k' \in K\). 
+    In the first case, we have \(k = h^{-1}h' \in H\) which gives contradiction. In the second case, we have \(h = k^{-1}k' \in K\) which also gives contradiction. Therefore the proof is complete.
+
     \item [10.] 
-    \item [15.] 
-    \item [17.] 
+    \begin{enumerate}
+        \item [(a)] We proceed with the subgroup formula. Let \(x, y \in H \cap K\). Then \(x \in H\) and \(y^{-1} \in H\), so \(xy^{-1} \in H\). Similarly, \(x \in K\) and \(y^{-1} \in K\), so \(xy^{-1} \in K\). Hence \(xy^{-1} \in H \cap K\).
+        
+        \item [(b)] Again we use the subgroup formula. Let \(\mathcal I\) be some index set. Let \(x, y \in \bigcup_{i \in \mathcal I} H_i\) for subgroups \(H_i \le G\) over all \(i \in \mathcal I\). Then for each \(i\), we have \(x, y^{-1} \in H_i\) by definition of the intersection. Hence defintionally we have \(xy^{-1} \in \bigcup_{i \in \mathcal I} H_i\), as desired.
+    \end{enumerate}
+
+    \item [15.] We use the subgroup formula. Let \(x, y \in \bigcup_{i = 1}^\infty H_i\). Then there exist some \(i, j\) such that \(x \in H_i\) and \(y \in H_j\). Without loss of generality assume that \(i \le j\) (if it's not then just swap the variables around). Then \(H_i \le H_j\), so \(x \in H_j\) and \(xy^{-1} \in H_j \subseteq \bigcup_{i = 0}^\infty H_i\), and the subgroup formula is satisfied. 
+    
+    \item [17.] Set \(G = \{(a_{ij}) \in GL_n(F) : \forall i > j, a_{ij} = 0\}\). First, we have to show that \(G \subseteq GL_n(F)\). Indeed, note that all the elements of \(G\) are in reduced row echelon form, so their determinants are simply that product of the diagonals, which is clearly \(1\). Hence all elements in \(G\) have inverses, i.e. \(G \subseteq GL_n(F)\).
+    
+    We proceed by proving the group axioms. Clearly \(I_n \in G\) is the identity.
+    
+    Next, we prove that \(G\) is closed under inverses. Suppose \(A, B \in G\) are upper triangular. Then for \(1 \le i, j \le n\), consider \(AB_{ij} = \sum_{k = 1}^n a_{ik}b_{kj}\). If \(i > j\), then \(k > i \implies k > j\) and \(j > k \implies i > k\), so are the terms have either \(a_{ik} = 0\) or \(a_{kj} = 0\). Hence \((AB)_{ij} = 0\). Of course when \(i = j\), we have only the term \(a_{ik}b_{kj} = 1\) when \(k = i = j\), so \((AB)_{ii} = 1\). Hence \(G\) is closed under multiplication.
+
+    Finally, we need to show that \(G\) has inverses. Let \(A\in G\) and \(B \in GL_n(F)\) such that \(AB = I_n\). Note that if \(i = n\), then we have \(b_{kj} = 0\). Extending this by doing induction on \(i\) shows that \(b_{kj} = 0\) for all \(k > j\). Hence \(B \in G\), and \(G\) has inverses. 
+
+
 \end{enumerate}
 
 % Exercises 5, 10, 12, pp. 52-53.

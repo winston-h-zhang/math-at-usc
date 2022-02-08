@@ -95,28 +95,47 @@ Exercises 3, 8, 20, 23, 25, pp. 40-41;
 Exercises 4, 5, 6, 20, 21, pp. 44-45.
 
 \begin{enumerate}
-    \item [4.]
-    \item [5.]
-    \item [6.]
-    \item [20.]
-    \item [21.]
+    \item [4.] 
+    \begin{enumerate}
+        \item [(a)] We proceed by using the subgroup formula. Let \(H\) be the kernel of the action of \(G\) on \(A\). Suppose \(x, y \in H\), i.e. both \(x\) and \(y\) fix all elements of \(A\). Then for any \(a \in A\), we have \((xy^{-1}) \cdot a) = x \cdot (y^{-1} \cdot a)\). We know that \(y \cdot a = a\), so \(a = y^{-1} \cdot a\). Hence we can simplify \((xy^{-1})\cdot a = a\) and conclude that \(xy^{-1} \in H\). Hence \(H\) is a subgroup.
+        \item [(b)] Let \(G_a = \{g \in G : ga = a\}\). We use the subgroup formula again. Suppose \(x, y \in G_a\). Again, \((xy^{-1}) \cdot a = x \cdot (y^{-1} \cdot a) = x \cdot a = a\). Hence \(xy^{-1} \in G_a\) and we have a subgroup. 
+    \end{enumerate}
+
+    \item [5.] The kernel \(K\) of the group action of \(G\) on \(A\) is defined as \(\{g \in G : \forall a \in A, ga = a\}\). If \(g \in K\), then the permutation \(\sigma_g\) associated with \(g\) is the identity permutation. But we have \(\varphi : G \to S_A\) defined by \(\varphi(g) = \sigma_g\), so \(\sigma_g = 1 \implies g \in \ker \varphi\). Hence \(K \subseteq \ker \varphi\).
+    
+    For the other inclusion, consider \(g \in \ker \varphi\). Then \(\sigma_g\) is the identity permutation, so clearly \(ga = a\) for all \(a \in A\). Then \(g \in K\). Hence the two subgroups \(K\) and \(\ker \varphi\) are equal.
+
+    \item [6.] For a faithful action of \(G\) on \(A\), the corresponding permutation representation is injective. Hence \(\ker \varphi\) is the trivial subgroup. By exercise 5, the kernel of the action is therefore also trivial.
+    
+    \item [20.] Imagine the group of such rigid motions \(G\) acting on the vertices of the tetrahedron. Then we have an action from \(G\) on \(\{\text{four vertices}\}\). This is equivalent to a homomorphism \(\varphi : G \to S_4\). Furthermore, the only action that fixes all the vertices is clearly the trivial action. Hence the action is faithful, and \(G\) embedds into \(S_4\), i.e. \(G\) is isomorphic to its image (which is some subgroup) in \(S_4\) under \(\varphi\).
+    
+    \item [21.] Let the rigid motions of the cube \(G\) act on the four pairs of opposite vertices that make up the cube. This is a valid action because opposite vertices remain opposite after rigid motions. The associated permutation representation is a map \(\varphi : G \to S_4\). Furthermore, the only action that does not permute any vertices is the identity action. Then \(G\) acts faithfully; hence \(\varphi\) is injective. 
+    
+    Now we prove that \(\varphi\) is surjective. Let \(\sigma\) be some permutation of opposite pairs of vertices. 
 \end{enumerate}
 
 Exercises 8, 10, 15 ,17, pp. 48-49.
 
 \begin{enumerate}
-    \item [8.]
-    \item [10.]
-    \item [15.]
-    \item [17.]
+    \item [8.] 
+    \item [10.] 
+    \item [15.] 
+    \item [17.] 
 \end{enumerate}
 
-Exercises 5, 10, 12, pp. 52-53.
-
-\begin{enumerate}
-    \item [5.]
-    \item [10.]
-    \item [12.]
-\end{enumerate}
+% Exercises 5, 10, 12, pp. 52-53.
+% 
+% \begin{enumerate}
+%     \item [5.] 
+%     \begin{enumerate}
+%         \item [(a)] Let \(G = S_3\) and \(A = \{1, (123), (132)\}\). Then \(|A| = 3\) implies that \(A\) is the cyclic group on 3 elements. In particular \(A\) is abelian, so at least \(A \subseteq C_G(A)\). Furthermore, we can check that the other 3 elements \((12), (23), (13)\) do not commute with \(A\), since \((12)(123) \neq (123)(12), (23)(123) \neq (123)(23),\) and \((13)(123) \neq (123)(13)\). Hence \(A = C_G(A)\).
+        
+%         Now we know that \(C_G(A) \subseteq N_G(A)\) and we can see that \((12) \in N_G(A)\) since \((12)(123)(12)^{-1} = (132) \in A\). Hence \(N_G(A)\) contains both \((123)\) and \((12)\), which generate \(G\). But \(N_G(A)\) has to be at least \(\rangle (12), (123)\langle = G\), so \(N_G(A) = G\), as desired.
+        
+%         \item [(b)] 
+%     \end{enumerate}
+%     \item [10.] 
+%     \item [12.] 
+% \end{enumerate}
 
 \end{document}

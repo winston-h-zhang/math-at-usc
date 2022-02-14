@@ -62,8 +62,10 @@
 \mathclass{410}
 
 \renewcommand{\bf}{\mathbf}
+\renewcommand{\bar}{\overline}
 \renewcommand{\implies}{\Rightarrow}
 \newcommand{\coimplies}{\Leftarrow}
+\newcommand{\normal}{\trianglelefteq}
 
 \begin{document}
 Exercises 6, 12, pp. 52-53.
@@ -105,25 +107,72 @@ Exercises 16, 17, pp. 65-66.
         
         \item[(b)] Suppose \(\langle r \rangle \le K\). Then \(|\langle r \rangle| \le |K|\) while \(|K| \mid |G|\). But \(\langle r \rangle\) has order \(n\) and \(G\) has order \(2n\). Hence \(|K|\) can only be \(n\), in which case \(H = K\), or \(2n\), in which case \(K = G\). This is exactly the definition of \(H\) being maximal, as desired.
          
-        \item[(c)] The order of \(x^p\) is \(n / p\), so \(|\langle x^p \rangle| = n / p\). If \(K\) contains \(\langle x^p \rangle\), then \(n/p \le |K|\) while \(|K| \mid n \implies a|K| = n\) for some \(a\). And again, 
+        \item[(c)] The order of \(x^p\) is \(n / p\), so \(|\langle x^p \rangle| = n / p\). If \(K\) contains \(\langle x^p \rangle\), then \(n/p \le |K|\) while \(|K| \mid n \implies a|K| = n\) for some \(a\). 
     \end{enumerate}
-    \item [17.]
+    \item [17.] 
+    \begin{enumerate}
+        \item[(a)] The chain \(\mathcal C\) is a set of subgroups \(\{H_i\}_{i \in \mathcal I}\) on a total order \(\mathcal I\) such that \(H_i \le H_j\) for all \(i \le j\). 
+        
+        We first show that if 
+        \(x, y \in \bigcup_{i \in \mathcal I} H_i = H\), then \[xy \in bigcup_{i \in \mathcal I} H_i = H.\]
+
+        Since \(x \in H\), we have \(x \in H_i\) for some \(i \in I\). Similiarly \(y \in H_j\) for some \(j \in \mathcal I\). Furthermore, \(I\) is a total order so either \(i \le j\) or \(i \ge j\). Without loss of generality assume that \(i \le j\), since we could just swap the labels if instead \(j \le i\). Then \(H_i \le H_j\), so \(x \in H_i \le H_j\) and \(y \in H_j\) imply \(xy \in H_j \le H\).
+
+        The other subgroup axioms are straightforward: \(e \in H\) since every \(H_i\) is a subgroup. For any \(x \in H\), \(\exists i, x \in H_i \implies x^{-1} \in H_i \le H\). 
+        
+        Hence \(H\) is a subgroup of \(G\).
+
+        \item[(b)] Assume for the sake of contradiction that \(H\) is \textit{not} a proper subgroup, i.e. \(H = G\). Then each \(g_i\) must lie in some \(H_{\alpha_i}\). There are only finite \(g_i\), therefore we can compute the finite maximum \(\max (\alpha_i) = \alpha_j\) for some fixed \(j\). Then \(H_{\alpha_j}\) is both in \(\mathcal C\) and contains each \(g_i\). 
+        Then \(\langle g_1, \dots, g_n\rangle \subset H_{\alpha_j}\). But \(\langle g_1, \dots, g_n\rangle = G\)! So \(H_{\alpha_j}\) is not proper, contradicting our assuptions about \(\mathcal C\).
+          
+        \item[(c)] Part (b) shows that for any chain \(\mathcal C\), the union of all subgroups in the chain \(H\) is an upper bound on \(\mathcal C\) that is proper. In other words, \(H \in \mathcal S\), and hence we may apply Zorn's lemma to deduce that \(\mathcal S\) contains at least one maximal element. This concludes the proof.
+    \end{enumerate}
 \end{enumerate}
 
 Exercises 1, 18, 24, 40, 41 pp. 85-89.
 
-\begin{enumerate}
-    \item [1.]
-    \item [18.]
-    \item [24.]
-    \item [40.]
-    \item [41.]
-\end{enumerate}
+\begin{theorem}[1]
+    Let \(\varphi : G \to H\) be a homomorphism and let \(E\) be a subgroup of \(H\). Prove that \(\varphi^{-1}(E) \le G\). If \(E \trianglelefteq H\), then \(\varphi^{-1}(E) \normal G\).
+\end{theorem}
+
+\begin{theorem}[18]
+    bruh
+\end{theorem}
+
+\begin{theorem}[24]
+    Prove that if \(N \normal G\) and \(H\) is any subgroup of \(G\) then \(N \cap H \normal H\).
+\end{theorem}
+
+\begin{theorem}[40]
+    Let \(G\) be a group, let \(N\) be a normal subgroup of \(G\) and let \(\bar{G} = G / N\). Prove that \(\bar x\) and \(\bar y\) commute in \(\bar G\) if and only if \(x^{-1}y^{-1}xy \in N\).
+\end{theorem}
+
+\begin{proof}
+    \((\implies)\): If \(x^{-1}y^{-1}xy \in N\), then \((x^{-1}y^{-1}xy)N = N \implies xyN = Nyx\). But \(N\) is normal, so we can swap the left and right cosets. Thus \(xN yN = xyN = N yx = yx N = yN xN\), as desired.
+
+    \((\coimplies)\): If \(xN yN = yN xN\), then we can just run the argument backwards:
+    \[xyN = yxN \implies x^{-1}y^{-1}xyN = N \implies x^{-1}y^{-1}xy \in N.\]
+\end{proof}
+
+\begin{theorem}[41]
+    Let \(G\) be a group. Prove that \(N = \langle x^{-1}y^{-1}xy | x, y \in G \rangle\) is a normal subgroup of \(G\) and \(G/N\) is abelian. 
+\end{theorem}
+
+\begin{proof}
+    \textit{\(N\) is a normal subgroup of \(G\)}: Let \(\varphi_g(n) = g^{-1}ng\). Note that conjugation by \(g\) is a homomorphism. Let \(n \in N\), which will have the form \(a_1^{\epsilon_1} a_2^{\epsilon_2} \dots a_n^{\epsilon_n}\), where each \(a_i = x^{-1}y^{-1}xy\) for some \(x, y \in G\) and \(\epsilon_i = \pm 1\). Now we want to show that \(g^{-1}ng = \varphi_g(n) \in N\) for any \(g \in G\). Since \(\varphi_g\) is a homomorphism, we have 
+    \[\varphi_g(n) = \varphi_g(a_1)^{\epsilon_1} \varphi_g(a_2)^{\epsilon_2} \dots \varphi_g(a_n)^{\epsilon_n}.\]
+    Because \(N\) is a subgroup, it suffices now to prove that each \(\varphi_g(a_i) \in N\). We have \[\varphi_g(a_i) = \varphi_g(x^{-1}y^{-1}xy) = \varphi_g(x^{-1}y^{-1}xy) = \varphi_g(x)^{-1}\varphi_g(y)^{-1}\varphi_g(x)\varphi_g(y).\]
+    The LHS is of the form \(x'^{-1}y'^{-1}x'y'\) for \(x' = \varphi_g(x)\) and \(y' = \varphi_g(y)\), so it must be in \(N\). Hence \(\varphi_g(a_i) \in N\). By extension, \(\varphi_g(n) \in N\). Therefore \(N\) is normal.
+\end{proof}
+
+\begin{proof}
+    \textit{\(N\) is abelian}: By Exercise 40 we have that \(\bar x\) and \(\bar y\) commute in \(G/N\) is and only if \(x^{-1}y^{-1}xy \in N\). But by definition, 
+\end{proof}
 
 Exercise 4, pp. 111.
 
 \begin{enumerate}
-    \item [4.]
+    \item [4.] 
 \end{enumerate}
 
 \end{document}

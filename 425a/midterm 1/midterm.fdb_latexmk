@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1644807082 "c:/Users/jiand/hanting-zhang/math_at_usc/425a/midterm 1/midterm.tex" "midterm.pdf" "midterm" 1644807084
-  "../formatting.tex" 1643178805 989 9d9c61238ffd84d042cacf4565890dc5 ""
+["pdflatex"] 1644818364 "c:/Users/jiand/hanting-zhang/math_at_usc/425a/midterm 1/midterm.tex" "midterm.pdf" "midterm" 1644818365
+  "../formatting.tex" 1644818363 989 9d9c61238ffd84d042cacf4565890dc5 ""
   "C:/Users/jiand/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1643087700 104882 21718b0db02983680cdd8987593b5315 ""
   "C:/Users/jiand/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1643013968 9769967 5252b0abad9b9757c61e3f2f9470eec6 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -64,8 +64,8 @@
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/setspace/setspace.sty" 1324294077 22913 a27d7908fc6f0385466454a966a316eb ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1636710260 12694 6c23725d50ab9d1e2d3ce482c58ffcf3 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1636710260 7147 5ac8a9ef36411064b1a501137af0fa54 ""
-  "c:/Users/jiand/hanting-zhang/math_at_usc/425a/midterm 1/midterm.tex" 1644807081 7607 3942ac40379819ec7b08eba42dc9998d ""
-  "midterm.aux" 1644807083 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
+  "c:/Users/jiand/hanting-zhang/math_at_usc/425a/midterm 1/midterm.tex" 1644818162 11688 e11589ecb681d05ab82871d1cd94d9fa ""
+  "midterm.aux" 1644818365 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
   (generated)
   "midterm.aux"
   "midterm.log"

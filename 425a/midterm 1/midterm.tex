@@ -58,7 +58,7 @@
 %% Enter your real name here
 %% Example: \realname{David Patrick}
 \realname{Hanting Zhang}
-\pset{MIDTERM}
+\pset{1}
 \mathclass{425A}
 
 \renewcommand{\bf}{\mathbf}
@@ -75,8 +75,10 @@
     One possible solution is simply \(y = 0\); hence trivially \(x \cdot y = 0\). But that's not very interesting so I'll give a nontrivial example.
 
     If \(x\) is trivial then \(y\) can be anything, so assume that \(x\) is nontrivial. Then there is at least one index \(i\) where \(x_i \neq 0\). Since \(n \ge 2\), pick some \(j \neq i\). Set \(y_i = -x_j\) and \(y_j = x_i\), and \(y_k = 0\) for all \(k \neq i\) and \(k \neq j\). Hence this defines \(y\) as nontrivial. Then 
-    \[x \cdot y = \sum_{k = 1}^n x_k y_k = x_i y_i + x_j + y_j = - x_i x_j + x_j x_i = 0.\]
+    \[x \cdot y = \sum_{k = 1}^n x_k y_k = x_i y_i + x_j y_j = - x_i x_j + x_j x_i = 0.\]
 \end{proof}
+
+\newpage
 
 \begin{theorem}[2]
     True or False: If true prove it, if false counterexample it.
@@ -91,7 +93,7 @@
 \end{theorem}
 
 \begin{proof}
-    Part (a): This claim is \textbf{false}. Consider the subsets \(F_n = [n, \infty)\). Then for any finite sub-collection \(F_{n_1}, F_{n_2}, \dots, F_{n_k}\), let \(n = \max_{k} n_k\). We can compute the intersection to be: 
+    Part (a): This claim is \textbf{false}. Consider the subsets \(F_n = [n, \infty)\). Then for any finite sub-collection \(F_{n_1}, F_{n_2}, \dots, F_{n_k}\), let \(n = \max_{k} (n_k)\). We can compute the intersection to be: 
     \[F_{n_1} \cap F_{n_2} \cap \dots \cap F_{n_k} = F_{n} \neq \varnothing.\]
     However, since for any \(x \in \mathbb R\) we may find some \(n \ge x\), there is always some \(F_n\) such that \(x \notin F_n\). Hence 
     \[\bigcap_{n=1}^\infty F_n = \varnothing.\]
@@ -99,7 +101,7 @@
 \end{proof}
 
 \begin{proof}
-    Part (b): This claim is \textbf{true}. If \(F_n\) are both closed and bounded subsets of \(\mathbb R\), then the Heine-Borel Theorem guarantees that \(F_n\) is compact. Now apply Theorem 2.36 fromthe textbook to conclude that 
+    Part (b): This claim is \textbf{true}. If \(F_n\) are both closed and bounded subsets of \(\mathbb R\), then the Heine-Borel Theorem guarantees that \(F_n\) is compact. Now apply Theorem 2.36 from the textbook to conclude that 
     \[\bigcap_{n = 1}^\infty F_n \neq \varnothing.\]
 \end{proof}
 
@@ -107,18 +109,23 @@
     Part (c): This claim is \textbf{false}. Let \(X = \mathbb Q\) with the relative topology inherited from \(\mathbb R\). Then consider the subsets \(F_n = \overline{B_{1/ n}(\sqrt 2)}\) as the closed balls centered at \(\sqrt 2\) with radius \(1 / n\), where \(p_n\) is tne \(n\)th prime. 
     In particular, since \(\sqrt 2 \pm 1 / n\) are irrational, the boundary points of \(F_n\) don't exist in \(\mathbb Q\), and hence we can drop them without changing anything: \(F_n = B_{1/n}(\sqrt 2)\).
 
-    Now we check that finite intersections are nonempty. Indeed, if \(F_{n_1}, F_{n_2}, \dots, F_{n_k}\) are a finite sub-collection, then we their intersection is just the ball of minimum radius \(r = \min_{k} (1/n_k)\). This radius is clearly greater than \(0\), so we know that \(F_{n_1} \cap F_{n_2} \cap \dots \cap F_{n_k} \neq \varnothing\).
+    Now we check that finite intersections are nonempty. Indeed, if \(F_{n_1}, F_{n_2}, \dots, F_{n_k}\) are a finite sub-collection, then their intersection is just the ball of minimum radius \(r = \min_{k} (1/n_k)\). This radius is clearly greater than \(0\), so we know that \(F_{n_1} \cap F_{n_2} \cap \dots \cap F_{n_k} \neq \varnothing\).
 
-    However, if we consider \(\bigcap_{n = 1}^\infty F_n\), then for any \(x \neq \sqrt 2\), we can find a \(k\) such that \(k > 1 / |x - \sqrt 2|\). This implies \(1 / n < |x - \sqrt 2|\). Hence by definition \(x \notin F_k\), so \(x \notin \bigcap_{n = 1}^\infty F_n\). But \(\sqrt 2\) is not in \(\mathbb Q\)! Hence in \(\mathbb Q\), the intersection \(\bigcap_{n = 1}^\infty F_n\) is empty. This disproves the claim.
+    However, if we consider \(\bigcap_{n = 1}^\infty F_n\), then for any \(x \neq \sqrt 2\), we can find a \(k\) such that \(k > 1 / |x - \sqrt 2|\). This implies \(1 / n < |x - \sqrt 2|\). Hence by definition \(x \notin F_k\), so \(x \notin \bigcap_{n = 1}^\infty F_n\). So all \(x \neq \sqrt 2\) are not in our intersection. But also \(\sqrt 2\) is not in \(\mathbb Q\)! Hence in \(\mathbb Q\), the intersection \(\bigcap_{n = 1}^\infty F_n\) is empty. This disproves the claim.
 \end{proof}
+
+\newpage
 
 \begin{theorem}[3]
     Consider the metric space \(\mathbb Q\) of all rationals on the real line with the Euclidean metric. Prove that if \(K \neq \varnothing\) is a compact subset of \(\mathbb Q\) then \(K\) cannot contain an open subset of \(\mathbb Q\). \textit{Hint: Consider the relative topology.}
 \end{theorem}
 
 \begin{proof}
-    bruh
+    By Theorem 2.33 from the textbook, a subset \(K \subseteq \mathbb Q\) is compact in \(\mathbb Q\) if and only if \(K \subseteq \mathbb R\) is compact. But \(\mathbb Q\) has empty interior in \(\mathbb R\), so \(K\) must also have empty interior in \(\mathbb R\). Thus any open subset of \(K\) with respect to \(\mathbb R\) must be \(\varnothing\). 
+    Furthermore, by the relative topology, open sets \(U\) of \(\mathbb Q\) must be equal equal to \(V \cap \mathbb Q\) for some open set \(V\) of \(\mathbb R\). We conclude that the only open subset of \(K\) in \(\mathbb Q\) is \(\varnothing\).
 \end{proof}
+
+\newpage
 
 \begin{theorem}[4]
     Let \(F\) and \(K\) be nonempty closed subsets of the metric space \(X\) with \(K \cap F = \varnothing\). Show that if \(K\) is compact there is a positive distance from \(F\) to \(K\), i.e.
@@ -126,16 +133,44 @@
     Is is still true if \(K\) is only assumed to be closed? If not find a counterexample.
 \end{theorem}
 
+\begin{proof}
+    Assume for the sake of contradiction that \(\inf \{d(x, y) \mid x \in K, y \in F\} = 0\). Then there is a squence of pairs \(a_n \in K\) and \(b_n \in F\) such that \(\lim_{n \rightarrow \infty} |a_n - b_n| = 0\). Since \(K\) is compact, by Theorem 2.37 in the textbook, there is a limit point \(a\) of \(\{a_n\}_{n = 1}^\infty\). This implies that \(\{a_n\}_{n = 1}^\infty\) has a convergent subsequence \(\lim_{n \rightarrow \infty} a_{m_n} = a\). 
+
+    Now for any \(\epsilon > 0\), choose large enough \(N\) such that \(|a_N - b_N| < \epsilon / 2\) and \(|a - a_{N}| < \epsilon / 2\) (with \(a_N\) is the subsequence). The triangle inequality then shows:
+    \[|a - b_N| < |a - a_N| + |a_N - b_N| < \epsilon / 2 + \epsilon / 2 = \epsilon.\]
+    Thus for any \(n \in \mathbb N\), \(b_n\) will have some neighbourhood which contains \(a \in K\). Hence \(a\) is a limit point of \(\{b_n\}_{n = 1}^\infty\). But \(F\) is closed implies \(a \in F\), contradicting our assumption that \(F \cap K = \varnothing\). And we're done.
+\end{proof}
+
+If \(K\) is not closed, then the claim does not hold in general. For example, take \(X = \mathbb Q\). Then the relative open sets \(A = [0, \sqrt 2] \cap \mathbb Q\) and \(B = [\sqrt 2, 2] \cap \mathbb Q\) are closed, disjoint in \(\mathbb Q\), and yet \(d(A, B) = 0\) since we can find subsequences that converge on both sides of \(\sqrt 2\).
+\newpage
+
 \begin{theorem}[5]
     A \textit{base} for a topological space \(X\) is a collection \(\{V_{\alpha} | \alpha \in A\}\) of open subsets of \(X\) such that for every open subset of \(G \subseteq X\), one has \(G = \bigcup_{\alpha \in \mathcal B} V_{\alpha}\) where \(\mathcal B \subseteq \mathcal A\).
 
     Prove that every compact metric space \(X\) has a countable base.
 \end{theorem}
 
+First we prove a lemma that makes things slightly easier:
+\begin{lemma}
+    Let \(X\) be a topological space. Let \(\{V_\alpha \mid a \in \mathcal A\}\) be a collection of open sets and let \(U \subseteq X\) be open. If for any \(x \in U\), there exists some \(V_{\alpha_x}\) such that \(x \in V_{\alpha_x} \subseteq U\), then there exists be \(\mathcal B \subseteq \mathcal A\) such that \(U = \bigcup_{\alpha \in B} V_\alpha\).
+\end{lemma}
+
 \begin{proof}
-    For each \(q > 0 \in \mathbb Q\), consider the collection of subsets \(\mathcal C_q = \{B_q(x) \mid x \in X\}\). For each \(q\), this clearly defines an open cover of \(X\), so we may construct a finite subcover \(\mathcal D_q = \{B_{q_1}(x_1), B_{q_2}(x_2), \dots, B_{q_n}(x_n)\}\). In articular, we have a \textit{countable} amount \textit{finite} covers, so their union is countable. Given this, we claim that 
+    Consider \(\mathcal B = \{\alpha_x \mid x \in U\}\). Then clearly \(\mathcal B \subseteq \mathcal A\). Furthermore, the assumption \(V_{\alpha_x} \subseteq U\) implies that \(\bigcup_{\alpha_x \in \mathcal B} V_{\alpha_x} \subseteq U\). 
+    For the other inclusion, every \(x \in U\) is in \(V_{\alpha_x}\), so \(x \in \bigcup_{\alpha_x \in \mathcal B} V_{\alpha_x}\). Hence we also have \(U \subseteq \bigcup_{\alpha_x \in \mathcal B} V_{\alpha_x}\). Thus we have the equality \(U = \bigcup_{\alpha_x \in \mathcal B} V_{\alpha_x}\), as desired.
+\end{proof}
+
+Now we proceed to the actual proof:
+
+\begin{proof}
+    For each \(q > 0 \in \mathbb Q\), consider the collection of subsets \(\mathcal C_q = \{B_q(x) \mid x \in X\}\). For each \(q\), this clearly defines an open cover of \(X\), so we may construct a finite subcover \(\mathcal D_q = \{B_{q_1}(x_1), B_{q_2}(x_2), \dots, B_{q_n}(x_n)\}\). In particular, we have a \textit{countable} amount \textit{finite} covers, so their union is countable. Given this, we claim that 
     \[\bigcup_{q \in \mathbb Q} \mathcal D_q\]
     forms a countable base of \(X\). 
+
+    Indeed, let \(U \subseteq X\) be a open set. Applying the lemma, we want to show that for any \(x \in U\), there is some \(V_x \in \bigcup_{q \in \mathbb Q} \mathcal D_q\) such that \(x \in V_x \subseteq U\). Because \(U\) is open, there is some neighbourhood \(B_r(x)\) contained in \(U\). Now choose rational \(q < r / 2\). 
+    Since \(\mathcal D_q\) covers \(X\), there is some \(V_x = B_q(y) \in \mathcal D_q\) such that \(x \in V_x\). By choosing \(q < r / 2\), we are also guaranteed that \(V_x \subseteq B_r(x)\). (This can be seen through the inequality \(\forall z \in V_x, |z - x| \le |z - y| + |y - x| < r/2 + r/2 = r\).)
+
+    Hence \(x \in V_x \subseteq U\), which is exactly what we need. Thus we can write \(U\) as a union of elements of \(\bigcup_{q \in \mathbb Q} \mathcal D_q\), and we conclude that \(\bigcup_{q \in \mathbb Q} \mathcal D_q\) is indeed a countable base of \(X\).
 \end{proof}
 
 \end{document}

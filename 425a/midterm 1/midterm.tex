@@ -91,22 +91,51 @@
 \end{theorem}
 
 \begin{proof}
-    Part (a): uwu
+    Part (a): This claim is \textbf{false}. Consider the subsets \(F_n = [n, \infty)\). Then for any finite sub-collection \(F_{n_1}, F_{n_2}, \dots, F_{n_k}\), let \(n = \max_{k} n_k\). We can compute the intersection to be: 
+    \[F_{n_1} \cap F_{n_2} \cap \dots \cap F_{n_k} = F_{n} \neq \varnothing.\]
+    However, since for any \(x \in \mathbb R\) we may find some \(n \ge x\), there is always some \(F_n\) such that \(x \notin F_n\). Hence 
+    \[\bigcap_{n=1}^\infty F_n = \varnothing.\]
+    This disproves the claim.
+\end{proof}
+
+\begin{proof}
+    Part (b): This claim is \textbf{true}. If \(F_n\) are both closed and bounded subsets of \(\mathbb R\), then the Heine-Borel Theorem guarantees that \(F_n\) is compact. Now apply Theorem 2.36 fromthe textbook to conclude that 
+    \[\bigcap_{n = 1}^\infty F_n \neq \varnothing.\]
+\end{proof}
+
+\begin{proof}
+    Part (c): This claim is \textbf{false}. Let \(X = \mathbb Q\) with the relative topology inherited from \(\mathbb R\). Then consider the subsets \(F_n = \overline{B_{1/ n}(\sqrt 2)}\) as the closed balls centered at \(\sqrt 2\) with radius \(1 / n\), where \(p_n\) is tne \(n\)th prime. 
+    In particular, since \(\sqrt 2 \pm 1 / n\) are irrational, the boundary points of \(F_n\) don't exist in \(\mathbb Q\), and hence we can drop them without changing anything: \(F_n = B_{1/n}(\sqrt 2)\).
+
+    Now we check that finite intersections are nonempty. Indeed, if \(F_{n_1}, F_{n_2}, \dots, F_{n_k}\) are a finite sub-collection, then we their intersection is just the ball of minimum radius \(r = \min_{k} (1/n_k)\). This radius is clearly greater than \(0\), so we know that \(F_{n_1} \cap F_{n_2} \cap \dots \cap F_{n_k} \neq \varnothing\).
+
+    However, if we consider \(\bigcap_{n = 1}^\infty F_n\), then for any \(x \neq \sqrt 2\), we can find a \(k\) such that \(k > 1 / |x - \sqrt 2|\). This implies \(1 / n < |x - \sqrt 2|\). Hence by definition \(x \notin F_k\), so \(x \notin \bigcap_{n = 1}^\infty F_n\). But \(\sqrt 2\) is not in \(\mathbb Q\)! Hence in \(\mathbb Q\), the intersection \(\bigcap_{n = 1}^\infty F_n\) is empty. This disproves the claim.
 \end{proof}
 
 \begin{theorem}[3]
     Consider the metric space \(\mathbb Q\) of all rationals on the real line with the Euclidean metric. Prove that if \(K \neq \varnothing\) is a compact subset of \(\mathbb Q\) then \(K\) cannot contain an open subset of \(\mathbb Q\). \textit{Hint: Consider the relative topology.}
 \end{theorem}
 
-\begin{theorem}
+\begin{proof}
+    bruh
+\end{proof}
+
+\begin{theorem}[4]
     Let \(F\) and \(K\) be nonempty closed subsets of the metric space \(X\) with \(K \cap F = \varnothing\). Show that if \(K\) is compact there is a positive distance from \(F\) to \(K\), i.e.
     \[\inf \{d(x, y) \mid x \in F, y \in K\} = \delta > 0.\]
     Is is still true if \(K\) is only assumed to be closed? If not find a counterexample.
 \end{theorem}
 
-\begin{theorem}[4]
+\begin{theorem}[5]
     A \textit{base} for a topological space \(X\) is a collection \(\{V_{\alpha} | \alpha \in A\}\) of open subsets of \(X\) such that for every open subset of \(G \subseteq X\), one has \(G = \bigcup_{\alpha \in \mathcal B} V_{\alpha}\) where \(\mathcal B \subseteq \mathcal A\).
 
     Prove that every compact metric space \(X\) has a countable base.
 \end{theorem}
+
+\begin{proof}
+    For each \(q > 0 \in \mathbb Q\), consider the collection of subsets \(\mathcal C_q = \{B_q(x) \mid x \in X\}\). For each \(q\), this clearly defines an open cover of \(X\), so we may construct a finite subcover \(\mathcal D_q = \{B_{q_1}(x_1), B_{q_2}(x_2), \dots, B_{q_n}(x_n)\}\). In articular, we have a \textit{countable} amount \textit{finite} covers, so their union is countable. Given this, we claim that 
+    \[\bigcup_{q \in \mathbb Q} \mathcal D_q\]
+    forms a countable base of \(X\). 
+\end{proof}
+
 \end{document}

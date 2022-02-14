@@ -93,7 +93,10 @@ Exercises 6, 12, pp. 52-53.
     \end{pmatrix} \notin H.\]
     Hence \(H \nleq N_G(H)\).
 
-    \item [(b)] If \(H \le C_G(H)\), then for any \(h, h' \in H\), we have \(h^{-1}h'h = h' \implies h'h = h h'\). Hence \(H\) is abelian, as desired.
+    \item [(b)] (\(\implies\)): If \(H\) is abelian, then clearly \(h'h = hh'\) for all \(h, h' \in H\). Then \(H \le C_G(H)\).
+
+    (\(\Leftarrow\)): If \(H \le C_G(H)\), then for any \(h, h' \in H\), we have \(h^{-1}h'h = h' \implies h'h = h h'\). Hence \(H\) is abelian, as desired.
+
     \end{enumerate}
     \item [12.] We each each part:
     \begin{enumerate}
@@ -110,7 +113,7 @@ Exercises 16, 17, pp. 65-66.
         
         \item[(b)] Suppose \(\langle r \rangle \le K\). Then \(|\langle r \rangle| \le |K|\) while \(|K| \mid |G|\). But \(\langle r \rangle\) has order \(n\) and \(G\) has order \(2n\). Hence \(|K|\) can only be \(n\), in which case \(H = K\), or \(2n\), in which case \(K = G\). This is exactly the definition of \(H\) being maximal, as desired.
          
-        \item[(c)] The order of \(x^p\) is \(n / p\), so \(|\langle x^p \rangle| = n / p\). If \(K\) contains \(\langle x^p \rangle\), then \(n/p \le |K|\) while \(|K| \mid n \implies a|K| = n\) for some \(a\). 
+        \item[(c)] The order of \(x^p\) is \(n / p\), so \(|\langle x^p \rangle| = n / p\). If \(K\) contains \(\langle x^p \rangle\), then \(n/p \le |K| \implies n / |K| \le p\) while \(|K| \mid n \implies n / |K| = a\) for some \(a \in \mathbb Z\). But the only possible factors of \(p\) are \(1\) and \(p\), and \(|K| \neq n\), so we must have \(a = p\). Because their orders are equal and one is a subset of the other, \(K = \langle x^p \rangle\). Hence \(\langle x^p \rangle\) is maximal.
     \end{enumerate}
     \item [17.] 
     \begin{enumerate}
@@ -135,13 +138,15 @@ Exercises 16, 17, pp. 65-66.
 Exercises 1, 18, 24, 40, 41 pp. 85-89.
 
 \begin{theorem}[1]
-    Let \(\varphi : G \to H\) be a homomorphism and let \(E\) be a subgroup of \(H\). Prove that \(\varphi^{-1}(E) \le G\). If \(E \trianglelefteq H\), then \(\varphi^{-1}(E) \normal G\).
+    Let \(\varphi : G \to H\) be a homomorphism and let \(E\) be a subgroup of \(H\). Prove that \(\varphi^{-1}(E) \le G\). If \(E \trianglelefteq H\), then \(\varphi^{-1}(E) \normal G\). Deduce that \(\ker \varphi \normal G\).
 \end{theorem}
 
 \begin{proof}
     Part 1: We show that \(\varphi^{-1}(E)\) is a subgroup with the subgroup property. Suppose \(g, h \in \varphi^{-1}(E)\). Then by definition \(\varphi(g), \varphi(h) \in E\), and since \(E\) is a subgroup, we have in particular \(\varphi(h)^{-1} = \varphi(h^{-1}) \in E\). Thus \(\varphi(g)\varphi(h^{-1}) = \varphi(gh^{-1}) \in E\). By definiton this means \(gh^{-1} \in \varphi^{-1}(E)\), which proves that \(\varphi^{-1}(E)\) is indeed a subgroup.
 
     Part 2: Now suppose that \(E \normal H\). To show that \(\varphi^{-1}(E) \normal G\), we have to prove \(gng^{-1} \in \varphi^{-1}(E)\) for all \(n \in \varphi^{-1}(E)\) and \(g \in G\). By definition, \(\varphi(n) \in E\), and also the normality of \(E\) implies \(\varphi(g)\varphi(n)\varphi(g)^{-1} \in H\). Applying the properties of homomorphisms, we have can deduce \(\varphi(gng^{-1}) \in H\), and so \(gng^{-1} \in \varphi^{-1}(E)\). Hence \(\varphi^{-1}(E)\) is normal in \(G\).
+
+    Part 3: Immediately from part 2, since \(\{e\} \normal H\) and by definition \(\ker \varphi = \varphi^{-1}(e)\), we have \(\ker \varphi \normal G\).
 \end{proof}
 
 \begin{theorem}[18]
@@ -211,7 +216,7 @@ Exercises 1, 18, 24, 40, 41 pp. 85-89.
 \end{proof}
 
 \begin{proof}
-    \textit{\(N\) is abelian}: By Exercise 40 we have that \(\bar x\) and \(\bar y\) commute in \(G/N\) is and only if \(x^{-1}y^{-1}xy \in N\). But by definition, 
+    \textit{\(N\) is abelian}: By Exercise 40 we have that \(\bar x\) and \(\bar y\) commute in \(G/N\) is and only if \(x^{-1}y^{-1}xy \in N\). But this implies that \(\bar{x^{-1}y^{-1}xy} = 1\) in \(G / N\). Rearranging gives \(\bar x \bar y = \bar y \bar x\), as desired. 
 \end{proof}
 
 Exercise 4, pp. 111.

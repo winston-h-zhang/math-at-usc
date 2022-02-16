@@ -62,10 +62,50 @@
 \mathclass{410}
 
 \renewcommand{\bf}{\mathbf}
+\renewcommand{\bar}{\overline}
 \renewcommand{\implies}{\Rightarrow}
 \newcommand{\coimplies}{\Leftarrow}
+\newcommand{\normal}{\trianglelefteq}
 
 \begin{document}
 Exercises 9, 10, pp. 116-117.
+
+\begin{theorem}[9]
+    Assume \(G\) acts transitively on the finite set \(A\) and let \(H\) be a normal subgroup of \(G\). Let \(\mathcal O_1, \mathcal O_2, \dots, \mathcal O_r\) be the distinct orbits of \(H\) on \(A\).
+
+    \begin{enumerate}
+        \item[(a)] Prove that \(G\) permutes the sets \(\mathcal O_1, \mathcal O_2, \dots, \mathcal O_r\) in the sense that for each \(g \in G\) and each \(i \in \{1, \dots, r\}\) there is a \(j\) such that \(g \mathcal O_i = \mathcal O_j\), where \(g \mathcal O = \{g \cdot a \mid a \in \mathcal O\}\). Prove that \(G\) is transitive on \(\{\mathcal O_1, \dots \mathcal O_r\}\). Deduce that all orbits of \(H\) on \(A\) have the same cardinality.
+        
+        \item[(b)] Prove that if \(a \in \mathcal O_1\) then \(|\mathcal O_1| = |H : H \cap G_a|\) and prove that \(r = |G : H G_a|\). 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Part (a): 
+\end{proof}
+
+\begin{theorem}[10]
+    Let \(H\) and \(K\) be subgroups of the group \(G\). For each \(x \in G\) define the \(HK\) \textit{double coset} of \(x\) in \(G\) to be the set
+    \[HxK = \{hxk \mid h \in H, k \in K\}.\]
+\end{theorem}
+
 Exercises 8, 14, pp. 122-123.
+
+\begin{theorem}[8]
+    Prove that if \(H\) has finite index \(n\) then there is a normal subgroup \(K \normal G\) with \(K \le H\) and \(|G : K| \le n!\). 
+\end{theorem}
+
+\begin{proof}
+    Let \(G\) act on the left cosets of \(H\) with permutation representation \(\pi_{G / H} : G \to S_{|G/H|}\). Then let \(K = \ker (\pi_{G/H})\), which is clearly a subset of \(K\) and also a normal subgroup of \(G\). By the first isomorphism theorem, \(G / \ker(\pi_{G/H}) = G / K \cong \text{im}(\pi_{G/H})\). Comparing the cardinality of both sides, we have \
+    \[|G : K| = |G / K| = |\text{im}(\pi_{G / H})| \le |S_{|G / H|}| = n!.\]
+\end{proof}
+
+\begin{theorem}[14]
+    Let \(G\) be a finite group of composite order \(n\) with the property that \(G\) has a subgroup of order \(k\) dividing \(n\) for each positive integer \(k\) dividing \(n\). Prove that \(G\) is not simple.
+\end{theorem}
+
+\begin{proof}
+    Choose \(k\) such that \(n / k = p\), where \(p\) is the minimum prime dividing \(n\). Then by Corollary 5, 
+\end{proof}
+
 \end{document}

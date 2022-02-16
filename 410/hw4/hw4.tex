@@ -130,9 +130,32 @@ Exercises 6, 12, pp. 52-53.
         \item[(c)] The permutations that stabilize \(x_4\) are the ones that fix \(4\). The subset of \(S_4\) that does this is: \(\{e, (12), (23), (13), (123), (231)\}\). Looking at these permutations in cycle notation, clearly they are isomorphic to \(S_3\). 
         (They are the image of the embedding \(\iota : S_3 \hookrightarrow S_4\).)
         
-        \item[(d)] An element \(\sigma\) stabilizes \(x_1 + x_2\) satisfy \(x_1 + x_2 = x_{\sigma(1)} + x_{\sigma(2)}\). Hence we must have either \((\sigma(1), \sigma(2)) = (1, 2)\) or \((\sigma(1), \sigma(2)) = (2, 1)\). In the first case, \(\sigma\) fixes 1 and 2, so the possible values are \(\{3, (34)\}\)
-        \item[(e)] 
-        \item[(f)]    
+        \item[(d)] An element \(\sigma\) stabilizes \(x_1 + x_2\) satisfy \(x_1 + x_2 = x_{\sigma(1)} + x_{\sigma(2)}\). Hence we must have either \((\sigma(1), \sigma(2)) = (1, 2)\) or \((\sigma(1), \sigma(2)) = (2, 1)\). In the first case, \(\sigma\) fixes 1 and 2, so the possible values are \(\{e, (34)\}\). 
+        In the second case, \(\sigma\) must permute \((12)\), so the possible values are \(\{3, (12), (12)(34)\}\). Letting \(x = (12), y = (34)\), we see that the stabilizer of \(x_1+ x_2\) is \(\{e, x, y, xy\}\) with \(x^2 = y^2 = e\). This is clearly the (abelian) group \(\mathbb Z_2 \times \mathbb Z_2\). 
+
+        \item[(e)] If \(\sigma\) stabilizes \(x_1 x_2 + x_3 x_4\), then 
+        \[x_{\sigma(1)}x_{\sigma(2)} + x_{\sigma(3)} x_{\sigma(4)} = x_1 x_2 + x_3 x_4.\]
+        Then there are two cases:
+        \begin{align*}
+            (\sigma(1), \sigma(2)) &\in \{(1, 2), (2, 1)\} \land (\sigma(3), \sigma(4)) \in \{(3, 4), (4, 3)\}, \\
+            (\sigma(1), \sigma(2)) &\in \{(3, 4), (4, 3)\} \land (\sigma(3), \sigma(4)) \in \{(1, 2), (2, 1)\}
+        \end{align*}
+        The first case has solutions \(\sigma \in \{e, (12), (34), (12)(34)\}\). And the second case has solutions \(\sigma \in \{(13)(24), (1324), (1423), (14)(23)\}\). 
+
+        To see that these two sets combine to form \(D_8\), map \((12) \mapsto s\) and \(r \mapsto (1324)\). Then we have:
+        \begin{align*}
+            e \mapsto e, \hspace{2mm} (1324) \mapsto r, \hspace{2mm} (12)(34) \mapsto r^2, \hspace{2mm} (1423) \mapsto r^3, \\ 
+            (12) \mapsto r, \hspace{2mm} (13)(24) \mapsto sr, \hspace{2mm} (34) \mapsto sr^2, \hspace{2mm} (14)(23) \mapsto sr^3.
+        \end{align*}
+        It can be checked that this is an isomorphism. Hence the stabilizer of \(x_1 x_2 + x_3 x_4\) is indeed isomorphic to \(D_8\).
+
+        \item[(f)] Again, for the map to stablize, we must have either \(x_1 + x_2 = x_{\sigma(1)} + x_{\sigma(2)}\) or \(x_1 + x_2 = x_{\sigma(3)} + x_{\sigma(4)}\). The same equations follow for \(x_3 + x_4\). So there are two cases:
+        \begin{align*}
+            (\sigma(1), \sigma(2)) &\in \{(1, 2), (2, 1)\} \land (\sigma(3), \sigma(4)) \in \{(3, 4), (4, 3)\}, \\
+            (\sigma(1), \sigma(2)) &\in \{(3, 4), (4, 3)\} \land (\sigma(3), \sigma(4)) \in \{(1, 2), (2, 1)\}
+        \end{align*}
+
+        As we've seen in part (e), this subset is isomorphic to \(D_8\).
     \end{enumerate}
 \end{enumerate}
 

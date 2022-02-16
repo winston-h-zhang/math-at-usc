@@ -98,9 +98,41 @@ Exercises 6, 12, pp. 52-53.
     (\(\Leftarrow\)): If \(H \le C_G(H)\), then for any \(h, h' \in H\), we have \(h^{-1}h'h = h' \implies h'h = h h'\). Hence \(H\) is abelian, as desired.
 
     \end{enumerate}
-    \item [12.] We each each part:
+    \item [12.] We do each part:
     \begin{enumerate}
-        \item[(a)] 
+        \item[(a)] Define 
+        \[p(x_1, \dots, x_4) = 12x_1^5 x_2^7 x_3 - 18 x_2^3 x_3 + 11 x_1^6 x_2 x_3^3 x_4^{23}.\]
+        
+        Direct calculation shows that:
+        \begin{align*}
+            \sigma \cdot p &= (1 2 3 4) \cdot p \\
+            &= 12x_2^5 x_3^7 x_4 - 18 x_3^3 x_4 + 11 x_1^{23} x_2^6 x_3 x_4^3 \\ 
+            \\
+            \tau \cdot (\sigma \cdot p) &= (123) \cdot 12x_2^5 x_3^7 x_4 - 18 x_3^3 x_4 + 11 x_1^{23} x_2^6 x_3 x_4^3 \\
+            &= 12 x_1^7 x_3^5 x_4 - 18 x_1^3 x_4 + 11 x_1 x_2^{23} x_3^6 x_4^3 \\ 
+            \\
+            (\tau \circ \sigma) \cdot p &= (1342) \cdot p \\ 
+            &= 12 x_1^7 x_3^5 x_4 - 18 x_1^3 x_4 + 11 x_1 x_2^{23} x_3^6 x_4^3 \\ 
+            \\
+            (\sigma \circ \tau) \cdot p &= (1324) \cdot p \\
+            &= 12 x_2 x_3^5 x_4^7 - 18 x_4^3 + 11 x_1^{23} x_2^3 x_3^6 x_4.
+        \end{align*}
+
+        \item[(b)] This definition gives a left group action of \(S_4\) on \(R\). If \(\sigma, \tau \in S_4\) and \(p \in R\), then 
+        \begin{align*}
+            \tau \cdot (\sigma \cdot p) &= \tau \cdot (p(x_{\sigma(1)}, \dots, x_{\sigma(4)})) \\
+            &= p(x_{\tau(\sigma(1))}, \dots, x_{\tau(\sigma(4))}) \\
+            &= p(x_{(\tau \circ \sigma) (1)}, \dots, x_{(\tau \circ \sigma) (1)}) \\
+            &= (\tau \circ \sigma) \cdot p.
+        \end{align*}
+        Hence composition in \(S_4\) is compatible with its action on \(R\). Clearly \(e \cdot p = p\). Thus we have satisfied the axioms for a group action, as desired.
+
+        \item[(c)] The permutations that stabilize \(x_4\) are the ones that fix \(4\). The subset of \(S_4\) that does this is: \(\{e, (12), (23), (13), (123), (231)\}\). Looking at these permutations in cycle notation, clearly they are isomorphic to \(S_3\). 
+        (They are the image of the embedding \(\iota : S_3 \hookrightarrow S_4\).)
+        
+        \item[(d)] An element \(\sigma\) stabilizes \(x_1 + x_2\) satisfy \(x_1 + x_2 = x_{\sigma(1)} + x_{\sigma(2)}\). Hence we must have either \((\sigma(1), \sigma(2)) = (1, 2)\) or \((\sigma(1), \sigma(2)) = (2, 1)\). In the first case, \(\sigma\) fixes 1 and 2, so the possible values are \(\{3, (34)\}\)
+        \item[(e)] 
+        \item[(f)]    
     \end{enumerate}
 \end{enumerate}
 

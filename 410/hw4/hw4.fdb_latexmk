@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1644870729 "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw4/hw4.tex" "hw4.pdf" "hw4" 1644870731
+["pdflatex"] 1645002374 "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw4/hw4.tex" "hw4.pdf" "hw4" 1645002376
   "../formatting.tex" 1643790627 989 9d9c61238ffd84d042cacf4565890dc5 ""
   "C:/Users/jiand/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1643087700 104882 21718b0db02983680cdd8987593b5315 ""
   "C:/Users/jiand/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1643013968 9769967 5252b0abad9b9757c61e3f2f9470eec6 ""
@@ -65,8 +65,8 @@
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/setspace/setspace.sty" 1324294077 22913 a27d7908fc6f0385466454a966a316eb ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1636710260 12694 6c23725d50ab9d1e2d3ce482c58ffcf3 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1636710260 7147 5ac8a9ef36411064b1a501137af0fa54 ""
-  "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw4/hw4.tex" 1644870728 14365 f82d19fd4fc4370ab7d8dfe56408006b ""
-  "hw4.aux" 1644870731 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
+  "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw4/hw4.tex" 1645002373 16608 b239520bc8501f30917d4a47b935eece ""
+  "hw4.aux" 1645002375 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
   (generated)
   "hw4.aux"
   "hw4.log"

@@ -71,9 +71,63 @@
     Prove that convergence of \(\{s_n\}\) implies convergence of \(\{|s_n|\}\). Is the converse true?
 \end{theorem}
 
+\begin{proof}
+    Suppose \(\{s_n\}\) converges to \(s\). Then for any \(\epsilon > 0\), there exists some \(N \in \mathbb N\) such that \(n \ge N\) implies \(|s - s_n| \le \epsilon\). We claim that \(\{|s_n|\}\) converges to \(|s|\). Indeed, if \(\epsilon > 0\), then choose the same \(N \in \mathbb N\) we did for \(\{s_n\}\). We have for any \(n \ge N\): 
+    \[||s| - |s_n|| \le |s - s_n| \le \epsilon.\]
+    (We proved the first inequality in homework 2!) Hence \(\{|s_n|\}\) converges.
+\end{proof}
+
 \begin{theorem}[2]
     Calculate \(\lim_{n \to \infty} (\sqrt{n^2 + n} - n)\).
 \end{theorem}
+
+We need a few lemmas (I continue to use this version sorry):
+
+\begin{lemma}
+    \(\lim_{n \to \infty} (\sqrt{n + c} - \sqrt{n}) = 0\). For any \(c \in \mathbb R\).
+\end{lemma}
+
+\begin{proof}
+    Indeed, suppose \(\epsilon > 0\). Then choose \(N \ge \frac{c^2}{4\epsilon^2} - c\). (This value will make sense after the the calucations.) 
+
+    Notice that if \(\delta = |\sqrt{n + c} - \sqrt{n} - 0| = \sqrt{n + c} - \sqrt{n}\), then we can use difference of squares to see that \(\delta (\sqrt{n + c} + \sqrt{n}) = n + c - n = c\). Since \(\sqrt{n + c} + \sqrt{n}\) will not be zero as \(n \to \infty\), we may write \(\delta = \frac{c}{\sqrt{n + c} + \sqrt{n}}\). Now for all \(n \ge N\), we have:
+    \begin{align*}
+        n \ge \frac{c^2}{4\epsilon^2} - c &\implies n + c \ge \frac{c^2}{4\epsilon^2} \\
+        &\implies \frac{1}{n + c} \le \frac{4\epsilon^2}{c^2} \\
+        &\implies \frac{1}{\sqrt{n + c}} \le \frac{2\epsilon}{c} \\
+        &\implies \frac{c}{2\sqrt{n + c}} \le \epsilon \\
+        &\implies \delta = \frac{c}{\sqrt{n + c} + \sqrt{n}} \le \epsilon
+    \end{align*}
+
+    Thus \(\lim_{n \to \infty} (\sqrt{n + c} - \sqrt{n}) = 0\).
+\end{proof}
+
+\begin{lemma}
+    If \(\lim_{n \to \infty} f(n) = L\) and \(\lim_{n \to \infty} g(n) = \infty\), then \[\lim_{n \to \infty} f(g(n)) = L.\]
+\end{lemma}
+
+\begin{proof}
+    Set \(\epsilon > 0\). Then there is some \(N_f\) such that \(n \ge N_f\) implies \(|f(n) - L| \le \epsilon\) by assumption. Futhermore, there is some \(N_g\) such that \(n \ge N_g\) implies \(g(n) \ge N_f\). Thus \(n \ge N_g\) implies \(|f(g(n)) - L| \le \epsilon\). This shows that
+    \[\lim_{n \to \infty} f(g(n)) = L.\]
+\end{proof}
+
+Now we can finally do the real problem!
+
+\begin{proof}
+    We can calculate a slightly different equation: \(\sqrt{n^2 + n + \frac{1}{4}} - n\). We can complete the square inside the radical to see that 
+    \[\sqrt{\left(n + \frac{1}{4}\right)^2} - n = n + \frac{1}{2} - n = \frac{1}{2}.\]
+    Thus we may rewrite:
+    \begin{align*}
+        \lim_{n \to \infty}(\sqrt{n^2 + n} - n) &= \lim_{n \to \infty}\left(\sqrt{n^2 + n} - \sqrt{n^2 + n + \frac{1}{4}} + \sqrt{n^2 + n + \frac{1}{4}} - n\right) \\ 
+        &= \lim_{n \to \infty} \left(\sqrt{n^2 + n} - \sqrt{n^2 + n + \frac{1}{4}} + \frac{1}{2}\right)
+    \end{align*}
+
+    We claim that the difference has a limit of \(0\). Let \(g(n) = n^2 + n\) and note that \(g(n) \to \infty\), so we may apply our lemma to obtain:
+    \begin{align*}
+        \lim_{m \to \infty} \left(\sqrt{m} - \sqrt{m + \frac{1}{4}} + \frac{1}{2}\right).
+    \end{align*}
+    But we know by our first lemma that this converges to \(\frac{1}{2}\), because we have proved that \(\lim_{m \to \infty} \left(\sqrt{m} - \sqrt{m + \frac{1}{4}}\right) = 0\). Thus \(\lim_{n \to \infty} (\sqrt{n^2 + n} - n) = \frac{1}{2}\).
+\end{proof}
 
 \begin{theorem}[3]
     If \(s_1 = \sqrt 2\), and 
@@ -81,9 +135,56 @@
     prove that \(\{s_n\}\) converges, and that \(s_n < 2\) for \(n = 1, 2, 3, \dots\).
 \end{theorem}
 
+\begin{proof}
+    By the complete upper bound property of the reals, it suffices to prove that \(\{s_n\}\) bounded above by \(2\) and monotonically increasing.
+
+    Indeed, we prove that \(s_n < 2\) for all \(n = 1, 2, 3, \dots\) by induction. Clearly \(s_1 = \sqrt 2 < 2\), so the base case is true. Now assume the induction hypothesis that \(s_k < 2\) for some \(k\). Then \(\sqrt{s_k} < \sqrt{2}\). Thus
+    \[s_{k + 1} = \sqrt{2 + \sqrt{s_k}} < \sqrt{2 + \sqrt{2}} < \sqrt{2 + 2} = 2,\]
+    which completes the induction.
+
+    Similarly, we prove that \(\{s_n\}\) is monotonically increasing by induction. 
+
+    Clearly, \(\sqrt 2 < \sqrt{2 + \sqrt{s_1}} = s_2\). Hence the base case is true.
+
+    Now assume the induction hypothesis that \(s_{k - 1} < s_{k}\) for some \(k\). Now since \(\sqrt{x}\) is a monotonically increasing function, we have 
+    \begin{align*}
+        s_{k - 1} < s_k &\implies \sqrt{s_{k - 1}} < \sqrt{s_k} \\
+        &\implies 2 + \sqrt{s_{k - 1}} < 2 + \sqrt{s_{k}} \\ 
+        &\implies \sqrt{2 + \sqrt{s_{k - 1}}} < \sqrt{2 + \sqrt{s_{k}}} \\ 
+        &\implies s_k < s_{k + 1},
+    \end{align*} 
+    which completes the induction.
+
+    Combining the two results shows that \(\{s_n\}\) converges.
+\end{proof}
+
 \begin{theorem}[4]
     Find the upper and lower limits of the sequence \(\{s_n\}\) defined by
     \[s_1 = 0; \hspace{2em} s_{2m} = \frac{s_{2m - 1}}{2}; \hspace{2em} s_{2m + 1} = \frac{1}{2} + s_{2m}.\]
 \end{theorem}
+
+\begin{proof}
+    First we prove by induction that for any \(m \ge 1\),
+    \[s_{2m} = \frac{1}{2} - \frac{1}{2^m}, \hspace{5em} s_{2m + 1} = 1 - \frac{1}{2^m}\]
+
+    Clearly the base case is true, since \(s_{2} = 0 = 1/2 - 1/2^1\) and \(s_3 = 1/2 = 1 - 1/2^1\).
+
+    Now assume for the sake of induction that 
+    \[s_{2k} = \frac{1}{2} - \frac{1}{2^k}, \hspace{5em} s_{2k + 1} = 1 - \frac{1}{2^k}.\]
+    Then 
+    \[s_{2k + 2} = \frac{s_{2k + 1}}{2} = \frac{1}{2}\left(1 - \frac{1}{2^k}\right) = \frac{1}{2} - \frac{1}{2^{k + 1}}.\]
+    Furthermore we can use this new value of \(s_{2k + 2}\) to compute \(s_{2(k + 1) + 1}\):
+    \[s_{2(k + 1) + 1} = \frac{1}{2} + s_{2k + 2} = \frac{1}{2} + \frac{1}{2} - \frac{1}{2^{k + 1}} = 1 - \frac{1}{2^{k + 1}}.\]
+
+    Hence the induction is complete.
+
+    Now we can compute the upper and lower limits by using theorem 3.17 in the textbook. Define \(E\), \(s^*\), and \(s_*\) as in Definition 3.16.
+
+    First, \(\limsup_{n \to \infty}(s_n) = 1\). Consider the subsequence of only odd indices. Then that subsequence clearly converges to \(1\), so \(1 \in E\). Futhermore, if \(x > 1\), then clearly for any \(n \in \mathbb N\) we have \(s_n < x\) since 1 bounds \(s_n\). Hence theorem 3.17 tells us that \(s^* = 1\).
+    
+    Second, \(\liminf_{n \to \infty}(s_n) = \frac{1}{2}\). Consider the subsequence of only even indices. Then that subsequence clearly converges to \(\frac{1}{2}\), so \(\frac{1}{2} \in E\). Also, if \(x < \frac{1}{2}\), then take \(N\) such that \(2^{N/2} > 1/ (x - 1/2)\). Then for any \(n \ge N\), if \(n\) is odd we clearly have \(s_n > \frac{1}{2}\), and if \(n\) is even we have \(s_n = \frac{1}{2} - \frac{1}{2^{n/2}}\). We also have \(\frac{1}{2} - x > \frac{1}{2^{n/2}} < x\) by assumption, so: 
+    \[x > \frac{1}{2} - \frac{1}{2^{n/2}},\]
+    which proves \(s_* = \frac{1}{2}\).
+\end{proof}
 
 \end{document}

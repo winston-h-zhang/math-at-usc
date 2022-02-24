@@ -1,0 +1,22 @@
+# Exam 1 Practice Questions I, 18.05, Spring 2014
+
+*Taken from: [mit-ocw 18.05](https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/exams/MIT18_05S14_Prac_Exam1a.pdf)*
+
+1. PROBABILITY has 11 letters, with 2 B's and 2 I's, so: 
+
+$$\boxed{\frac{11!}{2!2!}}$$
+
+2. There are $\binom{6}{4} = 15$ ways to pick 4 men and $\binom{7}{4} = 35$ ways to pick 4 women. Then there are $4!$ ways to arrange the pairs, so that makes $15(35)(24) = \boxed{12600}$ pairs.
+
+3. It's just the complement, so $$\boxed{\frac 1 3}$$
+
+4. We have $P(C \cap D) + P(C^c \cap D) = P(D)$. So $0.45 - 0.1 = \boxed{0.35}$.
+
+5. Probability of choosing the right answer is $p + (1- p) / c$. So $$\boxed{\frac{p}{p + (1-p)/c}}$$
+
+6.
+    a. Given that $C$ occurs, the other die must be 2, so $\boxed{1/6}$.
+
+    b. Given that $C$ occurs, 
+
+

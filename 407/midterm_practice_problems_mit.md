@@ -23,5 +23,10 @@ $$\boxed{\frac{11!}{2!2!}}$$
 
 7. The probability of getting the correct answer is $0.5 + 0.25(1/3) + 0.25(0.25) = 24/48 + 4/48 + 3/48 = 31/48$. So $$\frac{1/2}{31/48} = \boxed{\frac{24}{31}}$$
 
-8. 
+8. $P(A \cup B) = 1 - 0.42 = 0.58$ and $P(A \cap B) = P(A) + P(B) - P(A\cup B) = 0.4 + 0.3 - 0.58 = 0.12 = P(A)P(B)$. So yes, they are indenpendent.
 
+9. The expected value is $$\int_0^1x (2x) dx = \frac 2 3,$$ and $\mathbb E(X^2)$ is $$\int_0^1 x^2(2x) dx = \frac 1 2.$$ So $\text{Var}(X) = \mathbb E(X^2) - \mathbb E (X)^2 = 1/2 - 4/9 = \boxed{1/18}$.
+
+Next, $\mathbb E (X^4)$ is $$\int_0^1 x^4 (2x) dx = \frac 1 3,$$ so $\text{Var}(X^2) = \mathbb E (X^4) = \mathbb E(X^2)^2 = 1/3 - 1/4 = \boxed{1/12}$.
+
+10. 

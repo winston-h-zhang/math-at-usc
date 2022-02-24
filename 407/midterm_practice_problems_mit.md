@@ -17,6 +17,11 @@ $$\boxed{\frac{11!}{2!2!}}$$
 6.
     a. Given that $C$ occurs, the other die must be 2, so $\boxed{1/6}$.
 
-    b. Given that $C$ occurs, 
+    b. Given that $C$ occurs, the other die must be 6, so also $\boxed{1/6}$.
 
+    c. No, $A$ and $C$ are not independent. Same for $B$ and $C$.
+
+7. The probability of getting the correct answer is $0.5 + 0.25(1/3) + 0.25(0.25) = 24/48 + 4/48 + 3/48 = 31/48$. So $$\frac{1/2}{31/48} = \boxed{\frac{24}{31}}$$
+
+8. 
 

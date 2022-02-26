@@ -29,4 +29,6 @@ $$\boxed{\frac{11!}{2!2!}}$$
 
 Next, $\mathbb E (X^4)$ is $$\int_0^1 x^4 (2x) dx = \frac 1 3,$$ so $\text{Var}(X^2) = \mathbb E (X^4) = \mathbb E(X^2)^2 = 1/3 - 1/4 = \boxed{1/12}$.
 
-10. 
+10. I don't know.
+
+11. 

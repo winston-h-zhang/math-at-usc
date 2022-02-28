@@ -23,6 +23,15 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
 \usepackage[pdftex]{graphicx}
+% \usepackage{mathptmx}
+% \usepackage{geometry}
+%  \geometry{
+%  b5paper,
+%  left=15mm,
+%  right=15mm,
+%  top=15mm,
+%  bottom.
+% }
 \graphicspath{ {./images/} }
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -72,18 +81,52 @@
     \[\limsup_{n \to \infty} (a_n + b_n) \le \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n.\]
 \end{theorem}
 
+We first prove a useful lemma.
+
+\begin{lemma}
+    Let \(\{a_n\}\) be a sequence. Then \[\limsup_{n \to \infty} a_n = \lim_{n \to \infty} (\sup \{a_k \mid k \ge n\}).\]
+\end{lemma}
+
+\begin{proof}
+    Define \(A_n = \sup \{a_k \mid k \ge n\}\) and \(\lim_{n \to \infty} A_n = L\). 
+\end{proof}
+
+\begin{proof}
+    Let \(A_n = \sup \{a_k \mid k \ge n\}\) and \(B_n = \sup \{b_k \mid k \ge n\}\). Then for any \(k \ge n\), we have \(a_k + b_k \le A_n + B_n\), so the property of the supremum says that \(\sup \{a_k + b_k \mid k \ge n\} \le A_n + B_n\). This holds for all \(n \in \mathbb N\), so we take the limit to obtain
+    \begin{align*}
+        \limsup_{n \to \infty} (a_n + b_n) &= \lim_{n \to \infty} \sup \{a_k + b_k \mid k \ge n\} \\
+        &\le \lim_{n \to \infty} A_n + \lim_{n \to \infty} B_n \\
+        &= \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n,
+    \end{align*}
+    as desired.
+\end{proof}
+
 \begin{theorem}[7]
     Prove that the convergence of \(\sum a_n\) implies the convergence of 
     \[\sum \frac{\sqrt{a_n}}{n},\]
     if \(a_n \ge 0\).
 \end{theorem}
 
+\begin{proof}
+    The idea to this proof is that we must somehow linearize \(\frac{\sqrt{a_n}}{n}\) by bounding it with \(p_n a_n + q_n\). Then all that is required for \[\sum \frac{\sqrt{a_n}}{n}\] to converge is for 
+    \[\sum p_n a_n + q_n = \sum p_n a_n + \sum q_n\] to converge. 
+
+    Indeed, pick \(p_n = 1\) and \(q_n = \frac{1}{n^2}\). Since \(a_n, n \ge 0\), we have 
+    \begin{align*}
+        0 &\le a_n^2 + \frac{a_n}{n^2} + \frac{1}{n^4} \\
+        \implies \frac{a_n}{n^2} &\le a_n^2 + 2\frac{a_n}{n^2} + \frac{1}{n^4} = \left(a_n + \frac{1}{n^2}\right) \\
+        \implies \frac{\sqrt{a_n}}{n} &\le a_n + \frac{1}{n^2}.
+    \end{align*}
+    Then both \(\sum p_n a_n = \sum a_n\) and \(\sum q_n = \sum n^{-2}\) clearly converge. Hence \(\sum \sqrt{a_n}/n\) converges.
+\end{proof}
+
 \begin{theorem}[8]
     If \(\sum a_n\) converges, and if \(\{b_n\}\) is monotonic and bounded, prove that \(\sum a_n b_n\) converges. 
 \end{theorem}
 
 \begin{proof}
-    
+    Since \(\{b_n\}\) is bounded and montonic, it converges to some \(b \in \mathbb R\). If \(b_n\) is increasing, set \(c_n = b - b_n\), otherwise \(c_n = b_n - b\). This new sequence \(c_n\) is decreasing and converges to \(0\) by construction, therefore we may apply Theorem 3.42 from the textbook to obtain the convergence of \(\sum a_n c_n\). 
+    Whether we have \(c_n = b - b_n\) or \(c_n = b_n - b\), the sum \(\sum a_n c_n\) differs from \(\sum a_n b_n\) by some constant of \(\pm \sum a_n b\). Hence \(\sum a_n b_n\) converges.
 \end{proof}
 
 \end{document}

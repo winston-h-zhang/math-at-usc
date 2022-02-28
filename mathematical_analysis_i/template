@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% USE THIS FILE TO SUBMIT YOUR SOLUTIONS   %%
+%%                                          %%
+%% You must have the usamts.tex file in     %%
+%% the same directory as this file.         %%
+%% You do NOT need to submit this file or   %%
+%% usamts.tex with your solutions.  You     %%
+%% only need to submit the output PDF file. %%
+%%                                          %%
+%% DO NOT ALTER THE FILE usamts.tex         %%
+%%                                          %%
+%% If you have any questions or problems    %%
+%% using this file, or with LaTeX in        %%
+%% general, please go to the LaTeX          %%
+%% forum on the Art Of Problem Solving      %%
+%% web site, and post your problem.         %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT ALTER THE FOLLOWING LINES
+\documentclass[12pt]{article}
+\usepackage{mathptmx}
+\usepackage{geometry}
+ \geometry{
+ b5paper,
+ left=15mm,
+ right=15mm,
+ top=15mm,
+ bottom=15mm,
+}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{setspace}
+\usepackage{csquotes}
+
+\renewcommand{\baselinestretch}{1}
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{#3}}
+\theoremstyle{named}
+\newtheorem*{problem}{Theorem}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+% \realname{Hanting Zhang}
+% \pset{3}
+% \mathclass{425A}
+
+\renewcommand{\bf}{\mathbf}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\newcommand{\pk}{\textit{Previously known}}
+
+\begin{document}
+\end{document}

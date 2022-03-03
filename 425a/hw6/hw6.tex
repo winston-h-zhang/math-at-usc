@@ -78,27 +78,21 @@
 
 \begin{theorem}[5]
     For any two real sequences \(\{a_n\}, \{b_n\}\), prove that 
-    \[\limsup_{n \to \infty} (a_n + b_n) \le \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n.\]
+    \[\limsup_{n \to \infty} (a_n + b_n) \le \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n,\]
+    provided the sum on the right is not of the form \(\infty - \infty\).
 \end{theorem}
 
-We first prove a useful lemma.
-
-\begin{lemma}
-    Let \(\{a_n\}\) be a sequence. Then \[\limsup_{n \to \infty} a_n = \lim_{n \to \infty} (\sup \{a_k \mid k \ge n\}).\]
-\end{lemma}
-
 \begin{proof}
-    Define \(A_n = \sup \{a_k \mid k \ge n\}\) and \(\lim_{n \to \infty} A_n = L\). 
-\end{proof}
+    Set \(a^* = \limsup_{n \to \infty} a_n\), \(b^* = \limsup_{n \to \infty} b_n\), and \(c^* = \limsup_{n \to \infty} (a_n + b_n)\).
 
-\begin{proof}
-    Let \(A_n = \sup \{a_k \mid k \ge n\}\) and \(B_n = \sup \{b_k \mid k \ge n\}\). Then for any \(k \ge n\), we have \(a_k + b_k \le A_n + B_n\), so the property of the supremum says that \(\sup \{a_k + b_k \mid k \ge n\} \le A_n + B_n\). This holds for all \(n \in \mathbb N\), so we take the limit to obtain
-    \begin{align*}
-        \limsup_{n \to \infty} (a_n + b_n) &= \lim_{n \to \infty} \sup \{a_k + b_k \mid k \ge n\} \\
-        &\le \lim_{n \to \infty} A_n + \lim_{n \to \infty} B_n \\
-        &= \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n,
-    \end{align*}
-    as desired.
+    We do not consider the case \(a^* = \infty, b^* = -\infty\). If at least one of \(a^* = \infty\) or \(b^* = \infty\) (or both), then we necessarily have \(c^* \le \infty\). 
+    
+    Otherwise, if \(a^* = -\infty\), then \(a_n \to -\infty\). Then any subsequence of \(\{a_n + b_n\}\) also tends to \(-\infty\). Thus \(c^* = -\infty \le -\infty + b^*\). The same argument can be done in the case where \(b^* = -\infty\).
+
+    Hence we may assume that \(a^*, b^* \in \mathbb R\). By Theorem 3.17 in the textbook, we have for any \(\epsilon > 0\), there are \(N_s, N_t \in \mathbb N\) such that \(n \ge \max(N_s, N_t)\) implies \(a_n < a^* + \epsilon/2\) and \(b_n < b^* + \epsilon/2\). 
+    Thus \(a_n + b_n \le a^* + b^* + \epsilon\), and all subsequential limits of \(\{a_n + b_n\}\) are bounded by \(a^* + b^* + \epsilon\). 
+    By definition \(\sup E = c^*\), where \(E\) is the set of subsequential limits of \(\{a_n + b_n\}\), so we must have \(c^* \le a^* + b^* + \epsilon\). Since \(\epsilon > 0\) is arbitrary, we conclude that 
+    \[c^* \le a^* + b^* \implies \limsup_{n \to \infty} (a_n + b_n) \le \limsup_{n \to \infty} a_n + \limsup_{n \to \infty} b_n.\]
 \end{proof}
 
 \begin{theorem}[7]

@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% USE THIS FILE TO SUBMIT YOUR SOLUTIONS   %%
+%%                                          %%
+%% You must have the usamts.tex file in     %%
+%% the same directory as this file.         %%
+%% You do NOT need to submit this file or   %%
+%% usamts.tex with your solutions.  You     %%
+%% only need to submit the output PDF file. %%
+%%                                          %%
+%% DO NOT ALTER THE FILE usamts.tex         %%
+%%                                          %%
+%% If you have any questions or problems    %%
+%% using this file, or with LaTeX in        %%
+%% general, please go to the LaTeX          %%
+%% forum on the Art Of Problem Solving      %%
+%% web site, and post your problem.         %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT ALTER THE FOLLOWING LINES
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{csquotes}
+\include{../formatting}
+
+\renewcommand{\baselinestretch}{1}
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{7}
+\mathclass{425A}
+
+\renewcommand{\bf}{\mathbf}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+
+\begin{document}
+
+\begin{theorem}[1]
+    Suppose \(f\) is a real function defined on \(\mathbb R^1\) which satisfies 
+    \[\lim_{h \to 0}[f(x + h) - f(x - h)] = 0\]
+    for every \(x \in \mathbb R^1\). Does this imply that \(f\) is continuous?
+\end{theorem}
+
+\begin{proof}
+    \textbf{Counterexample}: Let \(f(x) = 0\) if \(x \neq 0\) and \(f(0) = 1\). At every point \(x \neq 0\), the limits \(\lim_{h \to 0} f(x \pm h)\) are well defined and equal to zero. Hence \(\lim_{h \to 0}[f(x + h) - f(x - h)] = 0\) for all \(x \neq 0\). If \(x = 0\), then we must have \(f(x \pm h) = 0\), and thus \(\lim_{h \to 0} f(x \pm h) = 0\). 
+
+    Then our hypothesis \(\lim_{h \to 0}[f(x + h) - f(x - h)] = 0\) is satisfied for every \(x \in \mathbb R\), but clearly \(f\) is not continuous at 0. 
+\end{proof}
+
+\begin{theorem}[2]
+    If \(f\) is a continuous mapping of a metric space \(X\) into a metric space \(Y\), prove that 
+    \[f(\overline{E}) \subseteq \overline{f(E)}\]
+    for every set \(E \subseteq X\). Show, by an example, that \(f(\overline{E})\) can be a proper subset of \(\overline{f(E)}\).
+\end{theorem}
+
+\begin{proof}
+    We want to show that \(y \in f(\overline{E}) \implies y \in \overline{f(E)}\). Indeed, let \(y \in f(\overline{E})\). There is \(x \in \overline{E}\) such that \(f(x) = y\). If \(x\) is in \(E\), then \(f(x) \in f(E) \subseteq \overline{f(E)}\). Otherwise, \(x\) must be a limit point of \(E\). 
+    In this case, there must be a sequence \(\{x_n\}\) of \(E\) that converges to \(x\). By the continuity of \(f\), we have \(f(x_n) \to f(x)\). Thus \(f(x)\) is a limit point of \(f(E)\), and \(f(x) \in \overline{f(E)}\). 
+
+    Hence we conclude that \(f(\overline{E}) \subseteq \overline{f(E)}\).
+
+    For an example where the inclusion is strict, take \(X = \mathbb Q\), \(Y = \mathbb R\), and \(E = [0, 1] \cap \mathbb Q \subseteq \mathbb Q\). If \(f\) is the embedding \(x \mapsto x\),  then \(\overline{E} = E\), so \(f(\overline{E}) = [0, 1] \cap \mathbb Q\). Meanwhile, \(\overline{f(E)} = \overline{[0, 1] \cap \mathbb Q} = [0, 1]\) (since after the map we are now in \(\mathbb R\)), which strictly includes \(f(\overline{E})\). 
+\end{proof}
+
+\begin{theorem}[3]
+    Let \(f\) be a continuous real function on a metric space \(X\). Let \(Z(f)\) (the \textit{zero set} of \(f\)) be the set of all \(p \in X\) at which \(f(p) = 0\). Prove that \(Z(f)\) is closed.
+\end{theorem}
+
+\begin{proof}
+    We prove that the complement of \(Z(f)\) is open. Let \(x \notin Z(f)\) and \(f(x) \neq 0\). Choose \(0 < \epsilon < f(x)\). The continuity of \(f\) allows us to find an \(\delta > 0\) such that for any \(y \in X\), \(d_X(y, x) < \delta\) implies \(d_Y(f(y), f(x)) < \epsilon\). 
+
+    Since \(\epsilon < f(x)\), \(d_Y(f(y), f(x)) < \epsilon\) implies that \(f(y) \neq 0\). Note that \(d_X(y, x) < \delta\) is equivalent to \(y \in B_x(\delta)\). Hence \(y \notin Z(f)\) for every \(y \in B_x(\delta)\). Putting everything together, we have 
+    \[x \in B_x(\delta) \subseteq X \setminus Z(f).\]
+    This holds for all \(x \notin Z(f)\), so \(X \setminus Z(f)\) is open. Thus \(Z(f)\) is closed.
+\end{proof}
+
+\begin{theorem}[4]
+    Let \(f\) and \(g\) be continuous mappings of a metric space \(X\) into a metric space \(Y\), and let \(E\) be a dense subset of \(X\). Prove that \(f(E)\) is dense in \(f(X)\). If \(g(p) = f(p)\) for all \(p \in E\), prove that \(g(p) = f(p)\) for all \(p \in X\). 
+\end{theorem}
+
+\begin{proof}
+    \textit{\(f(E)\) is dense}. Let \(y \in f(X)\). If \(y \in f(E)\), then there is nothing to prove. Otherwise, if \(y \in f(X) \setminus f(E)\), then we want to show that \(y\) is a limit point of \(f(E)\). Let \(x \in f^{-1}(y)\). Since \(E\) is dense in \(X\), there is some sequence \(x_n \to x\). The continuity of \(f\) implies that \(\lim_{x_n \to x} f(x_n) = y\), so \(f(x_n) = y_n \to y\). For each \(n\), \(f(x_n) \in f(E)\), so we can conclude that \(y\) is a limit point of \(f(E)\). 
+
+    Since \(y\) was arbitrary by assumption, we have \(f(E)\) is dense in \(f(X)\). 
+\end{proof}
+
+\begin{proof}
+    \textit{\(g(p) = f(p)\) for all \(p \in X\)}. Suppose \(p \in X\). If \(p \in E\), then there is nothing to prove. Otherwise, assume that \(p \in X \setminus E\). By the density of \(E\), there is at least one sequence \(x_n \to p\). For any of these sequences, the continuity of \(f\) and \(g\) guarentee the equalities \[\lim_{x_n \to p} f(x_n) = f(p)\hspace{2mm} \text{and} \hspace{2mm} \lim_{x_n \to p} g(x_n) = g(p).\] 
+    But since \(f(x_n) = g(x_n)\) for all \(n \in \mathbb N\), we also know that \(\lim_{x_n \to p} f(x_n) = \lim_{x_n \to p} g(x_n)\). Thus \(f(p) = g(p)\), as desired.
+\end{proof}
+
+\end{document}

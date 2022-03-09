@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1646337863 "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw6/hw6.tex" "hw6.pdf" "hw6" 1646337864
+["pdflatex"] 1646800729 "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw6/hw6.tex" "hw6.pdf" "hw6" 1646800730
   "../formatting.tex" 1643790627 989 9d9c61238ffd84d042cacf4565890dc5 ""
   "C:/Users/jiand/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1645995707 106480 f52c24a0502fd15bffd7f075cf1a7c94 ""
   "C:/Users/jiand/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1643013968 9769967 5252b0abad9b9757c61e3f2f9470eec6 ""
@@ -21,13 +21,18 @@
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
+  "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmti12.tfm" 1136765053 1484 ed72f8f5cf654cda15ecc8e32bfcbee5 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1247596666 32080 340ef9bf63678554ee606688e7b5339d ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1247596667 36741 fa121aac0049305630cf160b86157ee4 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1247596666 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1247596667 32722 d7379af29a190c3f453aba36302ff5a9 ""
+  "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1247596667 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1247596667 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1247596667 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1247596667 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
+  "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1247596667 36118 fad905eba93cff5bce1e185fe980a177 ""
+  "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1247596673 31764 459c573c03a4949a528c2cc7f557e217 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247596673 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/00miktex/epstopdf-sys.cfg" 1616067285 584 2a1075dd71571459f59146da9f7502ad ""
@@ -59,8 +64,8 @@
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/setspace/setspace.sty" 1324294077 22913 a27d7908fc6f0385466454a966a316eb ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1636710260 12694 6c23725d50ab9d1e2d3ce482c58ffcf3 ""
   "C:/Users/jiand/AppData/Local/Programs/MiKTeX/tex/latex/tools/tabularx.sty" 1636710260 7147 5ac8a9ef36411064b1a501137af0fa54 ""
-  "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw6/hw6.tex" 1646337861 4045 4b4ad69539ce40faefca207bcf4ae2f1 ""
-  "hw6.aux" 1646337864 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "c:/Users/jiand/hanting-zhang/math_at_usc/410/hw6/hw6.tex" 1646800728 14463 c0f38ff6c3309d109dc1c6439a71a725 ""
+  "hw6.aux" 1646800730 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
   (generated)
   "hw6.aux"
   "hw6.log"

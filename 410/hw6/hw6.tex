@@ -22,6 +22,7 @@
 %% DO NOT ALTER THE FOLLOWING LINES
 \documentclass[12pt]{article}
 \usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage{parskip}
 \usepackage[pdftex]{graphicx}
 \graphicspath{ {./images/} }
 \usepackage{fancyhdr}
@@ -133,19 +134,16 @@ Exercises 3, 5, 6, 8, 14 pp. 184-187.
 \end{theorem}
 
 \begin{proof}
-    We prove the statements separately:
-    \begin{enumerate}
-        \item[] \textit{Every element of \(G - H\) has order 2}. Let \(g \in G - H\). Then \(g\) must be of the form \(hk\) for some \(h \in H\) and \(k \in K\) and \textit{not} of the form \(g = h\). Thus we must have \(g = hx\). Then \(g^2 = hxhx\). The action implies that \(xhx^{-1} = xhx = h^{-1}\), therefore \(g^2 = hh^{-1} = 1\). Thus \(|g| = 2\).
+    \textit{Every element of \(G - H\) has order 2}. Let \(g \in G - H\). Then \(g\) must be of the form \(hk\) for some \(h \in H\) and \(k \in K\) and \textit{not} of the form \(g = h\). Thus we must have \(g = hx\). Then \(g^2 = hxhx\). The action implies that \(xhx^{-1} = xhx = h^{-1}\), therefore \(g^2 = hh^{-1} = 1\). Thus \(|g| = 2\).
     
-        \item[] \textit{\(G\) is abelian \(\iff\) \(\forall h \in H, h^2 = 1\)}. 
+    \textit{\(G\) is abelian \(\iff\) \(\forall h \in H, h^2 = 1\)}. 
     
-        (\(\implies\)): If \(G\) is abelian, then for any \(h \in H\), \(h(hx) = (hx)h\). Then 
-        \[hhx = hxh \implies hh = hxhx^{-1} = hxhx = 1 \implies h^2 = 1.\]
-    
-        (\(\coimplies\)): If \(h^2 = 1\) for all \(h \in H\), then every element of \(G\) has order 2. Then for any \(g_1, g_2 \in G\), 
-        \[(g_1g_2)^2 = g_1^2 g_2^2 = 1 \implies g_1 g_2 g_1 g_2 = g_1 g_1 g_2 g_2 \implies g_2 g_1 = g_1 g_2.\]
-        Thus \(G\) is abelian.
-    \end{enumerate}
+    (\(\implies\)): If \(G\) is abelian, then for any \(h \in H\), \(h(hx) = (hx)h\). Then 
+    \[hhx = hxh \implies hh = hxhx^{-1} = hxhx = 1 \implies h^2 = 1.\]
+
+    (\(\coimplies\)): If \(h^2 = 1\) for all \(h \in H\), then every element of \(G\) has order 2. Then for any \(g_1, g_2 \in G\), 
+    \[(g_1g_2)^2 = g_1^2 g_2^2 = 1 \implies g_1 g_2 g_1 g_2 = g_1 g_1 g_2 g_2 \implies g_2 g_1 = g_1 g_2.\]
+    Thus \(G\) is abelian.
 \end{proof}
 
 \begin{theorem}[5]
@@ -211,19 +209,75 @@ Exercises 3, 5, 6, 8, 14 pp. 184-187.
     Construct an non-abelian group of order 75. Classify all groups of order 75. 
 \end{theorem}
 
+\begin{proof}
+    Let \(G\) be a group of order \(75\). A routine application of Sylow's Theorems show that there is exactly one normal 5-Sylow subgroup \(P \normal G\) such that \(|P| = 5^2\). By the classification of groups of order \(p^2\) for primes \(p\), we must have 
+    \[P \cong \mathbb Z_{5^2} \hspace{2mm} \text{or} \hspace{2mm} P \cong \mathbb Z_5 \times \mathbb Z_5.\]
+    Furthermore, Cauchy's Theorem guarentees the existence of at least of subgroup \(Q\) of order 3. As 3 and 25 are coprime, \(P \cap Q = 1\). Thus \(|P Q| = |P||Q| = 75 \implies PQ = G\). Hence 
+    \[G \cong P \rtimes Q \cong P \rtimes \mathbb Z_3.\]
+    Now we must break into two cases:
+    \begin{enumerate}
+        \item[] \textit{Case 1}: If \(P \cong \mathbb Z_{5^2}\), then \(\Aut(\mathbb Z_{25}) \cong (\mathbb Z_{25})^\times\). The order is then \(\phi(25) = 20\), which 3 \textit{does not} divide. Thus any map 
+        \[\varphi : \mathbb Z_3 \to \Aut(P)\]
+        must be trivial. The semidirect product of \(P \rtimes Q\) degenerates to a direct product between \(\mathbb Z_{25}\) and \(\mathbb Z_3\). Hence in this case
+        \[G \cong \mathbb Z_{25} \times \mathbb Z_3 \cong \mathbb Z_{75}.\]
+
+        \item[] \textit{Case 2}: Here \(\Aut(P) \cong \Aut(\mathbb Z_5 \times \mathbb Z_5)\) is much more complicated. We can view \(\mathbb Z_5 \times \mathbb Z_5\) as an vector field over \(\mathbb Z_5\) by endowing it with the obvious scalar product (\(1 \cdot p = p\), \(2 \cdot p = p + p\), etc.). Then there is an natural isomorphism between \(\Aut(\mathbb Z_5 \times \mathbb Z_5)\) and the invertible matrices \(\text{GL}_2(\mathbb F_5)\). 
+        
+        We can determine the order of \(\text{GL}_2(\mathbb F_5)\) via a counting argument. The linear transformations \(A\) of \(\text{GL}_2(\mathbb F_5)\) are defined by the images of the two basis vectors \((1, 0)\) and \((0, 1)\). For the first basis vector, we can pick any nonzero vector \(v\) to be its image, giving \(5^2 - 1\) choices. 
+        The second basis vector cannot be any of \(\{1, v, 2v, 3v, 4v\}\) to ensure that the resulting map is invertible. Thus there as \(5^5 - 5\) choices. In total, this gives \((5^2 - 1) (5^2 - 5)\) possible linear transformations. Thus 
+        \[|\text{GL}_2(\mathbb F_5)| = |\Aut(\mathbb Z_5 \times \mathbb Z_5)| = 480.\]
+
+        Now we must determine the possible semidirect structures of \(P \rtimes Q\) by studying the possible homomorphisms \(\varphi : \mathbb Z_3 \to \Aut(\mathbb Z_5 \times \mathbb Z_5)\). Once again, if \(\varphi\) is trivial, then the semidirect product is direct, and we have 
+        \[G \cong \mathbb Z_5 \times \mathbb Z_5 \times \mathbb Z_3.\]
+        This classifies all the abelian groups of order 75. (Note that this agrees with the Fundemental Theorem of Abelian Groups.)
+
+        Otherwise, \(\mathbb Z_3\) is mapped to some subgroup of order 3 in \(\Aut(\mathbb Z_5 \times \mathbb Z_5)\). By Caunchy's Theorem, such a subgroup exists. Furthermore, we claim that different choices for \(\varphi\) is this produce isomorphic structures on the semidirct product. 
+        Indeed, 3 is a maximal prime of 480, so the 3-Sylow subgroups have order 3. Thus by Sylow's 2nd Theorem, all subgroups of order 3 are conjugate to each other in \(\Aut(\mathbb Z_5 \times \mathbb Z_5)\). Since \(\mathbb Z_3\) is cyclic, we may apply Problem 6 to deduce that all possible choices of \(\varphi\) produce isomorphic semidirect products. Hence we just have one non-abelian group is this case:
+        \[G \cong (\mathbb Z_5 \times \mathbb Z_5) \rtimes \mathbb Z_3,\]
+        where the semidirect product acts via conjugation, so that \(\varphi(x)(B) = \varphi(x) B \varphi(x)^{-1}\) (viewing both \(\varphi(x)\) and \(B\) as matrices in \(\text{GL}_2(\mathbb F_5)\)). It is difficult to find an explicit matrix of order 3, so we'll just stop here. (One must work with the characteristic polynomial and deduce something complicated.)
+    \end{enumerate}
+\end{proof}
+
 \begin{theorem}[14]
     Classify groups of order 60.
 \end{theorem}
 
 \begin{proof}
+    This is a terribly long proof, so I will be leaving out many routine details that do not effect the deeper understanding of the techniques used. 
+
     Let \(G\) be a group of order 60, let \(P\) be a Sylow 5-subgroup of \(G\) and let \(Q\) be a Sylow 3-subgroup of \(G\).
     \begin{enumerate}
         \item[(a)] If \(P\) is not normal in \(G\), then \(n_5 > 1\).Proposition 21 in Section 4.5 shows that \(G\) is simple. Then Proposition 23 of Section 4.5 shows that \(G \cong A_5\). 
          
-        \item[(b)] If \(P \normal G\) and \(Q\) is not normal in \(G\)
+        \item[(b)] If \(P \normal G\) and \(Q\) is not normal in \(G\), then Sylow's 3rd Theorem gives \(n_3 \ge 4\). Let \(Q_1, Q_2, Q_3, Q_4\) be four distinct 3-Sylow subgroups of \(G\). Then we can construct \(P Q_i\) for each \(i\) to obtain four groups of order \(15\) that intersect only at \(P\). Thus each \(P Q_i \cong \mathbb Z_{15}\) and also centralize \(P\), so that \(C_G(P)\) contains at least \(15 + 10 + 10 + 10 = 45\) elements. 
+        By Lagrange, \(|C_G(P)| \div |G|\) and consequently we may only have \(|C_G(P)| = 60\). Thus we conclude that \(P \le Z(G)\). 
+
+        Now consider \(G / P\), a quotient group of order 12. From the textbook's analysis of this group, we know that either \(n_2 = 1\) or \(n_3 = 1\). For the sake of contradiction assume that \(n_3 = 1\). Then \(G / P\) has a normal subgroup of order \(3\). An cardinaility argument shows that this subgroup must be of the form \(P Q_i / P\), which by the fourth isomorphism theorem we may correspond to \(P Q_i\) of \(G\). 
+        In fact \(P Q_i / P \normal G / P\) implies \(P Q_i \normal G\). Then for any \(g \in G\), we have \(g P Q_i g^{-1} = P Q_i\). If we break up the conjugate action by doing \[g P Q_i g^{-1} = g P g^{-1} g Q_i g^{-1} = P g Q_i g^{-1} = P Q_i,\]
+        it becomes clear that \(g Q_i g^{-1} = Q_i\). Hence \(Q_i \normal G\), which gives contradiction. 
+
+        Since \(n_3 \neq 1\) we must have instead that \(n_2 = 1\). Then the only possible group structure for \(Q / P\) is \(A_4\). Again, there is a normal 2-Sylow subgroup of \(Q / P\) of the form \(T P / P\), where \(T\) is a 2-Sylow subgroup of \(G\). This is due once more to cardinaility arguments. The fourth isomorphism theorem gives \(T P \normal G\), and thus applying the conjugation argument we see that \(T \normal G\). Since \(Q\) is not normal, we must have \(T Q \cong A_4\). 
+
+        Now with a subgroup of order \(12\) and \(P\), we can deduce that 
+        \[G \cong P \rtimes T Q \cong \mathbb Z_5 \rtimes_{\varphi} A_4.\]
+        Consider the possible maps \(\varphi : A-4 \to \Aut(\mathbb Z_5) \cong \mathbb Z_4\). The kernel of \(\varphi\) must be normal in \(A_4\), so it must be equal to \(1\) or \(V_4\). If \(\ker \varphi \cong V_4\), then the image of \(\varphi\) must have order 3, which is impossible due to Lagrange. Hence \(\ker \varphi = 1\) and the semidirect product is direct. Thus 
+        \[G \cong \mathbb Z_5 \rtimes_{\varphi} A_4 \cong A_4 \times \mathbb Z_5.\]
          
-        \item[(c)] \textbf{TODO}.
+        \item[(c)] If \(P, Q \normal G\), then \(PQ \normal G\) is a subgroup of order 15 isomorphic to \(\mathbb Z_{15}\). Let \(T\) be a 2-Sylow subgroup of \(G\). We have \(G \cong PQ \rtimes T \cong \mathbb Z_{15} \rtimes T\). We must find the associated homomorphisms \(\varphi : T \to \Aut(\mathbb Z-{15}) \cong \mathbb Z_4 \times \mathbb Z_2\).  
+        As for \(T\), it must be either \(\mathbb Z_4\) or \(mathbb Z_2 \times \mathbb Z_2\). Thus we split into two cases.
+
+        \textit{Case 1}: \(T \cong \mathbb Z_4\). Let \(x\) generate \(T\). We only need do map \(x\) to determine the maps \(\varphi : T \to \mathbb Z_4 \times \mathbb Z_2\). If \(|\varphi(T)| = 1\), then we have \(G = \mathbb Z_{15} \times \mathbb Z_4\). If \(|\varphi(T)| = 2\), then there are 3 possible images: \((0, 1), (2, 0), (2, 1)\). If \(|\varphi(G)| = 4\), then there is 2 images: \((1, 0)\) and \((1, 1)\). 
+        (Note here that the images \((3, 0)\) and \((3, 1)\) are not counted because they give isomorphic representations, but this is too tedious to all write out.)
+
+        Hence in this case there are a total of 6 possible isomorphism classes for \(G\). 
+
+        \textit{Case 2}: If \(T = \mathbb Z_2 \times \mathbb Z_2\), then we have \((0, 0)\) for the trivial image (giving a abelian group). If the image has order 2, then the differences in how we choose which elements go into the kernel all give the same semidirect structure. Thus only the image matters, of which there are 3 possiblilities: \((2, 0), (0, 1), (2, 1)\). If the image has order 4, then it must map to the unique subgroup generated by \(\langle(2, 0)\rangle \times \langle(0, 1)\rangle\). 
+        The choice of the mapping again produce the same isomorphism classes of \(G\), so there is only one new group here. 
+
+        Hence in total, this case produces 5 new isomorphism classes for \(G\). 
     \end{enumerate}
+
+    In total, we have 13 isomorphism classes of \(G\).
 \end{proof}
 
 Exercises 2, 5 pp. 165-167.
@@ -231,6 +285,14 @@ Exercises 2, 5 pp. 165-167.
 \begin{theorem}[5]
     Let \(G\) be a finite abelian group of type \((n_1, n_2, \dots, n_t)\). Prove that \(G\) contains an element of order \(m\) if and only if \(m \mid n_1\). Deduce that \(G\) is of exponent \(n_1\).
 \end{theorem}
+
+\begin{proof}
+    (\(\implies\)): If \(m \mid n_1\), then let \(am = n_1\). Consider the element \(a \in \mathbb Z_{n_1}\). This element clearly has order \(n_1 / a = m\).
+
+    (\(\coimplies\)): Suppose \(G\) contains an element of order \(m\). Let \(e_i\) generate \(\mathbb Z_{n_i}\) for \(1 \le i \le t\). Then \(m = a_1 e_1 + \dots a_t e_t\). The order of \(e_i\) is \(n_i\), so the order of \(a_i e_i\) divides \(n_i\). Furthermore, we know that the order of \(a + b\) divides \(\text{lcm}(|a|, |b|)\). The lcm of \(n_1, \dots, n_t\) is just \(n_1\), so we may extend the argument to conclude that the order of \(m = a_1 e_1 + \dots a_t e_t\) divides \(n_1\).
+
+    The exponent of \(G\) must at most be \(n_1\). Applying our findings above, we deduce that every element of \(G\) divides \(n_1\). Thus the exponent of \(G\) is also at least \(n_1\). Thus the exponent of \(G\) is \(n_1\), as desired. 
+\end{proof}
 
 Exercise 15 p. 174.
 

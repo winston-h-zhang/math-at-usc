@@ -1,0 +1,2264 @@
+#LyX file created by tex2lyx 2.3
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin C:/Users/jiand/hanting-zhang/math_at_usc/410/hw6/
+\textclass article
+\begin_preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% USE THIS FILE TO SUBMIT YOUR SOLUTIONS   %%
+%%                                          %%
+%% You must have the usamts.tex file in     %%
+%% the same directory as this file.         %%
+%% You do NOT need to submit this file or   %%
+%% usamts.tex with your solutions.  You     %%
+%% only need to submit the output PDF file. %%
+%%                                          %%
+%% DO NOT ALTER THE FILE usamts.tex         %%
+%%                                          %%
+%% If you have any questions or problems    %%
+%% using this file, or with LaTeX in        %%
+%% general, please go to the LaTeX          %%
+%% forum on the Art Of Problem Solving      %%
+%% web site, and post your problem.         %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT ALTER THE FOLLOWING LINES
+\usepackage{amsthm}\usepackage{amsfonts}\usepackage{tabularx}\usepackage{parskip}
+\usepackage[pdftex]{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+
+\usepackage{setspace}
+\usepackage{csquotes}
+\include{../formatting}
+
+\renewcommand{\baselinestretch}{1}
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+\newtheorem*{prop}{Proposition}\newtheorem*{corollary}{Corollary}\newtheorem*{lemma}{Lemma}\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{6}
+\mathclass{410}
+
+\renewcommand{\bf}{\mathbf}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\normal}{\trianglelefteq}
+
+
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Exercises 16, 17, pp. 138.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[16]
+\end_layout
+
+\end_inset
+
+ Prove that 
+\begin_inset Formula \((\mathbb Z / 24 \mathbb Z)^\times\)
+\end_inset
+
+ is an elementary abelian group of order 8. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By the Chinese Remainder Theorem, we have 
+\begin_inset Formula \[(\mathbb Z / 24 \mathbb Z)^\times \cong (\mathbb Z / 8 \mathbb Z)^\times \times (\mathbb Z / 3 \mathbb Z)^\times.\]
+\end_inset
+
+We know that 
+\begin_inset Formula \((\mathbb Z / 3 \mathbb Z)^\times \cong \mathbb Z_2\)
+\end_inset
+
+. Furthermore, 
+\begin_inset Formula \((\mathbb Z / 8 \mathbb Z)^\times\)
+\end_inset
+
+ consists of the elements 
+\begin_inset Formula \(a\)
+\end_inset
+
+ such that 
+\begin_inset Formula \(\gcd(a, 8) = 1\)
+\end_inset
+
+. This give 
+\begin_inset Formula \(a = 1, 3, 5, 7\)
+\end_inset
+
+. We can compute their orders directly: 
+\begin_inset Formula \begin{align*}
+        1^1 \equiv 3^2 \equiv 5^2 \equiv 7^2 \equiv 1 \mod 8 \\
+        \implies |1| = 1 \hspace{2mm} \text{and} \hspace{2mm} |3| = |5| = |7| = 2.
+    \end{align*}
+\end_inset
+
+Thus 
+\begin_inset Formula \((\mathbb Z / 8 \mathbb Z)^\times\)
+\end_inset
+
+ is a group of order 4 with 3 elements of order 2. The only possible such group is 
+\begin_inset Formula \(\mathbb Z_2^2\)
+\end_inset
+
+, so 
+\begin_inset Formula \[(\mathbb Z / 24 \mathbb Z)^\times \cong \mathbb Z_2^2 \times \mathbb Z_2 \cong \mathbb Z_2^3.\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Clearly 
+\begin_inset Formula \(\mathbb Z_2^3\)
+\end_inset
+
+ is an elementary group with 
+\begin_inset Formula \(p = 2\)
+\end_inset
+
+ that has order 8 and is abelian. 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[17]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula \(\langle G \rangle\)
+\end_inset
+
+ be a cyclic group of order 
+\begin_inset Formula \(n\)
+\end_inset
+
+. For 
+\begin_inset Formula \(n = 2, 3, 4, 5, 6,\)
+\end_inset
+
+ write out the elements of 
+\begin_inset Formula \(\Aut(G)\)
+\end_inset
+
+ explicitly. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Proof
+For each case, let 
+\begin_inset Formula \(x\)
+\end_inset
+
+ generate the group with 
+\begin_inset Formula \(|x| = n\)
+\end_inset
+
+. Notice that we only need to focus on the image of 
+\begin_inset Formula \(x\)
+\end_inset
+
+, as it determines the entire map. 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\begin_inset Formula \(n = 2\)
+\end_inset
+
+: 
+\begin_inset Formula \(x\)
+\end_inset
+
+ can only map to itself. Hence any automorphism must be the identity: 
+\begin_inset Formula \[1 \mapsto 1, \hspace{2mm} x \mapsto x.\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\begin_inset Formula \(n = 3\)
+\end_inset
+
+: We can map 
+\begin_inset Formula \(x\)
+\end_inset
+
+ to itself or 
+\begin_inset Formula \(x^2\)
+\end_inset
+
+. This gives two maps, which one can easily verify are also homomorphisms: 
+\begin_inset Formula \begin{align*}
+            1 \mapsto 1, \hspace{2mm} x \mapsto x, \hspace{2mm} x^2 \mapsto x^2 \\
+            1 \mapsto 1, \hspace{2mm} x \mapsto x^2, \hspace{2mm} x^2 \mapsto x.
+        \end{align*}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\begin_inset Formula \(n = 4\)
+\end_inset
+
+: We can map 
+\begin_inset Formula \(x\)
+\end_inset
+
+ to itself and 
+\begin_inset Formula \(x^3\)
+\end_inset
+
+, but not 
+\begin_inset Formula \(x^2\)
+\end_inset
+
+ (the map would not be bijective). This again gives two maps, which one can easily verify are also homomorphisms: 
+\begin_inset Formula \begin{align*}
+            1 \mapsto 1, \hspace{2mm} x \mapsto x, \hspace{2mm} x^2 \mapsto x^2 \hspace{2mm} x^3 \mapsto x^3 \\
+            1 \mapsto 1, \hspace{2mm} x \mapsto x^3, \hspace{2mm} x^2 \mapsto x^2 \hspace{2mm} x^3 \mapsto x.
+        \end{align*}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\begin_inset Formula \(n = 5\)
+\end_inset
+
+: We know that 
+\begin_inset Formula \((\mathbb Z_5)^\times \cong \mathbb Z_4\)
+\end_inset
+
+. Hence there are 4 maps, each corresponding 
+\begin_inset Formula \(x\)
+\end_inset
+
+ being mapped to an non-identity element: 
+\begin_inset Formula \begin{align*}
+            1 \mapsto 1, \hspace{2mm} x \mapsto x, \hspace{2mm} x^2 \mapsto x^2 \hspace{2mm} x^3 \mapsto x^3 \hspace{2mm} x^4 \mapsto x^4 \\
+            1 \mapsto 1, \hspace{2mm} x \mapsto x^2, \hspace{2mm} x^2 \mapsto x^4 \hspace{2mm} x^3 \mapsto x \hspace{2mm} x^4 \mapsto x^3 \\
+            1 \mapsto 1, \hspace{2mm} x \mapsto x^3, \hspace{2mm} x^2 \mapsto x \hspace{2mm} x^3 \mapsto x^4 \hspace{2mm} x^4 \mapsto x^2 \\
+            1 \mapsto 1, \hspace{2mm} x \mapsto x^4, \hspace{2mm} x^2 \mapsto x^3 \hspace{2mm} x^3 \mapsto x^2 \hspace{2mm} x^4 \mapsto x.
+        \end{align*}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\begin_inset Formula \(n = 6\)
+\end_inset
+
+: If 
+\begin_inset Formula \(x\)
+\end_inset
+
+ is mapped to any of 
+\begin_inset Formula \(x^2, x^3\)
+\end_inset
+
+, or 
+\begin_inset Formula \(x^4\)
+\end_inset
+
+, the generated map is not bijective. Hence there are only two possible maps, which we can see are isomorphisms: 
+\begin_inset Formula \begin{align*}
+            1 \mapsto 1, \hspace{2mm} x \mapsto x, \hspace{2mm} x^2 \mapsto x^2 \hspace{2mm} x^3 \mapsto x^3 \hspace{2mm} x^4 \mapsto x^4 \hspace{2mm} x^5 \mapsto x^5 \\
+            1 \mapsto 1, \hspace{2mm} x \mapsto x^5, \hspace{2mm} x^2 \mapsto x^4 \hspace{2mm} x^3 \mapsto x^3 \hspace{2mm} x^4 \mapsto x^2 \hspace{2mm} x^5 \mapsto x.
+        \end{align*}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+And thus we are done. 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Exercises 3, 5, 6, 8, 14 pp. 184-187.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[3]
+\end_layout
+
+\end_inset
+
+ Continue from Example 1. Prove that every element of 
+\begin_inset Formula \(G - H\)
+\end_inset
+
+ has order 2. Prove that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is abelian if and only if 
+\begin_inset Formula \(h^2 = 1\)
+\end_inset
+
+ for all 
+\begin_inset Formula \(h \in H\)
+\end_inset
+
+. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+
+\shape italic
+Every element of 
+\begin_inset Formula \(G - H\)
+\end_inset
+
+ has order 2
+\shape default
+. Let 
+\begin_inset Formula \(g \in G - H\)
+\end_inset
+
+. Then 
+\begin_inset Formula \(g\)
+\end_inset
+
+ must be of the form 
+\begin_inset Formula \(hk\)
+\end_inset
+
+ for some 
+\begin_inset Formula \(h \in H\)
+\end_inset
+
+ and 
+\begin_inset Formula \(k \in K\)
+\end_inset
+
+ and 
+\shape italic
+not
+\shape default
+ of the form 
+\begin_inset Formula \(g = h\)
+\end_inset
+
+. Thus we must have 
+\begin_inset Formula \(g = hx\)
+\end_inset
+
+. Then 
+\begin_inset Formula \(g^2 = hxhx\)
+\end_inset
+
+. The action implies that 
+\begin_inset Formula \(xhx^{-1} = xhx = h^{-1}\)
+\end_inset
+
+, therefore 
+\begin_inset Formula \(g^2 = hh^{-1} = 1\)
+\end_inset
+
+. Thus 
+\begin_inset Formula \(|g| = 2\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+
+\shape italic
+
+\begin_inset Formula \(G\)
+\end_inset
+
+ is abelian 
+\begin_inset Formula \(\iff\)
+\end_inset
+
+ 
+\begin_inset Formula \(\forall h \in H, h^2 = 1\)
+\end_inset
+
+
+\shape default
+.
+\end_layout
+
+\begin_layout Proof
+(
+\begin_inset Formula \(\implies\)
+\end_inset
+
+): If 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is abelian, then for any 
+\begin_inset Formula \(h \in H\)
+\end_inset
+
+, 
+\begin_inset Formula \(h(hx) = (hx)h\)
+\end_inset
+
+. Then 
+\begin_inset Formula \[hhx = hxh \implies hh = hxhx^{-1} = hxhx = 1 \implies h^2 = 1.\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+(
+\begin_inset Formula \(\coimplies\)
+\end_inset
+
+): If 
+\begin_inset Formula \(h^2 = 1\)
+\end_inset
+
+ for all 
+\begin_inset Formula \(h \in H\)
+\end_inset
+
+, then every element of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ has order 2. Then for any 
+\begin_inset Formula \(g_1, g_2 \in G\)
+\end_inset
+
+, 
+\begin_inset Formula \[(g_1g_2)^2 = g_1^2 g_2^2 = 1 \implies g_1 g_2 g_1 g_2 = g_1 g_1 g_2 g_2 \implies g_2 g_1 = g_1 g_2.\]
+\end_inset
+
+Thus 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is abelian. 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[5]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula \(G = \text{Hol}(\mathbb Z_2 \times \mathbb Z_2)\)
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(a)
+\end_layout
+
+\end_inset
+
+Prove that 
+\begin_inset Formula \(G = H \rtimes K\)
+\end_inset
+
+ where 
+\begin_inset Formula \(H = \mathbb Z_2 \times \mathbb Z_2\)
+\end_inset
+
+ and 
+\begin_inset Formula \(K \cong S_3\)
+\end_inset
+
+. Deduce that 
+\begin_inset Formula \(|G| = 24\)
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(b)
+\end_layout
+
+\end_inset
+
+Prove that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is isomorphic to 
+\begin_inset Formula \(S_4\)
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+We proceed by proving each part: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(a)
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula \(K = \Aut(\mathbb Z_2 \times \mathbb Z_2)\)
+\end_inset
+
+. If 
+\begin_inset Formula \(\varphi : \mathbb Z_2 \to \mathbb Z_2\)
+\end_inset
+
+ is an isomorphism, then 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ must fix 
+\begin_inset Formula \((0, 0)\)
+\end_inset
+
+ while permuting 
+\begin_inset Formula \(\{(0, 1), (1, 0), (1, 1)\}\)
+\end_inset
+
+. Thus the action of 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ on the 3 non-identity elements can be associated with a element of 
+\begin_inset Formula \(S_3\)
+\end_inset
+
+. So we have a map 
+\begin_inset Formula \[\Phi : \Aut(\mathbb Z_2 \times \mathbb Z_2) \to S_3.\]
+\end_inset
+
+Now, the composition of two maps 
+\begin_inset Formula \(\varphi_2 \circ \varphi_1\)
+\end_inset
+
+ will permute the 3 non-identity elements by the composition of the permutations associated with 
+\begin_inset Formula \(\varphi_1\)
+\end_inset
+
+ and 
+\begin_inset Formula \(\varphi_2\)
+\end_inset
+
+, so we have 
+\begin_inset Formula \[\Phi(\varphi_2 \circ \varphi_1) = \Phi(\varphi_1) \Phi(\varphi_2),\]
+\end_inset
+
+which shows that 
+\begin_inset Formula \(\Phi\)
+\end_inset
+
+ is a homomorphism.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Furthermore, clearly two automorphisms 
+\begin_inset Formula \(\varphi_1 \neq \varphi_2\)
+\end_inset
+
+ will permute the 3 non-identity elements differently, so 
+\begin_inset Formula \(\Phi\)
+\end_inset
+
+ is also injective. To see that 
+\begin_inset Formula \(\Phi\)
+\end_inset
+
+ is surjective, we must show that any permutation of the 3 non-identity elements gives a automorphism of 
+\begin_inset Formula \(\mathbb Z_2 \times \mathbb Z_2\)
+\end_inset
+
+. This is not hard to check directly, but there it is tedious so we shall omit it. Thus 
+\begin_inset Formula \(\Phi\)
+\end_inset
+
+ is bijective, and hence a isomorphism.
+\end_layout
+
+\begin_layout Standard
+We conclude that 
+\begin_inset Formula \(K \cong S_3\)
+\end_inset
+
+. Since 
+\begin_inset Formula \(|S_3| = 6\)
+\end_inset
+
+ and 
+\begin_inset Formula \(|H \rtimes K| = |H||K|\)
+\end_inset
+
+, we may deduce 
+\begin_inset Formula \(|G| = 4 \times 6 = 24\)
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(b)
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula \(G\)
+\end_inset
+
+ act on the 4 left cosets of 
+\begin_inset Formula \(K\)
+\end_inset
+
+, so that we may define the associated homomorphism 
+\begin_inset Formula \(G \to S_4\)
+\end_inset
+
+. Note that each left coset may be written as 
+\begin_inset Formula \(hk K\)
+\end_inset
+
+ for some 
+\begin_inset Formula \(h \in H\)
+\end_inset
+
+ and 
+\begin_inset Formula \(k \in K\)
+\end_inset
+
+. Since 
+\begin_inset Formula \(kK = K\)
+\end_inset
+
+, we may forget about the factors of 
+\begin_inset Formula \(k\)
+\end_inset
+
+ and realize that the 4 cosets are identified by the 4 elements of 
+\begin_inset Formula \(H\)
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+We want to show that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ acts faithfully and conclude that 
+\begin_inset Formula \(G \to S_4\)
+\end_inset
+
+ is injective. For any 
+\begin_inset Formula \(g \in G\)
+\end_inset
+
+, if 
+\begin_inset Formula \(g \cdot hK = hK\)
+\end_inset
+
+ for all left cosets of 
+\begin_inset Formula \(K\)
+\end_inset
+
+, then 
+\begin_inset Formula \[h^{-1}gh K = K \implies h^{-1}gh \in K \implies h^{-1}gh = 1,\]
+\end_inset
+
+where the last implication follows from the fact that 
+\begin_inset Formula \(h^{-1}gh \in H\)
+\end_inset
+
+ and 
+\begin_inset Formula \(H \cap K = 1\)
+\end_inset
+
+. Thus 
+\begin_inset Formula \(g = 1\)
+\end_inset
+
+, proving that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ acts faithfully and 
+\begin_inset Formula \(G \to S_4\)
+\end_inset
+
+ is injective. But 
+\begin_inset Formula \(|G| = |S_4| = 24\)
+\end_inset
+
+, so 
+\begin_inset Formula \(G \to S_4\)
+\end_inset
+
+ must also be bijective, and therefore an isomorphism. 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[6]
+\end_layout
+
+\end_inset
+
+ Assume that 
+\begin_inset Formula \(K\)
+\end_inset
+
+ is a cyclic group, 
+\begin_inset Formula \(H\)
+\end_inset
+
+ is an arbitrary group and 
+\begin_inset Formula \(\varphi_1\)
+\end_inset
+
+ and 
+\begin_inset Formula \(\varphi_2\)
+\end_inset
+
+ are homomorphisms from 
+\begin_inset Formula \(K\)
+\end_inset
+
+ into 
+\begin_inset Formula \(\Aut(H)\)
+\end_inset
+
+ such that 
+\begin_inset Formula \(\varphi_1(K)\)
+\end_inset
+
+ and 
+\begin_inset Formula \(\varphi_2(K)\)
+\end_inset
+
+ are conjugate subgroups of 
+\begin_inset Formula \(\Aut(H)\)
+\end_inset
+
+. If 
+\begin_inset Formula \(K\)
+\end_inset
+
+ is infinite assume 
+\begin_inset Formula \(\varphi_1\)
+\end_inset
+
+ and 
+\begin_inset Formula \(\varphi_2\)
+\end_inset
+
+ are injective. Prove by constructing an explicit isomorphism that 
+\begin_inset Formula \(H \rtimes_{\varphi_1} K \cong H \rtimes_{\varphi_2} K\)
+\end_inset
+
+. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Suppose that 
+\begin_inset Formula \(\sigma \varphi_1(K) \sigma^{-1} = \varphi_2(K)\)
+\end_inset
+
+. In particular, this can also be seen as the image of an automorphism on 
+\begin_inset Formula \(\varphi_2(K)\)
+\end_inset
+
+. Since 
+\begin_inset Formula \(K\)
+\end_inset
+
+ is cyclic, any automorphism has the form 
+\begin_inset Formula \(k \mapsto k^a\)
+\end_inset
+
+ for some 
+\begin_inset Formula \(a \in \mathbb Z\)
+\end_inset
+
+. Thus we have 
+\begin_inset Formula \(\sigma \varphi_1(k) \sigma^{-1} = \varphi_2(k)^a\)
+\end_inset
+
+ for all 
+\begin_inset Formula \(k \in K\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+We claim that the map from 
+\begin_inset Formula \(\psi : H \rtimes_{\varphi_1} K \to H \rtimes_{\varphi_2} K\)
+\end_inset
+
+ defined by 
+\begin_inset Formula \((h, k) \mapsto (\sigma(h), k^a)\)
+\end_inset
+
+ is a homomorphism. Indeed, let 
+\begin_inset Formula \((h_1, k_1), (h_2, k_2) \in H \rtimes_{\varphi_1} K\)
+\end_inset
+
+. Then we have, 
+\begin_inset Formula \begin{align*}
+        \psi((h_1, k_1) \bullet_{\varphi_1} (h_2, k_2)) &= \psi((h_1\varphi_1(k_1)(h_2), k_1 k_2)) \\
+        &= (\sigma h_1\varphi_1(k_1)(h_2) \sigma^{-1}, (k_1 k_2)^a) \\ 
+        &= (\sigma h_1 \sigma^{-1} \sigma \varphi_1(k_1)(h_2) \sigma^{-1}, k_1^a k_2^a) \\
+        &= (\sigma h_1 \sigma^{-1} \varphi_2(k_1)(h_2)^a, k_1^a k_2^a) \\ 
+        &= (\sigma h_1 \sigma^{-1} \varphi_2(k_1)(h_2^a), k_1^a k_2^a) \\ 
+        &= (\sigma h_1 \sigma^{-1}, k_1^a) \bullet_{\varphi_2} (h_2^a, k_2^a) \\ 
+        &= (\sigma h_1 \sigma^{-1}, k_1^a) \bullet_{\varphi_2} (\sigma h_2 \sigma^{-1}, k_2^a) \\ 
+        &= \psi(h_1, k_1) \bullet_{\varphi_2} \psi(h_2, k_2).
+    \end{align*}
+\end_inset
+
+Thus 
+\begin_inset Formula \(\psi\)
+\end_inset
+
+ is a homomorphism.
+\end_layout
+
+\begin_layout Proof
+Furthermore, we can consider the map 
+\begin_inset Formula \(\phi : H \rtimes_{\varphi_2} K \to H \rtimes_{\varphi_1} K\)
+\end_inset
+
+ in the opposite direction given by 
+\begin_inset Formula \(\phi((h, k)) = (\sigma^{-1}h\sigma, k^{a^{-1}})\)
+\end_inset
+
+. Since 
+\begin_inset Formula \(\sigma^{-1}\varphi_2(K)\sigma = \varphi_1(K)\)
+\end_inset
+
+ and this forms the inverse automorphism which maps 
+\begin_inset Formula \(k \mapsto k^{a^{-1}}\)
+\end_inset
+
+, we similarly deduce that 
+\begin_inset Formula \(\phi\)
+\end_inset
+
+ is a homomorphism as well. Now note that 
+\begin_inset Formula \begin{align*}
+        \psi \circ \phi ((h, k)) = \psi((\sigma^{-1}h\sigma, k^{a^{-1}})) = (\sigma\sigma^{-1}h\sigma\sigma^{-1}, (k^{a^{-1}})^a) = (h, k); \\
+        \phi \circ \psi ((h, k)) = \phi((\sigma h\sigma^{-1}, k^{a})) = (\sigma^{-1}\sigma h\sigma^{-1}\sigma, (k^{a})^{a^{-1}}) = (h, k).
+    \end{align*}
+\end_inset
+
+So 
+\begin_inset Formula \(\psi\)
+\end_inset
+
+ and 
+\begin_inset Formula \(\phi\)
+\end_inset
+
+ are two-sided inverses of each other. Thus 
+\begin_inset Formula \(\psi\)
+\end_inset
+
+ is an isomorphism and 
+\begin_inset Formula \[H \rtimes_{\varphi_1} K \cong H \rtimes_{\varphi_2} K.\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[8]
+\end_layout
+
+\end_inset
+
+ Construct an non-abelian group of order 75. Classify all groups of order 75. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula \(G\)
+\end_inset
+
+ be a group of order 
+\begin_inset Formula \(75\)
+\end_inset
+
+. A routine application of Sylow's Theorems show that there is exactly one normal 5-Sylow subgroup 
+\begin_inset Formula \(P \normal G\)
+\end_inset
+
+ such that 
+\begin_inset Formula \(|P| = 5^2\)
+\end_inset
+
+. By the classification of groups of order 
+\begin_inset Formula \(p^2\)
+\end_inset
+
+ for primes 
+\begin_inset Formula \(p\)
+\end_inset
+
+, we must have 
+\begin_inset Formula \[P \cong \mathbb Z_{5^2} \hspace{2mm} \text{or} \hspace{2mm} P \cong \mathbb Z_5 \times \mathbb Z_5.\]
+\end_inset
+
+Furthermore, Cauchy's Theorem guarentees the existence of at least of subgroup 
+\begin_inset Formula \(Q\)
+\end_inset
+
+ of order 3. As 3 and 25 are coprime, 
+\begin_inset Formula \(P \cap Q = 1\)
+\end_inset
+
+. Thus 
+\begin_inset Formula \(|P Q| = |P||Q| = 75 \implies PQ = G\)
+\end_inset
+
+. Hence 
+\begin_inset Formula \[G \cong P \rtimes Q \cong P \rtimes \mathbb Z_3.\]
+\end_inset
+
+Now we must break into two cases: 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\shape italic
+Case 1
+\shape default
+: If 
+\begin_inset Formula \(P \cong \mathbb Z_{5^2}\)
+\end_inset
+
+, then 
+\begin_inset Formula \(\Aut(\mathbb Z_{25}) \cong (\mathbb Z_{25})^\times\)
+\end_inset
+
+. The order is then 
+\begin_inset Formula \(\phi(25) = 20\)
+\end_inset
+
+, which 3 
+\shape italic
+does not
+\shape default
+ divide. Thus any map 
+\begin_inset Formula \[\varphi : \mathbb Z_3 \to \Aut(P)\]
+\end_inset
+
+must be trivial. The semidirect product of 
+\begin_inset Formula \(P \rtimes Q\)
+\end_inset
+
+ degenerates to a direct product between 
+\begin_inset Formula \(\mathbb Z_{25}\)
+\end_inset
+
+ and 
+\begin_inset Formula \(\mathbb Z_3\)
+\end_inset
+
+. Hence in this case 
+\begin_inset Formula \[G \cong \mathbb Z_{25} \times \mathbb Z_3 \cong \mathbb Z_{75}.\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\end_inset
+
+
+\shape italic
+Case 2
+\shape default
+: Here 
+\begin_inset Formula \(\Aut(P) \cong \Aut(\mathbb Z_5 \times \mathbb Z_5)\)
+\end_inset
+
+ is much more complicated. We can view 
+\begin_inset Formula \(\mathbb Z_5 \times \mathbb Z_5\)
+\end_inset
+
+ as an vector field over 
+\begin_inset Formula \(\mathbb Z_5\)
+\end_inset
+
+ by endowing it with the obvious scalar product (
+\begin_inset Formula \(1 \cdot p = p\)
+\end_inset
+
+, 
+\begin_inset Formula \(2 \cdot p = p + p\)
+\end_inset
+
+, etc.). Then there is an natural isomorphism between 
+\begin_inset Formula \(\Aut(\mathbb Z_5 \times \mathbb Z_5)\)
+\end_inset
+
+ and the invertible matrices 
+\begin_inset Formula \(\text{GL}_2(\mathbb F_5)\)
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+We can determine the order of 
+\begin_inset Formula \(\text{GL}_2(\mathbb F_5)\)
+\end_inset
+
+ via a counting argument. The linear transformations 
+\begin_inset Formula \(A\)
+\end_inset
+
+ of 
+\begin_inset Formula \(\text{GL}_2(\mathbb F_5)\)
+\end_inset
+
+ are defined by the images of the two basis vectors 
+\begin_inset Formula \((1, 0)\)
+\end_inset
+
+ and 
+\begin_inset Formula \((0, 1)\)
+\end_inset
+
+. For the first basis vector, we can pick any nonzero vector 
+\begin_inset Formula \(v\)
+\end_inset
+
+ to be its image, giving 
+\begin_inset Formula \(5^2 - 1\)
+\end_inset
+
+ choices. The second basis vector cannot be any of 
+\begin_inset Formula \(\{1, v, 2v, 3v, 4v\}\)
+\end_inset
+
+ to ensure that the resulting map is invertible. Thus there as 
+\begin_inset Formula \(5^5 - 5\)
+\end_inset
+
+ choices. In total, this gives 
+\begin_inset Formula \((5^2 - 1) (5^2 - 5)\)
+\end_inset
+
+ possible linear transformations. Thus 
+\begin_inset Formula \[|\text{GL}_2(\mathbb F_5)| = |\Aut(\mathbb Z_5 \times \mathbb Z_5)| = 480.\]
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we must determine the possible semidirect structures of 
+\begin_inset Formula \(P \rtimes Q\)
+\end_inset
+
+ by studying the possible homomorphisms 
+\begin_inset Formula \(\varphi : \mathbb Z_3 \to \Aut(\mathbb Z_5 \times \mathbb Z_5)\)
+\end_inset
+
+. Once again, if 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ is trivial, then the semidirect product is direct, and we have 
+\begin_inset Formula \[G \cong \mathbb Z_5 \times \mathbb Z_5 \times \mathbb Z_3.\]
+\end_inset
+
+This classifies all the abelian groups of order 75. (Note that this agrees with the Fundemental Theorem of Abelian Groups.)
+\end_layout
+
+\begin_layout Standard
+Otherwise, 
+\begin_inset Formula \(\mathbb Z_3\)
+\end_inset
+
+ is mapped to some subgroup of order 3 in 
+\begin_inset Formula \(\Aut(\mathbb Z_5 \times \mathbb Z_5)\)
+\end_inset
+
+. By Caunchy's Theorem, such a subgroup exists. Furthermore, we claim that different choices for 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ is this produce isomorphic structures on the semidirct product. Indeed, 3 is a maximal prime of 480, so the 3-Sylow subgroups have order 3. Thus by Sylow's 2nd Theorem, all subgroups of order 3 are conjugate to each other in 
+\begin_inset Formula \(\Aut(\mathbb Z_5 \times \mathbb Z_5)\)
+\end_inset
+
+. Since 
+\begin_inset Formula \(\mathbb Z_3\)
+\end_inset
+
+ is cyclic, we may apply Problem 6 to deduce that all possible choices of 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ produce isomorphic semidirect products. Hence we just have one non-abelian group is this case: 
+\begin_inset Formula \[G \cong (\mathbb Z_5 \times \mathbb Z_5) \rtimes \mathbb Z_3,\]
+\end_inset
+
+where the semidirect product acts via conjugation, so that 
+\begin_inset Formula \(\varphi(x)(B) = \varphi(x) B \varphi(x)^{-1}\)
+\end_inset
+
+ (viewing both 
+\begin_inset Formula \(\varphi(x)\)
+\end_inset
+
+ and 
+\begin_inset Formula \(B\)
+\end_inset
+
+ as matrices in 
+\begin_inset Formula \(\text{GL}_2(\mathbb F_5)\)
+\end_inset
+
+). It is difficult to find an explicit matrix of order 3, so we'll just stop here. (One must work with the characteristic polynomial and deduce something complicated.) 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[14]
+\end_layout
+
+\end_inset
+
+ Classify groups of order 60. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+This is a terribly long proof, so I will be leaving out many routine details that do not effect the deeper understanding of the techniques used.
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula \(G\)
+\end_inset
+
+ be a group of order 60, let 
+\begin_inset Formula \(P\)
+\end_inset
+
+ be a Sylow 5-subgroup of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ and let 
+\begin_inset Formula \(Q\)
+\end_inset
+
+ be a Sylow 3-subgroup of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(a)
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula \(P\)
+\end_inset
+
+ is not normal in 
+\begin_inset Formula \(G\)
+\end_inset
+
+, then 
+\begin_inset Formula \(n_5 > 1\)
+\end_inset
+
+.Proposition 21 in Section 4.5 shows that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is simple. Then Proposition 23 of Section 4.5 shows that 
+\begin_inset Formula \(G \cong A_5\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(b)
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula \(P \normal G\)
+\end_inset
+
+ and 
+\begin_inset Formula \(Q\)
+\end_inset
+
+ is not normal in 
+\begin_inset Formula \(G\)
+\end_inset
+
+, then Sylow's 3rd Theorem gives 
+\begin_inset Formula \(n_3 \ge 4\)
+\end_inset
+
+. Let 
+\begin_inset Formula \(Q_1, Q_2, Q_3, Q_4\)
+\end_inset
+
+ be four distinct 3-Sylow subgroups of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. Then we can construct 
+\begin_inset Formula \(P Q_i\)
+\end_inset
+
+ for each 
+\begin_inset Formula \(i\)
+\end_inset
+
+ to obtain four groups of order 
+\begin_inset Formula \(15\)
+\end_inset
+
+ that intersect only at 
+\begin_inset Formula \(P\)
+\end_inset
+
+. Thus each 
+\begin_inset Formula \(P Q_i \cong \mathbb Z_{15}\)
+\end_inset
+
+ and also centralize 
+\begin_inset Formula \(P\)
+\end_inset
+
+, so that 
+\begin_inset Formula \(C_G(P)\)
+\end_inset
+
+ contains at least 
+\begin_inset Formula \(15 + 10 + 10 + 10 = 45\)
+\end_inset
+
+ elements. By Lagrange, 
+\begin_inset Formula \(|C_G(P)| \div |G|\)
+\end_inset
+
+ and consequently we may only have 
+\begin_inset Formula \(|C_G(P)| = 60\)
+\end_inset
+
+. Thus we conclude that 
+\begin_inset Formula \(P \le Z(G)\)
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Now consider 
+\begin_inset Formula \(G / P\)
+\end_inset
+
+, a quotient group of order 12. From the textbook's analysis of this group, we know that either 
+\begin_inset Formula \(n_2 = 1\)
+\end_inset
+
+ or 
+\begin_inset Formula \(n_3 = 1\)
+\end_inset
+
+. For the sake of contradiction assume that 
+\begin_inset Formula \(n_3 = 1\)
+\end_inset
+
+. Then 
+\begin_inset Formula \(G / P\)
+\end_inset
+
+ has a normal subgroup of order 
+\begin_inset Formula \(3\)
+\end_inset
+
+. An cardinaility argument shows that this subgroup must be of the form 
+\begin_inset Formula \(P Q_i / P\)
+\end_inset
+
+, which by the fourth isomorphism theorem we may correspond to 
+\begin_inset Formula \(P Q_i\)
+\end_inset
+
+ of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. In fact 
+\begin_inset Formula \(P Q_i / P \normal G / P\)
+\end_inset
+
+ implies 
+\begin_inset Formula \(P Q_i \normal G\)
+\end_inset
+
+. Then for any 
+\begin_inset Formula \(g \in G\)
+\end_inset
+
+, we have 
+\begin_inset Formula \(g P Q_i g^{-1} = P Q_i\)
+\end_inset
+
+. If we break up the conjugate action by doing 
+\begin_inset Formula \[g P Q_i g^{-1} = g P g^{-1} g Q_i g^{-1} = P g Q_i g^{-1} = P Q_i,\]
+\end_inset
+
+it becomes clear that 
+\begin_inset Formula \(g Q_i g^{-1} = Q_i\)
+\end_inset
+
+. Hence 
+\begin_inset Formula \(Q_i \normal G\)
+\end_inset
+
+, which gives contradiction.
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula \(n_3 \neq 1\)
+\end_inset
+
+ we must have instead that 
+\begin_inset Formula \(n_2 = 1\)
+\end_inset
+
+. Then the only possible group structure for 
+\begin_inset Formula \(Q / P\)
+\end_inset
+
+ is 
+\begin_inset Formula \(A_4\)
+\end_inset
+
+. Again, there is a normal 2-Sylow subgroup of 
+\begin_inset Formula \(Q / P\)
+\end_inset
+
+ of the form 
+\begin_inset Formula \(T P / P\)
+\end_inset
+
+, where 
+\begin_inset Formula \(T\)
+\end_inset
+
+ is a 2-Sylow subgroup of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. This is due once more to cardinaility arguments. The fourth isomorphism theorem gives 
+\begin_inset Formula \(T P \normal G\)
+\end_inset
+
+, and thus applying the conjugation argument we see that 
+\begin_inset Formula \(T \normal G\)
+\end_inset
+
+. Since 
+\begin_inset Formula \(Q\)
+\end_inset
+
+ is not normal, we must have 
+\begin_inset Formula \(T Q \cong A_4\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now with a subgroup of order 
+\begin_inset Formula \(12\)
+\end_inset
+
+ and 
+\begin_inset Formula \(P\)
+\end_inset
+
+, we can deduce that 
+\begin_inset Formula \[G \cong P \rtimes T Q \cong \mathbb Z_5 \rtimes_{\varphi} A_4.\]
+\end_inset
+
+Consider the possible maps 
+\begin_inset Formula \(\varphi : A-4 \to \Aut(\mathbb Z_5) \cong \mathbb Z_4\)
+\end_inset
+
+. The kernel of 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ must be normal in 
+\begin_inset Formula \(A_4\)
+\end_inset
+
+, so it must be equal to 
+\begin_inset Formula \(1\)
+\end_inset
+
+ or 
+\begin_inset Formula \(V_4\)
+\end_inset
+
+. If 
+\begin_inset Formula \(\ker \varphi \cong V_4\)
+\end_inset
+
+, then the image of 
+\begin_inset Formula \(\varphi\)
+\end_inset
+
+ must have order 3, which is impossible due to Lagrange. Hence 
+\begin_inset Formula \(\ker \varphi = 1\)
+\end_inset
+
+ and the semidirect product is direct. Thus 
+\begin_inset Formula \[G \cong \mathbb Z_5 \rtimes_{\varphi} A_4 \cong A_4 \times \mathbb Z_5.\]
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\begin_inset Argument item:1
+status collapsed
+
+
+\begin_layout Standard
+(c)
+\end_layout
+
+\end_inset
+
+If 
+\begin_inset Formula \(P, Q \normal G\)
+\end_inset
+
+, then 
+\begin_inset Formula \(PQ \normal G\)
+\end_inset
+
+ is a subgroup of order 15 isomorphic to 
+\begin_inset Formula \(\mathbb Z_{15}\)
+\end_inset
+
+. Let 
+\begin_inset Formula \(T\)
+\end_inset
+
+ be a 2-Sylow subgroup of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. We have 
+\begin_inset Formula \(G \cong PQ \rtimes T \cong \mathbb Z_{15} \rtimes T\)
+\end_inset
+
+. We must find the associated homomorphisms 
+\begin_inset Formula \(\varphi : T \to \Aut(\mathbb Z-{15}) \cong \mathbb Z_4 \times \mathbb Z_2\)
+\end_inset
+
+. As for 
+\begin_inset Formula \(T\)
+\end_inset
+
+, it must be either 
+\begin_inset Formula \(\mathbb Z_4\)
+\end_inset
+
+ or 
+\begin_inset Formula \(mathbb Z_2 \times \mathbb Z_2\)
+\end_inset
+
+. Thus we split into two cases.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\shape italic
+Case 1
+\shape default
+: 
+\begin_inset Formula \(T \cong \mathbb Z_4\)
+\end_inset
+
+. Let 
+\begin_inset Formula \(x\)
+\end_inset
+
+ generate 
+\begin_inset Formula \(T\)
+\end_inset
+
+. We only need do map 
+\begin_inset Formula \(x\)
+\end_inset
+
+ to determine the maps 
+\begin_inset Formula \(\varphi : T \to \mathbb Z_4 \times \mathbb Z_2\)
+\end_inset
+
+. If 
+\begin_inset Formula \(|\varphi(T)| = 1\)
+\end_inset
+
+, then we have 
+\begin_inset Formula \(G = \mathbb Z_{15} \times \mathbb Z_4\)
+\end_inset
+
+. If 
+\begin_inset Formula \(|\varphi(T)| = 2\)
+\end_inset
+
+, then there are 3 possible images: 
+\begin_inset Formula \((0, 1), (2, 0), (2, 1)\)
+\end_inset
+
+. If 
+\begin_inset Formula \(|\varphi(G)| = 4\)
+\end_inset
+
+, then there is 2 images: 
+\begin_inset Formula \((1, 0)\)
+\end_inset
+
+ and 
+\begin_inset Formula \((1, 1)\)
+\end_inset
+
+. (Note here that the images 
+\begin_inset Formula \((3, 0)\)
+\end_inset
+
+ and 
+\begin_inset Formula \((3, 1)\)
+\end_inset
+
+ are not counted because they give isomorphic representations, but this is too tedious to all write out.)
+\end_layout
+
+\begin_layout Standard
+Hence in this case there are a total of 6 possible isomorphism classes for 
+\begin_inset Formula \(G\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
+Case 2
+\shape default
+: If 
+\begin_inset Formula \(T = \mathbb Z_2 \times \mathbb Z_2\)
+\end_inset
+
+, then we have 
+\begin_inset Formula \((0, 0)\)
+\end_inset
+
+ for the trivial image (giving a abelian group). If the image has order 2, then the differences in how we choose which elements go into the kernel all give the same semidirect structure. Thus only the image matters, of which there are 3 possiblilities: 
+\begin_inset Formula \((2, 0), (0, 1), (2, 1)\)
+\end_inset
+
+. If the image has order 4, then it must map to the unique subgroup generated by 
+\begin_inset Formula \(\langle(2, 0)\rangle \times \langle(0, 1)\rangle\)
+\end_inset
+
+. The choice of the mapping again produce the same isomorphism classes of 
+\begin_inset Formula \(G\)
+\end_inset
+
+, so there is only one new group here.
+\end_layout
+
+\begin_layout Standard
+Hence in total, this case produces 5 new isomorphism classes for 
+\begin_inset Formula \(G\)
+\end_inset
+
+. 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Proof
+In total, we have 13 isomorphism classes of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Standard
+Exercises 2, 5 pp. 165-167.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[5]
+\end_layout
+
+\end_inset
+
+ Let 
+\begin_inset Formula \(G\)
+\end_inset
+
+ be a finite abelian group of type 
+\begin_inset Formula \((n_1, n_2, \dots, n_t)\)
+\end_inset
+
+. Prove that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ contains an element of order 
+\begin_inset Formula \(m\)
+\end_inset
+
+ if and only if 
+\begin_inset Formula \(m \mid n_1\)
+\end_inset
+
+. Deduce that 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is of exponent 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+(
+\begin_inset Formula \(\implies\)
+\end_inset
+
+): If 
+\begin_inset Formula \(m \mid n_1\)
+\end_inset
+
+, then let 
+\begin_inset Formula \(am = n_1\)
+\end_inset
+
+. Consider the element 
+\begin_inset Formula \(a \in \mathbb Z_{n_1}\)
+\end_inset
+
+. This element clearly has order 
+\begin_inset Formula \(n_1 / a = m\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+(
+\begin_inset Formula \(\coimplies\)
+\end_inset
+
+): Suppose 
+\begin_inset Formula \(G\)
+\end_inset
+
+ contains an element of order 
+\begin_inset Formula \(m\)
+\end_inset
+
+. Let 
+\begin_inset Formula \(e_i\)
+\end_inset
+
+ generate 
+\begin_inset Formula \(\mathbb Z_{n_i}\)
+\end_inset
+
+ for 
+\begin_inset Formula \(1 \le i \le t\)
+\end_inset
+
+. Then 
+\begin_inset Formula \(m = a_1 e_1 + \dots a_t e_t\)
+\end_inset
+
+. The order of 
+\begin_inset Formula \(e_i\)
+\end_inset
+
+ is 
+\begin_inset Formula \(n_i\)
+\end_inset
+
+, so the order of 
+\begin_inset Formula \(a_i e_i\)
+\end_inset
+
+ divides 
+\begin_inset Formula \(n_i\)
+\end_inset
+
+. Furthermore, we know that the order of 
+\begin_inset Formula \(a + b\)
+\end_inset
+
+ divides 
+\begin_inset Formula \(\text{lcm}(|a|, |b|)\)
+\end_inset
+
+. The lcm of 
+\begin_inset Formula \(n_1, \dots, n_t\)
+\end_inset
+
+ is just 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+, so we may extend the argument to conclude that the order of 
+\begin_inset Formula \(m = a_1 e_1 + \dots a_t e_t\)
+\end_inset
+
+ divides 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+The exponent of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ must at most be 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+. Applying our findings above, we deduce that every element of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ divides 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+. Thus the exponent of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is also at least 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+. Thus the exponent of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ is 
+\begin_inset Formula \(n_1\)
+\end_inset
+
+, as desired. 
+\end_layout
+
+\begin_layout Standard
+Exercise 15 p. 174.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+begin{theorem}[15]
+\end_layout
+
+\end_inset
+
+ If 
+\begin_inset Formula \(A\)
+\end_inset
+
+ and 
+\begin_inset Formula \(B\)
+\end_inset
+
+ are normal subgroups of 
+\begin_inset Formula \(G\)
+\end_inset
+
+ such that 
+\begin_inset Formula \(G / A\)
+\end_inset
+
+ and 
+\begin_inset Formula \(G / B\)
+\end_inset
+
+ are both abelian, prove that 
+\begin_inset Formula \(G / A \cap B\)
+\end_inset
+
+ is abelian. 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+end{theorem}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Let 
+\begin_inset Formula \(G' = [G, G]\)
+\end_inset
+
+ be the commutator subgroup of 
+\begin_inset Formula \(G\)
+\end_inset
+
+. By Proposition 7 (4) from the textbook, since both 
+\begin_inset Formula \(A, B \normal G\)
+\end_inset
+
+ and 
+\begin_inset Formula \(G / A\)
+\end_inset
+
+ and 
+\begin_inset Formula \(G / B\)
+\end_inset
+
+ are abelian, we have 
+\begin_inset Formula \(G' \le A, B\)
+\end_inset
+
+. Thus 
+\begin_inset Formula \(G' \le A \cap B\)
+\end_inset
+
+, and Proposition 7 (4) once again tells us that 
+\begin_inset Formula \(G / (A \cap B)\)
+\end_inset
+
+ must be abelian. 
+\end_layout
+
+\end_body
+\end_document

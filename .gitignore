@@ -1,1 +1,4 @@
 .vscode/**
+**/*.aux
+**/*.log
+**/*.synctex.gz

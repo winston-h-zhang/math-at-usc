@@ -1,0 +1,161 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% USE THIS FILE TO SUBMIT YOUR SOLUTIONS   %%
+%%                                          %%
+%% You must have the usamts.tex file in     %%
+%% the same directory as this file.         %%
+%% You do NOT need to submit this file or   %%
+%% usamts.tex with your solutions.  You     %%
+%% only need to submit the output PDF file. %%
+%%                                          %%
+%% DO NOT ALTER THE FILE usamts.tex         %%
+%%                                          %%
+%% If you have any questions or problems    %%
+%% using this file, or with LaTeX in        %%
+%% general, please go to the LaTeX          %%
+%% forum on the Art Of Problem Solving      %%
+%% web site, and post your problem.         %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT ALTER THE FOLLOWING LINES
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{Homework \printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{Midterm 2}
+\mathclass{425A}
+
+\renewcommand{\bf}{\mathbf}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+
+\begin{document}
+
+\begin{theorem}[1]
+    Determine the convergence or divergence in (a)-(c).
+    \begin{enumerate}
+        \item[(a)] 
+        \[\sum_{k = 1}^\infty (-1)^k \frac{\sqrt{k + 1} - \sqrt{k}}{\sqrt{k}}\]
+        \item[(b)] \[\sum_{k = 1}^\infty \frac{k!}{(k + 2)!}\]
+        \item[(c)] \[\sum_{k = 1}^\infty \frac{2^k}{k^k}\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We do each separately:
+    \begin{enumerate}
+        \item[(a)] \textbf{TODO}
+        \item[(b)] \textbf{TODO}
+        \item[(c)] \textbf{TODO}
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[2]
+    Consider the power series \(\sum a_n z^n\) and assume that the coefficients \(a_n\) are integers, infinitely many of which are not zero. Prove that the radius of convergence \(R \le 1\).
+\end{theorem}
+
+\begin{proof}
+    \textbf{TODO:} radius of convergence
+\end{proof}
+
+\begin{theorem}[3]
+    Consider a function \(f : M \to \mathbb R\). It's graph is the set,
+    \[G(f) = \{(x, y) \in M \times \mathbb R \mid y = f(x)\}.\]
+    \begin{enumerate}
+        \item[(a)] Prove that if \(f\) is continuous then \(G(f)\) is closed as a subset of \(M \times \mathbb R\). 
+        \item[(b)] Prove that if \(f\) is continuous and \(M\) is compact then \(G(f)\) is compact.
+        \item[(c)] Prove that if \(G(f)\) is compact then \(f\) is continuous. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We do each part separately:
+    \begin{enumerate}
+        \item[(a)] \textbf{TODO:} \(\implies\)
+        \item[(b)] \textbf{TODO:} \(\implies\)
+        \item[(c)] \textbf{TODO:} \(\implies\)
+    \end{enumerate}    
+\end{proof}
+
+\begin{theorem}[4]
+    Let \(I = [0, 1]\) and let \(F : I \to I\) be continuous. Prove that \(F\) has at least one fixed point. Quoting a fixed points theorem is not acceptable.
+\end{theorem}
+
+\begin{proof}
+    \textbf{TODO:} fixed point, no thm
+\end{proof}
+
+\begin{theorem}[5]
+    Let \(X\) and \(Y\) be metric spaces and \(F : X \to Y\) be a continuous mapping onto \(Y\). If \(D\) is a dense subset of \(X\), prove that \(F(D)\) is a dense subset of \(Y\). 
+\end{theorem}
+
+\begin{proof}
+    \textbf{TODO:} dense \(\implies\) dense
+\end{proof}
+
+\textbf{EXTRA CREDIT (10 POINTS):}
+
+\begin{theorem}[6]
+    Prove the convergence or divergence of 
+    \[\sum_{n = 1}^\infty\frac{\sin n}{n}.\]
+\end{theorem}
+
+\begin{proof}
+    \textbf{TODO} 
+\end{proof}
+
+\end{document}

@@ -24,6 +24,7 @@
 \usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
 \usepackage[pdftex]{graphicx}
 \usepackage{fancyhdr}
+\usepackage{parskip}
 \pagestyle{fancy}
 \usepackage{setspace}
 \newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
@@ -78,6 +79,9 @@
 \pset{7}
 \mathclass{410}
 
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\Z}{\mathbb Z}
 \renewcommand{\bf}{\mathbf}
 \renewcommand{\implies}{\Rightarrow}
 \newcommand{\coimplies}{\Leftarrow}
@@ -86,8 +90,216 @@
 
 Exercises 6, 13, 14, 21, 25, 26, pp. 230-233.
 
+\textbf{Problem 6.} Are the following subrings of the ring of all functions from the closed interval \([0, 1]\) to \(\mathbb R\).
+\begin{enumerate}
+    \item[(a)] the set of all functions \(f(x)\) such that \(f(q) = 0\) for all \(q \in \mathbb Q \cap [0, 1]\): 
+    
+    \textbf{Yes.}
+
+    \item[(b)] the set of all polynomial functions: 
+    
+    \textbf{Yes.}
+    
+    \item[(c)] the set of all functions which have only finite numer of zeros, together with the zero function: 
+    
+    \textbf{Yes.}
+    
+    \item[(d)] the set of all functions which have an infinite number of zeros: 
+    
+    \textbf{Yes.}
+    
+    \item[(e)] the set of all functions \(f\) such that \(lim_{x \to 1^-} f(x) = 0\): 
+    
+    \textbf{Yes.}
+    
+    \item[(f)] the set of all rational linear combinations of the fuctions \(\sin nx\) and \(\cos nx\), where \(m, n \in \{0, 1, 2, \dots\}\): 
+    
+    \textbf{Yes.}
+    
+\end{enumerate}
+And we're done.
+\newline
+
+\begin{theorem}[13]
+    An element \(x\) in \(R\) is called \textit{nilpotent} if \(x^m = 0\) for some \(m \in \Z^+\).
+    \begin{enumerate}
+        \item[(a)] Show that if \(n = a^kb\) for some integers \(a\) and \(b\) then \(\overline{ab}\) is a nilpotent element of \(\Z / n \Z\). 
+        \item[(b)] If \(a \in \Z\) is an integer, show that the element \(\overline{a} \in \Z / n \Z\) is nilpotent if and only if every prome divisor of \(a\). In particular, determine the nilpotent elements of \(\Z / 72 \Z\) explicitly.
+        \item[(c)] Let \(R\) be the ring of functions from a nonempty set \(X\) to a field \(F\). Prove that \(R\) contains no nonzero nilpotent elements.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[14]
+    Let \(x\) be a nilpotent element of the commutative ring \(R\).
+    \begin{enumerate}
+        \item[(a)] Prove that \(x\) is either zero or a zero divisor.
+        \item[(b)] Prove that \(rx\) is nilpotent for all \(r \in R\).
+        \item[(c)] Prove that \(1 + x\) is a unit in \(R\). 
+        \item[(d)] Deduce that the sum of a nilpotent element and a unit is a unit.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[21]
+    Let \(X\) be any nonempty set.
+    \begin{enumerate}
+        \item[(a)] Prove that \(\mathcal P (X)\) is a ring under the addition and multiplication given.
+        \item[(b)] Prove that this ring is commutative, has an identity and is a Boolean ring.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[25]
+    Let \(I\) be the ring of integral Hamilton Quaterions and define 
+    \[N : I \to \Z \hspace{2mm} \text{by} \hspace{2mm} N(a + bi + cj + dk) = a^2 + b^2 + c^2 + d^2\]
+    (the map \(N\) is called the \textit{norm}).
+    \begin{enumerate}
+        \item[(a)] Prove that \(N(\alpha) = \alpha\overline{\alpha}\) for all \(\alpha \in I\), where if \(\alpha = a + bi + cj + dk\) then \(\overline{\alpha} = a - bi - cj = dk\).
+        \item[(b)] Prove that \(N(\alpha\beta) = N(\alpha)(\beta)\) for all \(\a, \b \in I\).
+        \item[(c)] Prove that an element of \(I\) is a unit if and only if it has norm \(+1\). Show that \(I^\times\) is isomprphic to the quaterion group of order 8.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[26]
+    Let \(K\) be a field and \(\nu : K^\times \to \Z\) a discrete valuation on \(K\). Let \(R\) be the valuation ring of \(\nu\).
+    \begin{enumerate}
+        \item[(a)] Prove that \(R\) is a subring of \(K\) which contains the identity.
+        \item[(b)] Prove that for each nonzero element \(x \in K\) either \(x\) or \(x^{-1}\) is in \(R\). 
+        \item[(c)] Prove that an element \(x\) is a unit of \(R\) if and only if \(\nu(0) = 0\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
 Exercises 3, 4, 10, 11, pp. 238-239.
 
+\begin{theorem}[3]
+    Let \(R[[x]]\) be the \textit{formal power series} of \(R\) in \(x\). Define addition and multiplication as the textbook does.
+    \begin{enumerate}
+        \item[(a)] Prove that \(R[[x]]\) is a commutative ring with 1.
+        \item[(b)] Show that \(1 - x\) is a unit in \(R[[x]]\) with inverse \(1 + x + x^2 + \cdots\).
+        \item[(c)] Prove that \(\sum_{n = 0}^\infty a_n x^n\) is a unit in \(R[[x]]\) if and only if \(a_0\) is a unit in \(R\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[4]
+    Prove that if \(R\) is an integral domain then the ring of formal power series \(R[[x]]\) is also an integral domain.
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[10]
+    Consider the following elements of the integral group ring \(\Z S_3\):
+    \[\a = 3(1, 2) - 5(2, 3) + 14(1, 2, 3) \hspace{2mm} \text{and} \hspace{2mm} \b = 6(1) + 2(2, 3) - 7(1, 3, 2)\]
+    (where (1) is the identity of \(S_3\)). Compute the following elements:
+
+    \textbf{(a)} \(\a + \b\), \textbf{(b)} \(2\a - 3\b\), \textbf{(c)} \(\a \b\), \textbf{(d)} \(\b\a\), \textbf{(e)} \(a^2\).
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[11]
+    Repeat the precedeing exercise under the assumption that the coefficients of \(\a\) and \(\b\) are in \(\Z / 3\Z\).
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
 Exercises 15, 17, 18, 19, 24, 26, pp. 247-251.
+
+\begin{theorem}[15]
+    Prove that the map \(\mathcal P(X) \to R\) defined by \(A \mapsto \chi_A\) is a ring homomorphism.
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[17]
+    Let \(R\) and \(S\) be nonzero rings with identity and denote their respective identities by \(1_R\) and \(1_S\). Let \(\varphi : R \to S\) be a nonzero homomorphism of rings. 
+    \begin{enumerate}
+        \item[(a)] Prove that if \(\varphi(1_R) \neq 1_S\), then \(\varphi(1_R)\) is a zero divisor in \(S\). Deduce that if \(S\) is an integral domain then every ring homomorphism from \(R\) to \(S\) sends the identity of \(R\) to the identity of \(S\). 
+        \item[(b)] Prove that if \(\varphi(1_R) = 1_S\) then \(\varphi(u)\) is a unit in \(S\) and that \(\varphi(u^{-1}) = \varphi(u)^{-1}\) for each unit \(u \in R\). 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+
+\begin{theorem}[18]
+    Let \(R\) be a ring.
+    \begin{enumerate}
+        \item[(a)] If \(I\) and \(J\) are ideals of \(R\) prove that their intersection \(I \cap J\) is also an ideal of \(R\). 
+        \item[(b)] Prove that the intersection of an arbitrary nonempty collection of ideals is again an ideal of \(R\). 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+
+\begin{theorem}[19]
+    Prove that if \(I_1 \subseteq I_2 \subseteq \dots\) are ideals of \(R\) then \(\bigcup_{n = 1}^\infty I_n\) is an ideal of \(R\).
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+
+\begin{theorem}[24]
+    Let \(\varphi : R \to S\) be a ring homomorphism.
+    \begin{enumerate}
+        \item[(a)] Prove that if \(J\) is an ideal of \(S\) then \(\varphi^{-1}(J)\) is an ideal of \(R\). Apply this to the special case when \(R\) is a subring of \(S\) and \(\varphi\) is the inclusion homomorphism to deduce that if \(J\) is an ideal of \(S\) then \(J \cap R\) is an ideal of \(R\). 
+        \item[(b)] Prove that if \(\varphi\) is surjective and \(I\) is an ideal of \(R\) then \(\varphi(I)\) is an ideal of \(S\). Give an example where this fails if \(\varphi\) is not surjective.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+
+\begin{theorem}[26]
+    Let \(R\) be a ring. For any \(n \in \Z\) and \(r \in R\), define \(nr = r + \dots + r\) (\(n\) times).
+    \begin{enumerate}
+        \item[(a)] Prove that the map \(\Z \to R\) defined by \(k \mapsto k1_R\) is a ring homomorphism whose kernel is \(n \Z\), where \(n\) is the characteristic of \(R\). 
+        \item[(b)] Determine the characteristics of the rings \(\mathbb Q\), \(\Z[x]\), and \(\Z / n \Z [x]\).
+        \item[(c)] Prove that if \(p\) is a prime and if \(R\) is a commutative ring of characteristic \(p\), then \((a + b)^p = a^p + b^p\) for all \(a, b \in R\). 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
 
 \end{document}

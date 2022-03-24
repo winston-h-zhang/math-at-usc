@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                          %%
+%% USE THIS FILE TO SUBMIT YOUR SOLUTIONS   %%
+%%                                          %%
+%% You must have the usamts.tex file in     %%
+%% the same directory as this file.         %%
+%% You do NOT need to submit this file or   %%
+%% usamts.tex with your solutions.  You     %%
+%% only need to submit the output PDF file. %%
+%%                                          %%
+%% DO NOT ALTER THE FILE usamts.tex         %%
+%%                                          %%
+%% If you have any questions or problems    %%
+%% using this file, or with LaTeX in        %%
+%% general, please go to the LaTeX          %%
+%% forum on the Art Of Problem Solving      %%
+%% web site, and post your problem.         %%
+%%                                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DO NOT ALTER THE FOLLOWING LINES
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{Homework \printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{8}
+\mathclass{425A}
+
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO} }}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+
+\begin{document}
+
+Chapter 5, \#1,2 3 and 26
+\begin{theorem}[1]
+    Let \(f\) be defined for all real \(x\), and suppose that 
+    \[|f(x) - f(y)| \le (x - y)^2\]
+    for all real \(x\) and \(y\). Prove that \(f\) is constant.
+\end{theorem}
+
+\begin{proof}
+    Without loss of generality assume that \(x \ge y\) and \(x = y + \delta\). Then we may rewrite the given equation as
+    \[\frac{|f(y + \delta) - f(y)|}{\delta} \le \delta.\]
+    Then for any \(y\), as \(\delta \to 0\), we have \(\lim_{\delta \to 0} |(f(y + \delta) - f(y)) / \delta| \le 0\). Thus \(f'(y)\) is defined and equal to zero. Theorem 5.11 gives \(f'(x) = 0\) implies \(f\) is constant.
+\end{proof}
+
+\begin{theorem}[2]
+    Suppose \(f'(x) > 0\) in \((a, b)\). Prove that \(f\) is strictly increasing on \((a, b)\), and let \(g\) be its inverse function. Prove that \(g\) is differentiable, and that 
+    \[g'(f(x)) = \frac{1}{f'(x)} \hspace{5mm} (a < x < b).\]
+\end{theorem}
+
+\begin{proof}
+    For any \(x, y \in (a, b)\), \(x > y\), apply MVT to see that \(f(y) - f(x) = (y - x)f'(c)\) for some \(x < c < y\). Both \(y - x > 0\) and \(f'(c) > 0\), so the RHS is positive; hence \(f(y) > f(x)\). This shows that \(f\) is strictly increasing.
+
+    We deduce that \(f\) is injective, and therefore it is bijective on its image, \((f(a), f(b))\). Thus we may construct an inverse \(g\). For any \(y \in (f(a), f(b))\), co
+\end{proof}
+
+\begin{theorem}[3]
+    Suppose that \(g\) is a real function on \(\R^1\), with bounded derivative (say \(|g'| \le M\)). Fix \(\e > 0\), and define \(f(x) = x + \e g(x)\). Prove that \(f\) is injective if \(\e\) is small enough. (A set of admissable values of \(\e\) can be determined which depends only on \(M\).)
+\end{theorem}
+
+\begin{theorem}[26]
+    Suppose \(f\) is differentiable on \([a, b]\), \(f(a) = 0\), and there is a real number \(A\) such that \(|f'(x)| \le A|f(x)|\) on \([a, b]\). Prove that \(f(x) = 0\) for all \(x \in [a, b]\). 
+\end{theorem}
+
+\end{document}

@@ -119,15 +119,28 @@ Chapter 5, \#1,2 3 and 26
 \begin{proof}
     For any \(x, y \in (a, b)\), \(x > y\), apply MVT to see that \(f(y) - f(x) = (y - x)f'(c)\) for some \(x < c < y\). Both \(y - x > 0\) and \(f'(c) > 0\), so the RHS is positive; hence \(f(y) > f(x)\). This shows that \(f\) is strictly increasing.
 
-    We deduce that \(f\) is injective, and therefore it is bijective on its image, \((f(a), f(b))\). Thus we may construct an inverse \(g\). For any \(y \in (f(a), f(b))\), co
+    We deduce that \(f\) is injective, and therefore it is bijective on its image, \((f(a), f(b))\). Thus we may construct an inverse \(g\). For any \(y \in (f(a), f(b))\), consider the limit 
+    \[\lim_{s \to y}\frac{g(s) - g(y)}{s - y} \hspace{5mm} (f(a) < y < f(b)).\]
+    Since \(g\) is the inverse of \(f\), there is a unique mapping \(f(x) = y\) and \(f(t) = s\) such that 
+    \[\lim_{s \to y} \frac{g(s) - g(y)}{s - y} = \lim_{t \to x}\frac{t - x}{f(t) - f(x)} = \lim_{t \to x}\left(\frac{f(t) - f(x)}{t - x}\right)^{-1} = \frac{1}{f'(x)}.\]
+    Thus \(g\) is differentiable, and with \(y = f(x)\), we deduce that
+    \[g'(f(x)) = \frac{1}{f'(x)} \hspace{5mm} (a < x < b).\]
 \end{proof}
 
 \begin{theorem}[3]
     Suppose that \(g\) is a real function on \(\R^1\), with bounded derivative (say \(|g'| \le M\)). Fix \(\e > 0\), and define \(f(x) = x + \e g(x)\). Prove that \(f\) is injective if \(\e\) is small enough. (A set of admissable values of \(\e\) can be determined which depends only on \(M\).)
 \end{theorem}
 
+\begin{proof}
+    Let \(\e < 1 / M\). Then \(f'(x) = 1 + \e g'(x)\). Now \(|\e g'(x)| < (1/M) M = 1\), so we have \(f'(x) > 0\). Thus \(f\) is strictly increasing. The reals form a total order so this implies that \(f\) is injective.
+\end{proof}
+
 \begin{theorem}[26]
     Suppose \(f\) is differentiable on \([a, b]\), \(f(a) = 0\), and there is a real number \(A\) such that \(|f'(x)| \le A|f(x)|\) on \([a, b]\). Prove that \(f(x) = 0\) for all \(x \in [a, b]\). 
 \end{theorem}
+
+\begin{proof}
+    Following the hint given by the textbook, let \(M_0 = \sup |f(x)|\) and \(M_1 = \sup |f'(x)|\) for \(x \in [a, b]\). For any \(x\), we have \(|f(x)| \le M_1(b - a) \le A(b - a)M_0\). We deduce that \(\sup |f(x)| = M_0 \le A(b - a)M_0\). Hence \(M_0 = 0\) if \(A(b - a) < 1\). So choose \(A < 1/ (b - a)\); then \(f = 0\).
+\end{proof}
 
 \end{document}

@@ -98,7 +98,7 @@
         converges.
         \item[(b)] \textbf{Converges.} We can bound each term:
         \[\frac{k!}{(k+2)!} = \frac{1}{(k + 1)(k + 2)} \le \frac{1}{k^2}.\] 
-        Now we know \(\sum_{k = 1}^\infty \frac{1}{k^2}\) converges, so the comparsion test gives the convergence of \(\sum_{k = 1}^\infty \frac{2^k}{k^k}\).
+        Now we know \(\sum_{k = 1}^\infty \frac{1}{k^2} = \frac{\pi^2}{6}\) converges, so the comparsion test gives the convergence of \(\sum_{k = 1}^\infty \frac{2^k}{k^k}\).
         \item[(c)] \textbf{Converges.} For \(k \ge 3\), 
         \[\frac{2^k}{k^k} = \left(\frac{2}{k}\right)^k \le \left(\frac{2}{3}\right)^k.\] 
         Then 
@@ -141,7 +141,7 @@
 \end{theorem}
 
 \begin{proof}
-    Extend the codomain of \(F\) to \(\R\) and consider the map \(f(x) = F(x) - x\). We have the bounds \(0 \le F(0) - 0 = F(0) \le 1\) and \(-1 \le F(1) - 1 \le 0\). Thus the interval \([f(0), f(1)]\) contains the point \(0\). The continuity of \(F(x)\)implies the continuity of \(f(x)\); the intermediate value theorem guarentees the existence of \(x_0 \in [0, 1]\) such that \(f(x_0) = 0\). Thus \(F(x_0) = x_0\) and \(x_0\) is a fixed point. 
+    Extend the codomain of \(F\) to \(\R\) and consider the map \(f(x) = F(x) - x\). We have the bounds \(0 \le F(0) - 0 = F(0) \le 1\) and \(-1 \le F(1) - 1 \le 0\). Thus the interval \([f(0), f(1)]\) contains the point \(0\). The continuity of \(F(x)\) implies the continuity of \(f(x)\); the intermediate value theorem guarentees the existence of \(x_0 \in [0, 1]\) such that \(f(x_0) = 0\). Thus \(F(x_0) = x_0\) and \(x_0\) is a fixed point. 
 \end{proof}
 
 \begin{theorem}[5]
@@ -157,14 +157,14 @@
 \textbf{EXTRA CREDIT (10 POINTS):}
 
 \begin{theorem}[6]
-    Prove the convergence or divergence of 
+    Prove the convergence or divergence of
     \[\sum_{n = 1}^\infty\frac{\sin n}{n}.\]
 \end{theorem}
 
 \begin{proof}
     We begin by bounding the partial sums \(\sum_{n = 1}^N \sin n\).
 
-    Consider \(S_N = \sum_{n = 1}^N \cos n + i \sin n\). Then \(\text{Im}(S_N) = \sum_{n = 1}^\infty \sin n\) is the quantity we need. Now we have
+    Consider \(S_N = \sum_{n = 1}^N \cos n + i \sin n\). Then \(\text{Im}(S_N) = \sum_{n = 1}^\infty \sin n\) is the quantity we need. Now \(|\Im(z)| \le |z|\) for any \(z \in \C\), so we have
     \begin{align*}
         |\Im(S_N)| \le |S_N| \le \left|\sum_{n = 1}^N e^{in}\right| = \left|e^i\frac{1 - e^{iN}}{1 - e^i}\right|,
     \end{align*}

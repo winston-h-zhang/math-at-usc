@@ -58,7 +58,7 @@
 %% Enter your real name here
 %% Example: \realname{David Patrick}
 \realname{Hanting Zhang}
-\pset{9}
+\pset{Midterm 2}
 \mathclass{425A}
 
 \renewcommand{\a}{\alpha}
@@ -81,4 +81,89 @@
 \begin{theorem}[25]
     Suppose \(f\) is twice differentiable on \([a, b]\), \(f(a) < 0, f(b) > 0, f'(x) \ge \delta > 0\), and \(0 \le f''(x) \le M\) for all \(x \in [a, b]\). Let \(\xi\) be the unique point in \((a, b)\) at which \(f(\xi) = 0\).
 \end{theorem}
+
+\begin{enumerate}
+    \item Choose \(x_1 \in (\xi, b)\), and define \(\{x_n\}\) by
+    \[x_{n + 1} = x_n - \frac{f(x_n)}{f'(x_n)}.\]
+    Interpret this geometrically, in terms of a tangent to the graph of \(f\).
+    \newline
+
+    Essentially, draw the tangent line at \(f(x_n)\) and look at its intersection with the \(x\)-axis. That is the value of \(x_{n + 1}\).
+
+    \item Prove that \(x_{n + 1} < x_n\) and that \[\lim_{n \to \infty} x_n = \xi.\]
+    
+    \begin{proof}
+        We first show that \(x_n > \xi\) for all \(n\) by induction. The base case \(n = 1\) is assumed by \(x_1 \in (\xi, \b)\). Now let \(x_n > \xi\). By IVT we have \(f(x_n) - f(x) = f'(z)(x_n - x)\) for some \(z \in (x, x_n)\). The function \(f'(x)\) is increasing since \(f''(x) \ge 0\), so \[f'(z) \le f'(x_n) \Rightarrow \frac{f(x_n) - f(x)}{x_n - x} \le f'(x_0).\] Rearranging gives 
+        \[f(x_n) + f'(x_0)(x - x_n) \le f(x).\]
+        In words, this just means that the tangent line at \(f(x_n)\) is less than \(f(x)\), since \(f(x)\) is convex. In particular, when the LHS is zero, then \(x = x_{n + 1}\). Thus \(0 = f(\xi) < f(x_{n + 1}) \Rightarrow \xi < x_{n + 1}\), which completes the induction as desired. (Note we drop the equality on the \(\le\) since \(f(x_{n + 1})\) cannot be equal to zero.)
+
+        As \(x_n > \xi\) for all \(n\), we know that \(f(x_n) > 0\). Thus \(x_{n + 1} = x_n - \frac{f(x_n)}{f'(x_n)} < x_n\), as desired.
+
+        To see that \(\lim_{n \to \infty}x_n = \xi\), note that 
+        \[\lim_{n \to \infty} x_n = \lim_{n \to \infty} x_{n + 1} = \lim_{n \to \infty} \left(x_n - \frac{f(x_n)}{f'(x_n)}\right) = \lim_{n \to \infty}x_n - \lim_{n \to \infty}\frac{f(x_n)}{f'(x_n)}.\]
+        Thus we deduce that \[\lim_{n \to \infty} \frac{f(x_n)}{f'(x_n)} = \Rightarrow \lim_{n \to \infty} f(x_n) = 0.\]
+        The continuity of \(f\) means that \(\lim_{n \to \infty} f(x_n) = f(\lim_{n \to \infty} x_n) = 0\). Thus we finally have \(\lim_{n \to \infty} x_n = \xi\).
+    \end{proof}
+
+    \item Use Taylor's theorem to show that \[x_{n + 1} - \xi = \frac{f''(t_n)}{2 f'(x_n)}(x_n - \xi)^2\]
+    for some \(t_n \in (\xi, x_n)\).
+
+    \begin{proof}
+        By Taylor's theorem, there is a point \(t \in (\xi, x_n)\) such that \[0 = f(\xi) = f(x_n) + f'(x_n)(\xi - x_n) + \frac{f''(x_n)}{2}(\xi - x_n)^2.\]
+        Dividing by \(f'(x_n)\) gives
+        \[0 = \frac{f(x_n)}{f'(x_n)} + (\xi - x_n) + \frac{f''(x_n)}{2f'(x)}(\xi - x_n)^2,\]
+        thus by the definition of \(x_{n + 1}\),
+        \[\xi - x_{n + 1} + \frac{f''(x_n)}{2f'(x)}(\xi - x_n)^2 = 0.\]
+        Hence 
+        \[x_{n + 1} - \xi = \frac{f''(x_n)}{2f'(x)}(\xi - x_n)^2.\]
+    \end{proof}
+
+    \item If \(A = M/2 \delta\), deduce that 
+    \[0 \le x_{n + 1} - \xi \le \frac{1}{A}[A(x - \xi)]^{2^n}.\]
+    (Compare with Exercises 16 and 18, Chapter 3.)
+    \begin{proof}
+        Given our result from part (c) and given that \(f'(x) \ge \delta > 0\) and \(0 \le f''(x) \le M\), we have 
+        \[0 \le s_{n + 1} - \xi = \frac{f''(t_n)}{2f'(x_n)}(x_n - \xi)^2 \le \frac{M}{2\delta}(x_n - \xi)^2 = A(x_n - \xi)^2.\]
+
+        Now we proceed by induction. We can verify that the base case \(n = 1\) holds:
+        \[0 \le x_2 - \xi \le A(x_12 - \xi)^2 = \frac{1}{A}[A(x_1 - \xi)]^2 = \frac{1}{A}[A(x_1 - \xi)]^{2^1}.\]
+
+        Assume for \(k \le n\) that the result holds for \(k\). Then applying part (c) shows that 
+        \[0 \le x_{k + 2} - \xi \le A(x_{k + 1} - \xi)^2 \le A\left[\frac{1}{A}[A(x_1 - \xi)]^{2^n}\right]^2 = \frac{1}{A}[A(x_1 - \xi)]^{2^{n + 1}}.\]
+        Hence the induction is complete and the result holds for all \(n\).
+
+        To compare this with problems 16 and 18, problem 18 is a special case of this exercise with \(f(x) = x^p - \a\). Then problem 16 is an further specialization to \(p = 2\). 
+    \end{proof}
+
+    \item Show that Newton's method amounts to finding a fixed point of the function \(g\) defined by \[g(x) = x - \frac{f(x)}{f'(x)}.\]
+    How does \(g'(x)\) behave for \(x\) near \(\xi\)?
+
+    \begin{proof}
+        Any \(x_0\) is a fixed point of \(g(x)\) if and only if \(f(x_0) = 0\), which happens if and only if \(x_0 = \xi\). Thus \(\xi\) is the unique fixed point of \(g(x)\).
+
+        Now with the quotient rule, we have \[g'(x) = 1 - \frac{f'(x)f'(x) - f(x)f''(x)}{[f'(x)]^2} - \frac{f(x)f''(x)}{[f'(x)]^2},\]
+        which implies that \(g'(x) \to 0\) as \(x \to \xi\).
+    \end{proof}
+
+    \item Put \(f(x) = x^{1/3}\) on \((-\infty, \infty)\) and try Newton's method. What happens?
+    \newline
+
+    We compute \(f'(x) = \frac{1}{3}x^{-2/3}\) and \(f''(x) = -\frac{2}{9}x^{-5/3}\), neither of which are bounded above or below. So we expect Newton's formula to fail. 
+
+    Indeed, 
+    \[x_{n + 1} = x_n - \frac{x_n^{1/3}}{\frac{1}{3}x_n^{-2/3}} = x_n - 3x_n = -2x_n.\]
+    Thus for any \(x_1\), we have the sequence \(x_n = (-2)^{n - 1}x_1\), which clearly blows up unless \(x_1 = 0\).
+\end{enumerate}
+
+I hope this is the correct formulation:
+\begin{theorem}[26]
+    Suppose \(\bf r : [a, b] \to \R^k\) is differentiable such that \(\bf r (a) = 0\) and there is a real number \(A\) such that 
+    \[|\bf r'(x)| \le A|\bf r(x)|\]
+    on \([a, b]\). Then \(\bf r(x) = 0\) for all \(x \in [a, b]\).
+\end{theorem}
+
+\begin{proof}
+    This proof is largely the same as the one-dimensional version. Let \(M_0 = \sup |\bf r(x)|\) and \(M_1 = \sup |\bf r'(x)|\) for \(x \in [a, b]\). Here \(|\bf r(\cdot)|\) is the vector norm on \(\R^k\). For any \(x\), we have \(|f(x)| \le M_1(b - a) \le A(b - a)M_0\). We deduce that \(\sup |\bf r(x)| = M_0 \le A(b - a)M_0\). Hence \(M_0 = 0\) if \(A(b - a) < 1\). So choose \(A < 1/ (b - a)\); then \(\bf r = \bf 0\).
+\end{proof}
+
 \end{document}

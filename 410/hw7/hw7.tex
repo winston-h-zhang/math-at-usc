@@ -124,10 +124,22 @@ Exercises 6, 13, 14, 21, 25, 26, pp. 230-233.
     Thus if \(\lim_{x \to 1^-} f(x) = 0\) and \(\lim_{x \to 1^-} g(x) = 0\), then \[\lim_{x \to 1^-} f(x) - \lim_{x \to 1^-} g(x) = \lim_{x \to 1^-} f(x) * \lim_{x \to 1^-} g(x) = 0,\]
     as desired.
     
-    \item the set of all rational linear combinations of the fuctions \(\sin nx\) and \(\cos nx\), where \(m, n \in \{0, 1, 2, \dots\}\): 
+    \item the set of all rational linear combinations of the functions \(\sin nx\) and \(\cos nx\), where \(m, n \in \{0, 1, 2, \dots\}\): 
     
-    \textbf{???.} \todo
+    \textbf{Yes.} Let $f(x)$ and $g(x)$ be rational linear combinations of \(\sin nx\) and \(\cos nx\), i.e.
+    $$\sum_{i = 0}^n (a_i \sin ix + b_i \cos ix) \hspace{2mm} \text{and} \hspace{2mm} \sum_{j = 0}^m (c_j \sin jx + d_j \cos jx).$$
+    Then we have $f(x) - g(x)$ equal to:
+    $$\sum_{k = 0}^{\max(n, m)} (a_k + c_k) \sin kx + (b_k + d_k) \cos kx),$$
+    which is another rational linear combinations of \(\sin nx\) and \(\cos nx\).
     
+    I won't type out $f(x)g(x)$ because the calculation is so messy, but essentially it boils down to a rational linear combination of the functions $\sin nx \sin mx$, $\cos nx \cos mx$, $\cos nx \sin mx$, $\sin nx \cos mx$. But these can be further broken down into \(\sin nx\) and \(\cos nx\) by applying sum to product formulas
+    \begin{align*}
+        2 \sin \a \cos \b &= \sin(\a - \b) + \sin (\a + \b) \\
+        2 \cos \a \cos \b &= \cos(\a - \b) + \cos (\a + \b) \\
+        2 \cos \a \sin \b &= \sin(\a + \b) - \sin (\a - \b) \\
+        2 \sin \a \sin \b &= \cos(\a - \b) - \cos (\a + \b).
+    \end{align*}
+    Thus $f(x) g(x)$ can be written rational linear combinations of \(\sin nx\) and \(\cos nx\), and thus this set is a subring.
 \end{enumerate}
 And we're done.
 \newline
@@ -148,19 +160,20 @@ And we're done.
         \item Let \(n = a^kb\). If \(k = 0\), then \(n = b\) so \(\overline{ab} = \overline{an} = \overline{0}\) is trivially nilpotent. 
         Otherwise, if \(k \ge 1\), we have \(\overline{ab}^k = \overline{a^kb^k} = \overline{a^k b * b^{k - 1}} = \overline{nb^{k - 1}} = \overline{0}\), as desired. Thus \(\overline{ab}\) is nilpotent.
 
-        \item (\(\Rightarrow\)): Suppose every prime divisor of \(n\) is a divisor of \(a\), i.e. for any prime \(p\), \(p \mid n \Rightarrow p \mid a\). By the fundemental theorem of arithmetic, write \(n = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}\), where \(p_i\) are primes and \(e_i > 0\). Then \(p_1 \dots p_k \mid a\) by our hypothesis. Write \(a = p_1 \dots p_k * b\) and \(e = \max(e_1, \dots, e_k)\). Then 
+        \item (\(\Rightarrow\)): Suppose every prime divisor of \(n\) is a divisor of \(a\), i.e. for any prime \(p\), \(p \mid n \Rightarrow p \mid a\). By the fundamental theorem of arithmetic, write \(n = p_1^{e_1} p_2^{e_2} \dots p_k^{e_k}\), where \(p_i\) are primes and \(e_i > 0\). Then \(p_1 \dots p_k \mid a\) by our hypothesis. Write \(a = p_1 \dots p_k * b\) and \(e = \max(e_1, \dots, e_k)\). Then 
         \begin{align*}
             a^e = (p_1 \dots p_k * b)^e = p_1^e \dots p_k^e * b^e.
         \end{align*}
         Since \(e_i \le e\), we can safely pull out each factor of \(p_i^{e_i}\) to have \(a^e = n * p_1^{e - e_1} \dots p_k^{e - e_k} * b^e\). Thus \(\overline{a}\) is nilpotent:
         \[\overline{a}^e = \overline{n * p_1^{e - e_1} \dots p_k^{e - e_k} * b^e} = \overline{0}.\]
 
-        (\(\Leftarrow\)): If \(a\) is a nilpotent element of \(\Z /n\Z\), then \(a^m = 0\) for some \(m \in \Z^+\). By the fundemental theorem of arithmetic, let \(a = p_1^{d_i} \dots p_k^{d_k}\) for primes \(p_i\) and \(d_i > 0\). Then \(a^m = 0\) in \(\Z / n\Z\) implies \(n \mid a^m\) in \(\Z\). Thus if \(p\) is any prime divisor of \(n\), we have \(p \mid n\) implies 
+        (\(\Leftarrow\)): If \(a\) is a nilpotent element of \(\Z /n\Z\), then \(a^m = 0\) for some \(m \in \Z^+\). By the fundamental theorem of arithmetic, let \(a = p_1^{d_i} \dots p_k^{d_k}\) for primes \(p_i\) and \(d_i > 0\). Then \(a^m = 0\) in \(\Z / n\Z\) implies \(n \mid a^m\) in \(\Z\). Thus if \(p\) is any prime divisor of \(n\), we have \(p \mid n\) implies 
         \[p \mid n * b = a^m = p_1^{d_i m} \dots p_k^{d_k m} \Rightarrow \exists i, p \mid p_i^{d_i m} \Rightarrow \exists i, p = p_i.\]
         Thus \(p\) is also a prime divisor of \(a\), and our proof is complete.
         
-        \todo \(\Z / 72\Z\).
-        \item We claim that anyu integral domain \(D\) has no nonzero nilpotent elements. Indeed, suppose \(x \in D\) in nilpotent. Let \(m \in \Z^+\) be the minimum number such that \(x^m = 0\). If \(m = 1\), then \(x = x^1 = 0\), so we're done. Otherwise, if \(m \ge 2\), then write \(x^m = x x^{m - 1} = 0\). By the minimality of \(m\), we know that \(x^{m - 1} \neq 0\). Since \(D\) is an integral domain and therefore has no nonzero zero-divisors, we must have \(x = 0\).
+        We may find the nilpotent elements of \(\Z / 72\Z\) using the above parts:
+        $$\{2 \cdot 3, 2^2 \cdot 3, 2^3 \cdot 3, 2 \cdot 3^2, 2^2 \cdot 3^2\} = \{6, 12, 24, 18, 36\}.$$
+        \item We claim that any integral domain \(D\) has no nonzero nilpotent elements. Indeed, suppose \(x \in D\) in nilpotent. Let \(m \in \Z^+\) be the minimum number such that \(x^m = 0\). If \(m = 1\), then \(x = x^1 = 0\), so we're done. Otherwise, if \(m \ge 2\), then write \(x^m = x x^{m - 1} = 0\). By the minimality of \(m\), we know that \(x^{m - 1} \neq 0\). Since \(D\) is an integral domain and therefore has no nonzero zero-divisors, we must have \(x = 0\).
         
         Now we return to the problem. Since \(F\) is a field it is also an integral domain. Then \(F\) has no nonzero nilpotent elements. Let \(f \in R\) be nilpotent. Then \(f^m = 0\) for some \(m \in Z^+\). Thus for any \(x \in X\), \(f(x)^m = 0 \Rightarrow f(x) = 0\), i.e. \(f = 0\), as desired.
     \end{enumerate}
@@ -179,9 +192,9 @@ And we're done.
 \begin{proof}
     Let \(x\) be nilpotent and \(x^m = 0\) for some minimal number \(m \in \Z^+\).
     \begin{enumerate}
-        \item Either \(x = 0\) or \(x^m = xx^{m - 1} = 0\). In the second case, the minimality of \(m\) guarentees that \(x^{m - 1} \neq 0\); thus \(x\) is a zero-divisor. 
+        \item Either \(x = 0\) or \(x^m = xx^{m - 1} = 0\). In the second case, the minimality of \(m\) guarantees that \(x^{m - 1} \neq 0\); thus \(x\) is a zero-divisor. 
          
-        \item We may rewrite \((rx)^m = r^mx^m\) by the commutativity of \(R\). Thus \((rx)^m = r^mx^m = r^m*0 = 0\), as desired.
+        \item We may rewrite \((rx)^m = r^mx^m\) because they commute in \(R\). Thus \((rx)^m = r^mx^m = r^m*0 = 0\), as desired.
         
         \item We motivate ourselves with the well-known factorization of \(1 - x^m\):
         \[1 - x^m = (1 + x)\left(\sum_{k = 0}^{m - 1}(-1)^kx^k\right).\] 
@@ -240,14 +253,29 @@ And we're done.
     \[N : I \to \Z \hspace{2mm} \text{by} \hspace{2mm} N(a + bi + cj + dk) = a^2 + b^2 + c^2 + d^2\]
     (the map \(N\) is called the \textit{norm}).
     \begin{enumerate}
-        \item Prove that \(N(\alpha) = \alpha\overline{\alpha}\) for all \(\alpha \in I\), where if \(\alpha = a + bi + cj + dk\) then \(\overline{\alpha} = a - bi - cj = dk\).
+        \item Prove that \(N(\alpha) = \alpha\overline{\alpha}\) for all \(\alpha \in I\), where if \(\alpha = a + bi + cj + dk\) then \(\overline{\alpha} = a - bi - cj - dk\).
         \item Prove that \(N(\alpha\beta) = N(\alpha)(\beta)\) for all \(\a, \b \in I\).
         \item Prove that an element of \(I\) is a unit if and only if it has norm \(+1\). Show that \(I^\times\) is isomprphic to the quaterion group of order 8.
     \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    \todo
+    We proceed with each separately:
+    \begin{enumerate}
+        \item We have $\a \overline{\a}$ is equal to:
+        $${\displaystyle {
+        \begin{alignedat}{4}
+        &aa&&+bb&&+cc&&+dd\\
+        {}+{}(&ab&&-ba&&+cd&&-dc) {i} \\
+        {}+{}(&ac&&-bd&&-ca&&+db) {j} \\
+        {}+{}(&ad&&+bc&&-cb&&-da) {k} 
+        \end{alignedat}}},$$
+        from which it is easy to see that everything cancels, leaving $a^2 + b^2 + c^2 + d^2$. Thus $N(\a) = \a \overline{\a}$.
+        \item From part (a) we know that $N(\a\b) = \a \b \overline{\a\b} = \a\b \overline{\b} \overline{\a} = \a N(\b) \overline{\a}$. But $N(\a)$ is an integer, so it commutes with $\overline{\a}$; hence we can pull it out to see that $N(\a\b) = \a N(\b) \overline{\a} = \a \overline{\a} N(\b) = N(\a) N(\b)$, as desired.
+        \item ($\Rightarrow$): If $\a \in I$ has unit norm, then $a^2 + b^2 + c^2 + d^2 = 1$. But we know that $a^2, b^2, c^2, d^2 \ge 0$ and $a, b, c, d$ are integers, so the only solutions occur when exactly one of $a, b, c, d$ is equal to $\pm 1$ and everyone else is zero. Thus there are 8 possible values of $\a$: $\pm a, \pm bi, \pm cj, \pm dk$. All of these are clearly units.
+        
+        ($\Leftarrow$): If $\a \in I$ is a unit, then its inverse can be written as $ \overline{\a} / (a^2 + b^2 + c^2 + d^2)$. The inverse must have integer coefficients, so we need $a / (a^2 + b^2 + c^2 + d^2) \in \Z$. This can only occur when $a^2 \le (a^2 + b^2 + c^2 + d^2) \le a \Rightarrow a = 0, \pm 1$. Thus we see that the only possible values of $N(\a)$ are 0 and 1. It can't be 0 because we assumed that $\a$ is a unit; hence we conclude $N(\a) = 1$.
+    \end{enumerate}
 \end{proof}
 
 \begin{theorem}[26]
@@ -255,12 +283,19 @@ And we're done.
     \begin{enumerate}
         \item Prove that \(R\) is a subring of \(K\) which contains the identity.
         \item Prove that for each nonzero element \(x \in K\) either \(x\) or \(x^{-1}\) is in \(R\). 
-        \item Prove that an element \(x\) is a unit of \(R\) if and only if \(\nu(0) = 0\).
+        \item Prove that an element \(x\) is a unit of \(R\) if and only if \(\nu(x) = 0\).
     \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    \todo
+    We proceed with each separately:
+    \begin{enumerate}
+        \item Note that $\nu(1) = \nu(1 \cdot 1) = \nu(1) + \nu(1) \Rightarrow \nu(1) = 0$. Thus the identity is in $R$.
+        \item Since we have $\nu(x) + \nu(x^{-1})\nu(xx^{-1}) = \nu(1) = 0$, either one or the other is non-negative. Thus one must be in $R$.
+        \item ($\Rightarrow$): If $\nu(x) = 0$, then $\nu(x^{-1}) = \nu(x^{-1}) + \nu(x) - \nu(x) = \nu(xx^{-1}) - \nu(x) = \nu(1) - \nu(x) = 0 - 0 = 0$. Thus $x^{-1} \in R$.
+        
+        ($\Leftarrow$): If $x$ is a unit in $R$, then $x^{-1}$ is in $R$, so $\nu(x), \nu(x^{-1}) \ge 0$. BUt we also know that $\nu(x) + \nu(x^{-1}) = 0$, so the only values they can be is $\nu(x) = \nu(x^{-1}) = 0$.
+    \end{enumerate}
 \end{proof}
 
 Exercises 3, 4, 10, 11, pp. 238-239.
@@ -323,36 +358,43 @@ Exercises 3, 4, 10, 11, pp. 238-239.
 \end{theorem}
 
 \begin{proof}
-    \todo Just apply the definitions given in the textbook.
+    Just apply the definitions given in the textbook. Note: I did the calculations on paper.
     \begin{enumerate}
         \item \(\a + \b = 6(1) + 3(1, 2) - 3(2, 3) + 14(1, 2, 3) - 7(1, 3, 2)\)
-        \item 
-        \begin{align*}
-            2\a - 3\b &= 6(1, 2) - 10 (2, 3) + 28(1, 2, 3) - 18(1) - 12(2, 3) + 21(1, 3, 2) \\
-            &= -18(1) + 6(1, 2) - 22(2, 3) + 28 (1,2,3) + 21(1, 3, 2)
-        \end{align*}
-        \item \(\a\b = \) \todo
-        \item \todo
-        \item \todo
+        \item $2\a - 3\b = -18(1) + 6(1, 2) - 22(2, 3) + 28 (1,2,3) + 21(1, 3, 2)$
+        \item \(\a\b = -108 (1) + 81(1, 2) - 21(1, 3) - 30 (2, 3) + 90(1, 2, 3)\) 
+        \item $\b\a = -108(1) + 18(1, 2) - 51(2, 3) + 63(1, 3) + 84(1, 2, 3) + 6(1, 3, 2)$
+        \item $\a^2 = 34(1) + 70(1, 2) + 42(2, 3) + 112 (1, 3) - 15(1, 2, 3) + 181 (1, 3, 2)$
     \end{enumerate}
 \end{proof}
 
 \begin{theorem}[11]
-    Repeat the precedeing exercise under the assumption that the coefficients of \(\a\) and \(\b\) are in \(\Z / 3\Z\).
+    Repeat the preceding exercise under the assumption that the coefficients of \(\a\) and \(\b\) are in \(\Z / 3\Z\).
 \end{theorem}
 
 \begin{proof}
-    \todo
+    We can just take the answers above and mod 3:
+    \begin{enumerate}
+        \item \(\a + \b = 2(1, 2, 3) + 2(1, 3, 2)\)
+        \item $2\a - 3\b = (1, 2, 3) + (1, 3, 2)$
+        \item \(\a\b = 0\) 
+        \item $\b\a = 0$
+        \item $\a^2 = 1(1) + 1(1, 2) + 1 (1, 3) + 1 (1, 3, 2)$
+    \end{enumerate}
 \end{proof}
 
 Exercises 15, 17, 18, 19, 24, 26, pp. 247-251.
 
 \begin{theorem}[15]
-    Prove that the map \(\mathcal P(X) \to R\) defined by \(A \mapsto \chi_A\) is a ring homomorphism, where \(\chi_A\) is the \textit{characteristic function} of \(A\). 
+    Prove that the map \(\varphi : \mathcal P(X) \to R\) defined by \(A \mapsto \chi_A\) is a ring homomorphism, where \(\chi_A\) is the \textit{characteristic function} of \(A\). 
 \end{theorem}
 
 \begin{proof}
-    \todo 
+    Notice that for any sets $A, B \subseteq X$, we have $\{x \mid x \in A \text{ xor } x \in B\}$ equal to $(A - B) \cap (B - A)$. Rewrite $\{x \mid x \in A \text{ xor } x \in B\} = \{x \mid \chi_A(x) = 1 \text{ xor } \chi_B(x) = 1\}$, and notice that in $\Z / 2 \Z$, we can replace the xor with $+$, so $$(A - B) \cap (B - A) = \{x \mid \chi_A(x) + \chi_B(x) = 1\} \Rightarrow \varphi(A + B) = \varphi(A) + \varphi(B).$$
+    
+    For multiplication, we have $AB = A \cap B = \{x \mid \chi_A(x) = 1 \land \chi_B(x) = 1\}$. But $\chi_A(x) = 1 \land \chi_B(x) = 1 \iff \chi_A(x)\chi_B(x) = 1$, thus $\varphi(AB) = \varphi(A \varphi(B)$. 
+    
+    This proves that $\varphi$ is a ring homomorphism, as desired. 
 \end{proof}
 
 \begin{theorem}[17]
@@ -439,11 +481,11 @@ Exercises 15, 17, 18, 19, 24, 26, pp. 247-251.
     We proceed with each separately:
     \begin{enumerate}
         \item Denote the map by \(\varphi\). We have \(\ker \varphi \le \Z\), and the subgroup structure of \(Z\) gives us \(\ker \varphi = n \Z\) for some \(n \in \mathbb N\). Since \(n \Z\) is cyclic, we only need to look at where the generator, \(n\), maps to. We must have \(\varphi(n) = 0\) and furthermore \(n\) is the minimal number for which this occurs. Hence \(\varphi(n) = n1_R = 0\) implies \(\text{char}(R) = n\).
-        \item There is no \(n \in \mathbb N\) such that \(n1_{\mathbb Q} = n = 0\). Thus \(\text{char}(\mathbb Q) = 0\). Similarily, the variable \(x\) doesn't affect \(n1_{\Z[x]}\), so \(\text{char}(\Z[x]) = 0\).
+        \item There is no \(n \in \mathbb N\) such that \(n1_{\mathbb Q} = n = 0\). Thus \(\text{char}(\mathbb Q) = 0\). Similarly, the variable \(x\) doesn't affect \(n1_{\Z[x]}\), so \(\text{char}(\Z[x]) = 0\).
         
         For \(\Z / n \Z [x]\), we have \(n1 = 0\) in \(\Z / n\Z\), so the same holds in the polynomial ring. Thus \(\text{char}(\Z / n \Z[x]) = n\).
 
-        \item As \(R\) is a communitative ring, we have enough structure to apply the binomal theorem:
+        \item As \(R\) is a commutative ring, we have enough structure to apply the binomial theorem:
         \[(a + b)^p = a^p + \binom{p}{1}a^{p - 1}b + \binom{p}{2}a^{p - 2}b^2 + \dots + \binom{p}{p - 1}ab^{p - 1} + b^p.\] 
         If \(k \neq 0, p\), consider \(\binom{p}{k} = \frac{p!}{k!(p - k)!}\). The factors in the denominator \(k!(p - k)!\) are strictly less than \(p\), and thus do not divide \(p\). Thus \(p! / k!(p - k)!\) must have a factor of \(p\). We have \(\text{char}(R) = p\), so all the terms but the first and last of \((a + b)^p\) are equal to zero. Thus \((a + b)^p = a^p + b^p\), as desired.
     \end{enumerate}

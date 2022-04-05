@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{Homework \printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{10}
+\mathclass{425A}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+
+\begin{document}
+
+Chapter 6, Problems 1, 2, 4 and 9
+
+\begin{theorem}[1]
+    Suppose \(\a\) increases on \([a, b]\), \(a \le x_0 \le b\), \(\a\) is continuous at \(x_0\), \(f(x_0) = 1\), and \(f(x) = 0\) if \(x \neq x_0\). Prove that \(f \in R(\a)\) and that \(\int f d\a = 0\).
+\end{theorem}
+
+\begin{proof}
+    Let \(\e > 0\). Because \(\a\) is continuous, we may find \(\d > 0\) such that \(|x - x_0| < \d\) implies \(|\a(x) - \a(x_0)| < \e\). Consider any partition \(a = t_0 < t_1 < \dots < t_n = b\) with \(n \ge 2\) such that \(t_{i} - t_{i - 1} < \d / 2\) for all \(i\). Then there exists an index \(i\) such that \(t_{i - 1} < x_0 < t_{i}\). For any choice of \(t_1^*, \dots, t_n^*\), we have 
+    \begin{align*}
+        \bigabs{\sum_{j = 1}^n f(t_j^*)(\a(t_j) - \a(t_{j - 1}))} &\le \abs{f(t_i^*)}\abs{\a(t_{i + 1}) - \a(t_{i})} \\
+        &\le \abs{\a(t_{i + 1}) - \a(t_{i})} \\
+        &\le \e.
+    \end{align*}
+    (Actually there is some ickiness when \(t_i = x_0\), but this has no real effect the computation.) By definition of the Riemann-Stieltjes integral, this means that \(f \in \mathcal R(\a)\) and \(\int f d\a = 0\).
+\end{proof}
+
+\begin{theorem}[2]
+    Suppose \(f \ge 0\), \(f\) is continuous on \([a, b]\) and \(\int_a^b f(x)dx = 0\). Prove that \(f(x) = 0\) for all \(x \in [a, b]\). (Compare this with Exercise 1.)
+\end{theorem}
+
+\begin{proof}
+    We prove the contrapositive. Suppose there is some \(x_0\) such that \(f(x_0) > 0\); we want to show that \(\int_a^b f(x)dx > 0\). 
+
+    Set \(\e = \frac{f(x_0)}{2} > 0\). The continuity of \(f\) gives us some \(\d > 0\) such that \(\abs{f(x) - f(x_0)} < \frac{f(x_0)}{2} = \e\) if \(\abs{x - x_0} < \d\). Let \(\ell = \min(\d, \max(x_0 - a, b - x_0)\) and note that \(\ell > 0\). Let \(I\) be the interval \([x_0 - \ell, x_0]\) if it is contained in \([a, b]\) and \([x_0, x_0 + \ell]\) otherwise. (These are all just technical details to fit the right interval in.) In any case, we have \(f(x) \ge \frac{f(x_0)}{2} = \e\) for all \(x \in I\). Now consider the function
+    \[f'(x) = \begin{cases}
+        \e & x \in I \\
+        0 & x \in [a, b] \setminus I
+    \end{cases}\]
+    which is continuous on \([a, b]\) except at two points, so it is Riemann integrable. At the same time we have \(f(x) \ge f'(x)\) for all \(x \in [a, b]\), so 
+    \[\int_a^b f(x)dx \ge \int_a^b f'(x)dx = \int_{x \in I} \e dx = \ell \e > 0.\]
+    This completes the proof. Note here, compared to Exercise 1, the continuity of \(f\) made a key difference.
+\end{proof}
+
+\begin{theorem}[4]
+    If \(f(x) = 0\) for all irrational \(x\), \(f(x) = 1\) for all rational \(x\), prove that \(f \notin \mathcal R\) on \([a, b]\) for any \(a < b\).
+\end{theorem}
+
+\begin{proof}
+    Let \(a < b\) and let \(a = t_0 < t_1 < \dots < t_n = b\) be any partition of \([a, b]\). Since both the rationals and irrationals are dense in \(\R\), we can also find \(t_1^*, \dots, t_n^*\) such that they are all either rational or irrational. With these two choices we will have 
+    \[\bigabs{\sum_{i = 1}^n f(t_i^*)(t_i - t_{i - 1})} = b - a \hspace*{5mm} \text{or} \hspace*{5mm} \bigabs{\sum_{i = 1}^n f(t_i^*)(t_i - t_{i - 1})} = 0.\]
+    This holds for any \(a < b\) and any partition, so the upper Riemann sum is \(b - a\) while the lower Riemann sum is \(0\). These do not match so \(f(x)\) is not Riemann integrable.
+\end{proof}
+
+\begin{theorem}[9]
+    Show that integration by parts can sometimes be applied to the ``improper'' integrals defined in Exercises 7 and 8. (State appropriate hypotheses, formulate a theorem, and prove it.) For instance show that 
+    \[\int_0^\infty \frac{\cos x}{1 + x}dx = \int_0^\infty \frac{\sin x}{(1 + x)^2}dx.\]
+    Show that one of these integrals converges \textit{absolutely}, but that the other does not.
+\end{theorem}
+
+\begin{prop}
+    Let \(f(x)\) and \(g(x)\) be continuously differentiable functions defined on \([a,  \infty)\). If \(\lim_{x \to \infty} f(x)g(x)\) exists and \(\int_a^\infty f(x)g'(x)dx\) converges, then \(\int_a^\infty f'(x)g(x)dx\) converges. 
+\end{prop}
+
+\begin{proof}
+    Let \(b > a\). Applying the normal integration by parts gives 
+    \[\int_a^b f'(x)g(x) dx = [f(b)g(b) - f(a)g(a)] - \int_a^b f(x)g'(x) dx.\]
+    In the limit, our hypotheses guarantee that the RHS is well defined. Thus the LHS also exists and is well defined, as desired.
+\end{proof}
+
+So now let \(f(x) = \sin x\) and \(g(x) = \frac{1}{1 + x}\). Then \(f'(x) = \cos x\) and \(g'(x) = -\frac{1}{(1 + x)^2}\). Since \[\bigabs{\frac{\sin x}{(1 + x)^2}}\le \frac{1}{x^2},\]
+we know that \(\int_0^\infty f(x)g'(x)dx\) converges absolutely; and \(\lim_{x \to \infty} f(x)g(x) = 0\). So indeed, 
+\[\int_0^\infty \frac{\cos x}{1 + x}dx = \int_0^\infty \frac{\sin x}{(1 + x)^2}dx.\]
+
+\end{document}

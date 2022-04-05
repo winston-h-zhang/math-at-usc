@@ -86,6 +86,7 @@
 \renewcommand{\a}{\alpha}
 \renewcommand{\b}{\beta}
 \newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathbb F}
 \renewcommand{\bf}{\mathbf}
 \renewcommand{\implies}{\Rightarrow}
 \newcommand{\coimplies}{\Leftarrow}
@@ -140,11 +141,44 @@ Let \(R\) be a ring with identity \(1 \neq 0\).
 \end{proof}
 
 \begin{theorem}[14]
-    \todo
+    Assume \(R\) is commutative. Let \(x\) be an indeterminate, let \(f(x)\) be a monic polynomial in \(R[x]\) of degree \(n \ge 1\) and use the bar notation to denote passage to the passage to the quotient ring \(R[x]/(f(x))\).
+    \begin{enumerate}
+        \item Show that every element of \(R[x]/(f(x))\) is of the form \(\overline{p(x)}\) for some polynomial \(p(x) \in R[x]\) of degree less than \(n\).
+        \item Prove that if \(p(x)\) and \(q(x)\) are distinct polynomials in \(R[x]\) which are both of degree less than \(n\), then \(\overline{p(x)} \neq \overline{q(x)}\).
+        \item If \(f(x) = a(x)b(x)\) where both \(a(x)\) and \(b(x)\) have degree less than \(n\), prove that \(\overline{a(x)}\) is a zero divisor in \(R[x]/(f(x))\).
+        \item If \(f(x) = x^n - a\) for some nilpotent element \(a \in R\), prove that \(\overline{x}\) is nilpotent in \(R[x]/(f(x))\).
+        \item Let \(p\) be prime, assume \(R = \F_p\) and \(f(x) = x^p - a\) for some \(a \in \F_p\). Prove that \(\overline{x - a}\) is nilpotent in \(R[x]/(f(x))\).
+    \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    \todo
+    We proceed with each part separately:
+    \begin{enumerate}
+        \item We proceed by induction on the degree to show that for any \(q(x)\in R[x]\) we have \(\overline{q(x)} = \overline{p(x)}\) for some \(p(x)\) of degree less than \(n\).
+        
+        Consider the base case \(m < n\), then there is nothing to prove.
+
+        Now assume for the sake of induction that for some \(k \ge n\) all polynomials \(r(x) \in R[x]\) with \(\deg r = k\) satisfy \(\overline{r(x)} = \overline{p(x)}\) for some \(p(x)\) of degree less than \(n\).
+
+        Let \(q(x) = a_{k + 1} x^{k + 1} + a_k x^k + \cdots + a_1 x + a_0\) be any polynomial of degree \(k + 1\). If \(f(x) = x^n + b_{n - 1} x^{n - 1} + \cdots + b_0\). Notice that we have the relation 
+        \[\overline{x^n} = \overline{-(b_{n - 1} x^{n - 1} + \cdots + b_0)}.\]
+        Hence we may erase the leading coefficient of \(q(x)\):
+        \begin{align*}
+            \overline{q(x)} &= \overline{a_{k + 1} x^{k + 1} + a_k x^k + \cdots + a_1 x + a_0} \\
+            &= \overline{a_{k + 1} x^{k + 1}} + \overline{a_k x^k + \cdots + a_1 x + a_0} \\
+            &= \overline{x^n}\left(\overline{a_{k + 1} x^{k + 1 - n}}\right) + \overline{a_k x^k + \cdots + a_1 x + a_0} \\
+            &= \left(\overline{-(b_{n - 1} x^{n - 1} + \cdots + b_0)}\right)\left(\overline{a_{k + 1} x^{k + 1 - n}}\right) + \overline{a_k x^k + \cdots + a_1 x + a_0} \\
+            &= -\left(\overline{a_{k + 1}b_{n - 1} x^{n - 1}x^{k + 1 - n} + \cdots + a_{k + 1}b_0x^{k + 1 - n}}\right) + \overline{a_k x^k + \cdots + a_1 x + a_0} \\
+            &= -\overline{a_{k + 1}b_{n - 1} x^{k} + \cdots + a_{k + 1}b_0x^{k + 1 - n}} + \overline{a_k x^k + \cdots + a_1 x + a_0}.
+        \end{align*}
+        Hence we see that \(\overline{q(x)} = \overline{r(x)}\) for some polynomial \(r(x)\) of degree \(k\)! The induction hypothesis states that \(\overline{q(x)} = \overline{r(x)} = \overline{p(x)}\) for some \(p(x)\) of degree less than \(n\). This completes the induction and we are done.
+        \item We have \(\deg(p - q) < n\). Thus \(p - q \notin (f(x)) \Rightarrow \overline{p - q} \neq \overline{0}\). Hence \(\overline{p(x)} \neq \overline{q(x)}\).
+        \item Since both \(\deg a(x), \deg b(x) < n\), we have \(\overline{a(x)}, \overline{b(x)} \neq 0\). But clearly we also have \(\overline{a(x)}\overline{b(x)} = \overline{a(x)b(x)} = \overline{f(x)} = \overline{0}\). Thus \(\overline{a(x)}\) is a zero divisor of \(R[x]/(f(x))\).
+        \item We have: \[f(x) = x^n - a \Rightarrow \overline{0} = \overline{x^n - a} \Rightarrow \overline{x^n} = \overline{a}.\]
+        But \(a\) is nilpotent, so there is some \(m \in \Z^+\) such that \(a^m = 0\). Thus, \[\overline{0} = \overline{a^m} = \overline{a}^m = \overline{x^n}^m = \overline{x}^{mn}.\]
+        So indeed \(\overline{x}\) is nilpotent as well.
+        \item From Exercise 26 from Section 3 we know that \((x - a)^p = x^p + (-a)^p\). Note that \(\F_p^\times\) is a group of order \(p - 1\), so we have \((-a)^{p - 1} = 1\). Thus \((x - a)^p = x^p - a\). But this exactly shows that \(\overline{(x - a)^p} = \overline{x^p - a} = \overline{0}\), as desired!
+    \end{enumerate}
 \end{proof}
 
 \begin{theorem}[16]
@@ -201,14 +235,23 @@ Let \(R\) be a ring with identity \(1 \neq 0\).
 \end{theorem}
 
 \begin{proof}
-    \todo
+    We proceed with each part separately:
     \begin{enumerate}
-        \item \todo Let \(P\) be a prime ideal of \(R\). We already know that \(P \le \rad P\), so it suffices to only show that \(\rad P \le P\). Let \(r \in \rad P\) and \(n \in \Z^+\) such that \(r^n \in P\). 
+        \item Let \(P\) be a prime ideal of \(R\). We already know that \(P \le \rad P\), so it suffices to only show that \(\rad P \le P\). Let \(r \in \rad P\) and \(n \in \Z^+\) such that \(r^n \in P\). 
         
         We proceed by induction to prove that \(r^n \in P \Rightarrow r \in P\) for all \(n \in \Z^+\). The base case \(n = 1\) is trivial: \(r \in P \Rightarrow r \in P\). Now assume for that sake of induction that \(r^k \in P \Rightarrow r \in P\) is true for some \(k \in \Z^+\). Then consider \(r^{k + 1} = rr^k\in P\). Since \(P\) is prime, we have either \(r \in P\), in which case we are done, or \(r^k \in P\), in which case we may apply our IH to conclude that \(r \in P\). This completes the induction. 
 
         Therefore we see that \(r^n \in P \Rightarrow r \in P\), so \(\rad P \le P\). Hence \(\rad P = P\) and \(P\) is a radical ideal.
-        \item \todo 
+        
+        \item Recall the following theorem from homework 7, problem 13 (b):
+        
+        \textit{If \(a \in \Z\) is an integer, the element \(\overline{a} \in \Z / n \Z\) is nilpotent if and only if every prime divisor of \(n\) is also a prime divisor of \(a\).}
+
+        Note that trying to find the radical of \(0\) is equivalent to finding all elements \(r \in R\) such that \(r^n = 0\) for some \(n \in \Z^+\), i.e. the nilpotent elements of \(R\). Thus here we have \(a \in \rad 0\) if and only if every prime divisor of \(n\) is also a prime divisor of \(a\).
+
+        (\(\Rightarrow\)): If \(n = p_1 \cdots p_k\) is the product of distinct primes, and each of those primes must divide \(a\), then \(\forall i, p_i \mid a \Rightarrow p_1 \cdots p_k \mid a \Rightarrow n \mid a\). Thus \(\overline{a} = \overline{0}\); we conclude that \(\rad 0 = 0\) is a radical ideal. 
+
+        (\(\Leftarrow\)): We show that contrapositive. Suppose \(n\) is not the product of distinct primes, i.e. there is some prime \(p\) such that \(p^2 \mid n\). Then \(a = p\cdot p_1' \cdots p_k'\), where \(p_1', \cdots, p_k'\) are all the other prime factors of \(n\) other than \(p\). But \(p^2\) does not divide \(a\) so \(n \nmid a\); hence \(a \neq 0 \in \rad 0\). We conclude that \(\rad 0\) is not a radical ideal, as desired.
     \end{enumerate}
 \end{proof}
 

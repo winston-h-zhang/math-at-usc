@@ -40,6 +40,7 @@
 \newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
 \theoremstyle{named}
 \newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
 
 %% DO NOT ALTER THE ABOVE LINES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,6 +83,36 @@
 \begin{document}
 
 Chapter 6, \# 9, 10 \& 13
+
+\begin{theorem}[9]
+    Show that integration by parts can sometimes be applied to the ``improper'' integrals defined in Exercises 7 and 8. (State appropriate hypotheses, formulate a theorem, and prove it.) For instance show that 
+    \[\int_0^\infty \frac{\cos x}{1 + x}dx = \int_0^\infty \frac{\sin x}{(1 + x)^2}dx.\]
+    Show that one of these integrals converges \textit{absolutely}, but that the other does not.
+\end{theorem}
+
+\begin{prop}
+    Let \(f(x)\) and \(g(x)\) be continuously differentiable functions defined on \([a,  \infty)\). If \(\lim_{x \to \infty} f(x)g(x)\) exists and \(\int_a^\infty f(x)g'(x)dx\) converges, then \(\int_a^\infty f'(x)g(x)dx\) converges. 
+\end{prop}
+
+\begin{proof}
+    Let \(b > a\). Applying the normal integration by parts gives 
+    \[\int_a^b f'(x)g(x) dx = [f(b)g(b) - f(a)g(a)] - \int_a^b f(x)g'(x) dx.\]
+    In the limit, our hypotheses guarantee that the RHS is well defined. Thus the LHS also exists and is well defined, as desired.
+\end{proof}
+
+So now let \(f(x) = \sin x\) and \(g(x) = \frac{1}{1 + x}\). Then \(f'(x) = \cos x\) and \(g'(x) = -\frac{1}{(1 + x)^2}\). Since \[\bigabs{\frac{\sin x}{(1 + x)^2}}\le \frac{1}{x^2},\]
+we know that \(\int_0^\infty f(x)g'(x)dx\) converges absolutely; and \(\lim_{x \to \infty} f(x)g(x) = 0\). So indeed, 
+\[\int_0^\infty \frac{\cos x}{1 + x}dx = \int_0^\infty \frac{\sin x}{(1 + x)^2}dx.\]
+
+To see that \(\int_0^\infty \frac{\cos x}{1 + x}dx\) does not converge absolutely, we need to show that 
+\[\int_0^\infty \frac{\abs{\cos x}}{1 + x}dx\] diverges. Indeed, Consider breaking up the integral onto each interval \([\pi n, \pi (n + 1)\), so that we may compare it to the harmonic series:
+\begin{align*}
+    \int_0^\infty \frac{\abs{\cos x}}{1 + x}dx &= \sum_{n = 0}^\infty \left(\int_{\pi n}^{\pi (n + 1)} \frac{\abs{\cos x}}{1 + x}dx\right) \\
+    &\ge \sum_{n = 0}^\infty \left(\int_{\pi n}^{\pi (n + 1)} \frac{\abs{\cos x}}{1 + \pi (n + 1)}dx\right) \\
+    &= \sum_{n = 0}^\infty \left(\frac{2}{1 + \pi (n + 1)}\right) \\
+    &\sim \sum_{n = 0}^\infty \frac 1 n.
+\end{align*}
+And we're done!
 
 \begin{theorem}[10]
     Let \(p\) and \(q\) be positive real numbers such that 

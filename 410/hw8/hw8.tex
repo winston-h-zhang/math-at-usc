@@ -298,9 +298,18 @@ Exercises 1, 2, 5 pp. 267-269.
 \end{theorem}
 
 \begin{proof}
-    \todo
+    We proceed with each:
+    \begin{enumerate}
+        \item If \((n_i, n_j) = 1\) then there are integers \(x, y\) such that \(xn_i + yn_j = 1\); thus we know that \((n_i, n_j) = \Z\) and that \((n_i)\) and \((n_j)\) are comaximal for any \(i\) and \(j\). Hence the Chinese Remainder Theorem gives that 
+        \[\Z / (n_1) \times \cdots \times \Z / (n_k) \cong \Z / (n_1 \cdots n_k) = \Z / (n).\]
+        This exactly means that there is a unique \(x \in \Z / (n)\) which solves the system. 
+        \item Since \(x\) is unique, it suffices to show that \(x\) satisfies the above equivalences. For any \(i\) and \(j \neq i\), \(n_i \mid n_j'\), so 
+        \[x \equiv \sum_{j = 1}^k a_j t_j n_j' \equiv a_i t_i n_i' \equiv a_i \mod{n_i},\]
+        which means we're done.
+        \item I do the computation elsewhere and won't include it since it's just very mechanical and boring. We have \(x \equiv 3601 \mod 16200\) and \(y \equiv 8269 \mod 16200\).
+    \end{enumerate}
 \end{proof}
 
-More to be added...? \todo
+More to be added...?
 
 \end{document}

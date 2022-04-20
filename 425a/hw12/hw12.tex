@@ -59,7 +59,7 @@
 %% Enter your real name here
 %% Example: \realname{David Patrick}
 \realname{Hanting Zhang}
-\pset{11}
+\pset{12}
 \mathclass{425A}
 
 \renewcommand{\a}{\alpha}
@@ -89,6 +89,26 @@ Chapter 7; \# 4 and 8 (pg. 175)
     For what values of \(x\) does the series converge absolutely? On what interval does it converge uniformly? On what interval does it fail to converge uniformly? Is \(f\) continuous whenever it converges? If \(f\) bounded?
 \end{theorem}
 
+\begin{proof}
+    The series converges for all real \(x\) except for \(x = 0\) and \(x = -\frac{1}{n^2}\) for \(n > 0\). For \(x = 0\), we have \(1 + 1 + \dots\), which diverges. For \(x = -\frac{1}{n^2}\), the \(n\)th term of the series is undefined. For all other \(x\), the series has the same growth rate as \(\sum \frac{1}{n^2}\), so it converges. 
+
+    The first reaction is that all intervals not containing \(X = \{0, -1, -\frac{1}{4}, \dots\}\) should be correct. However, the problem with this is that if our interval has a limit point in \(X\), then the neighbourhoods around such a limit point will not be bounded, and hence fail the Weierstrass M-test. 
+    The way to amend these limit points is to simply take closed intervals instead; hence we claim that \(f\) converges uniformly for any interval of the form \([a, b]\) disjoint from \(X\). (This includes intervals of the form \([a, \infty)\) and \((-\infty, b]\).) 
+    Indeed, \todo
+
+    From what we just talked about, \(f\) will fail to converge uniformly on any interval that has a limit point in \(X\). Explicitly, suppose \(a = -\frac{1}{n^2} \in X\) is a limit point of a considered interval \(I\). Let \(\e = 1\) and \(\d > 0\), then 
+    \begin{align*}
+        \bigabs{f(x) - f(x + \d)} &= \bigabs{\frac{1}{1 + n^2x} - \frac{1}{1 + n^2(x + \d)}} \\
+        &= \bigabs{\frac{n^2\d}{(1+n^2 x) (1 + n^2 (x + \d))}} \\
+        &\ge \frac{n^2 \d}{(1+n^2 \abs{x}) (1 + n^2 (\abs{x} + \d))} \\
+        &\ge 
+    \end{align*}
+
+    Uniform convergence show that the limit \(f\) is coninuous on any of the intervals it converges uniformly on. But the union of all intervals of the form \([a, b]\) disjoint from \(X\) is just \(\R - X\). Hence \(f\) is continuous whenever it is defined. 
+
+    Since \(f\) diverges around all the points of \(X\), \(f\) is clearly not bounded. 
+\end{proof}
+
 \begin{theorem}[8]
     if \[I(x) = \begin{cases}
         0 & (x \le 0), \\
@@ -96,5 +116,11 @@ Chapter 7; \# 4 and 8 (pg. 175)
     \end{cases}\]
     if \(\{x_n\}\) is a sequence of distinct points of \((a, b)\), and if \(\sum \abs{c_n}\) converges, prove that the series \[f(x) = \sum_{n = 1}^\infty c_n I(x - x_n) \hspace*{5mm} (a \le x \le b)\] converges uniformly, and that \(f\) is continuous for every \(x \neq x_n\).
 \end{theorem}
+
+\begin{proof}
+    The first part follows immediately from Theorem 7.10 in the text; let \(f_n = c_n I(x - x_n)\), then \(|f_n| \le \abs{c_n}\) and \(\sum \abs{c_n}\) converges, so \(\sum f_n\) converges, as desired.
+
+    Furthermore, \(f(x)\) is pointwise continuous at \(x\) when each \(f_n(x)\) is continuous at \(x\); hence \(f(x)\) is at least continuous for all \(x \neq x_n\).
+\end{proof}
 
 \end{document}

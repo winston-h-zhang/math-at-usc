@@ -94,6 +94,8 @@
 \newcommand{\rad}{\text{rad}\hspace*{0.7mm}}
 \renewcommand{\em}{\varnothing}
 \renewcommand{\mod}{\text{ mod }}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
 
 \begin{document}
 
@@ -103,9 +105,40 @@ Exercises 3, 7, 8, 10 pp. 277-279.
     Let \(R\) be a Euclidean Domain. Let \(m\) be the minimum integer in the set of norms of nonzero elements of \(R\). Prove that every nonzero element of \(R\) of norm \(m\) is a unit. Deduce that a nonzero element of norm zero (if such a element exists) is a unit.
 \end{theorem}
 
+\begin{proof}
+    Suppose \(a \in R\) and \(N(a) = m\). Divide 1 by \(a\) using the Euclidean division to obtain \(1 = qa + r\), where \(N(r) = 0\) or \(N(r) < N(a)\). By the minimality of \(m\), only the first case is possible. Thus \(r = 0\), and we see that \(1 = qa\); hence \(a\) is a unit.
+    
+    Since \(0\) is the minimum natural number, if there were a nonzero element \(a \in R\) such that \(N(a) = 0\), then by the above argument it would be a unit.
+\end{proof}
+
 \begin{theorem}[7]
-    Find a generator for the ideal \((85, 1 + 13i)\) in \(\Z[i]\), i.e., a greatest common divisor of 85 and \(1 = 13i\), by the Euclidean Algorithm. Do the same for the ideal \((47 - 13i, 53 + 56i)\).
+    Find a generator for the ideal \((85, 1 + 13i)\) in \(\Z[i]\), i.e., a greatest common divisor of 85 and \(1 + 13i\), by the Euclidean Algorithm. Do the same for the ideal \((47 - 13i, 53 + 56i)\).
 \end{theorem}
+
+\begin{proof}
+    Just compute:
+
+    For \((85, 1 + 13i)\):
+    \begin{align*}
+        \frac{85}{1 + 13i} &= \frac{1 - 13i}{2} \Rightarrow p = 0, q = -6 \\
+        85 &= -6i * (1 + 13i) + r = 78 + -6i + r \Rightarrow r = 7 + 6i \\
+        \frac{1 + 13i}{7 + 6i} &= \frac{(1 + 13i) (7 - 6i)}{85} = \frac{7 + 91i - 6i + 78}{85} = \frac{85 + 85i}{85} = 1 + i 
+    \end{align*}
+    Hence \((85, 1 + 13i) = (1 + i)\).
+
+    For \((47 - 13i, 53 + 56i)\): 
+    Let \(a = 47 - 13i, b = 53 + 56i\). Then \(N(a) = 2378, N(b) = 5945\), so
+    \begin{align*}
+        \frac{b}{a} &= \frac{53 + 56i}{47 - 13i} = \frac{(53 + 56i) (47 + 13i)}{2378} = \frac{1763 + 3321i}{2378} \\
+        &\Rightarrow p = 1, q = 1 \Rightarrow b = (1 + i) a + r \\
+        r &= (53 + 56i) - (1 + i)(47 - 13i) = -7 + 22i, N(r) = 533 \\
+        \frac{a}{r} &= \frac{47 - 13i}{-7 + 22i} = -\frac{(47 - 13i) (7 + 22i)}{533} = -\frac{615 + 943i}{533} \\
+        &\Rightarrow p = -1, q = -2 \Rightarrow a = -(1 + 2i) r + r_1 \\
+        r_1 &= (47 - 13i) + (1 + 2i)*(-7 + 22i) = -4 - 5i, N(r_1) = 41 \\
+        \frac{r}{r_1} &= \frac{-7 + 22i}{-4-5i} = \frac{(7 - 22i) (4 - 5i)}{41} = - \frac{82 + 123i}{41} = -2 -3i
+    \end{align*}
+    Hence \((47 - 13i, 53 + 56i) = (-2 - 3i) = (2 + 3i)\).
+\end{proof}
 
 \begin{theorem}[8]
     Let \(F = \Q(\sqrt{D})\) be a quadratic field with associated quadratic integer ring \(\mathcal O\) and field norm \(N\) as in Section 7.1.
@@ -115,9 +148,36 @@ Exercises 3, 7, 8, 10 pp. 277-279.
     \end{enumerate}
 \end{theorem}
 
+\begin{proof}
+    We proceed with each separately.
+    \begin{enumerate}
+        \item For this proof we follow the same steps as in the text. Let \(F = \Q(\sqrt[]{D})\) and \(\mathcal O_F\) be its field of integers. Let \(\a, \b \in \mathcal O_F\) where \(\a = a + b\sqrt D\) and \(\b = c + d \sqrt D\). Now as in the text, we choose \(p + qi\) such that the norm of the distance between \(p + qi\) and \(\a / \b\) is minimized. (In the case where \(D = -1\), this just means choosing the closest integer values for \(p\) and \(q\). Then we have \(N(\theta) = N(\a - (p + qi)\b) \le 1/2\).)
+        
+        In the case where \(D = -2\), not much changes; the imaginary part of \(\theta\) is bounded instead by \(\sqrt[]{2}/2\). Hence \(N(\theta) = N(\a - (p + qi)\b) \le 1/4 + 1/2 = 3/4\).
+
+        Now we consider the cases \(D = -3, -7, -11\). These all satisfy \(D \not\equiv 3 \mod 4\), so the integers are given by \(a + \frac{1 + \sqrt{D}}{2}b\). Again, we want to find the minimum distance between \(\a/\b\) and some point in \(\mathcal O_F\). From a geometric point of view, \(\mathcal O_F\) looks like a lattice on the complex plane. Specifically, \(\mathcal O_F\) looks like a triangular lattice because of the \(\frac{1 + \sqrt{D}}{2}\) terms we use to generate our elements. (This is opposed to \(\Z[i]\), whose lattice just looks square.) 
+
+        From a geometric point of view, then, we are trying to find minimum distance between a tiling of triangles and a point. This is equivalent to finding the minimum distance between a point and the vertices of the triangle region it sits in. And this distance is bounded by the circumradius, the longest distance any point can have from all three vertices at the same time. 
+
+        It is a well-known formula that the circumradius of a triangle of given by \(abc / 4 A\), where \(a, b, c\) are the sides of the triangle and \(A\) is the area. In our case, the triangle has side lengths \(1, \sqrt{1 + \abs{D}} / 2, \sqrt{1 + \abs{D}} / 2\) and area \(\frac 1 2 (1)(\sqrt{\abs{D}} / 2)\). Hence \(R = (1 + \abs{D}) / 4 \sqrt{D}\).
+
+        Returning back to the problem, this means that the minimum norm between \(\a/\b\) and some element of \(\mathcal O_F\) is bounded by \((1 + \abs{D})^2 / 16 \abs{D}\). For \(D = -3, -7, -11\), this value is less than 1. Hence again \(N(\theta) < 1\).
+
+        Putting all the cases together, we have \(\a = (p + qi)\b + \gamma\) for some well chose \(p + qi\) such that \(\gamma = \b \theta\). Since \(N(\theta) < 1\), we have \(N(\gamma) = N(\b)N(\theta) < N(\b)\). And so we're done. 
+
+        \item Again we follow the text. Note that the minimum values of \(N\) on \(R\) are \(1\) and \(4\), given by \(\pm 1\) and \(\pm 2\), since \(43/4, 67/4, 163/4 \ge 5\). 
+        
+        Choosing \(x = 2\), we must have \(u\) must divide \(2\) or \(3\). As in the text, we deduce that \(u = \pm 2\) or \(u = \pm 3\). Then it is clear that \(u\) does not divide \(\frac{1 + \sqrt{D}}{2}\). Hence there are no universal side divisors, and \(R\) is not an Euclidean domain. 
+    \end{enumerate}
+\end{proof}
+
 \begin{theorem}[10]
     Prove that the quotient ring \(\Z[i]/I\) is finite for any nonzero ideal \(I\) of \(\Z[i]\).
 \end{theorem}
+
+\begin{proof}
+    Since \(\Z[i]\) is a Euclidean domain, it is a PID; thus \(I = (\a)\) for some nonzero \(\a\). Using the Euclidean division, every element \(b \in \Z[i]\) can be written as \(q\a + r\), and hence all the ideals \((\a) + r\) are represented \(\{r \mid N(r) < N(\a)\}\). There are only a finite amount of integer solutions to \(a^2 + b^2 < N(\a)\), so there are only a finite number of cosets of the form \((\a) + r\). Hence \(\Z[i] / I\) is finite. 
+\end{proof}
 
 Exercises 1, 3, 4, 5, 6 pp. 282-283.
 
@@ -125,17 +185,31 @@ Exercises 1, 3, 4, 5, 6 pp. 282-283.
     Prove that in a Principal Ideal Domain two ideals \((a)\) and \((b)\) are comaximal if and only if a greatest common divisor of \(a\) and \(b\) is 1 (in which case \(a\) and \(b\) are said to be \textit{coprime} or \textit{relatively prime}.)
 \end{theorem}
 
+\begin{proof}
+    We have \((a)\) and \((b)\) are comaximal iff \((a) + (b) = R = (1)\), which occurs iff the gcd of \(a\) and \(b\) is \(1\). So we're done.
+\end{proof}
+
 \begin{theorem}[3]
-    Prove that a quotient of a P.I.D. by a prime ideal is once again a P.I.D..
+    Prove that a quotient of a PID by a prime ideal is once again a PID.
 \end{theorem}
 
+\begin{proof}
+    Let \(R\) be a PID and \(P\) be a prime ideal of \(R\). If \(P = 0\), then \(R / P \cong R\), which is a PID. Otherwise, \(P\) must be a maximal ideal of \(R\), since every nonzero prime ideal in a PID is a maximal ideal. Then \(R / P\) is a field, and hence it is trivially a PID as well.
+\end{proof}
+
 \begin{theorem}[4]
-    Let \(R\) be an integral domain. Prove that if the following two conditions hold then \(R\) is a P.I.D.:
+    Let \(R\) be an integral domain. Prove that if the following two conditions hold then \(R\) is a PID:
     \begin{enumerate}
         \item [(i)] any two nonzero elements \(a\) and \(b\) in \(R\) have a greatest common divisor which can be written in the form \(ra + sb\) for some \(r, s \in R\), and
         \item [(ii)] if \(a_1, a_2, a_3, \dots\) are nonzero elements of \(R\) such that \(a_{i + 1} \mid a_i\) for all \(i\), then there is a positive integer \(N\) such that \(a_n\) is a unit times \(a_N\) for all \(n \ge N\). 
     \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+    Let \(a_1 \in I\). If \((a_1) = R\), then we're done, otherwise, pick some \(b_1 \in I - (a)\) and consider \((a_2) = (a_1, b_1)\). Now repeat this process: for any \(n\), if \((a_n) = R\), then we're done; otherwise, pick some \(b_n \in I - (a_n)\) and construct \((a_{n + 1} = (a_n, b_n))\).
+
+    If this process terminates, then we will have \((a_n) = R\) for some \(n\) and hence \(I\) is principal. Furthermore, this process must terminate; if it did not, then we would have an strictly ascending chain \((a_1) \subset (a_2) \subset \dots\), which contradicts condition (ii)
+\end{proof}
 
 \begin{theorem}[5]
     Let \(R\) be the quadratic integer ring \(\Z[\sqrt{-5}]\). Define the ideals \(I_2 = (2, 1 + \sqrt[]{-5})\), \(I_3 = (3, 2 + \sqrt[]{-5})\), and \(I_3' = (3, 2 - \sqrt[]{-5})\).
@@ -146,17 +220,60 @@ Exercises 1, 3, 4, 5, 6 pp. 282-283.
     \end{enumerate}
 \end{theorem}
 
+\begin{proof}
+    \todo
+\end{proof}
+
 \begin{theorem}[6]
-    Let \(R\) be an integral domain and suppose that every \textit{prime} ideal in \(R\) is principal. This exercise proves that every ideal of \(R\) is principal, i.e., \(R\) is a P.I.D.
+    Let \(R\) be an integral domain and suppose that every \textit{prime} ideal in \(R\) is principal. This exercise proves that every ideal of \(R\) is principal, i.e., \(R\) is a PID.
     \begin{enumerate}
         \item Assume that the set of ideals of \(R\) that are not principal is nonempty and prove that this set has a maximal element under inclusion (which, by hypothesis, is not prime). [Use Zorn's Lemma.]
-        \item Let \(I\) be an ideal which is maximal with respect to being nonprincipal, and let \(a, b\in R\) with \(ab \in I\) but \(a \notin I\) and \(b \notin I\). Let \(I_a = (I, a)\) be the ideal generated by \(I\) and \(a\), let \(I_b = (I, b)\) be the ideal generated by \(I\) and \(b\), and define \(J = \{r \in R \mid rI_a \subseteq J\}\). Prove that \(I_a = (\a)\) and \(J = (\b)\) are principal ideals in \(R\) with \(I \subset I_b\) and \(I_a J = (\a \b) \subseteq I\).
-        \item If \(x \in I\) show that \(x = s \a\) for some \(s \in J\). Deduce that \(I = I_a J\) is principal, a contradiction, and conclude that \(R\) is a P.I.D.
+        \item Let \(I\) be an ideal which is maximal with respect to being nonprincipal, and let \(a, b\in R\) with \(ab \in I\) but \(a \notin I\) and \(b \notin I\). Let \(I_a = (I, a)\) be the ideal generated by \(I\) and \(a\), let \(I_b = (I, b)\) be the ideal generated by \(I\) and \(b\), and define \(J = \{r \in R \mid rI_a \subseteq I\}\). Prove that \(I_a = (\a)\) and \(J = (\b)\) are principal ideals in \(R\) with \(I \subset I_b \subseteq J\) and \(I_a J = (\a \b) \subseteq I\).
+        \item If \(x \in I\) show that \(x = s \a\) for some \(s \in J\). Deduce that \(I = I_a J\) is principal, a contradiction, and conclude that \(R\) is a PID.
     \end{enumerate}
 \end{theorem}
 
-Exercises 6, 8 pp. 282-283.
+\begin{proof}
+    We proceed with each separately:
+    \begin{enumerate}
+        \item Consider the union of all non-principal ideals of \(R\). Since \(R\) itself is principal, this union cannot be \(R\), and hence strictly a subset of \(R\). But the union is also an upper bound to all non-principal ideals, so we may apply Zorn's lemma to show that there is some maximal non-principal ideal in \(R\).
+        \item Let \(I\) be such a maximal non-principal ideal. Let \(ab \in I\) and \(a, b \notin I\). This forces \(I_a\) and \(I_b\) to be strictly greater than \(I\), so they must be principal. Furthermore, note that if \(r \in I\), then \(rI_a \subseteq II_a \subseteq I \). Therefore \(r \in I \subseteq J\). At the same time, \(bI_a = b(I, a) = bI + b(a) \subseteq I + I \subseteq I\); hence \(b \in J\). So we have \(I \subset I_b \subseteq J\), implying that \(J\) is also principal. Set \(I_a = (\a)\) and \(J = (\b)\). By the definition of \(J\), we have \(r I_a \subseteq I\) for all \(r \in J\), so \(JI_a = (\a\b) \subseteq I\).
+        \item Let \(x \in I\). Then \(I \subset I_a\) so \(x = s\a\) for some \(s \in R\). By definition, this means that \(s \in J\). But this implies that \(I \subseteq I_aJ\), which is a principal ideal! Thus we we contradiction; \(R\) must be a PID.
+    \end{enumerate}
+\end{proof}
 
-\todo
+Exercises 6, 8 pp. 292-293.
+
+\begin{theorem}[6]
+
+    \begin{enumerate}
+        \item Prove that the quotient ring \(\Z [i] / (1 + i)\) is a field of order 2.
+        \item Let \(q \in \Z\) be a prime with \(q \equiv 3 \mod 4\). Prove that the quotient ring \(\Z [i] / (q)\) is a field with \(q^2\) elements.
+        \item Let \(p \in \Z\) by a prime with \(p \equiv 1 \mod 4\) and write \(p = \pi \overline{\pi}\) as in Proposition 18. Show that the hypotheses for the Chinese Remainder Theorem are satisfied and that \(\Z [i] / (p)\) has order \(p^2\) and conclude that \(\Z [i] / (\pi)\) and \(\Z [i] / (\overline{\pi})\) are both fields of order \(p\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \todo
+    \begin{enumerate}
+        \item \todo 
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[8]
+    Let \(R\) be the quadratic integer ring \(\Z[\sqrt{-5}]\) and define the ideals \(I_2 = (2, 1 + \sqrt{-5}), I_3 = (3, 2 + \sqrt{-5})\), and \(I_3' = (3, 2 - \sqrt{-5})\). 
+    \begin{enumerate}
+        \item Prove that \(2, 3, 1 + \sqrt{-5}\), and \(1 - \sqrt{-5}\) are irreducibles in \(R\), no two of which are associate in \(R\), and that \(6 = 2 \cdot 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})\) are two distinct factorizations of \(6\) into irreducibles in \(R\). 
+        \item Prove that \(I_2, I_3\), and \(I_3'\) are prime ideals of \(R\). 
+        \item Show that the factorizations in \((a)\) imply the equality of ideals \((6) = (2)(3)\) and \((6) = (1 + \sqrt{-5})(1 - \sqrt{-5})\). Show that these two ideal factorizations give the same factorizations of the ideal as the product of prime ideals.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \todo
+    \begin{enumerate}
+        \item \todo 
+    \end{enumerate}
+\end{proof}
 
 \end{document}

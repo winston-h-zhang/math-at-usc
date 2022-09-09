@@ -175,9 +175,9 @@ Next, we can revisit the Gale-Shapley algorithm. We can definitely not run it th
   [Hint: This is much easier than Stable Matching.]
 
 \begin{proof}
-   First, we claim that Algorithm~\ref{alg:GS-student-stable} terminates in polynomial time. Each student must request to at most \(m\) rooms before finding a vacant room. Hence at most \(nm\) proposals can occur, after which the algorithm terminates. This is clearly polynomial in \(n\) and \(m\).
+  First, we claim that Algorithm~\ref{alg:GS-student-stable} terminates in polynomial time. Each student must request to at most \(m\) rooms before finding a vacant room. Hence at most \(nm\) proposals can occur, after which the algorithm terminates. This is clearly polynomial in \(n\) and \(m\).
 
-   We claim that this algorithm produces student-stable matchings. Suppose for the sake of contradiction that we have an unstable output \(M\). Then there exists pairs \((s, r)\) and \((s', r')\) such that \(s\) prefers \(r'\) over \(r\) and \(s'\) prefers \(r\) over \(r'\). But since once a room is taken, our algorithm never undos any matchings, that means \(s\) must have requested for \(r\) before \(r'\). This contradicts the assumption that \(r' > r\). Hence there can be no unstable outputs.
+  Note that once a student is paired with a room, that matching is permanment. We look at the current matches at each iteration of the algorithm. At first, nothing is matched so the current matches are vacuously stable. Now assume that current matchings are stable up to the \Kth{k} iteration. It is now the \Kth{k+1} student's turn to choose a empty room. Say the pair is \((s_{k+1}, r)\). Then \(r\) was empty for each student before \(s_{k + 1}\), but no one chose \(r\). Hence no student before \(s_{k + 1}\) prefers \(r\) over their current room. Hence there are no instabilities involving \(s_{k + 1}\). By assumption, there are no instabilities within the first \(k\) matches, so we conclude that our matching on the \Kth{k + 1} iteration is stable. By induction, this shows that the final matching of \(n\) students is stable.
 \end{proof}
 
 \end{enumerate}

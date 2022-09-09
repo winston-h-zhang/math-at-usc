@@ -156,11 +156,11 @@ Next, we can revisit the Gale-Shapley algorithm. We can definitely not run it th
     \STATE Start with the empty matching
     \WHILE{there exists a nonmatched student}
       \STATE Let $s$ be any student who has not requested for all rooms.
-      \STATE $m$ proposes to the highest-ranked room \(r\) on his list he has not yet requested.
+      \STATE $s$ proposes to the highest-ranked room \(r\) on his list he has not yet requested.
       \IF{$r$ is empty}
-        \STATE $(m,r)$ become matched.
+        \STATE $(s,r)$ become matched.
       \ELSE
-        \STATE Nothing happens, but $m$ will not request $r$ again.  
+        \STATE Nothing happens, but $s$ will not request $r$ again.  
       \ENDIF
      \ENDWHILE
      \STATE Finalize the current temporary matching.

@@ -1,0 +1,136 @@
+\documentclass[10pt]{article}
+\usepackage{fullpage}
+\usepackage[noend]{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{amsfonts}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{nicefrac}
+\usepackage{latexsym}
+\usepackage{epic}
+\usepackage{epsfig}
+\usepackage{amscd}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{enumerate}
+
+% \usepackage{CS270}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}[lemma]{Fact}
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{claim}[lemma]{Claim}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+
+\providecommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
+\providecommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
+\providecommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
+
+\providecommand{\SetCard}[1]{\ensuremath{| #1 |}\xspace}
+\providecommand{\SET}[1]{\ensuremath{\{ #1 \}}\xspace}
+\providecommand{\Abs}[1]{\ensuremath{| #1 |}\xspace}
+\providecommand{\Set}[2]{\ensuremath{\SET{#1 \mid #2}}\xspace}
+
+\providecommand{\Kth}[1]{\ensuremath{{#1}^{\rm th}}}
+\providecommand{\Ceiling}[1]{\ensuremath{\lceil {#1} \rceil}\xspace}
+\providecommand{\Floor}[1]{\ensuremath{\lfloor {#1} \rfloor}\xspace}
+
+\providecommand{\PROB}{\ensuremath{{\rm Prob}}\xspace}
+\providecommand{\Prob}[2][]{\ensuremath{%
+\ifthenelse{\equal{#1}{}}{\PROB[#2]}{\PROB_{#1}[#2]}}\xspace}
+\providecommand{\ProbC}[3][]{\Prob[#1]{#2\;|\;#3}}
+\providecommand{\Expect}[2][]{\ensuremath{%
+\ifthenelse{\equal{#1}{}}{\mathbb{E}}{\mathbb{E}_{#1}}%
+\left[#2\right]}\xspace}
+\providecommand{\ExpectC}[3][]{\Expect[#1]{#2\;|\;#3}}
+
+\title{\bf Homework 2}
+\author{Winston (Hanting) Zhang}
+\date{September 16, by 23:00}
+
+\begin{document}
+\maketitle
+
+\paragraph{General Instructions.} The following assignment is meant to be challenging, and we anticipate that it will take most of you at least 10--15 hours to complete, so please allow yourself plenty of time to work on it. (This assignment is probably a bit harder than Homework 1.)
+We highly recommend reading the entire assignment right away --- you never know when inspiration will strike.
+Please provide a formal mathematical proof for all your claims, and  present runtime guarantees for your algorithms using asymptotic (big-$O/\Omega/\Theta$) notation, unless stated otherwise. You may assume that all basic arithmetic operations (multiplication, subtraction, division, comparison, etc.) take constant time. %In problems involving graphs, we typically use $n$ and $m$ to denote the number of nodes and edges, respectively, unless otherwise stated.
+
+\paragraph{Collaboration.}  Please carefully check the collaboration policy on the course website. When in doubt, ask an instructor.
+
+\paragraph{Consulting outside sources.} Please carefully check the policy regarding outside sources on the course website. Again, when in doubt, ask an instructor.
+
+\paragraph{Submission.} Homework submission will be through the Gradescope system. Instructions and links have been provided through the course website and Piazza. The only accepted format is PDF. For this homework, we will still allow photographs/scans of handwritten solutions, but if they are illegible, you may lose points. Starting with Homework 3, only typed solutions will be accepted, and we highly recommend producing your solutions using \LaTeX~(the text markup language we are also using for this assignment).
+
+\paragraph{Recommended practice problems (do not hand in):} KT Problems 4.3, 4.4, 4.5, 4.7, 4.13. 
+
+
+\newpage
+
+\subsection*{Problem 1. [15]}
+
+Lincoln Riley and Alex Grinch\footnote{Just in case: those are the head coach and the defensive coordinator for the USC football team.} have approached you for some help for the next USC football game.
+Specifically, they are hoping to utilize your algorithms prowess to help choose which defensive back guards which of the opponent's wide receivers.
+
+They have abstracted the problem for you\footnote{You didn't know they were that good at math, did you?} as follows: on any given play, there will be $n$ opposing wide receivers and $n$ USC defensive backs on the field.\footnote{No, you cannot assume that $n \leq 10$. Do you really think that Pac12 referees will notice if each team has 38 players on the field? Yeah, right!} (This might change from play to play, but your algorithm will be called separately for each play.)
+They are playing man coverage (as opposed to zone coverage), which means that they want to match one defensive back each to one wide receiver.
+They will feed the algorithm the heights $r_1, r_2, \ldots, r_n$ of the opposing wide receivers in inches, as well as the heights $b_1, b_2, \ldots, b_n$ of the USC defensive backs in inches. They have learned from years of coaching experience how to predict the yardage gain of a play when a wide receiver of height $r$ is defended by a back of height $b$. When $r > b$, the average gain is $1+(r-b)^2$; when $r \leq b$, the average gain is $\frac{1}{1+(b-r)^2}$. Thus, the bigger the size advantage of the wide receiver, the larger the gain, and the bigger the size advantage of the defensive back, the smaller the gain. USC obviously prefers a smaller gain.
+
+We assume that the opposing quarterback throws to a uniformly random receiver, regardless of how good the matchup is.\footnote{There's only one Caleb Williams in the Pac12.} 
+
+Knowing all of this, your algorithm is now supposed to compute an assignment of defensive backs to receivers that minimizes the expected yardage gain of the opponent. Your assignment should be a matching, so you cannot double-team a receiver.
+
+Give a polynomial-time algorithm for this problem, and analyze it (i.e., prove that it finds the best assignment, and briefly analyze the running time).
+
+%\newpage
+
+\subsection*{Problem 2. [10+5=15]}
+  Imagine that you are an old-time vendor at a market place. When your customers buy --- say --- potatoes, you want to charge them by the pound.
+  To do so, you have a scale, and to use it, you need to balance the scale against the potatoes. You do this by placing metal weights of known weight on the other side, and when the scale is balanced, you know how much the product weighs.\footnote{A little less than you are charging the customer for, because of course, you have manipulated the scale a bit.}
+  You want to bring only $n$ different weights, but be able to measure as large of a consecutive (i.e., without any gaps) range $\{1, 2, \ldots, W\}$ of weights as possible, by using combinations (i.e., subsets) of the weights you brought. Here is a simple algorithm for doing this:
+
+  \begin{algorithm}[htb]
+  \begin{algorithmic}
+    \STATE Start with the empty set $S = \emptyset$ of weights.
+    \FOR{$i=1, \ldots, n$}
+       \STATE Add to $S$ the smallest integer weight $w$ which you cannot yet get as a sum of a subset of $S$.
+    \ENDFOR
+  \end{algorithmic}
+\caption{Weight Selection \label{alg:weights}}
+\end{algorithm}
+
+\begin{enumerate}
+\item This algorithm looks reasonable, but it's very simple and greedy. Maybe it would be better to add a smaller weight $w$ next which you can already get in some way from the weights you have, but which could possibly help you a lot later? Prove that this is not the case, by proving the following:
+
+\begin{theorem}
+  The algorithm produces a set $S$ such that among all possible sets $T$ of size $n$, $S$ produces the largest consecutive range $\{1, 2, \ldots, W\}$ of weights as sums of subsets.
+\end{theorem}
+
+Also briefly analyze the running time of the algorithm.
+
+\item If you run the algorithm by hand, you will probably discover an interesting pattern in the weights $w$ that it includes. State this pattern, and prove formally that this is the output of the algorithm.
+\end{enumerate}
+
+\section*{Problem 3. [0]}
+\textbf{Chocolate Problem: 2 chocolate bars}
+
+Reminder: If you solve a chocolate problem (which you can do in groups of size up to 3), please e-mail David with the solution --- do not submit it on Gradescope. Also, feel free to list preferences or dietary restrictions for/against particular types of chocolate.
+
+Imagine that you are in a chocolate store which makes $n$ different kinds of flavored chocolate truffles. They sell these truffles in $m$ different kinds of ``mix bags'', where bag $i$ contains a set $B_i \subseteq \{1, \ldots, n\}$ of distinct truffle types. Each bag costs 1 dollar, and you have $k$ dollars with you. You would like to try as many different \emph{types} of truffles as possible for your money. So you want to buy $k$ bags which together have the largest variety of different kinds of truffles.\footnote{Having duplicates of the same kind is not a problem, but it doesn't make you any happier, either.}
+
+There is an obvious greedy algorithm for choosing bags of truffles. In each iteration, add the bag which gives you the largest number of new types of truffles compared to what you already had in your earlier bag. (In the first iteration, this means just taking the bag with the largest number of different types.)
+
+\begin{enumerate}
+\item Warm-up (not worth any chocolate by itself): As we said in class, greedy algorithms are usually not optimal. This one is no exception. Construct an example input on which this algorithm does not get the largest number of distinct truffle types.
+\item While the output of the greedy algorithm here is not optimal, it is actually not too far off. Prove that it gets at least a $(1-(1-1/k)^k)$ fraction of the maximum possible number of truffle types you could have gotten with $k$ bags.
+
+  (Note that $(1-1/k)^k \to 1/e$ as $k \to \infty$, and for all $k$, you have that $(1-1/k)^k \leq 1/e$. (Here, $e \approx 2.71828$ is the Euler constant.) So the algorithm's output is always within a factor no worse than $1-1/e \approx 63\%$ of optimal.)
+\end{enumerate}
+
+\end{document}

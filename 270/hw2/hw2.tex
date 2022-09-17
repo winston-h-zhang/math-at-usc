@@ -88,6 +88,24 @@ Knowing all of this, your algorithm is now supposed to compute an assignment of 
 
 Give a polynomial-time algorithm for this problem, and analyze it (i.e., prove that it finds the best assignment, and briefly analyze the running time).
 
+\begin{proof}
+  Let \(B\) be the set of defensive backs and \(R\) be the set of wide receivers. Sort \(B\) and \(R\) by increasing height and label them as \(b_1, b_2, \dots, b_n\) and \(r_1, r_2, \dots, r_n\). We claim that greedily assigning \(b_i\) to \(r_i\), \(1 \le i \le n\), minimizes the expected yardage gain. Call this algorithm \(G\). 
+
+  Suppose we have an optimal algorithm \(O\), which matches each defensive back to wide receiver from shortest to tallest. For the sake of contradiction, suppose \(O\) choice of matchings differ from \(G\). Let the first difference in matching occur at iteration \(i\). Then we know that \(G\) assigned \(b_i\) to \(r_i\). Furthermore, \(O\) assigned \(b_i\) to some \(r_j\), with \(j > i\), since the previous iterations already matched all the receivers before \(r_i\). Now we claim that \(O\) is actually not optimal. Suppose \(O\) assigned \(b_k\) to \(r_i\). Again we know \(k > i\), since every defensive back before \(b_i\) was already matched. The two matches between \((b_i, r_j)\) and \((b_k, r_i)\) incurs expected gain in yardage of \(2^{r_j - b_i} + 2^{r_i - b_k}\). However, if we instead matched \((b_i, r_i)\) and \((b_k, r_j)\), the expected gain is \(2^{r_i - b_i} + 2^{r_j - b_k}\). Since our setup orders \(B\) and \(R\) in height order, \(k > i\) implies that \(b_k > b_i\). In particular, set \(b_k = b_i + d\) for \(d > 0\). Now we can compute, setting \(2^{-d} = X\),
+  \[2^{r_j - b_i} + 2^{r_i - b_k} = 2^{r_j - b_i} + 2^{r_i - b_i - d} = 2^{r_j - b_i} + 2^{r_i - b_i} X = 2^{r_j - b_i} + 2^{r_i - b_i} + 2^{r_i - b_i} (1 - X)\]
+  and 
+  \[2^{r_i - b_i} + 2^{r_j - b_k} = 2^{r_i - b_i} + 2^{r_j - b_i} X = 2^{r_i - b_i} + 2^{r_j - b_i} + 2^{r_j - b_i} (1 - X).\]
+  Note that the original matching and the modified matching differ only by where \(X\) is placed. Now \(d > 0\) implies that \(0 < X = 2^{-d} < 1\), so \(0 < 1 - X < 1\). 
+
+  Since \(j > i\), we have \(r_j > r_i\), so \(2^{r_j - b_i} > 2^{r_i - b_i}\), so \(2^{r_j - b_i} X < 2^{r_i - b_i} X\). Hence, we conclude that 
+  \[2^{r_i - b_i} + 2^{r_j - b_k} < 2^{r_j - b_i} + 2^{r_i - b_k},\]
+  meaning that we have better defense when we modifies the matching given by \(O\). This contradicts the optimality of \(O\), and hence we conclude that \(O\) does not differ from \(G\). Hence \(O\) is \(G\), and greedy is optimal.
+
+  The runtime of \(G\) is \(O(n \log n)\) for the sorting, using a good sorting algorithm like quicksort or mergesort, plus \(O(n)\) from iterating to create each matching. Hence the total runtime is \(O(n \log n) + O(n) = O(n \log n)\).
+
+
+\end{proof}
+
 %\newpage
 
 \subsection*{Problem 2. [10+5=15]}
@@ -114,7 +132,30 @@ Give a polynomial-time algorithm for this problem, and analyze it (i.e., prove t
 
 Also briefly analyze the running time of the algorithm.
 
+\begin{proof}
+  \textbf{Note: We use the results of 2b here.}
+  
+  By (2b), the the algorithm produces the set \(S = \{1, 2, \dots, 2^{n - 1}\}\) with range \(2^n - 1\). Let \(T\) be any other set of size \(n\). There are \(2^n - 1\) nonempty subsets of \(T\). Hence there is a maximum of \(2^n - 1\) possible sums of subsets of \(T\), implying that the range of \(T\) can be at most \(2^n - 1\). Thus, the set \(S\) produced by the algorithm is optimal, as no other set \(T\) can improve upon its range. 
+
+  The runtime for this algorithm is \(O(n)\). Within each iteration \(i\), by (2b), we know that we must pick up weight \(2^{i - 1}\) without any extra computation in \(O(1)\). Hence over the loop we accumulate \(O(n)\) runtime.
+\end{proof}
+
 \item If you run the algorithm by hand, you will probably discover an interesting pattern in the weights $w$ that it includes. State this pattern, and prove formally that this is the output of the algorithm.
+
+\begin{theorem}
+  Algorithm 1 produces weights \(1, 2, \dots, 2^{n - 1}\).
+\end{theorem}
+
+\begin{proof}
+  \textbf{Note: We do not use the results of (2a) here, so the proof is not circular.}
+
+  We proceed by strong induction to prove that the \Kth{i} iteration of the loop adds weight \(2^{i - 1}\). The base case \(n = 1\) is clearly true as we must pick weight \(1\) on our first iteration. 
+
+  Now assume that on the \Kth{k} iteration, we have weights \(1, 2, \dots, 2^{k - 1}\). We want to show that the \Kth{k + 1} weight has weight \(2^k\).
+
+  For any number \(1 \le m \le 2^k - 1\), we can decompose \(m\) into its binary representation \(\sum_{i = 0}^{k - 1} b_i 2^i\) for \(b_i \in \{0, 1\}\), which is exactly a sum of the a subset of the weights \(\{1, 2, \dots, 2^{k - 1}\}\). Hence the weights \(\{1, 2, \dots, 2^{k - 1}\}\) have range \(2^k - 1\). Thus on the \Kth{k + 1} iteration, the algorithm adds the smallest number we cannot sum to, \(2^k\). This completes our induction. 
+\end{proof}
+
 \end{enumerate}
 
 \section*{Problem 3. [0]}

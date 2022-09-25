@@ -1,0 +1,77 @@
+\documentclass[10pt]{article}
+\usepackage{fullpage}
+\usepackage[noend]{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{amsfonts}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{nicefrac}
+\usepackage{latexsym}
+\usepackage{epic}
+\usepackage{epsfig}
+\usepackage{amscd}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{times}
+
+% \usepackage{CS270}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}[lemma]{Fact}
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{claim}[lemma]{Claim}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+
+\providecommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
+\providecommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
+\providecommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
+
+\providecommand{\SetCard}[1]{\ensuremath{| #1 |}\xspace}
+\providecommand{\SET}[1]{\ensuremath{\{ #1 \}}\xspace}
+\providecommand{\Abs}[1]{\ensuremath{| #1 |}\xspace}
+\providecommand{\Set}[2]{\ensuremath{\SET{#1 \mid #2}}\xspace}
+
+\providecommand{\Kth}[1]{\ensuremath{{#1}^{\rm th}}}
+\providecommand{\Ceiling}[1]{\ensuremath{\lceil {#1} \rceil}\xspace}
+\providecommand{\Floor}[1]{\ensuremath{\lfloor {#1} \rfloor}\xspace}
+
+\providecommand{\PROB}{\ensuremath{{\rm Prob}}\xspace}
+\providecommand{\Prob}[2][]{\ensuremath{%
+\ifthenelse{\equal{#1}{}}{\PROB[#2]}{\PROB_{#1}[#2]}}\xspace}
+\providecommand{\ProbC}[3][]{\Prob[#1]{#2\;|\;#3}}
+\providecommand{\Expect}[2][]{\ensuremath{%
+\ifthenelse{\equal{#1}{}}{\mathbb{E}}{\mathbb{E}_{#1}}%
+\left[#2\right]}\xspace}
+\providecommand{\ExpectC}[3][]{\Expect[#1]{#2\;|\;#3}}
+
+\title{\bf Chocolate 3}
+\author{Winston (Hanting) Zhang}
+\date{Friday, September 23, by 23:00}
+
+\begin{document}
+\maketitle
+
+\subsection*{Problem 3. [0]}
+\textbf{Chocolate Problem: 2 chocolate bars}
+
+Reminder: If you solve a chocolate problem (which you can do in groups of size up to 3), please e-mail David with the solution --- do not submit it on Gradescope. Also, feel free to list preferences or dietary restrictions for/against particular types of chocolate.
+
+Exercise 4.31 in the textbook. Notice that Part (b) is really the interesting thing here --- Part (a) is basically a slightly harder regular problem.
+
+\begin{proposition}
+  Prove that for every pair of nodes \(u, v \in V\), the length of the shortest \(u-v\) path in \(H\) is at most 3 times the length of the shortest \(u-v\) path in \(G\). 
+\end{proposition}
+
+\begin{proof}
+  Denote the length of the shortest \(u-v\) path in \(H\) and \(G\) by \(d_H(u, v)\) and \(d_G(u, v)\), respectively. Suppose for the sake of contradiction that there exists some \(u, v \in V\) such that \(d_H(u, v) > 3 d_G(u, v)\). Furthermore set \(u, v\) to be the vertices such that \(d_H(u, v)\) is minimum with repsect to \(d_H(u, v) > 3 d_G(u, v)\). Note that such a minimum exists since edges have positive side lengths. (And the graph must be finite?) Consider the \(u-v\) path in \(G\) made up of the sequence of vertices \(u = v_1, v_2, \dots, v_k = v\). 
+\end{proof}
+
+\end{document}

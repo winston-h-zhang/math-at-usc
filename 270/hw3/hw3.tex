@@ -80,7 +80,79 @@ Consider an undirected connected graph $G=(V,E)$ with edge costs $c_e > 0$ for $
 \begin{enumerate}
 \item Let $E' \subseteq E$ be defined as the following set of edges: for each node $v$, $E'$ contains the cheapest of all edges incident on $v$, i.e., the cheapest edge that has $v$ as one of its endpoints. Is the graph $(V,E')$ connected? Is it acyclic? For both questions, provide a proof or a counter-example with explanations.
 
+\begin{proposition}
+  \((V, E')\) is not always connected.
+\end{proposition}
+
+\begin{proof}
+  Counterexample: Intuitively, we can have a super high weight edge that no one picks, which splits the graph. Consider \(V = \{w, x, y, z\}\) and \(E = \{(w, x), (x, y), (y, z)\}\) with weights \(\{1, 100, 1\}\),
+  respectively. Then \(\{w, x, y, z\}\) will all be incident to an edge of weight 1, making \(E' = \{(w, x), (y, z)\}\), which is not connected.
+\end{proof}
+
+\begin{proposition}
+  If \((V, E')\) has no self loops, then it is acyclic.
+\end{proposition}
+
+\begin{proof}
+  Assume for the sake of contradiction that \(E'\) has some cycle. Let \(e = (v, w)\) be the edge in that cycle with the highest weight. Since \(e\) is in a cycle, \(v\) and \(w\) are incident to edges \(e_v\) and \(e_w\) in the cycle. Note that \(w \neq w\), and \(e_v, e_w \neq e\), since \((V, E')\) has no self loops. 
+
+  We assumed that \(e\) has the highest weight, but this is contradictary as \(v\) both \(e_v\) and \(e_w\) are cheaper edges incident to \(v\) and \(w\). Hence \(e\) could never be in \(E'\), contradiction.  
+\end{proof}
+
 \item Consider the following outline for an algorithm, which starts with an empty set $T$ of edges: Let $E'$ contain the cheapest edge out of each connected component of $(V,T)$. Add $E'$ to $T$, and repeat until $(V,T)$ is connected. Show that this algorithm outputs a minimum spanning tree of $G$, and can be implemented in time $O(m \log n)$. 
+  
+  \begin{algorithm}[htb]
+  \begin{algorithmic}
+    \REQUIRE{graph \(G = (V, E)\)}
+    \FOR{each vertex \(v\) in \(G\)}
+      \STATE \(k_v = v\), (\(k_v\) is the connected component of \(v\))
+    \ENDFOR
+    \WHILE{\((V, T)\) is not connected}
+      \STATE \textbf{let} \(E' \gets\) set of minimum edges out of each connected component
+      \STATE \textbf{let} \(T \gets T \cup E'\)
+      \STATE compute new connected components of \((V, T)\) 
+     \ENDWHILE
+    \STATE \textbf{return} \((V, T)\)
+  \end{algorithmic}
+\caption{MST Algorithm \label{alg:mst}}
+\end{algorithm}
+
+\begin{proposition}
+  Algorithm 1 terminates and produces a MST of \(G\).
+\end{proposition}
+\begin{proof}
+  First let's establish two facts we will need to use. 
+  \begin{enumerate}
+    \item Since \(G\) is a connected graph with distinct edge weights, there is a unique MST \((V, T')\) of \(G\). 
+    \item \textbf{Cut property}: Let \(S \subseteq E\). The minimum edge between \(S\) and \(E \setminus S\) is in \(T'\).
+  \end{enumerate} 
+
+  At each iteration, the number of connected components of \((V, T)\) strictly decreases. Hence we can have at most \(|V|\) iterations before \((V, T)\) has only one connected component, i.e. \((V, T)\) is connected, and hence the algorithm must terminate. 
+  
+  Let \((V, T)\) be the output of Algorithm 1; let \((V, T')\) be the unique MST of \(G\). At each iteration \(k\), we produce some edge set \(E'_k\). By design, each edge \(e \in E'_k\) is the minimum edge between its connected component \(C\) and \(E \setminus C\). By the cut property, \(e \in T'\), thus \(E'_k \subseteq T'\). This holds for each iteration \(k\). We know that \(T = \bigcup_{k} E'_k\), i.e. \(T\) is the total of all edges in each iteration, so we conclude that \(T \subseteq T'\). 
+
+  Furthermore, \((V, T)\) is a connected subgraph of \(G\). Hence \(|T| \ge |V| - 1 = |T'|\), since \((V, T')\) is a MST. Combining \(T \subseteq T'\) and \(|T| \ge |T'|\), it must be that \(T = T'\). Hence \((V, T)\) is indeed the MST of \(G\). 
+\end{proof}
+
+\begin{proposition}
+  Algorithm 1 runs in \(O(m \log n)\) time complexity.
+\end{proposition}
+
+\begin{proof}
+  We claim that the outer while loop iterates at most \(O(\log n)\) times, and that the inner body runs in \(O(m)\), giving a total of \(O(m \log n)\) runtime. 
+
+  \textit{Outer while loop}: At the end of the iteration, we end with new connected components which each have at least 2 of the connected components from the start of the iteration inside them. That is to say, at each iteration we at least halve the number of connected components. We begin with a total of \(n\) connected compoents, giving an upper bound of \(O(\log n)\) iterations before \((V, T)\) is connected.
+
+  \textit{Inner body}: We claim that each of the 3 steps in the body can be implemented in \(O(m)\), for a total runtime of \(O(3m) = O(m)\). 
+  \begin{enumerate}
+    \item[1.] Compute \(E'\) as follows: Initialize empty map \(m\) where each key-value pair \((k, e)\) represents the current best edge \(e\) coming out of the connected component \(k\). For each \(e = (v, w) \in E\), let \(k_v\) and \(k_w\) be their components. (This can be implemented as a field of the node class for \(O(1)\) access.) If \(k_v = k_w\), then \(e\) is an internal edge, so discard \(e\). Otherwise, update \(m[k_v]\) and \(m[k_w]\) if \(e\) is lower cost than the current best (again \(O(1)\) if \(m\) vector or hashset). In the end, \(m\) maps each connected component to its best outgoing edge. Collect \(m\) into \(E'\). This runs a for loop for \(O(n)\), with \(O(1)\) operations within each iteration, for a total of \(O(n)\) to compute \(E'\).
+    \item[2.] Implement \(T\) as a vector. Then \(T \gets T \cup E'\) is \(O(|E'|) = O(m)\).
+    \item[3.] Compute the new connected components by running BFS/floodfill on \((V, T)\). BFS runs in \(O(m + n) = O(m)\).
+  \end{enumerate}
+
+  Thus we have shown that each step runs in \(O(m)\). This completes the proof.
+\end{proof}
+
 \end{enumerate}
 
 \noindent \textbf{Hints:}
@@ -103,6 +175,51 @@ Consider an undirected connected graph $G=(V,E)$ with edge costs $c_e > 0$ for $
   Your goal is to compute the earliest that you can arrive at $d$ when starting at $s$ at time $T$. You can assume that changing trains takes 0 time, so if you arrive at node $u$ at time $t$, you can board a train that leaves $u$ at time $t$.
 
   Give and analyze (i.e., prove correct and analyze the running time) an algorithm that solves this problem in time $O(m \log n)$.
+
+  \begin{algorithm}[htb]
+    \begin{algorithmic}
+      \REQUIRE{graph \(G\), vertex \textit{start}, vertex \textit{target}, start time             \(T\)} 
+
+      \STATE \textbf{let} \(Q\) be a min-heap of vertices prioritized by earliest time
+      \FOR{each vertex \(v \neq\) \textit{start} in \(G\)}
+        \STATE \(\text{earliest}[v] = \infty\)
+        \STATE Add \(v\) to \(Q\)
+      \ENDFOR
+      \STATE Add \textit{start} to \(Q\)
+      \STATE \textbf{let} \(\text{earliest}[\textit{start}] \gets T\)
+      \WHILE{\(Q\) is not empty}
+        \STATE \textbf{let} \(v \gets\) popmin \(Q\)
+        \IF{\(v =\) target}
+          \STATE \textbf{return} \(\text{earliest}[\textit{target}]\)
+        \ENDIF 
+        % \STATE Add \(v\) to \(S\)
+        \FOR{each incident edge \((v, w)\) with \(w\) still in \(Q\)}
+          \IF{\(t_v \ge \text{earliest}[v]\)}
+            \STATE \(\text{earliest}[w] \gets \text{min}(t_w, \text{earliest}[w])\)
+          \ENDIF
+        \ENDFOR
+       \ENDWHILE
+      \STATE \textbf{return} \(-\infty\)
+    \end{algorithmic}
+  \caption{Modified Dijkstra's Algorithm \label{alg:Dijkstra-modified}}
+  \end{algorithm}
+
+
+\begin{proof}
+  We do induction on the following invariant: At each iteration, when we pop \(v\), \(\text{dist}[v]\) is the shortest distance from \textit{start} to \(v\).
+
+  In the base case, all nodes have priority infinity except for \textit{start}, so we must pop \textit{start}. This trivially satisfies the invariant since \(\text{earliest}[\textit{start}] = 0\).
+
+  Now, assume the invariant is true till the \Kth{k} iteration. We set \(v \gets \text{popmin } Q\) and must prove the invariant is true on the \Kth{k + 1} iteration. Split the neighbours of \(w\) into two cases: those not in the \(Q\), \(N\), and those still in \(Q\), \(M\). Consider the shortest path from \textit{start} to \(w\) and let \(v\) be the node just before \(w\). 
+
+  If \(v \in M\), then we know that \(\text{earliest}[v] > \text{earliest}[w]\), because \(w\) had the minimum priority when we popped it. Hence going \textit{start} \(\to v \to w\) is clearly worst than not going through \(v\). Thus it cannot be the case that \(v in M\). 
+
+  If \(v \in N\), let \(m_v\) be the minimum time it takes to get to \(v\). Then the earliest you can get to \(w\) is the minimum of \(t_w\) over all edges \((v, w)\) such that \(t_v > m_v\). Note here \(m_v\) is the theorical best. However, by our induction hypothesis, \(\text{earliest}[v] = m_v\)! Since each \(v \in N\) was already popped, the line `\(\text{earliest}[w] \gets \text{min}(t_w, \text{earliest}[w])\)' was computed for each \(v\). In particular, this means exactly that \(\text{earliest}[w]\) is the minimum of \(t_w\) over all edges \((v, w)\) such that \(t_v > m_v\)! Hence our induction step is complete. 
+
+  Thus, when we pop \textit{end}, we must have \(\text{earliest}[\textit{end}]\) be the optimal time. 
+
+
+\end{proof}
 
 \noindent \textbf{Hint:} Obviously, this question is closely related to Dijkstra's Algorithm, which we did not cover in class. We highly recommend that you review the algorithm and --- more importantly --- its analysis in Section 4.4 of the textbook before attempting this question.
 

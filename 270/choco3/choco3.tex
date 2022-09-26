@@ -70,9 +70,9 @@ Exercise 4.31 in the textbook. Notice that Part (b) is really the interesting th
 \end{proposition}
 
 \begin{proof}
-  Denote the weight of a edge \(e = (u, v)\) by \(w(e) = w(u, v)\). For some subgraph \(K \subseteq G\), denote the length of the shortest \(u - v\) path in \(K\) by \(d_K(u, v)\). Let \(H\) be the output of our algorithm. Suppose for the sake of contradiction that there exists some \(u, v \in V\) such that \(d_H(u, v) > 3 d_G(u, v)\). Let the \(u - v\) path in \(G\) be made up of the sequence of vertices \(u = v_1, v_2, \dots, v_k = v\). Since \(H\) is connected, for each edge of the path \((v_i, v_{i+1})\), for \(1 \leq i < n\), there is a path in \(H\) connecting \(v_i\) and \(v_{i + 1}\). 
-
-  We claim that \(d_H(v_i, v_{i + 1}) \leq 3 d_G(v_i, v_{i + 1}) = 3 w(v_i, v_{i + 1})\). The equality holds because the edge \((v_i, v_{i + 1})\) itself is the shortest path between \(v_i\) and \(v_{i+1}\). If it weren't, then we could improve \(d_G(u, v)\) by taking the shorter path between \(v_i\) and \(v_{i + 1}\). As a corollary, this implies that \(d_G(u, v) = \sum_{i = 1}^{n - 1} w(v_i, v_{i + 1}) = \sum_{i = 1}^{n - 1} d_G(v_i, v_{i + 1})\).
+  Denote the weight of a edge \(e = (u, v)\) by \(w(e) = w(u, v)\). For some subgraph \(K \subseteq G\), denote the length of the shortest \(u - v\) path in \(K\) by \(d_K(u, v)\). Let \(H\) be the output of our algorithm. We want to show that for all \(u, v \in V\), we have \(d_H(u, v) \le 3 d_G(u, v)\). 
+  
+  Let the \(u - v\) path in \(G\) be made up of the sequence of vertices \(u = v_1, v_2, \dots, v_k = v\). Since \(H\) is connected, for each edge of the path \((v_i, v_{i+1})\), for \(1 \leq i < n\), there is a path in \(H\) connecting \(v_i\) and \(v_{i + 1}\). We claim that \(d_H(v_i, v_{i + 1}) \leq 3 d_G(v_i, v_{i + 1}) = 3 w(v_i, v_{i + 1})\). The equality holds because the edge \((v_i, v_{i + 1})\) itself is the shortest path between \(v_i\) and \(v_{i+1}\). If it weren't, then we could improve \(d_G(u, v)\) by taking the shorter path between \(v_i\) and \(v_{i + 1}\). As a corollary, this implies that \(d_G(u, v) = \sum_{i = 1}^{n - 1} w(v_i, v_{i + 1}) = \sum_{i = 1}^{n - 1} d_G(v_i, v_{i + 1})\).
   
   We split into two cases. 
   \begin{enumerate}

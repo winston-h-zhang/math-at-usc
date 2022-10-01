@@ -52,6 +52,24 @@
 \left[#2\right]}\xspace}
 \providecommand{\ExpectC}[3][]{\Expect[#1]{#2\;|\;#3}}
 
+\newcommand\algorithmicprocedure{\textbf{procedure}}
+\newcommand{\algorithmicendprocedure}{\algorithmicend\ \algorithmicprocedure}
+\makeatletter
+\newcommand\PROCEDURE[3][default]{%
+  \ALC@it
+  \algorithmicprocedure\ \textsc{#2}(#3)%
+  \ALC@com{#1}%
+  \begin{ALC@prc}%
+}
+\newcommand\ENDPROCEDURE{%
+  \end{ALC@prc}%
+  \ifthenelse{\boolean{ALC@noend}}{}{%
+    \ALC@it\algorithmicendprocedure
+  }%
+}
+\newenvironment{ALC@prc}{\begin{ALC@g}}{\end{ALC@g}}
+\makeatother
+
 \title{\bf Homework 4}
 \author{Winston (Hanting) Zhang}
 \date{Friday, September 30, by 23:00}
@@ -79,16 +97,29 @@ Please provide a formal mathematical proof for all your claims, and  present run
 
   Solve the following recurrences. In all cases, assume $T(1)$ is some positive constant. You should be able to find a matching upper and lower bound on $T(n)$. In other words, your answer should be of the form $T(n) = \Theta(\cdots)$. You do not need to provide formal proofs, just a brief justification for your answer. As we often due in class, you may sacrifice formality by ignoring issues with rounding integers; in all these recurrences, those issues will not matter.
 
+We apply a generous amount of the Master Theorem. 
+
 \begin{enumerate}
 \item $T(n) = 9 T(n/3) + c_1 \cdot n^2$
 
+\(a = 9\), \(b = 3\), \(c = 2\). We have \(\log_{b} a = \log_3 9 = 2 = c\). This is case 2, i.e. 
+\(\boxed{T(n) = \Theta(n^2 \log n)}\).
+
 \item $T(n) = 10 T(n/5) + c_2 \cdot n^{1.5}$
+
+\(a = 10\), \(b = 5\), \(c = 1.5\). We have \(\log_{b} a = \log_5 10 \approx 1.43 < c\). This is case 3, and we need to check the regularity condition. We have \(a f(n / b) = 10 c_2 (n / 5)^{1.5}\). Since \(5^{1.5} \approx 11\), \(10 / 5^{1.5} < 1\). Hence we can choose some \(10 / 5^{1.5} < k < 1\) such \(a f(n / b) \leq k f(n)\), and regularity holds. Thus \(\boxed{T(n) = \Theta(n^{1.5})}\).
 
 \item $T(n) = 3 T(n/4) + c_3 \cdot \sqrt{n}$
 
+\(a = 3\), \(b = 4\), \(c = 0.5\). We have \(\log_{b} a = \log_4 3 \approx 0.79 > c\). This is case 1. i.e. \(\boxed{T(n) = \Theta(n^{0.79})}\).
+
 \item $T(n) = T(n/3) + T(\frac{2}{3} n) + c_4 \cdot n$
 
+Consider the recursion tree. On the \Kth{0} layer, we do \(c_4 n\) work on a input of size \(n\) and split into two subproblems. On the \Kth{1} layer, we have a total input size of \(n/3 + 2n/3 = n\) and hence do a total of \(c_5 n\) work again. On the \Kth{2} layer, the total input size stays \(n\), and we do \(c_5 n\) work yet again. At each layer in the tree, the subproblem size skrinks by \(2/3\) and \(1/3\). This means there can be a maximum \(\log_{3/2} n\) layers, giving a upper bound of \(c_5 n \log_{3/2} n = O(n \log n)\) work. However, note that since we generate unbalanced subproblems, this tree is not full, as the \(1/3\) branches will shrink faster and hit the base case before \(\log_{3/2} n\) layers. We do know, however, that the tree will have a minimum of \(\log_3 n\) layers. Hence we are lower bounded by \(c_5 n \log_3 n = \Omega(n \log n)\). Combining these two bounds gives \(T(n) = \boxed{\Theta(n \log n)}\).
+
 \item $T(n) = T(n/4) + T(n/2) + c_5 \cdot n$
+
+Consider the recursion tree. On the \Kth{0} layer, we do \(c_5 n\) work on a input of size \(n\) and split into two subproblems. On the \Kth{1} layer, we have a total input size of \(n/4 + n/2 = 3n/4\) and hence do a total of \(c_5 3n/4\) work. On the \Kth{2} layer, the total input size skrinks by \(3/4\) again, and we do \(c_5 (3/4)^2 n\) work. This pattern continues to hold with layer \(k\) having \(c_5 (3/4)^k n\) work. Thus the total work on the tree is the geometric series given by: \(T(n) = \sum_{k = 0} c_5 \left(\frac{3}{4}\right)^k n = c_5 n \frac{1}{1 - 3/4} = \boxed{\Theta(n)}\).
 \end{enumerate}
 
 
@@ -108,7 +139,7 @@ Consider an array of integers  $A=[a_1,\ldots, a_n]$ with $a_1 < a_n$.
 \begin{proof}
   We proceed by strong induction on \(n\). The base case \(n = 2\) is true, since finding the consecutive entries is trivial, taking \(\log 2 = 1\) iteration. 
 
-  Now assume that our claim is true for all \(k < n\). We want to show that our claim is true for \(n\). Indeed, we query index \(a_{\lfloor{n/2}\rfloor}\).and do binary search. If \(a_1 < a_{\lfloor{n/2}\rfloor}\), then our previous result guarantees there exists an index \(\{1, \ldots, \lfloor n/2\rfloor - 1\}\) such that \(a_i < a_{i + 1}\). By our induction hypothesis, finding such an index will take \(\log (n/2)\) iterations. If instead \(a_1 > a_{\lfloor{n/2}\rfloor}\), then we conclude that \(a_{\lfloor{n/2}\rfloor} < a_n\). Hence our previous result and induction hypothesis again guarantees that we can find an index \(\{\lfloor n/2\rfloor - 1, \ldots, n - 1\}\) such that \(a_i < a_{i + 1}\) in \(\log (n/2)\) iterations. Thus in total, we can find the desired index for \(n\) in \(\log (n/2) + 1 = \log n - 1 + 1 = \log n = O(\log n)\) iterations.
+  Now assume that our claim is true for all \(k < n\). We want to show that our claim is true for \(n\). Indeed, we query index \(a_{\lfloor{n/2}\rfloor}\) and do binary search. If \(a_1 < a_{\lfloor{n/2}\rfloor}\), then our previous result guarantees there exists an index \(\{1, \ldots, \lfloor n/2\rfloor - 1\}\) such that \(a_i < a_{i + 1}\). By our induction hypothesis, finding such an index will take \(\log (n/2)\) iterations. If instead \(a_1 > a_{\lfloor{n/2}\rfloor}\), then we conclude that \(a_{\lfloor{n/2}\rfloor} < a_n\). Hence our previous result and induction hypothesis again guarantees that we can find an index \(\{\lfloor n/2\rfloor - 1, \ldots, n - 1\}\) such that \(a_i < a_{i + 1}\) in \(\log (n/2)\) iterations. Thus in total, we can find the desired index for \(n\) in \(\log (n/2) + 1 = \log n - 1 + 1 = \log n = O(\log n)\) iterations. Each iteration takes constant time, so the total runtime is \(O(\log n)\).
 \end{proof}
 
   [Hint: The first part may be useful here.]
@@ -122,8 +153,66 @@ Consider an array of integers  $A=[a_1,\ldots, a_n]$ with $a_1 < a_n$.
 
   David now wants to know how the ``most middle'' student performed. That is, he wants to find a student $i$ (out of the $2n$ total) such that at least $n$ students had scores no higher than $i$, and at least $n$ students had scores no lower than $i$. There may be multiple such students; for instance, if all students achieved the same score, then any student would do. Give an algorithm that always runs in time $O(\log n)$ and finds one such student, by outputting the array ($a$ or $b$) and the index $i$ where the student occurs in that array. 
 
+\begin{definition}
+  Let \(a\) be an array of even length \(\ell = 2n\). Student \(i\) is a \textbf{moodian} of \(a\) if at least \(n\) students have scores no higher than \(a[i]\), and at least \(n + 1\) students have scores no lower than \(a[i]\).
+\end{definition}
+
+\textbf{Remark.} We need this definition because the given definition of a median is slightly too ambiguous for our needs. Note that any moodian of \(a\) is also a median of \(a\). 
+
+\begin{proposition}
+  Let \(a\) be an array of even length \(\ell = 2n\). A moodian of \(a\) exists. 
+\end{proposition}
+
 \begin{proof}
+  Sort \(a\) so that \(a[1] \leq a[2] \leq \ldots \leq a[2n]\). Then \(a[n]\) is no higher than at least \(a[1]\) to \(a[n]\), a.k.a. \(n\) students, and also no lower than at least \(a[n]\) to \(a[2n]\), a.k.a. \(n + 1\) students. Hence \(a[n]\) is a moodian.
+\end{proof}
+
+\begin{algorithm}[htb]
+\begin{algorithmic}
+  \REQUIRE{Sorted arrays \(a\), \(b\); \(a\).length \(=\) \(b\).length \(= n\)} 
+  \PROCEDURE{moodian-find}{\(a, b\)}
+  \STATE \textbf{let} \(n \gets a\).length
+  \IF{\(n = 1\)}
+  \STATE \textbf{return} smaller of \(a[1]\) and \(b[1]\)
+  \ENDIF
+  \IF{\(a[n/2] = b[n/2]\)}
+  \STATE \textbf{return} student at \(a[n/2]\)
+  \ELSIF{\(a_m < b_m\)}
+  \STATE \textbf{return} \textsc{moodian-find}(\(a[n/2 + 1:n], b[1:n/2]\))
+  \ELSE
+  \STATE \textbf{return} \textsc{moodian-find}(\(a[1:n/2], b[n/2+1:n]\))
+  \ENDIF
+  \ENDPROCEDURE
+\end{algorithmic}
+\caption{\textsc{moodian-find} \label{alg:moodian-find}}
+\end{algorithm}
+
+\begin{proposition}
+  \textsc{moodian-find}(\(a, b\)) finds the moodian of \(a\) and \(b\) in \(O(\log n)\) time.
+\end{proposition}
+
+\begin{proof}
+  Suppose that \(n = 2^k\) for some \(k\), to make the proof cleaner. 
   
+  We proceed by strong induction on \(n\) to show that it takes \(O(\log n)\) iterations to find the moodian. The base case \(n = 1\) is trivial, since we simply take the smaller of \(a[1]\) and \(b[1]\), taking \(1\) iteration. 
+
+  Now assume that our claim is true for all \(k < n\). We want to show that our claim is true for \(n\). Indeed, we query index \(a[n/2]\) and \(b[n/2]\). Now there are three cases: 
+  \begin{enumerate}
+    \item \(a[n/2] = b[n/2]\): Then we know there are at least \(n/2\) students with scores no higher than \(a[n/2] = b[n/2]\) from both \(a\) and \(b\), for a total of at least \(n\) students no higher than \(a[n/2]\). For the other side, we know there are at least \(n/2 + 1\) students with scores no lower than \(a[n/2] = b[n/2]\) from both \(a\) and \(b\), for a total of at least \(n + 2\) students no lower than \(a[n/2]\). Thus \(a[n/2]\) is a moodian and we end the search in \(1 = O(\log n)\) iterations.
+    
+    \item \(a[n/2] < b[n/2]\): Consider the subarrays \(a' = a[n/2+1:n]\) and \(b' = b[1:n/2]\), so that \(a'[i] = a[n/2+i]\) and \(b'[i] = b[i]\). We claim that the moodian of \(a'\) and \(b'\) is the moodian of \(a\) and \(b\). 
+    
+    Indeed, let \(m\) be the moodian of \(a'\) and \(b'\). We claim that \(a[n/2] \leq m \leq b[n/2]\). Without loss of generality assume that \(m \in a'\); if \(m \in b'\) simply switch \(a' \iff b'\). We can deduce the LHS of the inequality we want using the fact that \(a\) is sorted: \(a[n/2] \leq a[n/2+1] = a'[1] \leq m\). 
+    
+    For the RHS of the inequality, assume for the sake of contradiction that \(b[n/2] < m\). Then all of the elements of \(b'\) are lower than \(m\). Hence everything no lower than \(m\) must be from \(a'\). Since \(a'\) has \(n/2\) elements, this implies that there can be a maximum of \(n/2\) student no lower than \(m\). This contradicts the fact that \(m\) is a moodian, since by definition, we need at least \(n/2 + 1\) students to be no lower than \(m\). Thus \(m \leq b[n/2]\). Note: this slight difference between \(+1\) for the median/moodian is the difference maker; if we did not have the slightly stricter condition, and had the ambigutiy of which median to choose, the given algorithm doesn't work.
+
+    Since \(m\) is the moodian of \(a'\) and \(b'\), at least \(n/2\) students are no higher than \(m\). Since \(a[n/2] \leq m\), we also have \(n/2\) students from \(a[1 : n/2]\) no higher than \(m\). By definition \(a[1 : n/2]\) and \(a'\) are disjoint, so in total we can say that there are at least \(n/2 + n/2 = n\) students in \(a\) and \(b\) no higher than \(m\). On the other side, there are \(n/2 + 1\) students no lower than \(m\) in \(a'\) and \(b'\). Since \(m \leq b[n/2]\), we also have \(n/2\) students from \(b[n/2+1:n]\) no lower than \(m\). By definition \(b[n/2 + 1 : n]\) and \(b'\) are disjoint, so in total we can say that there are at least \(n/2 + 1 + n/2 = n + 1\) students in \(a\) and \(b\) no lower than \(m\). These two conditions prove that \(m\) is indeed the moodian of \(a\) and \(b\).
+
+    By our induction hypothesis, finding the moodian of \(a'\) and \(b'\) takes \(\log (n/2)\) iterations. Thus in total, we can find the desired index for \(n\) in \(\log (n/2) + 1 = \log n - 1 + 1 = \log n = O(\log n)\) iterations. Each iteration takes constant time, so the total runtime is \(O(\log n)\).
+
+    \item \(a[n/2] > b[n/2]\): By symmetry, this is the same case as above, just switch \(a\) and \(b\).
+  \end{enumerate}
+  We have shown the correctness of \textsc{moodian-find} and that it has \(O(\log n)\) runtime, thus we are done.
 \end{proof}
 
 % \newpage

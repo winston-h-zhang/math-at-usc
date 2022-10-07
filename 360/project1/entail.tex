@@ -1,0 +1,144 @@
+\documentclass[10pt]{article}
+\usepackage{fullpage}
+\usepackage[noend]{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{amsfonts}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{nicefrac}
+\usepackage{latexsym}
+\usepackage{epic}
+\usepackage{epsfig}
+\usepackage{amscd}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{times}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% \usepackage{CS270}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}[lemma]{Fact}
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{claim}[lemma]{Claim}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+
+\providecommand{\half}{\ensuremath{\nicefrac{1}{2}}\xspace}
+\providecommand{\third}{\ensuremath{\nicefrac{1}{3}}\xspace}
+\providecommand{\quarter}{\ensuremath{\nicefrac{1}{4}}\xspace}
+
+\providecommand{\SetCard}[1]{\ensuremath{| #1 |}\xspace}
+\providecommand{\SET}[1]{\ensuremath{\{ #1 \}}\xspace}
+\providecommand{\Abs}[1]{\ensuremath{| #1 |}\xspace}
+\providecommand{\Set}[2]{\ensuremath{\SET{#1 \mid #2}}\xspace}
+
+\providecommand{\Kth}[1]{\ensuremath{{#1}^{\rm th}}}
+\providecommand{\Ceiling}[1]{\ensuremath{\lceil {#1} \rceil}\xspace}
+\providecommand{\Floor}[1]{\ensuremath{\lfloor {#1} \rfloor}\xspace}
+
+\providecommand{\PROB}{\ensuremath{{\rm Prob}}\xspace}
+\providecommand{\Prob}[2][]{\ensuremath{%
+\ifthenelse{\equal{#1}{}}{\PROB[#2]}{\PROB_{#1}[#2]}}\xspace}
+\providecommand{\ProbC}[3][]{\Prob[#1]{#2\;|\;#3}}
+\providecommand{\Expect}[2][]{\ensuremath{%
+\ifthenelse{\equal{#1}{}}{\mathbb{E}}{\mathbb{E}_{#1}}%
+\left[#2\right]}\xspace}
+\providecommand{\ExpectC}[3][]{\Expect[#1]{#2\;|\;#3}}
+
+\newcommand\algorithmicprocedure{\textbf{procedure}}
+\newcommand{\algorithmicendprocedure}{\algorithmicend\ \algorithmicprocedure}
+\makeatletter
+\newcommand\PROCEDURE[3][default]{%
+  \ALC@it
+  \algorithmicprocedure\ \textsc{#2}(#3)%
+  \ALC@com{#1}%
+  \begin{ALC@prc}%
+}
+\newcommand\ENDPROCEDURE{%
+  \end{ALC@prc}%
+  \ifthenelse{\boolean{ALC@noend}}{}{%
+    \ALC@it\algorithmicendprocedure
+  }%
+}
+\newenvironment{ALC@prc}{\begin{ALC@g}}{\end{ALC@g}}
+\makeatother
+
+\title{\bf Question 2}
+\author{Winston (Hanting) Zhang}
+\date{October 6, by 11:59}
+
+\begin{document}
+
+\subsection*{2. Resolution for First Order Logic - 20 points}
+Consider the following knowledge base: (a) All programmers who do not have bugs in their code and comment their code write high-quality code. (b) Programmers who use best coding practices comment their code. (c) Programmers who write high-quality code solve programming problems quickly. (d) Amanda uses best coding practices and (e) does not have bugs in her code. (f) Bill does not comment his code.
+
+\begin{enumerate}
+    \item You want to find out whether the knowledge base entails that Amanda solves programming problems quickly. Use resolution for a proof by contradiction.
+    \begin{enumerate}
+        \item Write down the entailment that you want to prove, expressing the English statements in first-order logic. Use the predicates HasBugs(x), Comments(x), HighQuality(x), QuickSolve(x), and BestPractice(x), where x is a programmer.
+        \item Do the transformations as explained in class.
+        \item Use resolution to try to obtain false (that is, the empty clause).
+        \item Interpret the result of the previous step in plain English.
+    \end{enumerate}
+    \item You want to find out whether the knowledge base entails that Bill solves programming problems quickly. Proceed using the steps given above.
+\end{enumerate}
+
+\begin{enumerate}
+    \item We start with the knowledge base 
+    \begin{align*} 
+      (1) \hspace*{2mm}& \forall x, \neg \text{HasBugs}(x) \land \text{Comment}(x) \implies \text{HighQuality}(x) \\
+      (2) \hspace*{2mm}& \forall x, \text{BestPractice}(x) \implies \text{Comment}(x) \\
+      (3) \hspace*{2mm}& \forall x, \text{HighQuality}(x) \implies \text{QuickSolve}(x) \\
+      (4) \hspace*{2mm}& \text{BestPractice}(A) \\
+      (5) \hspace*{2mm}& \neg \text{HasBugs}(A) \\
+      (6) \hspace*{2mm}& \neg \text{Comment}(B)
+    \end{align*}
+    By applying rewrite rules for implies, we can equivalently say 
+    \begin{align*} 
+      (1) \hspace*{2mm}& \forall x, \text{HasBugs}(x) \lor \neg \text{Comment}(x) \lor \text{HighQuality}(x) \\
+      (2) \hspace*{2mm}& \forall x, \neg \text{BestPractice}(x) \lor \text{Comment}(x) \\
+      (3) \hspace*{2mm}& \forall x, \neg \text{HighQuality}(x) \lor \text{QuickSolve}(x) \\
+      (4) \hspace*{2mm}& \text{BestPractice}(A) \\
+      (5) \hspace*{2mm}& \neg \text{HasBugs}(A) \\
+      (6) \hspace*{2mm}& \neg \text{Comment}(B)
+    \end{align*}
+    To show QuickSolve\((A)\), we do the transformation of adding: (7) \(\neg \text{QuickSolve}(A)\), and do resolution to try to prove false. Indeed, we have: 
+    \begin{align*}
+      (2) + (5) \Rightarrow (8) \hspace*{2mm}& \text{Comment}(A) \\
+      (1) + (8) \Rightarrow (9) \hspace*{2mm}& \text{HasBugs}(A) \lor \text{HighQuality}(A) \\
+      (3) + (9) \Rightarrow (10) \hspace*{2mm}& \text{HasBugs}(A) \lor \text{QuickSolve}(A) \\
+      (5) + (10) \Rightarrow (11) \hspace*{2mm}& \text{QuickSolve}(A) \\
+      (7) + (11) \Rightarrow (12) \hspace*{2mm}& \bot 
+    \end{align*}
+    Since we have false, resolution succeeds. In plain english, this means that Alice can solve problems quickly.
+
+    \item Start with the same 6 rules as we did for part 1 and add (7) \(\neg \text{QuickSolve}(B)\). We try to use resolution to prove false: 
+    \begin{align*}
+      (2) + (6) \Rightarrow (8) \hspace*{2mm}& \neg \text{BestPractice}(B) \\
+      (3) + (7) \Rightarrow (9) \hspace*{2mm}& \neg \text{HighQuality}(B) \\
+      (1) + (10) \Rightarrow (7) \hspace*{2mm}& \text{HasBugs}(B) \lor \neg \text{Comment}(B) \\
+      & \text{No other resolutions can be made.}
+    \end{align*}
+    Since no other resolutions can be made, we can only conlude that the knowledge base does not entail that Bob solves problems quickly.
+\end{enumerate}
+
+\subsection*{3. Bayesian Networks}
+\begin{enumerate}
+  \item[Part 1]
+  \begin{enumerate}
+    \item[(1)] \(P(K = T) = 0.56215\)
+    \item[(2)] \(P(K = T) = 0.61\)
+  \end{enumerate}
+  \item[Part 3]
+\end{enumerate}
+
+\end{document}

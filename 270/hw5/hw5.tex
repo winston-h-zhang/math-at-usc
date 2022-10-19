@@ -17,7 +17,14 @@
 \usepackage{hyperref}
 \usepackage{enumerate}
 \usepackage{times}
+\usepackage{listings}
+\usepackage{xcolor}
 
+\lstset { 
+  language=C++,
+  backgroundcolor=\color{black!5}, % set backgroundcolor
+  basicstyle=\footnotesize\ttfamily
+}
 % \usepackage{CS270}
 
 \newtheorem{lemma}{Lemma}
@@ -53,6 +60,8 @@
 \left[#2\right]}\xspace}
 \providecommand{\ExpectC}[3][]{\Expect[#1]{#2\;|\;#3}}
 
+\newcommand{\OPT}{\text{OPT}}
+
 \title{\bf Homework 5}
 \author{Winston (Hanting) Zhang}
 \date{Tuesday, October 18, by 23:00}
@@ -76,7 +85,7 @@ Please provide a formal mathematical proof for all your claims, and  present run
 \newpage
 
 \subsection*{Problem 1. [15]}
-  Imagine that you are playing a game resembling Chutes\&\ Ladders with your sibling. It consists of $n+1$ squares, labeled from $0$ to $n$. You start on square 0. When you reach square $n$, you win. When it is your turn, you roll a 6-sided die, and move that number of squares forward. There are two types of special squares:
+  Imagine that you are playing a game resembling Chutes \&\ Ladders with your sibling. It consists of $n+1$ squares, labeled from $0$ to $n$. You start on square 0. When you reach square $n$, you win. When it is your turn, you roll a 6-sided die, and move that number of squares forward. There are two types of special squares:
   \begin{itemize}
     \item If square $i$ is a ladder, then it comes with a destination square $d[i] > i$ where the ladder leads. You immediately climb the ladder, and end up on square $d[i]$.
     \item If square $i$ is a chute, you instantaneously die when you end up on square $i$ by rolling a die. (However, if you climbed to square $i$ using a ladder, you do not die.)
@@ -91,6 +100,86 @@ Please provide a formal mathematical proof for all your claims, and  present run
 
   Give and analyze a polynomial-time algorithm for solving this problem. If you are following an approach based on recurrences, just the recurrence is \emph{not} enough --- you have to give a full pseudo-code implementation with correctness proof and running time analysis. (The running time analysis will likely be short.)
 
+\paragraph*{Input:} 
+
+The board is given as a vector of integers \(a_0, \ldots, a_n\), where \(a_i = -1\) denotes a chute, \(a_i = 0\) denotes a non-special block, and \(a_i = > i\) denotes a ladder from \(i\) to \(a_i\). 
+
+\paragraph*{Output:}
+
+A vector of integers \(r_1, \ldots, r_k\) -- representing the shortest sequence of rolls that reaches square \(n\).
+
+\paragraph*{Code:} \hspace*{2mm}
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> chutes_and_ladders(vector<int> board) {
+    int n = board.size() - 1;
+    vector<int> ans;
+    vector<pair<int, int>> prev(n+1, {-1, 0});
+    vector<int> dp(n+1, INF);
+    dp[0] = 0;
+    // dp[i] represents the minimum number of rolls to get to i without dying
+    for (int i = 0; i < n; ++i) {
+        for (int r = 1; r <= 6; ++r) {
+            if (i + r <= n) { // careful, don't roll out of bounds
+                if (board[i + r] == 0 && dp[i] + 1 < dp[i + r]) { // update if non-special
+                    dp[i + r] = dp[i] + 1;
+                    prev[i + r] = {i, r};
+                } else if (board[i + r] > 0 && dp[i] + 1 < dp[board[i]]) { // update if ladder
+                    dp[board[i]] = dp[i] + 1;
+                    prev[board[i]] = {i, r};
+                }
+            }
+        }
+    }
+    // rebuild rolls
+    int prev_ = prev[n].first;
+    int roll = prev[n].second;
+    while (prev_ != -1) { // while a previous step exists
+        ans.push_back(roll);
+        if (prev_ == 0) // if prev_ is 0 we're done, reverse and return 
+            return reverse(ans, ans.begin(), ans.end());
+        prev_ = prev[prev_].first;
+        roll = prev[prev_].second;
+    }
+    // if there is no previous step, then we return failure
+    return vector<int>();
+}
+\end{lstlisting}
+
+\begin{proposition}
+  \texttt{chutes\_and\_ladders} outputs the shortest sequence of rolls that reaches square \(n\).
+\end{proposition}
+
+\begin{proof}
+  \textbf{Correctness:} We define \(\OPT(i)\) to be the minimum number of rolls it takes to reach square \(i\). We agree that \(\OPT(i) = \infty\) if it is not possible to reach square \(i\) without dying. Now consider all possible ways to reach some square \(i\). Either we land on \(i\) through a direct roll from squares \(\{i - 6, i - 5, \ldots, i - 1\}\), or we arrive through a ladder that ends on \(i\). Denote all ladder squares that end on \(i\) by \(\text{end}(i)\). With this analysis we can now write a reccurence for the optimal number of rolls it takes to reach square \(i\): 
+  \[\OPT(i) = 1 + \min_{j \in \{i - 6, \ldots, i - 1\} \cup \text{end}(i)}\OPT(j)\]
+
+  To prove the correctness of our algorithm, note that the given code can be split into two distinct parts. The first part is the dynamic programming which we claim computes \(\OPT(i)\). The second part retraces a vector of previous data to recover the shortest sequence of rolls. Hence for correctness, we only need to show that the first part computes \(dp[i] = \OPT(i)\) correctly. 
+
+  Indeed, we proceed by induction on \(n\). The base case \(k = 0\) is trivial, as we simply have \(dp[0] = 0 = \OPT(0)\). 
+
+  Now assume for the sake of induction that we have that \(dp[j] = \OPT(j)\) for all \(1 \le j \le k - 1\). We want to show that \(dp[k] = \OPT(k)\). (We use \(k\) to avoid clashing with \(i\) in the code.)
+
+  Indeed, let us consider all possible instructions within our program that assign a value to \(dp[k]\). There are three places we make an assignment to \(dp\). The first is the initialization to infinity. Then subsequently, we have two assignments in the non-special and ladder cases which occur if and only if \(i + r = k\) or \(i + r \in \text{end}(k)\) -- we can justify the ``if and only if'' by noting that these are the only possible assignments that can affect \(dp[k]\), and our loops attempt to make every possible assignment, so any assignment that can be made must be made. 
+  Furthermore, note that each assignment to \(dp\) is wrapped in an if statement that checks if the new proposed value is less than the current one, in other words, taking the minimum between the new and old value. Hence, we make assignments for \(dp(i + r) = \min(dp[i] + 1, dp[i + r])\) and \(dp[\text{board}[i]] = \min(dp[i] + 1, dp[\text{board}[i]])\). Now let's look through the notation: \(i + r = k \iff i \in \{k - 6, \ldots, k - 1\}\) and \(\text{board}[i] = k \iff i \in \text{end}(k)\). Rewriting with these equivalences, we are computing
+  \[dp[k] = \min(\infty, dp[k - 6], \ldots, dp[k - 1], \min_{i \in \text{end}(k)}(dp[i])) + 1.\]
+  Note that \(\{k - 6, \ldots, k - 1\}\) and \(\text{end}(k)\) are all less than \(k\) by construction, so our induction hypothesis guarantees that \(dp[k - r] = \OPT(k - r)\), \(1 \leq r \leq 6\) and \(dp[i] = \OPT(i)\), \(i \in \text{end}(k)\). Then from above we have: 
+  \begin{align*}
+    dp[k] &= \min(\infty, dp[k - 6], \ldots, dp[k - 1], \min_{i \in \text{end}(k)}(dp[i])) + 1 \\ 
+    &= 1 + \min_{j \in \{i - 6, \ldots, i - 1\} \cup \text{end}(i)}dp(j) \\ 
+    &= 1 + \min_{j \in \{i - 6, \ldots, i - 1\} \cup \text{end}(i)}\OPT(j) \\ 
+    &= \OPT(k)
+  \end{align*}
+  Thus our induction is complete. We conclude that at the end of execution, \(dp[n]\) will contain the minimum number of rolls it takes to get to square \(n\). 
+  
+  \textbf{Termination:} in the first part, we run a finite amount of iterations, which terminates. In the retracing step, by construction the pointers get smaller -- \(i\) points to some \(j\) such that \(j < i\). At some point we will retrace to \(i = 0\), so this terminates as well.
+
+  \textbf{Runtime:} Refer to the code above. All of the initialization in the beginning, setting up vectors, etc, is \(O(n)\). The main body consists of two for loops, the outer doing \(n\) iterations and inner doing exactly \(6\). The logic inside the loops consist only of comparisons and assignments, which runs in \(O(1)\). Hence the runtime for the main body is \(O(6n) = O(n)\). In the last part of the algorithm, we trace back with our previous pointers. By construction, this trace back visits at most all of the \(n\) squares, so this section also runs in \(O(n)\). Hence the total runtime is just \(O(n)\).
+
+  \textbf{Output:} We claim that the output is correct because it maintains the invariant that for every \(i\), prev[\(i\)] consists of some square \(j\) and a roll \(r\) such that rolling \(r\) at \(j\) is the optimal last roll that reaches square \(i\). This is clearly true, since the code only updates prev[\(i\)] when we find a better minimum for \(dp[i]\). Thus prev[\(i\)] always maintains the best known roll to reach \(i\) from the dp. Thus when we reconstruct the rolls, at each trace back we are just taking the optimal roll until we hit square 0. Once we terminate, we simply end up with the best sequence of rolls from 0 to \(n\) (backwards, so we have to reverse it).
+\end{proof}
 
 \subsection*{Problem 2. [15]}
   In class, we saw the algorithm for computing Edit Distance.
@@ -103,6 +192,156 @@ Please provide a formal mathematical proof for all your claims, and  present run
   
   Give and analyze a polynomial-time algorithm for solving this problem. If you are following an approach based on recurrences, just the recurrence is \emph{not} enough --- you have to give a full pseudo-code implementation with correctness proof and running time analysis. (The running time analysis will likely be short.)
 
+\paragraph*{Input:} 
+
+The strings \(x\) and \(y\), as well as the values of \(A, B, c\). 
+
+\paragraph*{Output:}
+
+An integer and vector of steps. The integer represents the minimum cost to transform \(x\) into \(y\). The vector lists the necessary steps needed to perform the transformation.
+
+\paragraph*{Code:} \hspace*{2mm}
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef pair<pair<int, int>, string> step;
+
+pair<int, vector<string>> min_distance(string x, string y, int A, int B, int c) {
+    int n = x.length();
+    int m = y.length();
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+    vector<vector<step>> prev(n + 1, vector<step>(m + 1, {{-1, -1}, "none"}));
+
+    for (int i = 1; i <= n; ++i) {
+        if (A >= c) {
+            dp[i][0] = A + c * (i - 1);
+            prev[i][0] = {{0, 0}, 
+                "delete at " + to_string(0) + ".." + to_string(i - 1)};
+        } else {
+            dp[i][0] = A * i;
+            prev[i][0] = {{i - 1, 0}, 
+                "delete at " + to_string(i - 1)};
+        }
+    }
+    for (int j = 1; j <= m; ++j) {
+        if (A >= c) {
+            dp[0][j] = A + c * (j - 1);
+            prev[0][j] = {{0, 0}, 
+                "insert at " + to_string(0) + ".." + to_string(j - 1)};
+        } else {
+            dp[0][j] = A * j;
+            prev[0][j] = {{0, j - 1}, 
+                "insert at " + to_string(0) + ".." + to_string(j - 1)};
+        }
+    }
+
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            pair<int, int> min_ij = {INF, INF};
+            int min_cost = INF; 
+            // must be either "none", "insert", "delete", or "substitute"
+            string operation = "";
+            int cost = INF;
+            for (int k = 1; k <= i; ++k) {
+                cost = dp[i - k][j] + A + c * (k - 1);
+                if (cost < min_cost) {
+                    min_ij = {i - k, j};
+                    min_cost = cost;
+                    operation = "delete at " + 
+                        to_string(i - k) + ".." + to_string(i - 1);
+                }
+            }
+            for (int k = 1; k <= j; ++k) {
+                cost = dp[i][j - k] + A + c * (k - 1);
+                if (cost < min_cost) {
+                    min_ij = {i, j - k};
+                    min_cost = cost;
+                    operation = "insert at " + 
+                        to_string(j - k) + ".." + to_string(j - 1);
+                }
+            }
+            cost = dp[i - 1][j - 1] + (B ? x[i - 1] == y[j - 1] : 0);
+            if (cost < min_cost) {
+                min_ij = {i - 1, j - 1};
+                min_cost = cost;
+                operation = "substitute " + 
+                    to_string(i - 1) + " -> " + to_string(j - 1);
+            }
+            dp[i][j] = min_cost;
+            prev[i][j] = {{min_ij.first, min_ij.second}, operation};
+        }
+    }
+
+    vector<string> ans;
+    int prev_x = prev[n][m].first.first;
+    int prev_y = prev[n][m].first.second;
+    string prev_descr = prev[n][m].second;
+    // if we hit (-1, -1), then the previous iteration was
+    // (0, 0) and we're done
+    while (prev_x != -1 && prev_y != -1) {
+        if (prev_descr != "none")
+            ans.push_back(prev_descr);
+        prev_descr = prev[prev_x][prev_y].second;
+        int temp_x = prev_x;
+        prev_x = prev[temp_x][prev_y].first.first;
+        prev_y = prev[temp_x][prev_y].first.second;
+    }
+    reverse(ans.begin(), ans.end());
+    return {dp[n][m], ans};
+}
+\end{lstlisting}
+
+\begin{proposition}
+  \texttt{min\_distance} outputs the minimum cost sequence of operations that transforms \(x\) into \(y\).
+\end{proposition}
+
+\begin{proof}
+  \textbf{Correctness:} We define \(\OPT(i, j)\) to be the minimum cost sequence of operations it takes to transform \(x[0..i)\) into \(y[0..j)\) (not inclusive at the endpoint, we agreed that \(x[i..i)\) is the empty substring). The final answer we need is \(\OPT(n, m)\). As we did for the original simpler version of this problem, for each subproblem, we can think in terms of alignment and conclude that there are three cases with their own subproblems: 
+  \begin{enumerate}
+    \item \(x[i]\) aligns with \(y[j]\): \(x[0..i-1]\) aligns \(y[0..j-1]\) \textbf{optimally}.
+    \item For some \(k\), \(x[i-k..i]\) all align with blank:  \(x[0..i-k]\) aligns with \(y[0..j]\) \textbf{optimally}. 
+    \item For some \(k\), \(y[j-k..j]\) all align with blank: \(x[0..i]\) aligns with \(y[0..j-k]\) \textbf{optimally}.
+  \end{enumerate}
+  Since these are all the subproblems we have, we can write a recurrence relation for \(\OPT(i, j)\). There are 3 types of base cases. First, clearly we have \(\OPT(0, 0) = 0\). If \(j = 0\), then we are trying to match \(x[0..i]\) to an empty substring, so the best we can do is just to delete everything for a cost of \(\OPT(i, 0) = \min(A + c(i - 1), Ai)\). Similarly if \(i = 0\), then we are matching an empty string to \(y[0..j]\), so we just insert everything for a cost of \(\OPT(0, j) = \min(A + c(j - 1), Aj)\). Now suppose \(i, j > 0\), then define the minimum for the second and third cases as:
+  \begin{align*}
+    \OPT_m(i, j) &= \text{if \(x[i] \neq y[j]\) then \(B\) else 0} + \OPT(i - 1, j - 1) \\
+    \text{OPT}_x(i) &= \min_{0 \leq k < i}(A + c(k - 1) + \OPT(i - k, j)) \\
+    \text{OPT}_y(j) &= \min_{0 \leq k < j}(A + c(k - 1) + \OPT(i, j - k)) \\
+  \end{align*}
+  Then we have 
+  \[\OPT(i, j) = \min(\OPT_x(i), \OPT_y(j), \OPT_m(i, j)).\]
+  (Note this is really just a recurrence on \(\OPT(i, j)\) -- having \(\OPT_m(i, j)\), \(\OPT_x(i)\) and \(\OPT_y(j)\) just clears up the clutter.)
+
+  To prove the correctness of our algorithm, note that the given code can be split into two distinct parts. The first part is the dynamic programming which we claim computes \(\OPT(i, j)\). The second part retraces a map of previous data to recover the shortest sequence of operations. Hence for correctness, we only need to show that the first part computes \(dp[i][j] = \OPT(i, j)\) correctly. 
+
+  Indeed, we proceed by strong induction on \(i + j\). The base case \(i + j = 0\) is trivial, as then we must have \(i = j = 0\), and from our setup \(dp[0][0] = 0 = \OPT(0, 0)\). 
+
+  Now assume for the sake of induction that \(dp[i][j] = \OPT(i, j)\) whenever we have \(i', j'\) such that \(i' + j' < i + j\). Now we can do casework on the values of \(i, j\):
+  \begin{enumerate}
+    \item If \(j = 0\), then our algorithm simply sets \(dp[i][0] = \min(A + c(i - 1), Ai) = \OPT(i, 0)\) (base case). 
+    \item If \(i = 0\), then our algorithm simply sets \(dp[0][j] = \min(A + c(j - 1), Aj) = \OPT(0, j)\) (base case). 
+    \item If \(i, j > 0\), then our algorithm first attempts to remove \(1 \leq k < i\) characters from \(x\) and use an optimal alignment between \(x[0..i-k]\) and \(y[0..j]\) by applying our induction hypothesis -- note that \(i - k + j < i + j\). Hence \(dp[i - k][j] = \OPT[i - k][j]\), and at the end of the first loop we have the value:
+    \begin{align*}
+      \min_{1 \leq k < i}(A + c(k - 1) + dp[i - k][j]) = \min_{1 \leq k < i}(A + c(k - 1) + \OPT[i - k][j]) = \OPT_x(i)
+    \end{align*}
+    In the second loop, similarily we attempt to insert \(k\) characters into \(x\) from \(y\) and use the optimal alignment between \(x[0..i]\) and \(y[0..j - k]\). Again we apply our induction hypothesis (\(i + j - k < i + j\)), and at the end of the second loop we have: 
+    \begin{align*}
+      &\hspace*{4mm}\min(\OPT_x(i), \min_{1 \leq k < j}(A + c(k - 1) + dp[i][j - k]))\\ 
+      &= \min(\OPT_x(i), \min_{1 \leq k < j}(A + c(k - 1) + \OPT[i][j - k])) \\ &= \min(\OPT_x(i), \OPT_y(j))
+    \end{align*}
+    In the final step, we take a final minimum with \(\text{if \(x[i] \neq y[j]\) then \(B\) else 0} + dp[i - 1][j - 1]\). Again, \(i - 1 + j - 1 < i + j\), so our induction hypothesis guarantees 
+    \[\text{if \(x[i] \neq y[j]\) then \(B\) else 0} + dp[i - 1][j - 1] = \OPT_m(i, j).\] Thus our final computed cost is 
+    \[dp[i][j] = \min(\OPT_x(i), \OPT_y(j), \OPT_m(i, j)) = \OPT(i, j).\]
+  \end{enumerate}
+  Hence in all cases, we have \(dp[i][j] = \OPT(i, j)\). This completes the induction. 
+
+  \textbf{Termination:} in the first part, we run a finite amount of iterations, which terminates. In the retracing step, by construction the pointers get smaller -- \(i, j\) points to some \(i', j'\) such that \(i' + j < i + j\). At some point we will retrace to \((i, j) = (0, 0)\), so this terminates as well.
+
+  \textbf{Runtime:} Refer to the code above. All of the initialization in the beginning, setting up vectors, etc, is \(O(nm)\). The main body has two top for loops, the outer doing \(n\) iterations and inner doing \(m\). Within the two inner loops, we run two more loops in sequence, the first doing \(n\) iterations and the second doing \(m\) iterations. Everything inside these two loops and within the main body consist only of comparisons and assignments, which runs in \(O(1)\). Hence the runtime of the inner body is \(O(n + m)\), and then adding the two outer loops gives \(O(nm(n + m))\). In the last part of the algorithm, we trace back with our previous pointers. By construction, this trace back visits at most all of the \(nm\) dp subproblems, so this section also runs in \(O(nm)\). Hence the total runtime of the entire piece of code is \(O(nm) + O(nm(n + m)) + O(nm) = O(nm(n + m))\).
+
+  \textbf{Output:} We claim that the output is correct because it maintains the invariant that for every \(i, j\), prev[\(i\)][\(j\)] consists of the squares \(i', j'\) and a operation \(t\) such that doing \(t\) at \(i', j'\) is the optimal operation that aligns \(x[0..i]\) with \(y[0..j]\). This is true since the code only updates prev[\(i\)][\(j\)] when we find a better minimum for \(dp[i][j]\). Thus prev[\(i\)][\(j\)] always maintains the best known operation to align \(x[0..i]\) to \(y[0..j]\) from the dp. Thus when we reconstruct the operations, at each trace back we are just taking the optimal operation until we can no longer go back more. Once we terminate, we simply end up with the best sequence of operations transforming \(x\) to \(y\) (once again backwards, so we must reverse).
+\end{proof}
 
 \subsection*{Chocolate Problem: 1 chocolate bar}
   

@@ -53,6 +53,23 @@
 \left[#2\right]}\xspace}
 \providecommand{\ExpectC}[3][]{\Expect[#1]{#2\;|\;#3}}
 
+\newcommand\algorithmicprocedure{\textbf{procedure}}
+\newcommand{\algorithmicendprocedure}{\algorithmicend\ \algorithmicprocedure}
+\makeatletter
+\newcommand\PROCEDURE[3][default]{%
+  \ALC@it
+  \algorithmicprocedure\ \textsc{#2}(#3)%
+  \ALC@com{#1}%
+  \begin{ALC@prc}%
+}
+\newcommand\ENDPROCEDURE{%
+  \end{ALC@prc}%
+  \ifthenelse{\boolean{ALC@noend}}{}{%
+    \ALC@it\algorithmicendprocedure
+  }%
+}
+\newenvironment{ALC@prc}{\begin{ALC@g}}{\end{ALC@g}}
+\makeatother
 
 \title{\bf Homework 7}
 \author{Winston (Hanting) Zhang}
@@ -84,6 +101,114 @@ It is supposed to run in polynomial time (not pseudo-polynomial) and output a ne
 
 Give and analyze a polynomial-time algorithm for finding such an $f'$.
 
+\begin{algorithm}[htb]
+  \begin{algorithmic}
+    \PROCEDURE{find-cycles-at}{\(G, v\)}
+      \STATE \textbf{let} \(q \gets \{v\}\) (queue with one element)
+      \STATE \textbf{let} visited \(\gets \{\}\) (empty set)
+      \STATE \textbf{let} prev \(\gets \{\}\) (empty map)
+      \STATE \textbf{let} cycles \(\gets \{\}\) (empty list)
+      \WHILE{not \(q\).empty}
+        \STATE \textbf{let} \(w \gets q\).pop
+        \STATE visited\([w] =\) true
+        \IF{\(w = v\)}
+          \STATE \textbf{let} \(C \gets\) \textsc{backtrack}(prev, \(w\))
+          \STATE cycles.push\(()\)
+        \ENDIF
+        \FOR{each edge \(e\) out of \(v\)}
+          \IF{ahh}
+            \STATE
+          \ENDIF
+        \ENDFOR
+      \ENDWHILE
+      \STATE \textbf{return}
+    \ENDPROCEDURE
+
+    \PROCEDURE{remove-cycles-at}{\(G, f, v\)}
+      \STATE \textbf{let} cycles \(\gets\) \textsc{find-cycles-at}\((G, v)\)
+      \FOR{\(C\) in cycles}
+        \STATE \textbf{let} \(e^* \gets\) edge with minimum cost in \(C\).edges
+        \FOR{\(e\) in \(C\).edges}
+          \STATE \textbf{let} \(f_e \gets f_e - f_{e^*}\)
+        \ENDFOR
+      \ENDFOR
+      \STATE \textbf{return} \(f\)
+    \ENDPROCEDURE
+    
+    \PROCEDURE{remove-cycles}{\(G, f\)}
+      \FOR{\(v\) in \(V\)}
+        \STATE \textbf{let} \(f \gets\) \textsc{remove-cycles-at}(\(G, f, v\))
+      \ENDFOR
+      \STATE \textbf{return} \(f\)
+    \ENDPROCEDURE
+  \end{algorithmic}
+  \caption{Remove cycles from flow. \label{alg:rain-days}}
+\end{algorithm}
+
+\begin{definition}
+  Let \(f, f'\) be flows on \(G\). Define \(f \leq f'\) if \(f_e \leq f'_e\) for all \(e \in E\). 
+\end{definition}
+
+\begin{proposition}
+  Given a finite graph \(G = (V, E)\) and vertex \(v \in V\), \textsc{find-cycles-at}(\(G, v\)) outputs a list of all cycles in \(G\) containing the vertex \(v\) in \(O(E^2)\) time complexity.
+\end{proposition}
+
+\begin{proof}
+  This is a rare \textit{proof by piazza post}. Kempe states in a post: ``If you want to detect cycles, you need to outline it at a level of detail that a good 104 student could implement it from your description.''
+
+  A good 104 student should recognize that \textsc{find-cycles-at}\((G, v)\) is a BFS procedure. The condition for termination is hitting the start node \(v\) again in our search, at which point we backtrack through a map of previous pointers to construct a cycle. This is a full BFS that only terminates when all nodes are explored, possibly triggering many termination calls to save multiple detected cycles. 
+
+  We claim that since this is a full BFS, we detect all possible cycles that contain \(v\). We point to Kempe's comment again and omit a full proof of this claim. The cost of searching with BFS is \(O(V + E)\). The termination condition can only be triggered when we we explore a edge going into \(e\); this number is bounded by \(E\). Furthermore, the cost of constructing individual cycles is also bounded by \(E\), since we can backtrack at most \(E\) times. Hence the cost of termination and constructing cycles is \(O(E^2)\). In total, the runtime complexity is \(O(V + E + E^2) = O(E^2)\), as desired.
+\end{proof}
+
+\begin{proposition}
+  Let \(f\) be a valid flow on \(G\). Given \(v \in V\), let \(f' = \textsc{remove-cycles-at}(G, f, v)\).
+  Then 
+  \begin{enumerate}
+    \item \(f'\) is a valid flow on \(G\);
+    \item \(f' \le f\);
+    \item \(f'\) does not contain any cycles containing \(v\).
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  We begin by indexing the cycles obtained by \textsc{find-cycles-at}\((G, v)\) with \(C_1, C_2, \ldots, C_k\). The outer for loop executes its body from \(C = C_1\) to \(C = C_k\). 
+
+  Now we define a sequence of modifications to the original flow \(f\) as follows. Start with \(f_0 = f\), then at each iteration \(i\) of the outer loop, we modify \(f_{i - 1}\) and produce a new flow \(f_i\), ending with \(f_k = f'\) (which we output). We claim that for every \(1 \leq i \leq k\), \(f_i\) is a valid flow, \(f_i \leq f\), and \(f_i\) does not contain any of the cycles \(C_j\) for \(j \leq i\).
+
+  Indeed, we proceed by induction on \(i\). The base case \(i = 0\) is trivial: \(f_0 = f\) is obviously a valid flow and \(f \leq f\). Since \(C_0\) does not exist, \(f_0\) trivially does not contain \(C_0\).
+
+  Now assume for the sake of induction that \(f_{i - 1}\) is a valid flow such that \(f_{i - 1} \leq f\) and and \(f_{i - 1}\) does not contain any of the cycles \(C_j\) for \(j \leq i - 1\). We want to show that \(f_i\) is a valid flow such that \(f_i \leq f\) and \(f_i\) does not contain any of the cycles \(C_j\) for \(j \leq i\).
+
+  We analyze the inner loop that modifies \(f_{i - 1}\) into \(f_i\). Consider each node \(w\) in \(C_i\). Since \(C_i\) is a cycle, we know that \(w\) has exactly two edges \(e_{\text{in}}\) and \(e_{\text{out}}\) going in and out. When we loop through all edges in \(C_i\) in our algorithm, we subtract \(f_{i, e^*}\) from \(e_{\text{in}}\) and \(e_{\text{out}}\), setting \(f_{i}^{\text{in}}(w) = f_{i - 1}^{\text{in}}(w) - f_{i, e^*}\) and \(f_{i}^{\text{out}}(w) = f_{i - 1}^{\text{out}}(w) - f_{i, e^*}\). By our induction hypothesis, \(f_{i - 1}\) is a valid flow! Thus \(f_{i - 1}^{\text{in}}(w) = f_{i - 1}^{\text{out}}(w)\), and hence we may conclude that \(f_{i}^{\text{in}}(w) = f_{i}^{\text{out}}(w)\). This hold for all vertices \(w\) which we modify within \(C_i\), showing that \(f_i\) conserves the in-out flow at each vertex. 
+  
+  Next, we are substracting flow, so clearly \(f_{i} \leq f_{i - 1}\). By our induction hypothesis, \(f_{i - 1} \leq f\), so \(f_i \leq f_{i - 1} \leq f\). Furthermore, since \(f_{i, e^*}\) is the minimum flow in \(C_i\), we can guarantee that all modified edges are still non-negative. Thus this shows that \(f_i\) is valid and \(f_{i} \leq f\). 
+  
+  Finally, because \(f_{i} \leq f_{i - 1}\), \(f_i\) definitely cannot contain any cycles that \(f_{i - 1}\) does not have. Thus by our induction hypothesis, \(f_i\) does not contain any of the cycles \(C_j\) for \(j \leq i - 1\). Furthermore, \(e^* \in C_i\) and we must have \(f_{i, e^*} = 0\), therefore \(f_i\) does not contain \(C_i\) as well, proving that \(f_i\) does not contain any of the cycles \(C_j\) for \(j \leq i\), as desired. This completes the induction!
+
+  The result of our induction gives \(f_k = f'\) is a valid flow such that \(f_k = f' \leq f\) and \(f_k = f'\) does not contain any of the cycles \(C_1, \ldots, C_k\). These are exactly the three conditions that complete the proof.
+\end{proof}
+
+\begin{proposition}
+  Let \(f\) be a valid flow on \(G\) and \(f' = \textsc{remove-cycles}(G, f)\). Then 
+  \begin{enumerate}
+    \item \(f'\) is a valid flow on \(G\);
+    \item \(f' \le f\);
+    \item \(f'\) is acyclic.
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  Index the vertices \(v_1, \ldots, c_n\). Again, we follow the execution of the loop and define a sequence of modifications to the original flow \(f\) as follows. Start with \(f_0 = f\), then at each iteration \(i\) of the loop, we modify \(f_{i - 1}\) and produce a new flow \(f_i\), ending with \(f_n = f'\) (which we output). We claim that for every \(1 \leq i \leq n\), \(f_i\) is a valid flow such that \(f_i \leq f\) and \(f_i\) does not contain any cycles containing \(v_j\) for \(j \leq i\).
+
+  We proceed by induction on \(i\). The base case \(i = 0\) is trivial: \(f_0 = f\) is obviously a valid flow and \(f \leq f\).
+
+  Now assume for the sake of induction that \(f_{i - 1}\) is a valid flow such that \(f_{i - 1} \leq f\) and \(f_{i - 1}\) does not contain any cycles containing \(v_j\) for \(j \leq i - 1\). We want to show that \(f_i\) is a valid flow such that \(f_i \leq f\) and \(f_i\) does not contain any cycles containing \(v_j\) for \(j \leq i\). 
+  
+  Indeed, the body simply sets \(f_i = \textsc{remove-cycles-at}(G, f_{i - 1})\). Combining Proposition 2 with our induction hypothesis, we can immediately conclude that \(f_i\) is a valid flow such that \(f_i \leq f_{i - 1} \leq f\) and \(f_i\) does not contain any cycles containing \(v_j\) for \(j \leq i - 1\) plus \(v_i\) itself. This completes the induction.
+
+  Thus \(f_n = f'\) is a valid flow such that \(f_n = f' \leq f\) and \(f_n = f'\) does not contain any cycles, as desired.
+\end{proof}
 
 \subsection*{Problem 2. [15]}
 Imagine that you are starting a food delivery startup with the motto ``We know you hate when you must wait. Herewith we state that it's not great when we are late, so it's our fate to not get paid.\footnote{There wasn't enough budget to hire someone to come up with a good marketing slogan.}''

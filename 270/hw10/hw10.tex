@@ -177,7 +177,7 @@ Unless we give a hint otherwise, hardness proofs can be accomplished reasonably 
 \end{proposition}
 
 \begin{proof}
-  
+  Suppose we had an input and certificate for \textsc{Station} with graph \(G\). The certificate are \(k\) edges \(E'\) that we add to \(G\). Our certifier simply does BFS with a counter that counts that distance away from the start node \(s\). If at any time the counter for any node increases above \(2\), we return ``no.'' Otherwise, if our BFS completes, return ``yes.'' This is clearly a correct certifier, and running BFS takes \(O(m)\), which is polynomial in out input.
 \end{proof}
 
 \begin{proposition}
@@ -214,44 +214,6 @@ Unless we give a hint otherwise, hardness proofs can be accomplished reasonably 
   So, we have shown that we can remove all ``bad'' edges and replace them with connections bewteen \((s, s_j)\). Then take these \(k\) connections and collect the subsets \(S_j\) that are connected. Since all the element nodes of \(G\) are reachable via some \(s \to s_j \to x_i\), we have that \(S_j\) forms a cover of \(U\). Thus we also have a ``yes'' instance of \textsc{Set Cover}. 
   
   Thus we have a proper reduction from \textsc{Set Cover} to \textsc{Station}, so \textsc{Station} is NP-hard, and thus also NP-complete.
-\end{proof}
-
-\begin{definition}
-  We define the following function from instances of \textsc{3-SAT} to \textsc{Station}: Given a \textsc{3-SAT} decision problem on the proposition \(p\) with literals \(x_1, \ldots, x_k\) and \(m\) clauses \(C_1, \ldots, C_m\). Constuct the following graph: 
-  \begin{enumerate}
-    \item Create the start vertex \(s\).
-    \item Create \(2k\) literal vertices \(x_i, \overline{x_i}\) for each \(1 \leq i \leq k\). 
-    \item Add an edge \((x_i, \overline{x_i})\) for each \(1 \leq i \leq k\).
-    \item Create \(m\) clause vertices \(c_j\) for each \(1 \leq j \leq m\).
-    \item For each clause \(C_j\) and for each of the 3 literals in the clause, if a literal \(x_i\) is present, then add an edge \((c_j, x_i)\), otherwise if \(\neg x_i\) is present, then add an edge \((c_j, \overline{x_i})\). 
-    \item For each literal \(x_i\), add \(2k + 1\) nodes \(u_{i, \ell}\), for \(1 \leq \ell \leq k\), and add edges \((x_i, u_{i, \ell})\) and \((\overline{x_i}, u_{i, \ell})\).
-  \end{enumerate}
-  Call this constructed graph \(G_p = (V, E)\)
-\end{definition}
-
-\begin{proposition}
-  The function from \textsc{3-SAT} to \textsc{Station} given by \(p \mapsto G_p\) is a Karp reduction.
-\end{proposition}
-
-\begin{proof}
-  We must show that \(p\) is satisfiable if and only if \(G_p\) is solvable. We show both directions. 
-
-  Suppose \(p\) is satisfiable. Then there exist some assignment of the \(x_i\) to ``true'' and ``false'' such that \(p\) is true. Then, for each \(1 \leq i \leq k\), if \(x_i\) is ``true'', then add an edge \((s, x_i)\). Otherwise if \(x_i\) is ``false'', then add an edge \((s, \overline{x_i})\). We claim that adding these \(k\) edges make all nodes in \(G_p\) reachable. Let's do casework on the literal nodes, the clause nodes, and the \(u\) nodes separately:
-  \begin{enumerate}
-    \item If \(s\) connects to \(x_i\), then \(\overline{x_i}\) is reachable from \(s \to x_i \to \overline{x_i}\). If \(s\) connects to \(\overline{x_i}\), then we have to opposite \(s \to \overline{x_i} \to x_i\). This holds for all \(i\), so all the literal nodes are reachable.
-    \item We know that \(p\) is true, so each clause \(C_j\) must also be true. Thus there is some literal \(x_i\) or \(\neg x_i\) in the clause that is true. We only need one of these since doing \(\text{true} \lor \text{anything}\) is ``true''. 
-    If \(x_i\) is true, recall that \(c_j\) connects to \(x_i\) from step 5 of our construction. Then \(c_j\) is reachable via \(s \to x_i \to c_j\). If \(\neg x_i\) is true, then \(x_i\) is false and recall that \(c_j\) connects to \(\overline{x_i}\) from step 5 of our construction. Thus \(c_j\) is reachable via \(s \to \overline{x_i} \to c_j\). 
-
-    This holds for all \(c_j\), so all the clause nodes are reachable.
-    \item All the \(u\) nodes connect to either \(x_i\) or \(\overline{x_i}\), so we can reach any \(u\) node via \(s \to x_i \to u_{i, \ell}\) or \(s \to \overline{x_i} \to u_{i, \ell}\). 
-  \end{enumerate}
-  Thus \(G_p\) is solvable, given that \(p\) is satisfiable.
-
-  Now for the other direction. Suppose that \(G_p\) solvable. We want to show that \(p\) is satisfiable. 
-
-  Unfortunately, we cannot directly use the same idea of connecting to \(x_i\) or \(\overline{x_i}\) because we might be able to ``cheat'' a solution by connecting to the clause nodes directly. Let's call any solution to \(G_p\) that connects to non-literal nodes or connects to both a literal and its complement (i.e. connecting to both \(x_i\) and \(\overline{x_i}\)) as ``degenerate'' solutions. We claim in fact that no degenerate solutions exist!
-
-  Think about how to make the \(u\) nodes reachable. We either have to connect to them directly via \(s \to u\), or go through \(x_i\)/\(\overline{x_i}\). 
 \end{proof}
 
 \subsection*{Problem 4. [10]}

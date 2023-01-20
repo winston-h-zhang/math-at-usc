@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W2P1}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+
+\begin{document}
+
+\begin{theorem}[3.1]
+    Prove that
+    \[\lim_{L \to \infty} \sum_{\ell = 0}^{2L + 1} \sum_{j + k = \ell} x_{j, k} = -\frac{2}{3}.\]
+\end{theorem}
+
+\begin{proof}
+    We may rearrange the finite sum \(\sum_{\ell = 0}^{2L + 1} \sum_{j + k = \ell} x_{j, k}\) into \(\sum_{n = 0}^L \sum_{m = n}^{2L + 1 - n} x_{n, m}\). Formally checking that this is a bijection is quite painful, but the geometric argument is that the second sum simply counts the entries column by column instead of along the diagonals.
+
+    Now, the definition of \(x_{n, m}\) gives:
+    \begin{align*}
+        \sum_{n = 0}^L \sum_{m = n}^{2L + 1 - n} x_{n, m} &= \sum_{n = 0}^L \left(-1 + \sum_{m = n + 1}^{2L + 1 - n} x_{n, m}\right) \\ 
+        \text{(since \(m > n\) we have \(x_{n, m} = 2^{n - m}\))  } &= \sum_{n = 0}^L \left(-1 + \sum_{m = n + 1}^{2L + 1 - n} 2^{n - m}\right) \\
+        \text{(reindex with \(m' = m - n\))   } &= \sum_{n = 0}^L \left(-1 + \sum_{m' = 1}^{2L + 1 - 2n} \frac{1}{2^{m'}}\right) \\
+        &= \sum_{n = 0}^L \left(-1 + 1 - \frac{1}{2^{2L + 1 - 2n}}\right) \\
+        &= -\frac{1}{2} \sum_{n = 0}^L \frac{1}{4^{L - n}} = -\frac{1}{2} \sum_{n = 0}^L \frac{1}{4^{n}}
+    \end{align*}
+
+    Now as \(L \to \infty\), we have \(-\frac{1}{2} \sum_{n = 0}^L \frac{1}{4^{n}} \to -\frac{1}{2} \left(\frac{1}{1 - 1/4}\right) = -2/3\), as desired.
+\end{proof}
+
+\begin{theorem}[3.2]
+    Let \((x_{n, m})_{n, m = 0}^\infty\) be a double sequence of complex numbers. Let \(\phi : \mathbb{N}_0 \to \mathbb{N}_0 \times \mathbb{N}_0\) be a bijection, \(\phi(n) = (j(n), k(n))\). Prove that if \(\sum_{n = 0}^\infty \sum_{m = 0}^\infty |x_{n, m}|\) converges, then so does the series \(\sum_{n = 0}^\infty x_{j(n), k(n)}\), and
+    \[\sum_{n = 0}^\infty \sum_{m = 0}^\infty |x_{n, m}| = \sum_{n = 0}^\infty x_{j(n), k(n)}.\]
+\end{theorem}
+
+\begin{lemma}
+    Let \(\phi : \mathbb{N}_0 \to \mathbb{N}_0 \times \mathbb{N}_0\) be a bijection, \(\phi(n) = (j(n), k(n))\). For any \(L\), there exists some \(N\) such that \([0, L] \times [0, L] \subseteq \phi([0, N])\). i.e. \(\phi\) will always ``fill up" the \(L \times L\) square.
+\end{lemma}
+
+\begin{proof}
+    Proof by contradiction. Suppose this wasn't the case for all \(N\). Then \(\phi\) would not be bijective, since there exists some \((x, y) \in [0, L] \times [0, L]\) with no preimage.
+\end{proof}
+
+\begin{proof}
+    Let \(\e > 0\). Define 
+    \[y_m = \sum_{n = 0}^\infty|x_{m, n}|, \hspace*{4mm} z_n = \sum_{m = 0}^\infty |x_{m, n}|, \hspace{4mm} A = \sum_{n = 0}^\infty \sum_{m = 0}^\infty x_{n, m}.\]
+    By the same argument as Lemma 3.3, there exists some \(M_0\) and \(N_0\) such that, for any \(M > M_0\) and \(N > N_0\),
+    \[\sum_{m = M + 1}^\infty y_m < \frac{\e}{2}, \hspace*{4mm} \sum_{n = N + 1}^\infty x_n < \frac{\e}{2}.\]
+
+    To show that \(\sum_{n = 0}^\infty x_{j(n), k(n)}\) converges, it suffices to show that there exists some \(P\) such that
+    \[\bigabs{A - \sum_{n = 0}^P x_{j(n), k(n)}} < 2 \e.\]
+
+    Indeed, choose \(L = \max(M, N)\). Then by our above lemma, there is some \(P\) such \([0, L] \times [0, L] \subseteq \phi([0, P])\). Let \(S = [0, P] - \phi^{-1}([0, L] \times [0, L])\) be the points in the interval that don't get mapped into the square. Also note that \(S \subseteq [L + 1, \infty) \times [0, \infty) \cup [0, \infty) \times [L + 1, \infty)\). Thus we have, 
+    \begin{align*}
+        \bigabs{\sum_{n = 0}^P x_{j(n), k(n)} - \sum_{j = 0}^L \sum_{k = 0}^L x_{j, k}} &\leq \sum_{n \in S} |x_{j(n), k(n)}| \\
+        &\leq \sum_{(i, j) \in [L + 1, \infty) \times [0, \infty)} |x_{j, k}| + \sum_{(i, j) \in [0, \infty) \times [L + 1, \infty)} |x_{j, k}| \\
+        &\leq \sum_{j = L + 1}^\infty y_j + \sum_{k = L + 1}^\infty x_k < \e.
+    \end{align*}
+
+    Thus we have, 
+    \begin{align*}
+        \bigabs{A - \sum_{n = 0}^P x_{j(n), k(n)}} &\leq \bigabs{A - \sum_{j = 0}^L \sum_{k = 0}^L x_{j, k}} + \bigabs{\sum_{n = 0}^P x_{j(n), k(n)} - \sum_{j = 0}^L \sum_{k = 0}^L x_{j, k}} \\
+        &< \e + \e = 2\e
+    \end{align*}
+    as desired. Thus our proof is complete.
+\end{proof}
+
+\end{document}

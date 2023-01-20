@@ -33,9 +33,10 @@
 
 \newtheorem*{prop}{Proposition}
 \newtheorem*{corollary}{Corollary}
-\newtheorem*{lemma}{Lemma}
+\newtheorem{lemma}{Lemma}
 \theoremstyle{remark}
 \newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
 
 \newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
 \theoremstyle{named}
@@ -137,6 +138,43 @@
         &< \e + \e = 2\e
     \end{align*}
     as desired. Thus our proof is complete.
+\end{proof}
+
+\newpage
+
+\begin{theorem}[4.1]
+    Provide the missing details of the claims in Remark 4.6. That is,
+    \begin{enumerate}
+        \item Prove that \(f^{(n)}(0) = 0\) for all \( n \in \mathbb N\), and
+        \item Explain why \(f\) cannot be represented as a power series of the form \(\sum_{n = 0}^\infty c_n x^n\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+    Let \(f(x) = e^{-1/x^2}\) if \(n \neq 0\) and \(f(0) = 0\). Then \(f^{(n)}(x) = P_n(1/x) e^{-1/x^2}\) if \(n \neq 0\) and \(f^{(n)}(0) = 0\), where \(P_n\) is polynomial in \(1/x\).
+\end{lemma}
+
+\begin{proof}
+    We proceed by induction on \(n\). Clearly \(n = 0\) holds as \(P_0 = 1\), which is polynomial, \(f^{(0)}(x) = P_0 e^{-1/x^2}\), and \(f^{(0)}(0) = 0\).
+
+    Now assume that for some \(k\), \(P_k\) is polynomial in \(1/x\) and \(f^{(k)}(x) = P_k(1/x) e^{-1/x^2}\). Then we have
+    \begin{align*}
+        f^{(k + 1)}(x) &= \frac{d}{dx} P_k(1/x) e^{-1/x^2} \\
+        &= P_k(1/x) \frac{d}{dx} e^{-1/x^2} + e^{-1/x^2} \frac{d}{dx} P_k(1/x) \\
+        &= P_k(1/x) \cdot \frac{2}{x^3} \cdot e^{-1/x^2} + e^{-1/x^2} \cdot \frac{-1}{x^2} \cdot P_k'(1/x) \\
+        &= \left(2 P_k(1/x) \frac{1}{x^3} - P_k'(1/x) \frac{1}{x^2}\right) e^{-1/x^2}.
+    \end{align*}
+    Setting \(w = 1/x\), we see that \(P_{k + 1}(w) = 2 P_k(w) w^3 - P_k'(w) w^2\) is indeed polynomial in \(w = 1/x\). Furthermore, \(f^{(k + 1)}\) continuous at 0 since \(-1/x^2 \to -\infty\) as \(x \to 0\). The exponential skrinks faster than \(1/x^m\) for all \(m\) and we end up with \(\lim_{x \to 0} f^{(0)}(x) = 0\). Thus our claim holds for \(k + 1\), and our induction is complete.
+\end{proof}
+
+Now we get with the actual problem...
+
+\begin{proof}
+    We proceed with each part.
+    \begin{enumerate}
+        \item By Lemma 2, just forget the \(P_n(1/x)\) part and see that we've also shown \(f^{(n)}(0) = 0\).
+        \item From the notes, functions must be the same if their power series are the same. However, the power series for \(e^{-1/x^2}\) is 0, but it is not the same as the zero function. Therefore \(e^{-1/x^2}\) is not representable as a power series.
+    \end{enumerate}
 \end{proof}
 
 \end{document}

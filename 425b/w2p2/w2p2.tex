@@ -124,7 +124,7 @@
     To show that \(\sum_{n = 0}^\infty x_{j(n), k(n)}\) converges, it suffices to show that there exists some \(P\) such that
     \[\bigabs{A - \sum_{n = 0}^P x_{j(n), k(n)}} < 2 \e.\]
 
-    Indeed, choose \(L = \max(M, N)\). Then by our above lemma, there is some \(P\) such \([0, L] \times [0, L] \subseteq \phi([0, P])\). Let \(S = [0, P] - \phi^{-1}([0, L] \times [0, L])\) be the points in the interval that don't get mapped into the square. Also note that \(S \subseteq [L + 1, \infty) \times [0, \infty) \cup [0, \infty) \times [L + 1, \infty)\). Thus we have, 
+    Indeed, choose \(L = \max(M, N)\). Then by our above lemma, there is some \(P\) such \([0, L] \times [0, L] \subseteq \phi([0, P])\). Let \(S = [0, P] \setminus \phi^{-1}([0, L] \times [0, L])\) be the points in the interval that don't get mapped into the square. Also note that \(S \subseteq [L + 1, \infty) \times [0, \infty) \cup [0, \infty) \times [L + 1, \infty)\). Thus we have, 
     \begin{align*}
         \bigabs{\sum_{n = 0}^P x_{j(n), k(n)} - \sum_{j = 0}^L \sum_{k = 0}^L x_{j, k}} &\leq \sum_{n \in S} |x_{j(n), k(n)}| \\
         &\leq \sum_{(i, j) \in [L + 1, \infty) \times [0, \infty)} |x_{j, k}| + \sum_{(i, j) \in [0, \infty) \times [L + 1, \infty)} |x_{j, k}| \\

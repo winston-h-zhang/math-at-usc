@@ -1,0 +1,226 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{ITP \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{PS1}
+\mathclass{439}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+
+% \tikzset{
+%         ->, % makes the edges directed
+%         >=stealth', % makes the arrow heads bold
+%         node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+%         every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+%         initial text=$ $, % sets the text that appears on the start arrow
+%         }
+
+\begin{document}
+
+\subsubsection*{Problem 1.}
+
+(a) Hex regex is \texttt{0x([0-9]|[a-f]|[A-F])+}
+
+(b)
+
+\begin{figure}[ht] % ’ht’ tells LaTeX to place the figure ’here’ or at the top of the page
+  \centering % centers the figure
+  \begin{tikzpicture}[scale=0.2]
+
+    \tikzstyle{every node}+=[inner sep=0pt]
+    \draw [black] (4,-30) circle (3);
+    \draw (4,-30) node {$1$};
+    \draw [black] (11.4,-30) circle (3);
+    \draw (11.4,-30) node {$2$};
+    \draw [black] (19,-30) circle (3);
+    \draw (19,-30) node {$3$};
+    \draw [black] (25.9,-33.8) circle (3);
+    \draw (25.9,-33.8) node {$6$};
+    \draw [black] (25.9,-26.5) circle (3);
+    \draw (25.9,-26.5) node {$5$};
+    \draw [black] (25.9,-40.9) circle (3);
+    \draw (25.9,-40.9) node {$7$};
+    \draw [black] (25.9,-19.3) circle (3);
+    \draw (25.9,-19.3) node {$4$};
+    \draw [black] (34.8,-19.3) circle (3);
+    \draw (34.8,-19.3) node {$8$};
+    \draw [black] (34.8,-26.5) circle (3);
+    \draw (34.8,-26.5) node {$9$};
+    \draw [black] (34.8,-33.8) circle (3);
+    \draw (34.8,-33.8) node {$10$};
+    \draw [black] (34.8,-40.9) circle (3);
+    \draw (34.8,-40.9) node {$11$};
+    \draw [black] (41.1,-30) circle (3);
+    \draw (41.1,-30) node {$12$};
+    \draw [black] (48.5,-30) circle (3);
+    \draw (48.5,-30) node {$13$};
+    \draw [black] (54.5,-26.5) circle (3);
+    \draw (54.5,-26.5) node {$15$};
+    \draw [black] (54.5,-19.3) circle (3);
+    \draw (54.5,-19.3) node {$14$};
+    \draw [black] (63.1,-19.3) circle (3);
+    \draw (63.1,-19.3) node {$18$};
+    \draw [black] (63.1,-26.5) circle (3);
+    \draw (63.1,-26.5) node {$19$};
+    \draw [black] (54.5,-33.8) circle (3);
+    \draw (54.5,-33.8) node {$16$};
+    \draw [black] (63.1,-33.8) circle (3);
+    \draw (63.1,-33.8) node {$20$};
+    \draw [black] (54.5,-40.9) circle (3);
+    \draw (54.5,-40.9) node {$17$};
+    \draw [black] (63.1,-40.9) circle (3);
+    \draw (63.1,-40.9) node {$21$};
+    \draw [black] (69.8,-30) circle (3);
+    \draw (69.8,-30) node {$22$};
+    \draw [black] (76.8,-30) circle (3);
+    \draw (76.8,-30) node {$23$};
+    \draw [black] (7,-30) -- (8.4,-30);
+    \fill [black] (8.4,-30) -- (7.6,-29.5) -- (7.6,-30.5);
+    \draw (7.7,-31) node [below] {\texttt{0}};
+    \draw [black] (14.4,-30) -- (16,-30);
+    \fill [black] (16,-30) -- (15.2,-29.5) -- (15.2,-30.5);
+    \draw (15.2,-31.3) node [below] {\texttt{x}};
+    \draw [black] (51.09,-28.49) -- (51.91,-28.01);
+    \fill [black] (51.91,-28.01) -- (50.97,-27.98) -- (51.47,-28.85);
+    \draw [black] (51.03,-31.61) -- (51.97,-32.19);
+    \fill [black] (51.97,-32.19) -- (51.56,-31.34) -- (51.02,-32.19);
+    \draw [black] (49.97,-27.38) -- (53.03,-21.92);
+    \fill [black] (53.03,-21.92) -- (52.21,-22.37) -- (53.08,-22.86);
+    \draw [black] (49.95,-32.63) -- (53.05,-38.27);
+    \fill [black] (53.05,-38.27) -- (53.11,-37.33) -- (52.23,-37.81);
+    \draw [black] (57.5,-19.3) -- (60.1,-19.3);
+    \fill [black] (60.1,-19.3) -- (59.3,-18.8) -- (59.3,-19.8);
+    \draw (58.8,-20.3) node [below] {\texttt{0}};
+    \draw [black] (57.5,-26.5) -- (60.1,-26.5);
+    \fill [black] (60.1,-26.5) -- (59.3,-26) -- (59.3,-27);
+    \draw (58.8,-27.5) node [below] {\texttt{1-9}};
+    \draw [black] (57.5,-33.8) -- (60.1,-33.8);
+    \fill [black] (60.1,-33.8) -- (59.3,-33.3) -- (59.3,-34.3);
+    \draw (58.8,-34.8) node [below] {\texttt{a-f}};
+    \draw [black] (57.5,-40.9) -- (60.1,-40.9);
+    \fill [black] (60.1,-40.9) -- (59.3,-40.4) -- (59.3,-41.4);
+    \draw (58.8,-41.9) node [below] {\texttt{A-F}};
+    \draw [black] (64.67,-38.34) -- (68.23,-32.56);
+    \fill [black] (68.23,-32.56) -- (67.38,-32.98) -- (68.24,-33.5);
+    \draw [black] (65.71,-32.32) -- (67.19,-31.48);
+    \fill [black] (67.19,-31.48) -- (66.25,-31.44) -- (66.74,-32.31);
+    \draw [black] (65.76,-27.89) -- (67.14,-28.61);
+    \fill [black] (67.14,-28.61) -- (66.66,-27.8) -- (66.2,-28.68);
+    \draw [black] (64.69,-21.84) -- (68.21,-27.46);
+    \fill [black] (68.21,-27.46) -- (68.21,-26.51) -- (67.36,-27.04);
+    \draw [black] (72.8,-30) -- (73.8,-30);
+    \fill [black] (73.8,-30) -- (73,-29.5) -- (73,-30.5);
+    \draw [black] (21.68,-28.64) -- (23.22,-27.86);
+    \fill [black] (23.22,-27.86) -- (22.28,-27.77) -- (22.74,-28.66);
+    \draw [black] (20.63,-27.48) -- (24.27,-21.82);
+    \fill [black] (24.27,-21.82) -- (23.42,-22.22) -- (24.26,-22.76);
+    \draw [black] (21.63,-31.45) -- (23.27,-32.35);
+    \fill [black] (23.27,-32.35) -- (22.81,-31.53) -- (22.33,-32.4);
+    \draw [black] (20.6,-32.53) -- (24.3,-38.37);
+    \fill [black] (24.3,-38.37) -- (24.29,-37.42) -- (23.45,-37.96);
+    \draw [black] (28.9,-19.3) -- (31.8,-19.3);
+    \fill [black] (31.8,-19.3) -- (31,-18.8) -- (31,-19.8);
+    \draw (30.35,-20.3) node [below] {\texttt{0}};
+    \draw [black] (28.9,-26.5) -- (31.8,-26.5);
+    \fill [black] (31.8,-26.5) -- (31,-26) -- (31,-27);
+    \draw (30.35,-27.5) node [below] {\texttt{1-9}};
+    \draw [black] (28.9,-33.8) -- (31.8,-33.8);
+    \fill [black] (31.8,-33.8) -- (31,-33.3) -- (31,-34.3);
+    \draw (30.35,-34.8) node [below] {\texttt{a-f}};
+    \draw [black] (28.9,-40.9) -- (31.8,-40.9);
+    \fill [black] (31.8,-40.9) -- (31,-40.4) -- (31,-41.4);
+    \draw (30.35,-41.9) node [below] {\texttt{A-F}};
+    \draw [black] (36.32,-21.89) -- (39.58,-27.41);
+    \fill [black] (39.58,-27.41) -- (39.6,-26.47) -- (38.74,-26.98);
+    \draw [black] (37.42,-27.96) -- (38.48,-28.54);
+    \fill [black] (38.48,-28.54) -- (38.02,-27.72) -- (37.54,-28.59);
+    \draw [black] (37.37,-32.25) -- (38.53,-31.55);
+    \fill [black] (38.53,-31.55) -- (37.59,-31.53) -- (38.1,-32.39);
+    \draw [black] (36.3,-38.3) -- (39.6,-32.6);
+    \fill [black] (39.6,-32.6) -- (38.77,-33.04) -- (39.63,-33.54);
+    \draw [black] (44.1,-30) -- (45.5,-30);
+    \fill [black] (45.5,-30) -- (44.7,-29.5) -- (44.7,-30.5);
+    \draw [black] (44.1,-30) -- (45.5,-30);
+  \end{tikzpicture}
+  \caption{Caption of the FSM}
+  \label{fig:my_label}
+\end{figure}
+
+
+\end{document}

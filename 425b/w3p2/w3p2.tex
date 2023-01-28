@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W3P2}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+\begin{document}
+
+\begin{theorem}[1.5]
+    Assume \(f \in \Rloc(\R)\) and \(\int_{-\infty}^{\infty} |f(x)| dx < + \infty\). Then given \(\e > 0\) there exists \(R > 0\) such that 
+    \[\int_{-\infty}^{\infty} |f(x) - f(x) 1_{[-R, R]}(x)| dx < \e.\]
+\end{theorem}
+
+\begin{proof}
+    Note that it suffices to show that there is some \(R > 0\) such that
+    \[\int_{R}^{\infty} |f(x)| dx < \e,\]
+    since then we can replicate the argument on both sides with \(\e / 2\) and combine them to achieve the full claim.
+
+    Assume for the sake of contradiction that there is some \(\e > 0\) such that for all \(R > 0\), 
+    \[\int_{R}^{\infty} |f(x)| dx \geq \e.\]
+    Now let \(R_0 = 0\). Since \(\int_{R_0}^{\infty} |f(x)| dx \geq \e\), there is some \(R_1\) such that \(\int_{R_0}^{R_1} |f(x)| dx = \e\). But then again \(\int_{R_1}^{\infty} |f(x)| dx \geq \e\), so there exists some \(R_2\) such that \(\int_{R_1}^{R_2} |f(x)| dx = \e\). Continuing with this, we may construct a sequence \(R_0 < R_1 < \cdots < R_n < \cdots\) such that 
+    \[\int_{R_n}^{R_{n + 1}} |f(x)| dx = \e.\]
+    Thus we have
+    \begin{align*}
+        \int_{0}^{\infty} |f(x)| dx = \sum_{n = 0}^\infty \int_{R_n}^{R_{n + 1}} |f(x)| dx  = \sum_{n = 0}^\infty \e = \infty.
+    \end{align*}
+    Contradiction! Thus there must be some \(R > 0\) such that \(\int_{R}^{\infty} |f(x)| dx < \e\), as desired.
+\end{proof}
+
+\begin{theorem}[1.6]
+    This Exercise outlines a proof of Theorem 1.6. For all parts of the problem, assume that \(f \in \Rloc(\R)\).
+    \begin{enumerate}
+        \item Assume that \(\int_{-\infty}^{\infty}|f(x)|^2 dx = 0\). Prove that \(\int_{-\infty}^{\infty} f(x) \overline{g(x)} dx = 0\) whenever \(g \in \Rloc(\R)\) and \(\int_{-\infty}^{\infty}|g(x)|^2 dx < + \infty\).
+        \item Assume that \(\int_{-\infty}^{\infty}|f(x)|^p dx = 0\) for some \(p > 0\). Prove that \(\int_{-\infty}^{\infty}|f(x)|^q dx = 0\) for all \(q > p\). 
+        \item Assume that \(\int_{-\infty}^{\infty}|f(x)|^p dx = 0\) for some \(p > 0\). Prove that \(\int_{-\infty}^{\infty}|f(x)|^q dx = 0\) whenever \(q = 2^{-n}p\) for some \(n \in \N\).
+        \item Combine parts (b) and (c) of this Exercise to prove Theorem 1.6(a).
+        \item Prove Theorem 1.6(b) by combining Theorem 1.6(a) with part (a) of this Exercise.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each step
+    \begin{enumerate}
+        \item \todo
+        \item We have \(q = p + (q - p)\), so we can break up the integral into \(\int_{-\infty}^{\infty} |f(x)|^p |f(x)|^{q - p} dx\). In particular, on every bounded interval, we know that \(|f(x)|^{q - p}\) must be bounded by some \(L\), since \(f(x) \in \Rloc(\R)\). Thus for all intervals \([a, b]\),
+        \[\int_{a}^{b} |f(x)|^q dx \leq \int_{a}^{b} |f(x)|^p L dx = L \int_{a}^{b} |f(x)|^p = 0.\]
+        This implies \(\int_{-\infty}^{\infty} |f(x)|^q dx = 0\), as desired.
+        \item Consider \(|f(x)|^{p/2}\) applied in part (a). Then we have \(\int_{-\infty}^{\infty}|f(x)|^{p/2}\overline{g(x)} dx = 0\). The problem is how to choose \(g(x)\). We would like to choose \(g = 1\), but then we would have \(\int_{-\infty}^{\infty} g(x) dx = \infty\). So instead we choose \(g(x) = 1_{[-R, R]}\) for some \(R > 0\). Thus we have 
+        \[\int_{-\infty}^{\infty}|f(x)|^{p/2} dx = \lim_{R \to \infty} \int_{-\infty}^{\infty}|f(x)|^{p/2} \overline{1_{[-R, R]}} dx = \lim_{R \to \infty} 0 = 0.\]
+        Inducting on this, we have 
+        \[\int_{-\infty}^{\infty}|f(x)|^{p/2^n} dx = 0\]
+        for all \(n \in \N\).
+
+        \item Putting parts (b) and (c) together, let \(q > 0\). Choose \(n\) such that \(2^n > p/q\), so that \(q > 2^{-n} p\). Thus from part (c) \(\int_{-\infty}^{\infty}|f(x)|^{p} dx = 0\) implies \(\int_{-\infty}^{\infty}|f(x)|^{p/2^n} dx = 0\), which from part (b) implies \(\int_{-\infty}^{\infty}|f(x)|^{q} dx = 0\), as desired.
+        \item \todo
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[1.7]
+    Let \(f\) be a nonnegative, continuous function defined on \(\R\). If \(\int_{-\infty}^{\infty} f(x) dx = 0\), then \(f(x) = 0\) for all \(x \in \R\).
+\end{theorem}
+
+\begin{proof}
+    Assume for the sake of contradiction that \(f \neq 0\), i.e. there is some \(x_0\) such that \(f(x_0) \neq 0\). Set \(\e = f(x_0)/2 > 0\). Since \(f\) is continuous, there exists some \(\d > 0\) such that \(f([x_0 - \d, x_0 + \d]) \subseteq [f(x_0) - \e, f(x_0) + \e]\). In particular, we conclude that \(f(x) \geq f(x_0) - \e = x_0 / 2\) on the interval \([x_0 - \d, x_0 + \d]\). Thus
+    \[\int_{-\infty}^{\infty} f(x) dx \geq \int_{x_0 - \d}^{x_0 + \d} (f(x_0) - \e) dx = 2\d (f(x_0) - \e) > 0,\]
+    contradiction! Thus we conclude that \(f = 0\).
+\end{proof}
+
+\end{document}

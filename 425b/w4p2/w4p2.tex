@@ -1,0 +1,220 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W4P2}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+\newcommand{\infint}{\int_{-\infty}^{\infty}}
+\newcommand{\g}{\Gamma}
+\renewcommand{\l}{\lambda}
+
+\begin{document}
+
+\begin{theorem}[3.1]
+    Prove that the integral defining \(\g(x)\) converges for all \(x > 0\).
+\end{theorem}
+
+\begin{proof}
+    Split the integral up between \((0, 1)\) and \((1, \infty)\) and deal with the convergence of each with different strategies. 
+
+    On the unit interval, we have \(\int_{0}^{1} t^{x - 1} dt = \left . \frac{t^x}{x}\right |_{0}^1 = \frac{1}{x}\). But \(t^{x - 1}e^{-t} < t^{x - 1}\) on \(t \in (0, 1)\), thus \(\int_{0}^{1} t^{x - 1} e^t dt < \frac{1}{x}\) converges.
+
+    On the \((1, \infty)\) ray, consider \(t^{x - 1} e^{-t} \leq e^{-t/2}\). This inequality is not outright true, but
+    \[t^{x - 1} e^{-t} \leq e^{-t/2} \iff \frac{t^{x - 1}}{e^{t/2}} \leq 1 \hspace*{4mm} \text{and} \hspace*{4mm} \lim_{t \to \infty} \frac{t^{x - 1}}{e^{t/2}} = 0.\] 
+    So for each \(t\), there is some \(N\) such that the inequality holds for all \(x \geq N\). Thus we may split the integral again,
+    \begin{align*}
+        \int_{1}^{\infty} t^{x - 1} e^{-t} dt &= \int_{1}^{N} t^{x - 1} e^{-t} dt + \int_{N}^{\infty} t^{x - 1} e^{-t} dt \\
+        &\leq X + \int_{N}^{\infty} e^{-t/2} dt \\
+        &= X - \left . 2e^{-t/2}\right |_N^\infty \\ 
+        &= X + 2e^{-N/2} \\
+        &< \infty,
+    \end{align*} 
+    where \(X\) is just some finite value. Thus \(\g(x)\) converges on both \((0, 1)\) and \((1, \infty)\), so it is a convergent integral, as desired.
+\end{proof}
+
+\begin{theorem}[3.2]
+    Using H\"older's inequality, show that the Gamma function \(\g : (0, \infty) \to \R\) is log-convex.
+\end{theorem}
+
+\begin{proof}
+    We want to show that \(\log(\g(\lambda a + (1 - \lambda) b)) \leq \l \log(\g(a)) + (1 - \l) \log(\g(b))\). Indeed, we use H\"older's inequality in the form of Exercise 2.3:
+    \begin{align*}
+        \log(\g(\lambda a + (1 - \lambda) b)) &= \log \left(\int_{0}^{\infty} t^{\l a + (1 - \l)b - 1} e^{-t} dt\right) \\
+        &= \log \left(\int_{0}^{\infty} t^{(a - 1)\l} e^{-t\l}t^{(b - 1)(1 - \l)} e^{-t(1 - \l)} dt\right) \\
+        &= \log \left(\int_{0}^{\infty} (t^{a - 1} e^{-t})^\l(t^{b - 1} e^{-t})^{1 - \l} dt\right) \\
+        &\leq \log \left[\left(\int_{0}^{\infty}t^{a - 1}e^{-t} dt\right)^\l \left(\int_{0}^{\infty}t^{b - 1}e^{-t} dt\right)^{1 - \l}\right] \\
+        &= \l \log \left(\int_{0}^{\infty}t^{a - 1}e^{-t} dt\right) + (1 - \l) \log \left(\int_{0}^{\infty}t^{b - 1}e^{-t} dt\right) \\
+        &= \l \log(\g(a)) + (1 - \l) \log(\g(b)),
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[3.3]
+    Let \(B : (0, \infty) \times (0, \infty) \to \R\) be defined by
+    \[B(x, y) = \int_{0}^{1} t^{x - 1} (1 - t)^{y - 1} dt.\]
+    This is called the \textit{beta function}.
+    \begin{enumerate}
+        \item Prove that \(B(1, y) = \frac{1}{y}\), for \(y \in (0, \infty)\).
+        \item Prove that for each fixed \(y \in (0, \infty)\), the function \(x \mapsto B(x, y)\) is log-convex on \((0, \infty)\).
+        \item Using an integration-by-parts on the identity
+        \[B(x + 1, y) = \int_{0}^{1} \left(\frac{t}{1 - t}\right)^x ( 1- t)^{x + y - 1} dt,\]
+        prove that \(B(x + 1, y) = \frac{x}{x + y} B(x, y)\).
+        \item Argue that for each \(y > 0\), the function \(f_y : (0, \infty) \to \R\) defined by 
+        \[f_y(x) = \frac{\g(x + y)}{\g(y)} B(x, y)\]
+        satisfies the hypotheses of the Bohr-Mollerup Theorem. Conclude that 
+        \[B(x, y) = \frac{\g(x)\g(y)}{\g(x + y)}, \hspace*{4mm} x, y > 0.\]
+        \item Using the conclusion of part (d), and the substitution \(t = \sin^2 \theta\) in the definition of the beta function, show that \(B(\frac{1}{2}, \frac{1}{2}) = (\g(\frac{1}{2}))^2 = \pi\).
+        \item Using the conclusion of part (e), and the substitution \(t = s^2\) in the definition of the Gamma function, conclude that 
+        \[\infint e^{-s^2} dx = \sqrt{\pi}.\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part.
+    \begin{enumerate}
+        \item We have \[B(1, y) = \int_{0}^{1} (1 - t)^{y - 1} dt = \left . -\frac{(1 - t)^y}{y}\right |_0^1 = - \frac{0}{y} + \frac{1}{y} = \frac{1}{y}.\]
+        
+        \item We want to show that \(\log(B(\l a + (1 - \l)b, y)) \leq \l \log(B(a, y)) + (1 - \l)\log(B(b, y))\). Indeed, we have again by H\"older's inequality,
+        \begin{align*}
+            B(\l a + (1 - \l)b, y) &= \int_{0}^{1} t^{\l a + (1 - \l) b - 1}(1 - t)^{y - 1} dt \\
+            &= \int_{0}^{1} t^{(a - 1)\l} (1 - t)^{(y - 1)\l}t^{(b - 1)(1 - \l)} (1 - t)^{(y - 1)(1 - \l)} dt \\
+            &= \int_{0}^{1} (t^{a - 1} (1 - t)^{y - 1})^\l(t^{b - 1} (1 - t)^{y - 1})^{1 - \l} dt \\
+            &\leq \left(\int_{0}^{1} t^{a - 1} (1 - t)^{y - 1} dt\right)^\l \left(\int_{0}^{1} t^{b - 1} (1 - t)^{y - 1}\right)^{1 - \l} \\
+            &= B(a, y)^\l B(b, y)^{1 - \l}.
+        \end{align*}
+        Thus, 
+        \begin{align*}
+            \log (B(\l a + (1 - \l)b, y)) &\leq \log(B(a, y)^\l B(b, y)^{1 - \l}) \\
+            &= \l \log(B(a, y)) + (1 - \l)\log(B(b, y)),
+        \end{align*}
+        as desired.
+
+        \item Integrating by parts with \(u = \left(\frac{t}{1 - t}\right)^x\) and \(dv = (1 - t)^{x + y - 1}\), we compute first that \(du = \left(\frac{t}{1 - t}\right)^{x - 1}\frac{x dt}{(1 - t)^2}\) and \(v = -\frac{(1 - t)^{x + y}}{x + y}\). Then,
+        \begin{align*}
+            B(x + 1, y) &= \int_{0}^{1} \left(\frac{t}{1 - t}\right)^x ( 1- t)^{x + y - 1} dt \\
+            &= \left . uv \right |_0^1 - \int_{0}^{1}v du \\
+            &= \left . -\left(\frac{t}{1 - t}\right)^x \frac{(1 - t)^{x + y}}{x + y}  \right |_0^1 + \int_{0}^{1} \frac{(1 - t)^{x + y}}{x + y} \left(\frac{t}{1 - t}\right)^{x - 1}\frac{x dt}{(1 - t)^2} \\
+            &= \left . - \frac{t^x(1 - t)^{y}}{x + y}  \right |_0^1 + \frac{x}{x + y}\int_{0}^{1} t^{x - 1}(1 - t)^{y - 1} dt \\
+            &= 0 - 0 + \frac{x}{x + y} B(x, y) \\
+            &= \frac{x}{x + y} B(x, y),
+        \end{align*}
+        as desired.
+        \item We prove properties \(\g(\text{1-3})\).
+        \begin{enumerate}
+            \item[\((\g1)\):] We have 
+            \begin{align*}
+                f_y(x + 1) &= \frac{\g(x + 1 + y)}{\g(y)} B(x + 1, y) \\
+                &= \frac{(x + y)\g(x + y)}{\g(y)} \frac{x}{x + y} B(x, y) \\
+                &= x \frac{\g(x + y)}{\g(y)} B(x, y) = x f_y(x).
+            \end{align*}
+            \item[\((\g2)\):] We have 
+            \begin{align*}
+                f_y(1) &= \frac{\g(1 + y)}{\g(y)} B(1, y) = \frac{y \g(y)}{\g(y)}\frac{1}{y} = 1. \\
+            \end{align*}
+            \item[\((\g3)\):] Since the product of log-convex functions are convex, it suffices to show that for fixed \(y\), \(\frac{\g(x)\g(y)}{\g(x + y)}\) and \(B(x, y)\) are log-convex. The latter was proven in part (b). The former is a translation and scaling of a log-convex function, which is clearly log-convex. Thus \(f_y(x)\) must also be log-convex.
+        \end{enumerate}
+        So \(f_y(x)\) satisfies the hypotheses of the Bohr-Mollerup Theorem. Therefore, it must be true that
+        \begin{align*}
+            f_y(x) = \frac{\g(x + y)}{\g(y)} B(x, y) = \g(x).
+        \end{align*}
+        We conclude that 
+        \[B(x, y) = \frac{\g(x)\g(y)}{\g(x + y)}, \hspace*{4mm} x, y > 0.\]
+        \item With the substitution \(t = \sin^2 \theta\), we have \(dt = 2 \cos \theta \sin \theta d \theta\). Thus
+        \begin{align*}
+            \int_{0}^{1} t^{x - 1} (1 - t)^{y - 1} dt &= 2\int_{0}^{\pi/2} (\sin \theta)^{2x - 1} (\cos \theta)^{2y - 1} d \theta.
+        \end{align*}
+        Setting \(x = y = 1/2\), we have
+        \begin{align*}
+            B\left(\frac{1}{2}, \frac{1}{2}\right) &= 2\int_{0}^{\pi/2} (\sin \theta)^{2(1/2) - 1} (\cos \theta)^{2(1/2) - 1} d \theta \\
+            &= \int_{0}^{\pi/2}d \theta = 2\pi / 2 = \pi.
+        \end{align*}
+        From part (d), \(B(\frac{1}{2}, \frac{1}{2}) = \frac{\g(1/2)\g(1/2)}{\g(1)} = (\g(\frac{1}{2}))^2\). Thus \(B(\frac{1}{2}, \frac{1}{2}) = (\g(\frac{1}{2}))^2 = \pi\), as desired.
+
+        \item With the substitution \(t = s^2\), we have \(dt = 2 s ds\). Fixing \(x = 1/2\), we have 
+        \begin{align*}
+            \g(1/2) = \int_{0}^{\infty} t^{1/2 - 1} e^{-t} dt &= \int_{0}^{\infty} s^{2(1/2 - 1)} e^{-s^2} 2s ds = 2\int_{0}^{\infty} e^{- s^2} ds. \\
+        \end{align*}
+        Thus, remarkably, we conclude with part (d) that
+        \[\infint e^{-s^2} dx = 2\int_{0}^{\infty} e^{- x^2} dx = \g(1/2) = \sqrt{\pi}.\]
+    \end{enumerate}
+\end{proof}
+
+\end{document}

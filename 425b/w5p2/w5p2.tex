@@ -1,0 +1,198 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W5P2}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+\newcommand{\nlp}[1]{\|{#1}\|_{\ell^p}}
+
+\begin{document}
+
+\begin{theorem}[2.5]
+    For \(p \in [1, \infty)\), define \(\ell^p(\N;\C)\) to be the set of all complex-valued sequences \((x_j)_{j = 1}^\infty\) such that
+    \[\|(x_j)_{j = 1}^\infty\|_{\ell^p} := \left[\sum_{j = 1}^\infty \abs{x_j}^p\right]^{\frac{1}{p}} < + \infty\|.\]
+    Define addition of sequences and multiplication by (complex) scalars componentwise in each case, i.e., 
+    \[(x_j)_{j = 1}^\infty + (y_j)_{j = 1}^\infty = (x_j + y_j)_{j = 1}^\infty; \hspace*{6mm} c(x_j)_{j = 1}^\infty = (cx_j)_{j = 1}^\infty.\]
+    Prove that \((\ell^p(\N;\C), \|\cdot\|_{\ell^p})\) is a normed vector space, using the following outline.
+    \begin{enumerate}
+        \item Adapt the proof of H\"older's inequality (Theorem 2.13 and Exercise 2.3) to prove that for complex-valued sequences \((x_j)_{j = 1}^\infty \in \ell^p(\N;\C), (y_j)_{j = 1}^\infty \in \ell^q(\N;\C)\), where \(p\) and \(q\) are H\"older conjugates, we have 
+        \begin{align*}
+            \bigabs{\sum_{j = 1}^{\infty} x_j y_j} \leq \|(x_j)_{j = 1}^\infty\|_{\ell^p} \|(y_j)_{j = 1}^\infty\|_{\ell^q}.
+        \end{align*}
+        \item Mimic the proof of Minkowski's inequality (Theorem 2.14) to prove that \(\|\cdot\|_{\ell^p}\) is a norm on \(\ell^p(\N;\C)\), for \(p \in [1, \infty)\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+    Define \(\mathcal{F} : \ell^p(\N;\C) \to \mathcal{R}_\text{loc}(\R)\) by
+    \[\mathcal{F}((x_j)_{j = 1}^\infty) = \sum_{j = 1}^\infty x_j 1_{[j - 1, j]}.\]
+    Then we have the nice property that,
+    \[\|(x_j)_{j = 1}^\infty\|_{\ell^p} = \|\mathcal{F}((x_j)_{j = 1}^\infty)\|_{L^p}\]
+\end{lemma}
+
+\begin{proof}
+    Indeed, by definition
+    \begin{align*}
+        \|\mathcal{F}((x_j)_{j = 1}^\infty)\|_{L^p} &= \left(\int_{-\infty}^{\infty} \bigabs{\sum_{j = 1}^{\infty} x_j 1_{[j - 1, j]}}^p dt\right)^\frac{1}{p} \\&= \left(\int_{-\infty}^{\infty} \sum_{j = 1}^{\infty} \abs{x_j}^p 1_{[j - 1, j]} dt\right)^\frac{1}{p} \\
+        &= \left(\sum_{j = 1}^{\infty} \int_{j - 1}^{j}\abs{x_j}^p dt\right)^\frac{1}{p} \\
+        &= \left(\sum_{j = 1}^{\infty} (j - (j - 1))\abs{x_j}^p\right)^\frac{1}{p} \\
+        &= \left(\sum_{j = 1}^{\infty}\abs{x_j}^p\right)^\frac{1}{p} = \|(x_j)_{j = 1}^\infty\|_{\ell^p}.
+    \end{align*}
+    Note \(\mathcal{F}\) is well defined since \(\mathcal{F}((x_j)_{j = 1}^\infty) < +\infty\).
+\end{proof}
+
+\begin{proof}
+    We proceed with the lemma, which makes things much easier.
+    \begin{enumerate}
+        \item Note that
+        \begin{align*}
+            \int_{-\infty}^{\infty} |\mathcal{F}((x_j)_{j = 1}^\infty)| |\mathcal{F}((y_j)_{j = 1}^\infty)| dt &= \int_{-\infty}^{\infty} \sum_{j = 1}^{\infty}x_j y_j 1_{[j - 1, j]} dt \\
+            &= \sum_{j = 1}^{\infty} \int_{j - 1}^{j} x_j y_j dt \\
+            &= \sum_{j = 1}^{\infty} x_j y_j.
+        \end{align*}
+        By H\"older's inequality on \(L^p\), we have 
+        \begin{align*}
+            \sum_{j = 1}^{\infty} x_j y_j &= \int_{-\infty}^{\infty} |\mathcal{F}((x_j)_{j = 1}^\infty)| |\mathcal{F}((y_j)_{j = 1}^\infty)| dt \\
+            &\leq \|\mathcal{F}((x_j)_{j = 1}^\infty)\|_{L^p} \|\mathcal{F}((y_j)_{j = 1}^\infty)\|_{L^q} \\
+            &= \|(x_j)_{j = 1}^\infty\|_{\ell^p} \|(y_j)_{j = 1}^\infty\|_{\ell^q},
+        \end{align*}
+        as desired.
+        \item Note again that
+        \begin{align*}
+            \|\mathcal{F}((x_j)_{j = 1}^\infty) + \mathcal{F}((y_j)_{j = 1}^\infty)\|_{L^p} &= \left(\int_{-\infty}^{\infty} |\mathcal{F}((x_j)_{j = 1}^\infty) + \mathcal{F}((y_j)_{j = 1}^\infty)|^p dt\right)^\frac{1}{p} \\
+            &= \left(\int_{-\infty}^{\infty} \bigabs{(x_j + y_j) 1_{[j - 1, j]}}^p dt\right)^\frac{1}{p} \\
+            &= \|\mathcal{F}((x_j + y_j)_{j = 1}^\infty)\|_{L^p}.
+        \end{align*}
+        By Minkowski's inequality on \(L^p\), we have
+        \begin{align*}
+            \|(x_j + y_j)_{j = 1}^\infty\|_{\ell^p} &= \|\mathcal{F}((x_j)_{j = 1}^\infty) + \mathcal{F}((y_j)_{j = 1}^\infty)\|_{L^p} \\
+            &\leq \|\mathcal{F}((x_j)_{j = 1}^\infty)\|_{L^p} + \|\mathcal{F}((y_j)_{j = 1}^\infty)\|_{L^p} \\
+            &= \|(x_j)_{j = 1}^\infty\|_{\ell^p} + \|(y_j)_{j = 1}^\infty\|_{\ell^p},
+        \end{align*}
+        as desired.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[2.6]
+    Prove that \((\ell^p(\N;\C), \|\cdot\|_{\ell^p})\) is complete for all \(p \in [1, \infty)\).
+\end{theorem}
+
+\begin{proof}
+    Let \(x^{(n)} = (x_j^{(n)})_{j = 1}^\infty \in \ell^p(\N;\C)\) be a sequence for each \(n \in \N\), so that \((x^{(n)})_{n = 1}^\infty\) is a sequence of sequences. For this problem, assume that \((x^{(n)})_{n = 1}^\infty\) is Cauchy. We want to show that it converges to some \(x = (x_j)_{j = 1}^\infty\). 
+
+    Indeed, being Cauchy implies that for any \(\e > 0\), there is some \(N\) such that for any \(n, m > N\), we have \(\nlp{x^{(n)} - x^{(m)}} < \e\). Thus for all \(j\), 
+    \begin{align*}
+        \abs{x_j^{(n)} - x_j^{(m)}}^p \leq \sum_{j = 1}^{\infty} \abs{x_j^{(n)} - x_j^{(m)}}^p = \nlp{x^{(n)} - x^{(m)}}^p < \e^p,
+    \end{align*}
+    and we may conclude that each componentwise sequence \((x_j^{(n)})_{n = 1}^\infty\) is Cauchy in \(\C\). Since \(\C\) is complete, all of these converge to some \(x_j\). Thus we can define the sequence \(x = (x_j)_{j = 1}^\infty\). 
+
+    Now fix some \(k \in \N\). We have 
+    \begin{align*}
+        \sum_{j = 1}^{k} \abs{x_j^{(n)} - x_j^{(m)}}^p \leq \sum_{j = 1}^{\infty} \abs{x_j^{(n)} - x_j^{(m)}}^p = \nlp{x^{(n)} - x^{(m)}}^p < \e^p.
+    \end{align*}
+
+    Taking \(m \to \infty\), we have \(\sum_{j = 1}^{k} \abs{x_j^{(n)} - x_j}^p < \e^p\). Taking \(k \to \infty\) (note the importance of the order we take these limits!), we have \(\sum_{j = 1}^{\infty} \abs{x_j^{(n)} - x_j}^p = \nlp{x^{(n)} - x}^p < \e^p\). Minkowski's inequality says that, for all \(n > N\),
+    \begin{align*}
+        \nlp{x} \leq \nlp{x - x^{(n)}} + \nlp{x^{(n)}} = \nlp{x^{(n)} - x} + \nlp{x^{(n)}} < \e + \nlp{x^{(n)}}.
+    \end{align*}
+    Thus we know that \(\nlp{x}\) is bounded and in \(\ell^p(\N;\C)\). Furthermore, \(\nlp{x^{(n)} - x}^p < \e^p\) implies \(\lim_{n \to \infty} x^{(n)} = x\). This shows that \(\ell^p(\N;\C)\) is complete, as desired.
+\end{proof}
+
+\begin{theorem}[2.7]
+    Let \((V, \|\cdot\|)\) be a normed vector space. We say that a series \(\sum_{n = 1}^\infty v_n\) in \(V\) \textit{converges} in \(V\) if there exists \(w \in V\) such that \(\|\sum_{n = 1}^N v_n - w\| \to 0\) as \(N \to \infty\), that is, if the sequence \((s_N)_{N = 1}^\infty\) of partial sums \(s_N = \sum_{n = 1}^N v_n\) converges in \(V\) under the norm \(\|\cdot\|\). We say that the series \(\sum_{n = 1}^\infty v_n\) converges \textit{absolutely} if the series of numbers \(\sum_{n = 1}^{\infty}\|v_n\|\) converges in \(\R\).
+
+    Prove that \((V, \|\cdot\|)\) is a Banach space if and only if every absolutely convergent series in \(V\) converges in \(V\).
+\end{theorem}
+
+\begin{proof}
+    (\(\Rightarrow\)): Suppose we have a Banach space \((V, \|\cdot\|)\) and an absolutely convergent series \(\sum_{n = 1}^\infty v_n\). Fix any \(\e > 0\). Because \(\sum_{n = 1}^{\infty} \|v_n\|\) converges, there exists some \(N\) such that for all \(i, j > N\), assuming \(i > j\) without loss of generality, \(\sum_{n = i}^{j} \|v_n\| < \e\). Thus 
+    \[\|s_i - s_j\| = \left \| \sum_{n = i + 1}^{j} v_n \right \| \leq \sum_{n = i}^{j} \|v_n\| < \e.\]
+    We conclude that \((s_n)_{n = 1}^\infty\) is a Cauchy sequence in \(V\). Thus it must converge, as desired.
+
+    (\(\Leftarrow\)): Suppose that if a sequence \(\sum_{n = 1}^{\infty} v_n\) converges absolutely, then it converges in \(V\). Let \((s_n)_{n = 1}^\infty\) be a Cauchy sequence in \(V\). For any \(\e > 0\) and \(k \in \N\), there exists some \(N\) such that for any \(n_k, n_{k + 1} > N\), we have \(\|s_{n_k} - s_{n_{k+1}}\| < \e / 2^k\). Choose the \(n_k\) in a proper manner to define \(a_k = s_{n_k} - s_{n_{k + 1}}\), so as to form a subsequence \((a_{n_k})_{k = 1}^\infty\). Now we have, 
+    \begin{align*}
+        \sum_{k = 1}^{\infty} \|a_k\| < \sum_{k = 1}^{\infty} \frac{\e}{2^k} = \e.
+    \end{align*}
+    which converges absolutely. By assumption then \(\sum_{k = 1}^{\infty} a_k\) converges. Thus the subsequence \(\sum_{i = 1}^{k} a_i = s_{n_k}\) converges. We know that if a Cauchy sequence has a subsequential limit, then the entire sequence does too, so \((s_n)_{n = 1}^\infty\) also converges, as desired.
+\end{proof}
+
+\end{document}

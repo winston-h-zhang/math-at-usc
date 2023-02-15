@@ -1,0 +1,172 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W6P1}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[1.1]
+    Show that replacing `rectangles' with `squares' in the definition of a set of measure zero leads to an equivalent definition. (Skipped.)
+\end{theorem}
+
+\begin{theorem}[1.2]
+    The following sets have measure zero:
+    \begin{enumerate}
+        \item Any finite subset of \(\R^n\) has measure zero.
+        \item Any finite or countable union of sets of measure zero itself has measure zero.
+        \item Any subset of a measure-zero set has measure zero.
+        \item \(\R^{n - 1} \times \{0\}\) has measure zero in \(\R^n\).
+        \item If \(Z \subseteq \R^n\) has measure zero and \(\varphi : Z \to \R^n\) is Lipschtiz, then \(\varphi(Z)\) has measure zero. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part.
+    \begin{enumerate}
+        \item Let \(\{s_1, \cdots, s_k\} \subseteq \R^n\) be a finite set. Then simply cover the set with \(k\) cubes of volume \(\e / k\) each.
+        \item Let \(\{S_i\}_{i = 1}^\infty\) be a finite or countable collection of sets, where it is understood that we stop enumerating at \(k\) if the collection is finite. If each set has measure zero, then for any \(\e\), the set \(S_i\) can be covered with a collection of rectangles with volume less than \(\e / 2^i\). Then the total volume of the union of all the collections covers \(\bigcup_{i = 1}^\infty S_i\) is no more than \(\sum_{i = 1}^\infty \e / 2^i = \e\), as desired.
+        \item If \(Z \subseteq \R^n\) has measure zero, then for any \(\e\), \(\{R_i\}\) is a cover with total volume less than \(\e\). But thus \(\{R_i\}\) trivially covers any subset of \(Z\) with volume less than \(\e\) also, and thus any subset of \(Z\) has measure zero.
+        \item Note that we can break the hyperplane into \textit{tiles}:
+        \[\R^{n - 1} \times \{0\} = \bigcup_{v \in \N^{n - 1}}\left(\bigotimes_{i = 1}^{n - 1} [v_i, v_i + 1] \times \{0\}\right).\]
+        For any \(\e\), each tile at \(v \in \N^{n - 1}\) can be covered with \(\bigotimes_{i = 1}^{n - 1} [v_i, v_i + 1] \times [-\e/2, -\e/2]\). Thus each tile is a set of measure zero. Since \(\N^{n - 1}\) is a countable set, by part (2), \(\R^{n - 1} \times \{0\}\) is a countable union of measure zero sets, and therefore has measure zero itself.
+        \item Let \(Z\) be a measure zero set. For any \(\e\), let \(\{R_i\}\) be a cover of \(Z\) with total volume less than \(\e / L^n\). Since \(\varphi\) is Lipschtiz with \(L\), we have \(|\varphi(R_i)| \leq L^n|R_i|\). Since \(\{R_i\}\) covers \(Z\), we know that \(\{\varphi(R_i)\}\) covers \(\varphi(R_i)\) with volume at most \(L^n (\e / L^n) = \e\), as desired.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[1.3]
+    For real numbers \(A < B\), prove that the interval \([A, B]\) is \textit{not} a set of measure zero, using the following outline. First, argue by contradiction, assuming that there is some `bad' open covering \(\mathcal B = \{(a_i, b_i)\}_{i = 1}^\infty\) of \([A, B]\) such that 
+    \[\sum_{i = 1}^\infty (b_i - a_i) < B - A\]
+    (where the sum is understood to be truncated at some finite index if \(\mathcal B\) is a finite collection.) Then, justify the following steps.
+    \begin{enumerate}
+        \item Show that, without loss of generality, you may assume that \(\mathcal B\) is finite.
+        \item Define \(N\) to be the smallest possible number of intervals that make up a putative `bad' covering \(\mathcal B\). Argue that \(N\) cannot be equal to 1.
+        \item Let \(\mathcal B\) be a `bad' covering consisting of \(N\) intervals. Show that without loss of generality, you may assume that \(A \in (a_1, b_1)\) and that \(a_2 < b_1\).
+        \item Use (c) to fashion a `bad' covering \(\mathcal B'\) with \(N - 1\) elements, and explain why this completes the proof.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part.
+    \begin{enumerate}
+        \item Since \(\mathcal B\) is a cover of a compact set, it has some finite subcover. Thus without loss of generality we may always assume that \(\mathcal B\) is finite.
+        \item If \(N = 1\), then we could only have one interval \((a_1, b_1)\). We have to have \(a_1 < A\) and \(b_1 > B\), but then \(b_1 - a_1 > B - A\), which contradicts our original assumption on \(\mathcal B\). Thus \(N > 1\).
+        \item Without loss of generality, order the intervals by \(a_i\) in increasing order. 
+        
+        Then we must have \(a_1 < A\). If it is the case that \(b_1 < A\) as well, then \((a_1, b_1)\) doesn't cover \([A, B]\) at all, and we can safely remove it from \(\mathcal B\) for a smaller cover. But we assumed that \(N\) is the smallest sized covers that exist, so this cannot happen. Thus \(b_1 > A\) and \(A \in (a_1, b_1)\).
+
+        Furthermore, if \(a_2 > b_1\), then all \(a_i > b_1\), for \(i \geq 2\). This implies that \(b_1 \notin (a_i, b_i)\) for all \(i \geq 2\) and \(b_1 \notin (a_1, b_1)\), which is impossible since \(\mathcal B\) is a cover, and thus must contain \(b_1\). Hence \(a_2 < a_1\). 
+        \item With (c), construct another `bad' covering \((a_1, b_2)\) with all \((a_i, b_i)\) for \(i > 2\). This is clearly still a cover since (c) guarantees that \((a_1, b_2) = (a_1, b_1) \cup (a_2, b_2)\). This new cover \(\mathcal B'\) has \(N - 1\) elements. But this contradicts the minimality of \(N\). Thus any such `bad' cover cannot exist, as desired. 
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[1.4]
+    If \(f\) is the function in Example 1.3 of Chapter 9, show that \(\text{osc}_0(f) = 1\).
+\end{theorem}
+
+\begin{proof}
+    Along the curve \(x_2 = x_1^2\), the value of \(f\) is constant \(1/2\). Along the curve \(x_2 = -x_1^2\), the value of \(f\) is constant \(-1/2\). Thus
+    \[\limsup_{(a, b) \to (0, 0)} f(a, b) - \liminf_{(a, b) \to (0, 0)} f(a, b) = \frac{1}{2} + \frac{1}{2} = 1,\]
+    as desired.
+\end{proof}
+
+\begin{theorem}[1.5]
+    Let \(f\) and \(g\) be two locally Riemann integrable functions defined on all of \(\R\). Show that \(\int_{a}^{b}f(x) dx = \int_{a}^{b} g(x) dx\) \textit{for all} compact intervals \([a, b]\) if and only if the set \(\{x \in \R : f(x) \neq g(x)\}\) has measure zero.
+\end{theorem}
+
+\begin{proof}
+    Note \(\int_{a}^{b}f(x) dx = \int_{a}^{b} g(x) dx\) if and only if \(\bigabs{\int_{a}^{b} (f(x) - g(x)) dx} < \e\) for all \(\e > 0\). Thus it suffices to work with this instead.
+
+    (\(\Rightarrow\)): \todo
+
+    (\(\Leftarrow\)): If \(Z = \{x \in \R : f(x) \neq g(x)\}\) is a set of measure zero, then for any \(\e > 0\), let \(\{R_i\}\) be a cover with total length less than \(\e / M\), where \(M = \sup_Z |f(x) - g(x)|\). Then we have 
+    \begin{align*}
+        \bigabs{\int_{a}^{b} (f(x) - g(x)) dx} &= \bigabs{\int_Z (f(x) - g(x)) dx} \\
+        &\leq \int_Z |f(x) - g(x)| dx \\
+        &\leq |Z| \sup_Z |f(x) - g(x)| \\
+        &= M (\e / M) = \e,
+    \end{align*}
+    as desired.
+\end{proof}
+
+\end{document}

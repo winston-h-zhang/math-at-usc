@@ -1,0 +1,189 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W7P1}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[4.2]
+    Verify that the sequence (23) is Cauchy in \(L^p_{\mathcal R}(\R)\).
+    \begin{align*}
+        f_n = \frac{1_{(1/n, 1]}}{x^{1/2p}}.
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    Without loss of generality for \(n > m > N\), \(N\) to be fixed later, we have
+    \begin{align*}
+        \|f_n - f_m\|_{L_p}^p &= \int_{-\infty}^{\infty} \bigabs{\frac{1_{(1/n, 1]} - 1_{(1/m, 1]}}{x^{1/2p}}}^p dx \\
+        &= \int_{-\infty}^{\infty} \bigabs{\frac{1_{(1/n, 1/m]}}{x^{1/2}}} dx \\
+        &= \int_{1/n}^{1/m} \frac{1}{|x|^{1/2}} dx \\
+        &= 2 \sqrt{1/m} - 2 \sqrt{1/n}.
+    \end{align*}
+    Next, we may bound
+    \begin{align*}
+        2 \sqrt{1/m} - 2 \sqrt{1/n} = \frac{2(\sqrt n - \sqrt m)}{\sqrt{nm}} \leq \frac{2\sqrt n}{\sqrt{nm}} = \frac{2}{\sqrt m} < \frac{2}{\sqrt N}.
+    \end{align*}
+    Thus choose \(N > 4 / \e^2\), and we conclude \(\|f_n - f_m\|_{L_p}^p < \e\), which suffices.
+\end{proof}
+
+\begin{theorem}[5.1]
+    Suppose \(f \in \mathcal{R}_{\text{loc}}(\R)\) is \(T\)-periodic, and assume that \(1 \leq p < \infty\). Show that given \(\e > 0\) there exists a \textit{continuous} \(T\)-periodic function \(g\) such that \(\|g\|_u \leq 4 \|f\|_u\) and 
+    \begin{align*}
+        \int_{0}^{T} \abs{f(x) - g(x)}^p dx < \e.
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    We can follow the constructions of Corollary 5.2 and Lemma 5.3, while taking extra care to maintain the periodicity of each construction. Indeed, since \(f \in \Rloc(\R)\), we have \(f|_{[0, T]} \in \mathcal R([0, T])\). Thus there is some step function
+    \begin{align*}
+        \ell|_{[0, T]} = \sum_{j = 1}^n m_j 1_{[p_{j - 1}, p_j)}
+    \end{align*}
+    such that \(\|f|_{[0, T]} - \ell|_{[0, T]}\|_{L^1([0, T])} < \e\) and \(\|\ell|_{[0, T]}\|_u \leq 2 \|f|_{[0, T]}\|_u\). Since \(f\) is \(T\)-periodic, we can ``copy-paste'' this construction across every \(T\) interval and obtain an \(T\)-periodic extension \(\ell\) of \(\ell|_{[0, T]}\). We also have 
+    \begin{align*}
+        \|\ell\|_u = \max_n \|\ell|_{[nT, (n + 1)T]}\|_u \leq \max_n 2\|f|_{[nT, (n+1)T]}\| = 2\|f\|_u.
+    \end{align*}
+
+    Next, from Corollary 5.2 we may construct from \(\ell|_{[0, T]}\) a continuous function \(g|_{[0, T]} = \sum_{j = 1}^{n}c_j g_j\). Then it is easy to see that 
+    \begin{align*}
+        g = \sum_{n}^{} g|_{[nT, (n + 1)T]}
+    \end{align*}
+    is a \(T\)-periodic function. We also have \(\|\ell - g\|_{L^1([0, T])} < \e\) and 
+    \begin{align*}
+        \|g\|_u = \max_n \|g\|_{[nT, (n + 1)T]}\|_u \leq \max_n 2\|\ell|_{[nT, (n+1)T]}\| = 2\|\ell\|_u.
+    \end{align*}
+    (Actually, there is a bit of ``leakage'' across the boundary points at \(0, T, 2T, \ldots\), so the equations are not exactly true -- but these leakages don't effect the uniform norm.)
+
+    Together, we conclude that there is some \(T\)-periodic function \(g\) such that \(\|g\|_u \leq 4 \|f\|_u\) and \(\|f - g\|_{L^1([0, T])} < \e\) (approx.).
+
+    To extend this to all \(1 \leq p < \infty\), note that \(f \in \mathcal R([0, T])\) implies that \(f\) in bounded. Thus \(g\) is bounded by construction. Thus we can bound \(|f(x) - g(x)|^{p - 1} \leq L\) on \([0, T]\), and therefore
+    \begin{align*}
+        \int_{0}^{T} \abs{f(x) - g(x)}^p dx &= \int_{0}^{T} \abs{f(x) - g(x)}\abs{f(x) - g(x)}^{p - 1} dx \\
+        &\leq TL \int_{0}^{T} \abs{f(x) - g(x)}dx < \e.
+    \end{align*} 
+\end{proof}
+
+\begin{theorem}[1.1]
+    Assume that \(\phi : \R \to \R\) and \(f : \R \to \R\) satisfy the following:
+    \begin{enumerate}
+        \item \(\phi\) is compactly supported and continuously differentiable.
+        \item \(f\) is compactly supported and is Riemann integrable on an interval containing its support.
+    \end{enumerate}
+    Prove that the function \(g : \R \to \R\) defined \(g = \phi * f\) is continuously differentiable on \(\R\), with derivative \(g' = \phi' * f\). What can you say about the case where \(\phi\) and \(f\) are \(k\) and \(\ell\) times continuously differentiable, respectively (and still both be compactly supported)?
+\end{theorem}
+
+\begin{proof}
+    We have 
+    \begin{align*}
+        g'(x) &= \lim_{h \to 0} \left(\frac{\phi * f (x + h) - \phi * f (x)}{h}\right) \\
+        &= \lim_{h \to 0} \frac{1}{h} \left(\int_{-\infty}^{\infty}\phi(x + h - y) f(y) dy - \int_{-\infty}^{\infty}\phi(x - y) f(y) dy\right) \\
+        &=  \lim_{h \to \infty} \int_{-\infty}^{\infty} \left( \frac{\phi(x - y + h) - \phi(x - y)}{h}\right)f(y) dy.
+    \end{align*}
+    Now we want to show that \(g'(x) - \phi' * f < \e\), so consider
+    \begin{align*}
+        g'(x) - \phi' * f &= \lim_{h \to \infty} \int_{-\infty}^{\infty} \left( \frac{\phi(x - y + h) - \phi(x - y)}{h} - \phi'(x - y) \right)f(y) dy \\
+        &= \lim_{h \to \infty} \int_{-\infty}^{\infty} E_h(y)f(y) dy,
+    \end{align*}
+    where \(E_h(y) = \frac{\phi(x - y + h) - \phi(x - y)}{h} - \phi'(x - y)\).
+    Now we can see that pointwise as \(h \to 0\),
+    \begin{align*}
+        \frac{\phi(x - y + h) - \phi(x - y)}{h} - \phi'(x - y) \to 0.
+    \end{align*}
+    However, this is insufficient to move change the order of the limit/integration. But note that 
+    \begin{align*}
+        E_h(y) &= \frac{\phi(x - y + h) - \phi(x - y)}{h} - \phi'(x - y) \\
+        &= \frac{1}{h} \left( \int_{x - y}^{x - y + h} \phi'(t) dt - \int_{x - y}^{x - y + h} \phi'(x - y) dt \right) \\
+        &= \frac{1}{h} \left( \int_{x - y}^{x - y + h} \phi'(t) - \phi'(x - y) dt \right).
+    \end{align*}
+    Since \(\phi\) is compactly supported and continuously differentiable, this implies that \(\phi'\) is uniformly continuous. Thus we see that in fact \(E_h(y) \to 0\) uniformly as \(h \to 0\). Furthermore, consider the fact that \(f\) has compact support, so we can limit the bounds of integration to some \([-L, L]\), and thus we may move the limit in:
+    \begin{align*}
+        g'(x) - \phi' * f &= \lim_{h \to \infty} \int_{-\infty}^{\infty} E_h(y)f(y) dy \\
+        &= \lim_{h \to \infty} \int_{-L}^{L} E_h(y)f(y) dy \\
+        &= \int_{-L}^{L} \lim_{h \to \infty} E_h(y) f(y) dy \\
+        &= \int_{-L}^{L} 0 f(y) dy = 0.
+    \end{align*}
+    Thus \(g'(x) = \phi' * f\), as desired.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W8P2}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[2.2]
+    Prove that there is no ``exact identity'' for convolutions, in the following sense: If \(\phi \in \Rloc(\R)\), then there exists \(f \in C_c(\R)\) such that the identity \(\phi * f \equiv f\) does not hold.
+
+    Hint: Argue by contradiction. Assume \(\phi\) is an ``exact identity'' (i.e., \(\phi * f \equiv f\) for all \(f \in BC(\R)\)). Choose \((f_n)_{n = 1}^\infty\) to be a sequence of nonnegative, continuous functions, supported inside some fixed bounded interval, such that \(\sup_{n \in \N}{\int_{-\infty}^{\infty} f_n(x) dx} \leq M < +\infty\), and such that \(f_n(0) \to \infty\) as \(n \to \infty\). (You may assume the existence of such a sequence of functions.) Look at the sequence of numbers \((\phi * f_n (0))_{n = 1}^\infty\) and derive a contradiction.
+\end{theorem}
+
+\begin{proof}
+    Assume for the sake of contradiction that such a \(\phi\) does exist. Then let \(f_n\) be an approximate identity like the one we just just studied (except smoothed out a bit to be continuous). This satisfies \(f_n(0) \to \infty\) as \(n \to 0\) and \(\sup_{n \in \N} \|f\|_{L^1} < M\). Then we have \(\phi * f_n (0) \to \phi(0)\) as \(n \to \infty\). However, then \(\phi * f (0) \neq f (0)\) since \(f_n(0) \to f(0) = \infty\) as \(n \to \infty\), which gives contradiction as desired. 
+\end{proof}
+
+\begin{theorem}[2.3]
+    Suppose \(f : \R \to \R\) is continuous away from \(x = a\), but that it has a jump discontinuity at \(a\): \(f(a^+) \neq f(a^-)\). Assume also that \(f\) is bounded. 
+    \begin{enumerate}
+        \item Suppose \((\phi_n)_{n = 1}^\infty\) is an approximate identity such that each \(\phi_n\) is an even function, i.e., \(\phi_n(x) = \phi_n(-x)\) for every \(x \in \R\). Prove that
+        \begin{align*}
+            \lim_{n \to \infty} \phi_n * f(a) = \frac{f(a^+) + f(a^-)}{2}.
+        \end{align*}
+        \item Let \(\lambda \in [0, 1]\) be given. Construct an approximate identity \((\phi_n)_{n = 1}^\infty\) such that 
+        \begin{align*}
+            \lim_{n \to \infty} \phi_n * f(a) = \lambda f(a^+) + (1 - \lambda) f(a^-).
+        \end{align*}
+        In your answer, you should show that your sequence \((\phi_n)_{n = 1}^\infty\) satisfies the definition of an approximate identity from Exercise 2.1 and Example 2.2.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part separately.
+    \begin{enumerate}
+        \item Consider the value \(\abs{\phi_n * f(a) - \frac{1}{2}(f(a^+) + f(a^-))}\). We want to show that for any \(\e > 0\), there exists an \(N \in \N\) such that for all \(n \geq N\), this value is less than \(\e\). The intuition is that each side of the convolution is approximating each side of the function, and thus in total forms the average. Indeed, noting that \(\int_{-\infty}^{0}\phi_n(y) dy = \int_{0}^{\infty}\phi_n(y) dy = 1/2\) (since \(\phi_n\) is even), split the convolution at \(x = a\) and consider both sides:
+        \begin{align*}
+            \int_{-\infty}^{0} \phi_n(y) f(a - y) dy - \frac{f(a^-)}{2} &= \int_{-\infty}^{0} \phi_n(y) (f(a - y) - f(a^-)) dy
+        \end{align*}
+        and
+        \begin{align*}
+            \int_{0}^{\infty} \phi_n(y) f(a - y) dy - \frac{f(a^+)}{2} &= \int_{0}^{\infty} \phi_n(y) (f(a - y) - f(a^+)) dy.
+        \end{align*}
+        Now for the left, \(f(y)\) is continuous and converges to \(f(a^-)\), so choose \(\d > 0\) such that \(\abs{f(a - y) - f(a^-)} < \frac{\e}{2M}\) whenever \(-\d < y < 0\). Next, choose \(N \in \N\) large enough such that
+        \begin{align*}
+            \int_{-\infty}^{-\d} \abs{\phi_n(x)}dx < \frac{\e}{4 \|f\|_u}.
+        \end{align*}
+        Then for \(n \geq N\), we have
+        \begin{align*}
+            \bigabs{\int_{-\infty}^{0} \phi_n(y) (f(a - y) - f(a^-)) dy} &= \int_{-\infty}^{-\d} + \int_{-\d}^{0} \abs{\phi_n(y)} \abs{f(a - y) - f(a^-)} dy \\
+            &\leq \frac{\e}{2M} \int_{- \d}^{0} \abs{\phi_n(y)} dy + 2\|f\|_u \int_{-\infty}^{-\d} \abs{\phi_n(y)} dy \\
+            &< \frac{\e}{2} + \frac{\e}{2} = \e.
+        \end{align*}
+        By symmetry, the same logic holds for the right as well, so we have 
+        \begin{align*}
+            \bigabs{\int_{0}^{\infty} \phi_n(y) (f(a - y) - f(a^+)) dy} < \e.
+        \end{align*}
+        Thus summing both sides, we conclude that \(\abs{\phi_n * f(a) - \frac{1}{2}(f(a^+) + f(a^-))} < 2\e\) for \(n \geq N\), i.e., \(\lim_{n \to \infty}\phi_n * f(a) = \frac{1}{2}(f(a^+) + f(a^-))\), as desired.
+
+        \item Generalizing the idea from part (a), we want to create a approximate identity that is weighted \(\lambda\) on the left and \(1 - \lambda\) on the right. The most natural way to do this is simply define:
+        \begin{align*}
+            \phi_n(x) = n 1_{[-\lambda / n, (1 - \lambda) / n]}.
+        \end{align*}
+        This is clearly an approximate identity. Conditions (1) and (2) are trivial (\(\|\phi_n\|_{L^1} = 1\) for all \(n \in \N\)). For condition (3), choose \(\d = \max(\lambda/n, (1 - \lambda) / n)\).
+    \end{enumerate}
+\end{proof}
+
+\end{document}

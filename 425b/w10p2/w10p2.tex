@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W10P1}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[3.4]
+    Let \((V, \langle \cdot, \cdot \rangle)\) be a real or complex Hilbert space. Assume \(V\) is \textit{separable} -- that is, assume there exists a countable set \(E\) which is dense in \(V\). Construct an orthonomral Schauder basis for \(V\), using the following process:
+    \begin{enumerate}
+        \item Fill in the details of the following procedure: Pick \(v_1 \in E \setminus \{0\}\). Given vectors \(v_1, \ldots, v_n \in V\) which are pairwise orthogonal and nonzero, pick an arbitrary \(u \in E\). If \(u \in \text{span}\{v_1, \cdots, v_n\}\), discard it; 
+        otherwise, take \(v_{n + 1}\) to the part of \(u\) that lies in \(\text{span}\{v_1, \cdots, v_n\}^\perp\). This gives you a sequence \((v_n)_{n = 1}^\infty\) of orthogonal vectors (briefly say why).
+        \item Put \(W = \text{span}\{v_j\}_{j = 1}^\infty\) and prove that \(\overline W = V\). 
+        \item Using Bessel's inequality in the next section, Exercise 2.7 from Chapter 3, and the fact that \(W^\perp = \{0\}\) to prove that \((v_j)_{j = 1}^\infty\) is a Schauder basis for \(V\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part separately:
+    \begin{enumerate}
+        \item The steps are already laid out, so we'll just give some quick justification. Since every new \(v_{n + 1}\) is chosen to be in \(\text{span}\{v_1, \ldots, v_n\}^\perp\), it is guaranteed to be orthogonal to \(\{v_1, \ldots, v_n\}\). Applying transfinite induction, the entire sequence \((v_n)_{n = 1}^\infty\) will be pairwise orthogonal. 
+        
+        \item Note that \(W = \text{span} \{ v_j \}_{j = 1}^\infty = \text{span } E\). If this wasn't the case, then there would exist some \(u \in E\) such that some part of \(u\) lies in \((\text{span} \{ v_j \}_{j = 1}^\infty)^\perp\). But this is impossible by the construction of \(W\), therefore we must have \(W = E\). Since \(E\) is dense in \(V\), then so must be \(W\), as desired.
+        
+        \item Aside: the author gave up on this one, although he has the right idea? Essentially, if \((v_n)_{n = 1}^\infty\) is a (Hamel) basis for \(W\), then it is a Schauder basis for \(\overline W\), or something like this, but the author has no idea how to write this intuition out formally.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[3.5]
+    Let \((V, \langle \cdot, \cdot \rangle)\) be a real or complex inner product space, and let \(U, W \leq V\).
+    \begin{enumerate}
+        \item Show that if \(U \subseteq W\), then \(W^\perp \subseteq U^\perp\).
+        \item Prove that \(W^\perp\) is always a \textit{closed} subspace of \(V\).
+        \item Show that if \(V = W \oplus W^\perp\), then \((W^\perp)^\perp = W\).
+        \item Prove by way of example that the equality \((W^\perp)^\perp = W\) can fail.
+        \item Show that if \(V\) is a Hilbert space, then in general we have \((W^\perp)^\perp = \overline W\), where \(\overline W\) denotes the closure of \(W\) in \(V\). 
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part separately.
+    \begin{enumerate}
+        \item Suppose \(w \in W^\perp\), then for all \(v \in W\), we have \(\langle w, v \rangle = 0\), but \(U \subseteq W\), so this implies for all \(v \in U\), we have \(\langle w, v \rangle = 0\), which exactly means \(w \in U^\perp\).
+        \item We show that \(W^\perp\) contains its closure, i.e. let \(v \in \overline W\) and let \((v_n)_{n = 1}^\infty\) be a sequence in \(W^\perp\) such that \(v_n \to v \in V\). By definition, we have \(\langle v_n, w \rangle = 0\) for all \(w \in W\), so \(\lim_{n \to \infty} \langle v_n, w \rangle = \langle \lim_{n \to \infty} v_n, w \rangle = \langle v, w \rangle = 0\), as desired.
+        \item We show both inclusions. 
+        
+        First \((W^\perp)^\perp \subseteq W\): Suppose \(v \in (W^\perp)^\perp\). Since we know that \(V = W \oplus W^\perp\), write \(v = w + w^\perp\). By definition, for all \(w' \in W^\perp\), we have \(\langle v, w' \rangle = 0\). Thus:
+        \begin{align*}
+            0 = \langle w + w^\perp, w' \rangle = \langle w, w' \rangle + \langle w^\perp, w' \rangle = \langle w^\perp, w' \rangle.
+        \end{align*}
+        This must hold for all \(w'\), so choose \(w' = w^\perp\) to conclude that \(\langle w^\perp, w^\perp \rangle = 0 \implies w^\perp = 0\). Thus \(v = w \in W\).
+
+        For the other side, suppose \(w \in W\). We want to show that, for all \(w^\perp \in W^\perp\), \(\langle v, w' \rangle = 0\). But this is clearly true, so \(w \in (W^\perp)^\perp\).
+        \item Consider the space \(\ell^2(\N;\R)\). Let \(W\) be the subspace of finitely supported sequences such that \(a_1 = 0\). i.e. 
+        \begin{align*}
+            W = \{a_n \in \R^{\N} \mid \sum_{n = 1}^{\infty} |a_n|^2 < \infty, a_1 = 0, a_n \text{  finitely supported}\}.
+        \end{align*}
+        Then \(W^\perp\) are the sequences such that \(a_n = 0\) for all \(n \neq 1\). Then
+        \begin{align*}
+            (W^\perp)^\perp = \{a_n \in \R^{\N} \mid \sum_{n = 1}^{\infty} |a_n|^2 < \infty, a_1 = 0\},
+        \end{align*}
+        and we don't necessarily need to be finitely supported anymore.
+        \item We show both inclusions.
+        
+        First \(\overline W \subseteq (W^\perp)^\perp\): Suppose \(w \in W\), then trivially \(\langle w, w^\perp \rangle = 0\) for all \(w^\perp in W^\perp\), so \(w \in (W^\perp)^\perp\). From part (b), \((W^\perp)^\perp\) is closed. \(\overline W\) is the smallest closed set containing \(W\), so it must be that \(\overline W \subseteq (W^\perp)^\perp\).
+
+        On the other hand, we show the contrapositive. Suppose \(v \notin \overline W\). Then there exists some \(w\perp \in \overline W^\perp\), \(w \neq 0\) and \(w \in \overline W\) such that \(v = w^perp + w\). Since \(W \subseteq \overline W\), part (a) shows \(w^\perp \in \overline W^\perp \subseteq W^\perp\). But then \(\langle v, w^\perp \rangle = \langle w^\perp + w, w^\perp \rangle = \langle w^\perp, w^\perp \rangle \neq 0\). Thus \(v \notin (W^\perp)^\perp\), as desired.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[1.1]
+    (The Basel Problem)
+    \begin{enumerate}
+        \item Compute the Fourier coefficients of the function \(f : [-\pi, \pi] \to \C\) given by \(f(x) = x\).
+        \item Using Parseval's identity, together with part (a), prove that \(\sum_{n = 1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part separately:
+    \begin{enumerate}
+        \item We compute, for \(n \neq 0\):
+        \begin{align*}
+            c_n = \frac{1}{2\pi} \int_{-\pi}^{\pi} x e^{-inx} dx = \frac{i(-1)^n}{n}
+        \end{align*}
+        (we leave out the work to keep things simple) and \(c_0 = 0\), since \(x\) is odd.
+        \item So then
+        \begin{align*}
+            \|f(x)\|^2 &= \frac{1}{2\pi}\int_{-\pi}^{\pi} x^2 dx = \frac{\pi^2}{3} \\
+            &= \sum_{n = -\infty}^{\infty} \bigabs{\frac{i (-1)^n}{n}}^2 = \sum_{n = 1}^{\infty} \frac{2}{n^2}.
+        \end{align*}
+        Thus we conclude:
+        \begin{align*}
+            \frac{\pi^2}{6} = \sum_{n = 1}^{\infty} \frac{1}{n^2}.
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\end{document}

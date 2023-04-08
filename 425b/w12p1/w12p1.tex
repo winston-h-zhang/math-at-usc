@@ -1,0 +1,160 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W12P1}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[1.1]
+    Prove that if \(G\) is Frechet differentiable at \(x_0\), then its Frechet derivative at \(x_0\) is unique.
+\end{theorem}
+
+\begin{proof}
+    Let \(T_1\) and \(T_2\) be two Frechet derivatives of \(G\) at \(x_0\). We want to show that
+    \begin{align*}
+        \lim_{z \to 0} \frac{\|G(x_0 + z) - G(z_0) - T_1 z\|}{\|z\|} = \lim_{z \to 0} \frac{\|G(x_0 + z) - G(z_0) - T_2 z\|}{\|z\|}.
+    \end{align*}
+    Indeed, move everything to the left to get 
+    \begin{align*}
+        \lim_{z \to 0} \frac{\|G(x_0 + z) - G(z_0) - T_1 z - (G(x_0 + z) - G(z_0) - T_2 z)\|}{\|z\|} = \lim_{z \to 0} \frac{\|T_2 z - T_1 z\|}{\|z\|} = 0.
+    \end{align*}
+    This implies \(\|T_2 - T_1\|(u) = 0\) for all unit vectors \(u\). But of course, we can simply extend this linearly and conclude that \(\|T_2 - T_1\| = 0\), i.e. \(T_1 = T_2\), as desired.
+\end{proof}
+
+\begin{theorem}[1.2]
+    Explain what is wrong with the following argument, letting \(G, G_1, G_2\) be as in Example 1.14: ``Since \(G_2\) is a linear transformation, it is its own derivative, \(G_2' \equiv G_2\) Therefore \(G_2'(G_1(f)) = G_2(G_1(f)) = \int_{a}^{x} f(t)^2 dt\).'' (Hint: The short answer to this question is: The equality at the end is nonsense. But be more specific as to why.)
+\end{theorem}
+
+\begin{proof}
+    The claim \(G_2' \equiv G\) is nonsense. The first is a map from \(X \to \mathcal B (X;Y)\). The second is a map \(X \to Y\). It is only true that, for every \(x \in X\), \(G_2'(x) = G\).
+\end{proof}
+
+\begin{theorem}[1.3]
+    Compute the Frechet derivative of the function
+    \begin{align*}
+        G : (C([0, \pi]), \|\cdot\|_u) \to (C^1([0, \pi]), \|\cdot\|_{C^1}), \hspace*{4mm} G(f)(x) = \int_{0}^{x}\sin(f(t)^2) dt.
+    \end{align*}
+\end{theorem}
+
+\begin{proof}
+    We compute a candidate with the chain rule, \(G_1 = \sin(f(t)^2)\) and \(G_2 = \int_{0}^{x} f(t) dt\). Then,
+    \begin{align*}
+        [G_1'(f)z](x) &= 2f(x)\cos(f(x)^2)z(x) \\
+        G_2'(f) &= G_2,
+    \end{align*}
+    since \(G_2\) is linear. Therefore,
+    \begin{align*}
+        G'(f)z &= G_2'(G_1(f)) \circ G_1'(f) = G_2(2f\cos(f^2)z) \\
+        &= \int_{0}^{x} 2 f(t) \cos(f(t)^2) z(t) dt.
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[1.4]
+    Let \(X\) and \(Y\) be real normed spaces, and let \(U\) and \(V\) be open subsets of \(X\) and \(Y\), respectively. Assume there exists a bijection \(G : U \to V\) such that \(G\) is differentiable at every point of \(U\) and \(G^{-1}\) is a differentiable at every point of \(V\). Then for every \(x \in U\), \(G'(x)\) is invertible, with inverse
+    \begin{align*}
+        G'(x)^{-1} = (G^{-1})'(G(x)).
+    \end{align*}
+    In particular, \(G'(x)\) is a vector space isomorphism (which must be an isomorphism of normed vector spaces if \(X\) and \(Y\) is known to be finite-dimensional.)
+\end{theorem}
+
+\begin{proof}
+    Just apply the chain rule to \(\id{X}(x) = (G^{-1} \circ G)(x)\). We have,
+    \begin{align*}
+        (G^{-1})'(G(x)) \circ G'(x) &= \id{X} \\
+        \Rightarrow  (G^{-1})'(G(x)) \circ G'(x) \circ G'(x)^{-1} &= \id{X} \circ G'(x)^{-1} \\
+        \Rightarrow (G^{-1})'(G(x)) &= G'(x)^{-1}.
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[1.5]
+    Let \(X\) and \(Y\) be real normed vector spaces; let \(E\) be a connected open subset of \(X\). Assume \(f : E \to Y\) is differentiable on \(E\) and that \(f'(x)\) is the zero element of \(\mathcal B (X;Y)\) for all \(x \in E\). Prove that \(f\) is constant on \(E\). (Hint: Recall that a set \(E\) is connected if and only if \(E\) has no proper subsets that are both open and closed in \(E\). It will be useful to consider functions of the form \(g_z(t) = f(a + tz)\) for part of your argument.)
+\end{theorem}
+
+\begin{proof}
+    \todo
+\end{proof}
+
+\end{document}

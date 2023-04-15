@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W13P2}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[3.2]
+    Assume \(f \in C^2(W;\R)\) for some open subset \(W\) of \(\R^n\).
+    \begin{enumerate}
+        \item Explicitly write out all the terms of the second order Taylor polynomial \(P_2(z)\) if \(n = 1\), \(n = 2\), or \(n = 3\), by evaluating all the multi-index powers and factorials. (This is quick for \(n = 1\) and \(n = 2\) but takes a bit of writing for \(n = 3\).)
+        \item For arbitrary \(n\), write down a formula for \(P_2(z)\) in terms of the Jacobian and Hessian matrices.
+        \item (The Second Derivative Test.) A symmetric matrix \(A \in \R^{n \times n}\) is said to be \textit{positive-definite} if \(x^T A x > 0\) for all \(x \in \R^n\), \(x \neq 0\). Prove that if \(J f(x_0) = 0\) and \(H f(x_0)\) is a positive definite, then \(f\) has a local minimum at \(x_0\). (Hint: The function \(z \mapsto H(x_0)z \cdot z\) is a continuous function from \(\R^n\) to \(\R\); its restriction to the (compact!) st \(S^1 = \{x \in \R^n : |x| = 1\}\) is of course continuous.) Similarly, show that if \(J f(x_0) = 0\) and \(H f(x_0)\) is \textit{negative-definite} (you can guess the definition), then \(f\) has a local maximum at \(x_0\).
+        \item Show that a \(2 \time 2\) symmetric matrix \(A = (a_{i,j})_{i, j = 1}^2\) is positive definite if and only if \(\det A\) and \(a_{1,1}\) are positive. Use this information to write down another version of the Second Derivative Test for a function of 2 variables.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part separately.
+    \begin{enumerate}
+        \item Recall the formulas for \(P_2(z)\). Suppose \(n = 1\). If \(|\a| = 0\), then we have \(\a = (0)\). If \(|\a| = 1\), then we have \(\a = (1)\). If \(|\a| = 2\), then we have \(\a = (2)\). Thus,
+        \begin{align*}
+            P_2(z) &= \sum_{k = 0}^{2}\sum_{|\a| = k} \frac{\partial^\a f(a)}{\a!}z^\a \\
+            &= f(a) + \frac{df(a)}{dz}z + \frac{1}{2}\frac{d^2f(a)}{dz^2}z^2.
+        \end{align*}
+        Suppose \(n = 2\). If \(|\a| = 0\), then we have \(\a = (0, 0)\). If \(|\a| = 1\), then we have \(\a \in \{(1, 0), (0, 1)\}\). If \(|\a| = 2\), then we have \(\a \in \{(2, 0), (1, 1), (0, 2)\}\). Thus,
+        \begin{align*}
+            P_2(z) &= \sum_{k = 0}^{2}\sum_{|\a| = k} \frac{\partial^\a f(a)}{\a!}z^\a \\
+            &= f(a) + \partial_1 f(a) z + \partial_2 f(a) z + \frac{1}{2}\partial_1^2 f(a) z^2 + \frac{1}{2}\partial_2^2 f(a) z^2 + \partial_1\partial_2 f(a) z^2.
+        \end{align*}
+        Suppose \(n = 3\). If \(|\a| = 0\), then we have \(\a = (0, 0, 0)\). If \(|\a| = 1\), then we have \(\a \in \{(1, 0, 0), (0, 1, 0), (0, 0, 1)\}\). If \(|\a| = 2\), then we have
+        \begin{align*}
+            \a \in \{&(2, 0, 0), (0, 2, 0), (0, 0, 2), (1, 1, 0), (1, 0, 1), (0, 1, 1)\}.
+        \end{align*} Thus,
+        \begin{align*}
+            P_2(z) = f(a) &+ \partial_1 f(a) z + \partial_2 f(a) z + \partial_1 f(a) z \\
+            &+ \frac{1}{2}\partial_1^2 f(a) z^2 + \frac{1}{2}\partial_2^2 f(a) z^2 + \frac{1}{2}\partial_3^2 f(a) z^2 \\
+            &+ \partial_1\partial_2 f(a) z^2 + \partial_2\partial_3 f(a) z^2 + \partial_1\partial_3 f(a) z^2.
+        \end{align*}
+        \item Reading off the terms, we can see that 
+        \begin{align*}
+            P_2(z) = f(a) + \nabla f(a)^T z + \frac{1}{2} z^T H f(a) z.
+        \end{align*}
+        (Note how the \(1/2\) factor perfectly handles the duplicated partials in the off diagonals.)
+        \item \todo
+        \item We want to show that \(z^T A z > 0\) for all \(z \in \R^2\). Let \(a_{1, 1} = a\), \(a_{1, 2} = a_{2, 1} = b\), and \(a_{2, 2} = c\) and let \(z = (x, y)\). Expanding this out, we have
+        \begin{align*}
+            z^T A z = ax^2 + 2bxy + cy^2. 
+        \end{align*}
+        (\(\Rightarrow\)): If \(z^T A z > 0\), then setting \(z = (1, 0)\) implies \(a > 0\). Next consider \(z = (x, 1)\). Then we know that \(ax^2 + 2bx + c > 0\) for all \(x\). This means that the polynomial has no zeros. Thus its discriminant \(4b^2 - 4ac\) must be negative, i.e. \(ac - b^2 = \det A > 0\).
+        (\(\Leftarrow\)): Do casework on \(y = 0\) and do almost the opposite argument. For all \(z = (x, 0)\), \(a_{1, 1} > 0\) implies \(ax^2 = z^T A z > 0\). 
+
+        If \(y \neq 0\), then consider \(t = x/y\) and \(q(t) = at^2 + 2bt + c = \frac{1}{y^2} z^T A z\). Since \(\det A > 0\), we know that \(b^2 - ac < 0\), so \(q(t)\) has no roots. Since \(a > 0\), it must be that \(q(t) > 0\) for all \(t\). This implies \(z^T A z > 0\) for all \((x, y)\), \(y \neq 0\). 
+        
+        Thus \(z^T A z\) holds for all \(z \in \R^2\), as desired.
+    \end{enumerate}
+\end{proof}
+
+\end{document}

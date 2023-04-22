@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,tabularx}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+\pagestyle{fancy}
+\usepackage{setspace}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\newcommand{\realname}[1]{\newcommand{\printrealname}{#1}}
+\newcommand{\pset}[1]{\newcommand{\printpset}{#1}}
+\newcommand{\mathclass}[1]{\newcommand{\printmathclass}{#1}}
+
+%% Pagestyle setup
+\setlength{\headheight}{0.75in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\voffset}{-.5in}
+\setlength{\headsep}{10pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headwidth}{6.5in}
+\setlength{\textheight}{8in}
+\lhead{Math \printmathclass}
+\chead{\Large \textbf{\printpset}}
+\rhead{\printrealname}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\setlength{\textwidth}{6.5in}
+\renewcommand{\baselinestretch}{1}
+\setenumerate[0]{label=(\alph*)}
+\newcommand{\todo}{\textcolor{red}{\textbf{TODO }}}
+
+\newtheorem*{prop}{Proposition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{defn}{Definition}
+\newtheorem*{remark}{Remark}
+
+\newtheoremstyle{named}{}{}{}{}{\bfseries}{.}{.5em}{\thmnote{Problem #3}}
+\theoremstyle{named}
+\newtheorem*{theorem}{Theorem}
+\allowdisplaybreaks
+
+%% DO NOT ALTER THE ABOVE LINES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you would like to use Asymptote within this document (which is optional), 
+%% you can find out how at the following URL:
+%%
+%%   http://www.artofproblemsolving.com/Wiki/index.php/Asymptote:_Advanced_Configuration
+%%
+%% As explained there, you will want to uncomment the line below.  But be
+%% sure to check the website because there are several other steps that must 
+%% be followed.
+%% \usepackage{asymptote}
+
+%% Enter your real name here
+%% Example: \realname{David Patrick}
+\realname{Hanting Zhang}
+\pset{W14P2}
+\mathclass{425B}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\bf}{\mathbf}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\coimplies}{\Leftarrow}
+\renewcommand{\em}{\varnothing}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\Rloc}{\mathcal R_{\text{loc}}}
+
+%% should be reset
+
+\begin{document}
+
+\begin{theorem}[1.4]
+    Fix \(A > 1\) and consider the function \(f : \R \to \R\) defined by 
+    \begin{align*}
+        f(t) = \begin{cases}
+            t + At^2 \sin(1/t) & t \neq 0 \\
+            0 & t = 0.
+        \end{cases}
+    \end{align*}
+    The graph of \(f\) near \(t\) is pictured in Figure 1(B).
+    \begin{enumerate}
+        \item Show that \(f\) is differentiable everywhere, and compute its derivative (including at zero).
+        \item Show that \(f\) is not injective on any interval around zero. Hint: Use Exercise 1.3(b), and keep in mind that it's not necessary to exhibit an extremum in order to rigorously prove it exists.
+        \item Discuss how (a) and (b) relate to the (single-variable) Inverse Function Theorem (restricting attention to a neighborhood of \(0\)). Which if the hypotheses of the Theorem are satisfied and which are not? In particular, this example demonstrates that one of the hypotheses cannot be removed. Which one?
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We proceed with each part separately:
+    \begin{enumerate}
+        \item For \(t \neq 0\), the derivative is
+        \begin{align*}
+            2A\sin\left(\dfrac{1}{x}\right)x-A\cos\left(\dfrac{1}{x}\right)+1.
+        \end{align*}
+        For the derivative at \(0\), we have to compute it directly, 
+        \begin{align*}
+            f'(0) &= \lim_{t \to 0} \frac{f(t) - f(0)}{t} \\
+            &= \lim_{t \to 0} \frac{t + At^2 \sin(1/t) - 0}{t} \\
+            &= \lim_{t \to 0} 1 + At\sin(1/t) \\
+            &= 1 + A,
+        \end{align*}
+        where in the last part, we use the fact that \(\lim_{t \to 0} t \sin(1/t) = 1\).
+        \item Consider the sequence of points \(t_n = 1 / \pi n\). We have 
+        \begin{align*}
+            f(t_n) &= 2A \sin(\pi n) \frac{1}{\pi n} - A \cos(\pi n) + 1 \\
+            &= 0 - A (-1)^n + 1 = A (-1)^{n + 1} + 1.
+        \end{align*}
+        Since \(A > 1\), this implies that as \(t_n \to 0\), \(f'(t_n)\) constantly flips between the positive and negative. Thus for any neighborhood \(U\) around \(0\), we can find sufficiently large \(n\) such that \(t_n, t_{n + 1}, t_{n + 2} \in U\), and the sign of \(f'(t_n), f'(t_{n + 1}), f'(t_{n + 2})\) is positive/negative/positive. Since \(f'(t)\) is continuous, that means there exist points \(M \in [t_n, t_{n + 1}]\) and \(m \in [t_{n + 1}, t_{n + 2}]\), such that \(f'(M) = f'(m) = 0\), and \(M\) and \(m\) are the local maxima and minima of \(f\) on \(U\), respectively. By Exercise 1.3(b), this shows that \(f\) is never injective on \(U\), as desired.
+        \item The hypotheses of \(f'(x) > 0\) (and the other trivial ones) have been satisfied. The one thing that is missing is \(f \in C^1(U;\R)\). Subtly, \(f(t)\) is not \(C^1\) at \(t = 0\), since \(f'(t)\) is not continuous at \(t = 0\).
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[3.1]
+    Consider the system of equations
+    \begin{align*}
+        \begin{cases}
+            x + y + \sin(xy) = z \\
+            \sin(x^2 + y) = 2z
+        \end{cases}
+        \hspace*{4mm} x, y, z \in \R.
+    \end{align*}
+    \begin{enumerate}
+        \item Show that there exists a neighborhood \(V\) of \(0\) in \(\R\), a neighborhood \(W\) of \((0, 0)\) in \(\R^2\), and a function \(g : V \to W\), \(g(z) = (g_1(z), g_2(z))\), such that \((x, y, z) = (g_1(z), g_2(z), z)\) solves the above system for every \(z \in V\). Compute \(J g(0)\).
+        \item Repeat part (a), with the following change: Instead of writing \(x\) and \(y\) as a function of \(z\) near \((0, 0, 0)\), write \(z\) and \(z\) as a function of \(y\).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \todo
+\end{proof}
+
+\end{document}
